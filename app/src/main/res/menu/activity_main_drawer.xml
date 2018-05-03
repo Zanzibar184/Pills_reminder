@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_top">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Cure" />
+        <item
+            android:id="@+id/nav_pills"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="I miei farmaci" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="Calendario" />
+        <item
+            android:id="@+id/nav_pharamarcy"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="Trova farmacie" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Contatti importanti" />
+        <item
+            android:id="@+id/nav_sms"
+            android:icon="@drawable/ic_add_alert_black_24dp"
+            android:title="SMS AVVISO" />
+        <item
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/ic_note_add_black_24dp"
+            android:title="Note" />
+
+    </group>
+
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Impostazioni" />
+
+    </group>
+
+
+
+
+</menu>
