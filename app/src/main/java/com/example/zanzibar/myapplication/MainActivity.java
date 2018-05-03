@@ -3,6 +3,7 @@ package com.example.zanzibar.myapplication;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -80,25 +81,59 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        TextView txt = findViewById(R.id.txt1);
 
         if (id == R.id.nav_home) {
-            txt.setText("home");
+
+            Cure cure = new Cure();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+
         } else if (id == R.id.nav_pills) {
-            txt.setText("pillole");
+
+            MieiFarmaci mieiFarmaci = new MieiFarmaci();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).commit();
+
         } else if (id == R.id.nav_calendar) {
+
+            Calendario calendario = new Calendario();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).commit();
 
         } else if (id == R.id.nav_pharamarcy) {
 
+            Pharmacy pharmacy = new Pharmacy();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, pharmacy).commit();
+
         } else if (id == R.id.nav_contacts) {
+
+            ContattiImportanti contattiImportanti = new ContattiImportanti();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).commit();
+
 
         } else if (id == R.id.nav_sms) {
 
+            SmsAvviso smsAvviso = new SmsAvviso();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).commit();
+
+
         } else if (id == R.id.nav_notes) {
 
+            Note note = new Note();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).commit();
+
         } else if (id == R.id.nav_settings) {
+            Impostazioni impostazioni = new Impostazioni();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).commit();
 
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
