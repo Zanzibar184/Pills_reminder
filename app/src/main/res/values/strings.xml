@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pills_Reminder_v1</string>
+    <string name="app_name">Pills Reminder</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -9,4 +9,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="nav_title_home">Cure</string>
+    <string name="nav_title_pills">I miei farmaci</string>
+    <string name="nav_title_calendar">Calendario</string>
+    <string name="nav_title_pharamarcy">Trova farmacie</string>
+    <string name="nav_title_contacts">Contatti importanti</string>
+    <string name="nav_title_sms">SMS AVVISO</string>
+    <string name="nav_title_notes">Note</string>
+    <string name="nav_title_settings">Impostazioni</string>
+
 </resources>
