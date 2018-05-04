@@ -26,4 +26,10 @@ public class Pharmacy extends Fragment {
         return inflater.inflate(R.layout.fragment_pharmacy, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Trova farmacie");
+    }
+
 }

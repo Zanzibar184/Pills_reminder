@@ -26,4 +26,10 @@ public class Impostazioni extends Fragment {
         return inflater.inflate(R.layout.fragment_impostazioni, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Impostazioni");
+    }
+
 }

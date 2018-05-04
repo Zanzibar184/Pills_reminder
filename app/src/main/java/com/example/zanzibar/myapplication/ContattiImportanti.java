@@ -26,4 +26,10 @@ public class ContattiImportanti extends Fragment {
         return inflater.inflate(R.layout.fragment_contatti_importanti, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Contatti importanti");
+    }
+
 }

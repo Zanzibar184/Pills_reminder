@@ -26,4 +26,10 @@ public class Calendario extends Fragment {
         return inflater.inflate(R.layout.fragment_calendario, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Calendario");
+    }
+
 }

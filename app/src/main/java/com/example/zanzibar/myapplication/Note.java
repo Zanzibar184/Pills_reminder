@@ -26,4 +26,12 @@ public class Note extends Fragment {
         return inflater.inflate(R.layout.fragment_note, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Note");
+    }
+
+
+
 }

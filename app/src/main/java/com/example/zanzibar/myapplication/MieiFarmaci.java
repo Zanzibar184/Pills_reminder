@@ -26,4 +26,10 @@ public class MieiFarmaci extends Fragment {
         return inflater.inflate(R.layout.fragment_miei_farmaci, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("I miei farmaci");
+    }
+
 }

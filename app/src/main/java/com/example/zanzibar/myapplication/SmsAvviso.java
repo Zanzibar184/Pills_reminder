@@ -26,4 +26,10 @@ public class SmsAvviso extends Fragment {
         return inflater.inflate(R.layout.fragment_sms_avviso, container, false);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("SMS AVVISO");
+    }
+
 }
