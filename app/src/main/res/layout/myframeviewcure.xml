@@ -8,15 +8,15 @@
     android:orientation="vertical">
 
     <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
-
+    <!-- margine 15dp aggiungere in dimens.xml-->
     <RelativeLayout
         android:id="@+id/myview1"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="45dp"
         android:background="@drawable/rounded_shape"
         android:elevation="12dp">

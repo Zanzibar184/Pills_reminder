@@ -52,6 +52,7 @@ public class Cure extends Fragment {
                 txt_title.setText("Mattina");
             } else if (n == 2) {
                 txt_title.setText("Pomeriggio");
+                //frame.setVisibility(View.GONE);
             } else if (n == 3) {
                 txt_title.setText("Sera");
             } else if(n == 4){
