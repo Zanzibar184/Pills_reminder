@@ -5,4 +5,13 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="height_view">150dp</dimen>
+    <dimen name="height_settings_view">50dp</dimen>
+    <dimen name="marginLeft_view">15dp</dimen>
+    <dimen name="marginRight_view">15dp</dimen>
+    <dimen name="marginBottom_view">15dp</dimen>
+    <dimen name="marginTop_view">45dp</dimen>
+    <dimen name="marginTop_settings_view">10dp</dimen>
+    <dimen name="shadow_view">12dp</dimen>
+    <dimen name="line_title_space">20dp</dimen>
 </resources>
