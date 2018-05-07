@@ -8,11 +8,13 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <FrameLayout
+    <!--Inserita qui una scrollview per dare la possibilità di scorrere tra i vari contenuti-->
+
+    <ScrollView
         android:id="@+id/fragmentmanager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </FrameLayout>
+    </ScrollView>
 
 </LinearLayout>
