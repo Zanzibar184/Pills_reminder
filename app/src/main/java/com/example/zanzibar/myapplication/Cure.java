@@ -4,7 +4,10 @@ package com.example.zanzibar.myapplication;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +26,15 @@ public class Cure extends Fragment {
 
     final int numberOfFrames = 4;
 
+    FloatingActionButton fab_cure = null;
+
     public Cure() {
         // Required empty public constructor
     }
 
+    public Cure(FloatingActionButton fab_cure) {
+        this.fab_cure = fab_cure;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +45,16 @@ public class Cure extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab_cure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_cure);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiPillola).commit();
+            }
+        });
+
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcure);
 
         for (int i = 1; i <= numberOfFrames; i++) {

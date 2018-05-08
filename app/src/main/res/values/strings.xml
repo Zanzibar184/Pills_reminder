@@ -21,8 +21,9 @@
 
     <string name="nome_cura">Nome del farmaco</string>
     <string name="scorte_farmaco">Scorte</string>
-    <string name="dosi_farmaco">Dosi</string>
+    <string name="dosi_farmaco">Dosi e Orari</string>
     <string name="periodo_assunzione">Periodo di assunzione</string>
     <string name="importanza_farmaco">Importanza</string>
 
 </resources>
+

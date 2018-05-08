@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     protected NavigationView navigationView;
+    FloatingActionButton fab = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +45,13 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            fab.show();
+            Cure cure = new Cure(fab);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+        }
     }
 
     public void setActionBarTitle(String title) {
@@ -90,46 +98,47 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_home) {
-
-            Cure cure = new Cure();
+            fab.show();
+            Cure cure = new Cure(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
 
         } else if (id == R.id.nav_pills) {
-
-            MieiFarmaci mieiFarmaci = new MieiFarmaci();
+            fab.show();
+            MieiFarmaci mieiFarmaci = new MieiFarmaci(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).commit();
 
         } else if (id == R.id.nav_calendar) {
-
-            Calendario calendario = new Calendario();
+            fab.show();
+            Calendario calendario = new Calendario(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).commit();
 
         } else if (id == R.id.nav_pharamarcy) {
-
+            fab.hide();
             startActivity(new Intent(this, MapsActivity.class));
-            Cure cure = new Cure();
+            Cure cure = new Cure(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
             navigationView.getMenu().getItem(0).setChecked(true);
 
 
         } else if (id == R.id.nav_contacts) {
-
-            ContattiImportanti contattiImportanti = new ContattiImportanti();
+            fab.show();
+            ContattiImportanti contattiImportanti = new ContattiImportanti(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).commit();
 
 
         } else if (id == R.id.nav_sms) {
-
+            fab.hide();
             SmsAvviso smsAvviso = new SmsAvviso();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).commit();
 
 
         } else if (id == R.id.nav_notes) {
-
-            Note note = new Note();
+            fab.show();
+            Note note = new Note(fab);
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).commit();
 
         } else if (id == R.id.nav_settings) {
+            fab.hide();
             Impostazioni impostazioni = new Impostazioni();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).commit();
 

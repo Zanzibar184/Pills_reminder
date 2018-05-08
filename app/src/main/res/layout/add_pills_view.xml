@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
             android:background="@color/colorPrimaryDark"
-            android:id="@+id/view2" />
+            android:id="@+id/line1" />
 
         <EditText
             android:id="@+id/nome_farmaco"
@@ -72,8 +72,11 @@
             android:id="@+id/text_title2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:gravity="center_horizontal"
-            android:text="@string/scorte_farmaco"/>
+            android:text="@string/scorte_farmaco" />
 
         <View
             android:layout_width="fill_parent"
@@ -92,7 +95,6 @@
             android:layout_alignLeft="@+id/textView4"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/textView4"
-            android:layout_marginBottom="13dp"
             android:text="Quantità corrente" />
 
         <TextView
@@ -134,7 +136,7 @@
     <RelativeLayout
         android:id="@+id/myview3"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
         android:layout_marginLeft="@dimen/marginLeft_view"
@@ -156,7 +158,28 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view3" />
+
+        <ImageView
+            android:id="@+id/img_add_dosi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="39dp"
+            android:layout_marginStart="39dp"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_add_dosi"
+            android:layout_toEndOf="@+id/img_add_dosi"
+            android:layout_toRightOf="@+id/img_add_dosi"
+            android:text="Aggiungi dose" />
 
     </RelativeLayout>
 
@@ -186,14 +209,75 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view2" />
+
+        <EditText
+            android:id="@+id/dateinit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imgdateinit"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="date" />
+
+        <ImageView
+            android:id="@+id/imgdateinit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imgdateend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imgdateinit"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/imgdateinit"
+            app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
+        <EditText
+            android:id="@+id/dateend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/dateinit"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/dateinit"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/imgdateinit"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:text="Dal" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/dateend"
+            android:layout_alignBottom="@+id/dateend"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignStart="@+id/textView3"
+            android:text="Al" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/myview5"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
+        android:layout_height="@dimen/height_inserimento_view"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
         android:layout_marginLeft="@dimen/marginLeft_view"
@@ -217,6 +301,16 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
             android:background="@color/colorPrimaryDark" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:text="Cura importante (Aggiungila al servizio SMS Avviso)" />
 
     </RelativeLayout>
 
