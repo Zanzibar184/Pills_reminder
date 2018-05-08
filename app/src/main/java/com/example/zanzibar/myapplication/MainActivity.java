@@ -1,5 +1,6 @@
 package com.example.zanzibar.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    protected NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -85,54 +87,50 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_home) {
 
             Cure cure = new Cure();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
 
         } else if (id == R.id.nav_pills) {
 
             MieiFarmaci mieiFarmaci = new MieiFarmaci();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).commit();
 
         } else if (id == R.id.nav_calendar) {
 
             Calendario calendario = new Calendario();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).commit();
 
         } else if (id == R.id.nav_pharamarcy) {
 
-            Pharmacy pharmacy = new Pharmacy();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, pharmacy).commit();
+            startActivity(new Intent(this, MapsActivity.class));
+            Cure cure = new Cure();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+            navigationView.getMenu().getItem(0).setChecked(true);
+
 
         } else if (id == R.id.nav_contacts) {
 
             ContattiImportanti contattiImportanti = new ContattiImportanti();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).commit();
 
 
         } else if (id == R.id.nav_sms) {
 
             SmsAvviso smsAvviso = new SmsAvviso();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).commit();
 
 
         } else if (id == R.id.nav_notes) {
 
             Note note = new Note();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).commit();
 
         } else if (id == R.id.nav_settings) {
             Impostazioni impostazioni = new Impostazioni();
-            FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).commit();
 
         }
