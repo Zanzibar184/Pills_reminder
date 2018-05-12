@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_marginTop="@dimen/marginTop_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/contatto"
+        android:layout_gravity="center"/>
+
+    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Nome del contatto"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/line1" />
+
+        <EditText
+            android:id="@+id/nome_contatto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Nome..."
+            android:inputType="textPersonName" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Relazione (ad esempio medico, figlia, ecc...)"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/line2" />
+
+        <EditText
+            android:id="@+id/relazione_contatto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Relazione..."
+            android:inputType="textPersonName" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Numero di telefono"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/line3" />
+
+        <EditText
+            android:id="@+id/numero_contatto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Nome..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_conferma_contatto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Conferma"
+        android:layout_margin="@dimen/marginLeft_view"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+</LinearLayout>

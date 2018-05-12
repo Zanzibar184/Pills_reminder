@@ -1,6 +1,7 @@
 package com.example.zanzibar.myapplication;
 
 import android.app.DatePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,11 +10,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -36,12 +39,24 @@ public class AggiungiPillola extends Fragment {
     private DatePickerDialog.OnDateSetListener dateinit = null;
     private DatePickerDialog.OnDateSetListener dateend = null;
 
+    private Button btn_conferma = null;
+
+    int nClicks = 0;
+    RelativeLayout r1;
+    RelativeLayout r2;
+    RelativeLayout r3;
+    RelativeLayout r4;
+    RelativeLayout r5;
+
+    Drawable draw;
+
     public AggiungiPillola() {
         // Required empty public constructor
     }
 
-    public AggiungiPillola(FloatingActionButton fab_pills) {
+    public AggiungiPillola(FloatingActionButton fab_pills, Drawable draw) {
         this.fab_pills = fab_pills;
+        this.draw = draw;
     }
 
     @Override
@@ -57,9 +72,16 @@ public class AggiungiPillola extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddpill);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_pills_view, linearLayout, false);
         linearLayout.addView(frame);
+        r1 = view.findViewById(R.id.myview3_1);
+        r2 = view.findViewById(R.id.myview3_2);
+        r3 = view.findViewById(R.id.myview3_3);
+        r4 = view.findViewById(R.id.myview3_4);
+        r5 = view.findViewById(R.id.myview3_5);
 
         fab_pills.hide();
 
+        ImageView imgpill = (ImageView) view.findViewById(R.id.imgpillchosen);
+        imgpill.setImageDrawable(draw);
         ImageView img_date_init = (ImageView) view.findViewById(R.id.imgdateinit);
         ImageView img_date_end = (ImageView) view.findViewById(R.id.imgdateend);
         ImageView img_add_pill = (ImageView) view.findViewById(R.id.img_add_dosi);
@@ -91,8 +113,18 @@ public class AggiungiPillola extends Fragment {
         img_add_pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Dose aggiunta", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                nClicks++;
+                if(nClicks==1){
+                    r1.setVisibility(View.VISIBLE);
+                } else if(nClicks==2) {
+                    r2.setVisibility(View.VISIBLE);
+                } else if(nClicks==3) {
+                    r3.setVisibility(View.VISIBLE);
+                } else if(nClicks==4) {
+                    r4.setVisibility(View.VISIBLE);
+                } else if(nClicks==5) {
+                    r5.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

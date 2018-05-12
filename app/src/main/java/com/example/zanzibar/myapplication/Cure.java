@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,9 @@ public class Cure extends Fragment {
         fab_cure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_cure);
+                ScegliPillola scegliPillola = new ScegliPillola(fab_cure);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiPillola).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, scegliPillola).commit();
             }
         });
 

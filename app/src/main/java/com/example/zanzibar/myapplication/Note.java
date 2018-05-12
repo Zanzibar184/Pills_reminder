@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,9 @@ public class Note extends Fragment {
         fab_note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Ci troviamo in NOTE() :-)", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AggiungiNota aggiungiNota = new AggiungiNota(fab_note);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).commit();
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
