@@ -1,5 +1,8 @@
 package com.example.zanzibar.myapplication;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,7 +34,7 @@ public class ScegliPillola extends Fragment {
     ImageView arrow_right_image;
     TextView name_pill;
 
-    Drawable.ConstantState img_state = null;
+    Drawable img_state = null;
 
     public ScegliPillola() {
         // Required empty public constructor
@@ -61,33 +64,33 @@ public class ScegliPillola extends Fragment {
         arrow_right_image = (ImageView) view.findViewById(R.id.image_arrow_right);
         name_pill = (TextView) view.findViewById(R.id.txt_tipo_farmaco);
 
-        final Drawable.ConstantState id_img_pill = getResources().getDrawable(R.drawable.pill_colored).getConstantState();
-        final Drawable.ConstantState id_img_siringa = getResources().getDrawable(R.drawable.syringe).getConstantState();
-        final Drawable.ConstantState id_img_gocce = getResources().getDrawable(R.drawable.gocce).getConstantState();
-        final Drawable.ConstantState id_img_spray = getResources().getDrawable(R.drawable.spray).getConstantState();
-        final Drawable.ConstantState id_img_sciroppo = getResources().getDrawable(R.drawable.sciroppo).getConstantState();
-        final Drawable.ConstantState id_img_pomata = getResources().getDrawable(R.drawable.pomata).getConstantState();
+        final Drawable id_img_pill = getResources().getDrawable(R.drawable.pill_colored);
+        final Drawable id_img_siringa = getResources().getDrawable(R.drawable.syringe);
+        final Drawable id_img_gocce = getResources().getDrawable(R.drawable.gocce);
+        final Drawable id_img_spray = getResources().getDrawable(R.drawable.spray);
+        final Drawable id_img_sciroppo = getResources().getDrawable(R.drawable.sciroppo);
+        final Drawable id_img_pomata = getResources().getDrawable(R.drawable.pomata);
 
         arrow_left_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                img_state = pill_image.getDrawable().getConstantState();
-                if(img_state==id_img_pill){
+                img_state = pill_image.getDrawable();
+                if(areDrawablesIdentical(img_state,id_img_pill)) {
                     pill_image.setImageResource(R.drawable.spray);
-                    name_pill.setText("Iniezione");
-                } else if(img_state==id_img_spray) {
+                    name_pill.setText("Spray");
+                } else if(areDrawablesIdentical(img_state,id_img_spray)) {
                     pill_image.setImageResource(R.drawable.pomata);
-                    name_pill.setText("Pillola");
-                } else if(img_state==id_img_pomata) {
+                    name_pill.setText("Pomata");
+                } else if(areDrawablesIdentical(img_state,id_img_pomata)) {
                     pill_image.setImageResource(R.drawable.gocce);
                     name_pill.setText("Gocce");
-                } else if(img_state==id_img_gocce) {
+                } else if(areDrawablesIdentical(img_state,id_img_gocce)) {
                     pill_image.setImageResource(R.drawable.sciroppo);
                     name_pill.setText("Sciroppo");
-                } else if(img_state==id_img_sciroppo) {
+                } else if(areDrawablesIdentical(img_state,id_img_sciroppo)) {
                     pill_image.setImageResource(R.drawable.syringe);
                     name_pill.setText("Iniezione");
-                } else if(img_state==id_img_siringa) {
+                } else if(areDrawablesIdentical(img_state,id_img_siringa)) {
                     pill_image.setImageResource(R.drawable.pill_colored);
                     name_pill.setText("Pillola");
                 }
@@ -97,23 +100,23 @@ public class ScegliPillola extends Fragment {
         arrow_right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                img_state = pill_image.getDrawable().getConstantState();
-                if(img_state==id_img_pill){
+                img_state = pill_image.getDrawable();
+                if(areDrawablesIdentical(img_state,id_img_pill)) {
                     pill_image.setImageResource(R.drawable.syringe);
                     name_pill.setText("Iniezione");
-                } else if(img_state==id_img_siringa) {
+                } else if(areDrawablesIdentical(img_state,id_img_siringa)) {
                     pill_image.setImageResource(R.drawable.sciroppo);
                     name_pill.setText("Sciroppo");
-                } else if(img_state==id_img_sciroppo) {
+                } else if(areDrawablesIdentical(img_state,id_img_sciroppo)) {
                     pill_image.setImageResource(R.drawable.gocce);
                     name_pill.setText("Gocce");
-                } else if(img_state==id_img_gocce) {
+                } else if(areDrawablesIdentical(img_state,id_img_gocce)) {
                     pill_image.setImageResource(R.drawable.pomata);
                     name_pill.setText("Pomata");
-                } else if(img_state==id_img_pomata) {
+                } else if(areDrawablesIdentical(img_state,id_img_pomata)) {
                     pill_image.setImageResource(R.drawable.spray);
                     name_pill.setText("Spray");
-                } else if(img_state==id_img_spray) {
+                } else if(areDrawablesIdentical(img_state,id_img_spray)) {
                     pill_image.setImageResource(R.drawable.pill_colored);
                     name_pill.setText("Pillola");
                 }
@@ -137,5 +140,36 @@ public class ScegliPillola extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Scegli il tipo di pillola");
     }
 
+    public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {
+        Drawable.ConstantState stateA = drawableA.getConstantState();
+        Drawable.ConstantState stateB = drawableB.getConstantState();
+        // If the constant state is identical, they are using the same drawable resource.
+        // However, the opposite is not necessarily true.
+        return (stateA != null && stateB != null && stateA.equals(stateB))
+                || getBitmap(drawableA).sameAs(getBitmap(drawableB));
+    }
+
+    public static Bitmap getBitmap(Drawable drawable) {
+        Bitmap result;
+        if (drawable instanceof BitmapDrawable) {
+            result = ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            int width = drawable.getIntrinsicWidth();
+            int height = drawable.getIntrinsicHeight();
+            // Some drawables have no intrinsic width - e.g. solid colours.
+            if (width <= 0) {
+                width = 1;
+            }
+            if (height <= 0) {
+                height = 1;
+            }
+
+            result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(result);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        }
+        return result;
+    }
 
 }
