@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.maps;
 
 import java.io.BufferedReader;
 import java.io.IOException;

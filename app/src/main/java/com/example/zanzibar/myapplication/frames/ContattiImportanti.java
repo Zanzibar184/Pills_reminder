@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -15,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 
 /**
@@ -38,7 +40,7 @@ public class ContattiImportanti extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contatti_importanti, container, false);
+        return inflater.inflate(R.layout.sfondo_contatti_importanti, container, false);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class ContattiImportanti extends Fragment {
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcontatti);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.myframeviewcontatti, linearLayout, false);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
         linearLayout.addView(frame);
 
         //prendo il numero di telefono che è inserito e

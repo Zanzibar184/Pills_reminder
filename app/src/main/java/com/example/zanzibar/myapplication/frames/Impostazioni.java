@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 
 import android.os.Bundle;
@@ -7,9 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 
 /**
@@ -28,14 +29,14 @@ public class Impostazioni extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_impostazioni, container, false);
+        return inflater.inflate(R.layout.sfondo_impostazioni, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutimpostazioni);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.myframeviewimpostazioni, linearLayout, false);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_impostazioni, linearLayout, false);
         linearLayout.addView(frame);
 
     }

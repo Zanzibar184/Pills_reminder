@@ -1,21 +1,19 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 
 /**
@@ -40,7 +38,7 @@ public class Cure extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_cure, container, false);
+        return inflater.inflate(R.layout.sfondo_cure, container, false);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class Cure extends Fragment {
     }
 
     public void addLayoutCure(int n) {
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.myframeviewcure, linearLayout, false);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_cure, linearLayout, false);
         TextView txt_title = (TextView) frame.findViewById(R.id.text_title);
             if (n == 1) {
                 txt_title.setText("Mattina");

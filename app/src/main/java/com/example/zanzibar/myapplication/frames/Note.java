@@ -1,16 +1,18 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 
 /**
@@ -34,7 +36,7 @@ public class Note extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note, container, false);
+        return inflater.inflate(R.layout.sfondo_note, container, false);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class Note extends Fragment {
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.myframeviewnote, linearLayout, false);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
         linearLayout.addView(frame);
     }
 

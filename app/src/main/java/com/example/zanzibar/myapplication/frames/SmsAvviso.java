@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 
 /**
@@ -26,14 +29,14 @@ public class SmsAvviso extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sms_avviso, container, false);
+        return inflater.inflate(R.layout.sfondo_sms_avviso, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutsms);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.myframeviewsms, linearLayout, false);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_sms, linearLayout, false);
         linearLayout.addView(frame);
     }
 

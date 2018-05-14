@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Cure"
-    android:id="@+id/llayoutcontatti">
+    tools:context=".frames.Cure"
+    android:id="@+id/llayoutimpostazioni">
 
     <!--Qui ho un linear layout per gestire meglio l'ordine dei vari contenuti, che appunto andranno inseriti qui-->
 

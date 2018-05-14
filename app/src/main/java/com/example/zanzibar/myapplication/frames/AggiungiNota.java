@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication;
+package com.example.zanzibar.myapplication.frames;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
+
+import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,7 +56,7 @@ public class AggiungiNota extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_aggiunginota, container, false);
+        return inflater.inflate(R.layout.sfondo_aggiunginota, container, false);
     }
 
     @Override

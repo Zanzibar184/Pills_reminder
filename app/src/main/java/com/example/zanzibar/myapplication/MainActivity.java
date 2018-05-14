@@ -14,7 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.example.zanzibar.myapplication.frames.Calendario;
+import com.example.zanzibar.myapplication.frames.ContattiImportanti;
+import com.example.zanzibar.myapplication.frames.Cure;
+import com.example.zanzibar.myapplication.frames.Impostazioni;
+import com.example.zanzibar.myapplication.frames.MieiFarmaci;
+import com.example.zanzibar.myapplication.frames.Note;
+import com.example.zanzibar.myapplication.frames.SmsAvviso;
+import com.example.zanzibar.myapplication.maps.MapsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

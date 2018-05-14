@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AggiungiContatto"
-    android:id="@+id/llayoutaddcontatto">
+    tools:context=".frames.Cure"
+    android:id="@+id/llayoutcure">
 
     <!--Qui ho un linear layout per gestire meglio l'ordine dei vari contenuti, che appunto andranno inseriti qui-->
 
