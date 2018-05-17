@@ -130,7 +130,7 @@ public class ScegliPillola extends Fragment {
             public void onClick(View v) {
                 AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_sceglipillola,pill_image.getDrawable());
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiPillola).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiPillola).addToBackStack(null).commit();
             }
         });
 

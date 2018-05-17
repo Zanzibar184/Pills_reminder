@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,12 +55,13 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (savedInstanceState == null) {
+        if(savedInstanceState==null) {
             fab.show();
             Cure cure = new Cure(fab);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
         }
+
     }
 
     public void setActionBarTitle(String title) {
@@ -72,7 +74,18 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+            if (count>0) {
+                //Log.e("count", "is getBackStackEntryCount -> " + count);
+                for (int i = 0; i < count; ++i) {
+                    getSupportFragmentManager().popBackStackImmediate();
+                    //Log.e("getBackStack", "IS REMOVED " + i);
+                }
+            } else {
+                super.onBackPressed();
+                //Log.i("super", "sto usando onBackPressed di default");
+            }
         }
     }
 

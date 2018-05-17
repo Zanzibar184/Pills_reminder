@@ -47,7 +47,7 @@ public class Note extends Fragment {
             public void onClick(View view) {
                 AggiungiNota aggiungiNota = new AggiungiNota(fab_note);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);

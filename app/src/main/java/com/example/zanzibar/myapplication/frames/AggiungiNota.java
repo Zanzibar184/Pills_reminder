@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,7 @@ public class AggiungiNota extends Fragment {
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nClicks==1) {
-                    nClicks++;
-                    rdatetimeselect.setVisibility(View.VISIBLE);
-                } else if (nClicks==2) {
-                    nClicks--;
-                    rdatetimeselect.setVisibility(View.GONE);
-                }
+                setDateAndTimeVisibility();
             }
         });
 
@@ -103,20 +98,7 @@ public class AggiungiNota extends Fragment {
         img_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        text_time.setText( selectedHour + ":" + selectedMinute);
-                    }
-                }, hour, minute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
-                mTimePicker.show();
-
+                setTimePickerNota();
             }
         });
 
@@ -148,5 +130,45 @@ public class AggiungiNota extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date.setText(sdf.format(myCalendardate.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void setDateAndTimeVisibility() {
+        if(nClicks==1) {
+            nClicks++;
+            rdatetimeselect.setVisibility(View.VISIBLE);
+        } else if (nClicks==2) {
+            nClicks--;
+            rdatetimeselect.setVisibility(View.GONE);
+        }
+    }
+
+    private void setTimePickerNota() {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //Comunque dobbiamo salvare selectedHour e selectedMinute
+                String string_with_minute_hour_zero = "0" + selectedHour + ":0" + selectedMinute;
+                String string_with_hour_zero = "0" + selectedHour + ":" + selectedMinute;
+                String string_with_minute_zero = selectedHour + ":0" + selectedMinute;
+                String string_with_minute_hour = selectedHour + ":" + selectedMinute;
+                if(selectedHour>=0 && selectedHour<=9) {
+                    if(selectedMinute>=0 && selectedMinute<=9)
+                        text_time.setText(string_with_minute_hour_zero);
+                    else
+                        text_time.setText(string_with_hour_zero);
+                } else {
+                    if(selectedMinute>=0 && selectedMinute<=9)
+                        text_time.setText(string_with_minute_zero);
+                    else
+                        text_time.setText(string_with_minute_hour);
+                }
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 }

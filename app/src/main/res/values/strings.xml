@@ -25,5 +25,14 @@
     <string name="periodo_assunzione">Periodo di assunzione</string>
     <string name="importanza_farmaco">Importanza</string>
 
+    <string name="scatta_fotocamera">Scatta foto</string>
+    <string name="scatta_galleria">Scegli da galleria</string>
+    <string name="conferma_farmaco">Conferma assunzione farmaco</string>
+    <string name="nonconferma_farmaco">Farmaco non assunto</string>
+    <string name="posticipa_farmaco">Posticipa</string>
+
+    <string name="importa_contatto">Importa nome e telefono da contatto</string>
+    <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
+
 </resources>
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_conferma"
+        android:title="@string/conferma_farmaco"/>
+
+    <item
+        android:id="@+id/menu_non_conferma"
+        android:title="@string/nonconferma_farmaco"/>
+
+    <item
+        android:id="@+id/menu_posticipa"
+        android:title="@string/posticipa_farmaco"/>
+</menu>

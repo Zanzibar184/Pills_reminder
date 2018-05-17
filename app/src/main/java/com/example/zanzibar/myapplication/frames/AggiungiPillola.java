@@ -1,12 +1,21 @@
 package com.example.zanzibar.myapplication.frames;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,7 +23,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.Database_cure.Cura;
@@ -23,6 +34,7 @@ import com.example.zanzibar.myapplication.Database_cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -49,12 +61,27 @@ public class AggiungiPillola extends Fragment {
 
     private Button btn_conferma = null;
 
+    private String choose_from_camera = "Scatta foto";
+    private String choose_from_gallery = "Scegli da galleria";
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
+    private static final int CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE = 2888;
+
     int nClicks = 0;
     RelativeLayout r1;
     RelativeLayout r2;
     RelativeLayout r3;
     RelativeLayout r4;
     RelativeLayout r5;
+
+    ImageView img_call_camera;
+
+    ImageView imgpill;
+
+    private EditText text_time_dose1 = null;
+    private EditText text_time_dose2 = null;
+    private EditText text_time_dose3 = null;
+    private EditText text_time_dose4 = null;
+    private EditText text_time_dose5 = null;
 
     Drawable draw;
 
@@ -88,13 +115,26 @@ public class AggiungiPillola extends Fragment {
 
         fab_pills.hide();
 
-        ImageView imgpill = (ImageView) view.findViewById(R.id.imgpillchosen);
+        imgpill = (ImageView) view.findViewById(R.id.imgpillchosen);
         imgpill.setImageDrawable(draw);
         ImageView img_date_init = (ImageView) view.findViewById(R.id.imgdateinit);
         ImageView img_date_end = (ImageView) view.findViewById(R.id.imgdateend);
         ImageView img_add_pill = (ImageView) view.findViewById(R.id.img_add_dosi);
+        ImageView img_time_dose_1 = (ImageView) view.findViewById(R.id.img_time_1);
+        ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
+        ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
+        ImageView img_time_dose_4 = (ImageView) view.findViewById(R.id.img_time_4);
+        ImageView img_time_dose_5 = (ImageView) view.findViewById(R.id.img_time_5);
+
+        img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
+
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
+        text_time_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
+        text_time_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
+        text_time_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
+        text_time_dose4 = (EditText) view.findViewById(R.id.txt_dose4);
+        text_time_dose5 = (EditText) view.findViewById(R.id.txt_dose5);
         nome_cura = view.findViewById(R.id.nome_farmaco);
         scorte = view.findViewById(R.id.scorte);
         rimanenze = view.findViewById(R.id.rimanenze);
@@ -124,18 +164,68 @@ public class AggiungiPillola extends Fragment {
         img_add_pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nClicks++;
-                if(nClicks==1){
-                    r1.setVisibility(View.VISIBLE);
-                } else if(nClicks==2) {
-                    r2.setVisibility(View.VISIBLE);
-                } else if(nClicks==3) {
-                    r3.setVisibility(View.VISIBLE);
-                } else if(nClicks==4) {
-                    r4.setVisibility(View.VISIBLE);
-                } else if(nClicks==5) {
-                    r5.setVisibility(View.VISIBLE);
-                }
+                setVisibilityDosi();
+            }
+        });
+
+        img_call_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), img_call_camera);
+                popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getTitle().equals(choose_from_camera)) {
+                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(takePicture,
+                                    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                        } else if(item.getTitle().equals(choose_from_gallery)) {
+                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(pickPhoto,
+                                    CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE);
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+        img_time_dose_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose1);
+            }
+        });
+
+        img_time_dose_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose2);
+            }
+        });
+
+        img_time_dose_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose3);
+            }
+        });
+
+        img_time_dose_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose4);
+            }
+        });
+
+        img_time_dose_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose5);
             }
         });
 
@@ -168,6 +258,20 @@ public class AggiungiPillola extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi farmaco");
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bitmap bmp = (Bitmap) data.getExtras().get("data");
+                setPillImageCapturedFromCamera(bmp);
+            }
+        } else if (requestCode == CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                Uri pickedImage = data.getData();
+                setPillImageCapturedFromGallery(pickedImage);
+            }
+        }
+    }
 
     private void setDateInit() {
         myCalendarinit = Calendar.getInstance();
@@ -211,6 +315,81 @@ public class AggiungiPillola extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date_end.setText(sdf.format(myCalendarend.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void setPillImageCapturedFromCamera(Bitmap bmp) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        // convert byte array to Bitmap
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                byteArray.length);
+
+        imgpill.setImageBitmap(bitmap);
+    }
+
+    private void setPillImageCapturedFromGallery(Uri pickedImage) {
+        String[] filePath = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
+        cursor.moveToFirst();
+        String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+
+        imgpill.setImageBitmap(bitmap);
+
+        cursor.close();
+    }
+
+    private void setVisibilityDosi() {
+        nClicks++;
+        if(nClicks==1){
+            r1.setVisibility(View.VISIBLE);
+        } else if(nClicks==2) {
+            r2.setVisibility(View.VISIBLE);
+        } else if(nClicks==3) {
+            r3.setVisibility(View.VISIBLE);
+        } else if(nClicks==4) {
+            r4.setVisibility(View.VISIBLE);
+        } else if(nClicks==5) {
+            r5.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setTimePickerDosi(EditText editText) {
+        final EditText e = editText;
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //Comunque dobbiamo salvare selectedHour e selectedMinute
+                String string_with_minute_hour_zero = "0" + selectedHour + ":0" + selectedMinute;
+                String string_with_hour_zero = "0" + selectedHour + ":" + selectedMinute;
+                String string_with_minute_zero = selectedHour + ":0" + selectedMinute;
+                String string_with_minute_hour = selectedHour + ":" + selectedMinute;
+                if(selectedHour>=0 && selectedHour<=9) {
+                    if(selectedMinute>=0 && selectedMinute<=9)
+                        e.setText(string_with_minute_hour_zero);
+                    else
+                        e.setText(string_with_hour_zero);
+                } else {
+                    if(selectedMinute>=0 && selectedMinute<=9)
+                        e.setText(string_with_minute_zero);
+                    else
+                        e.setText(string_with_minute_hour);
+                }
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
 }

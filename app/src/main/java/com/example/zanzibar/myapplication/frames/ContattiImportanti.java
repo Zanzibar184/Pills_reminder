@@ -51,7 +51,7 @@ public class ContattiImportanti extends Fragment {
             public void onClick(View view) {
                 AggiungiContatto aggiungiContatto = new AggiungiContatto(fab_contatti);
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiContatto).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiContatto).addToBackStack(null).commit();
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcontatti);

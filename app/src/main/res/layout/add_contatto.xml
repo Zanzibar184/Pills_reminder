@@ -6,14 +6,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_marginTop="@dimen/marginTop_image"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/contatto"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center">
 
-    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
+        <ImageView
+            android:id="@+id/imgcontactphotochosen"
+            android:layout_width="@dimen/img_pill_addfarmaco"
+            android:layout_height="@dimen/img_pill_addfarmaco"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/marginTop_image"
+            android:src="@drawable/contatto"/>
+
+        <ImageView
+            android:id="@+id/onclick_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imgcontactphotochosen"
+            android:layout_toEndOf="@+id/imgcontactphotochosen"
+            android:layout_toRightOf="@+id/imgcontactphotochosen"
+            android:src="@drawable/ic_camera" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+        <CheckBox
+            android:id="@+id/checkBox_importa_contatto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/importa_contatto" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -132,6 +167,26 @@
             android:ems="10"
             android:hint="Nome..."
             android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+        <CheckBox
+            android:id="@+id/checkBox_setContact_SMSAVVISO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/setta_contatto_SMSAVVISO" />
 
     </RelativeLayout>
 

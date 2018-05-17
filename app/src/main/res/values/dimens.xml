@@ -9,7 +9,8 @@
     <dimen name="height_settings_view">50dp</dimen>
     <dimen name="height_inserimento_view">100dp</dimen>
     <dimen name="img_pill_scrollview">80dp</dimen>
-    <dimen name="img_pill_addfarmaco">100dp</dimen>
+    <dimen name="img_pill_addfarmaco">150dp</dimen>
+    <dimen name="img_contact_addphoto">150dp</dimen>
     <dimen name="height_listpill_cure">200dp</dimen>
     <dimen name="height_choose_pill">300dp</dimen>
     <dimen name="marginLeft_view">15dp</dimen>

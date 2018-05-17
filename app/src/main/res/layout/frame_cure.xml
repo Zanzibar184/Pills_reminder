@@ -63,7 +63,7 @@
                         android:background="@drawable/rounded_shape_stroke">
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/img_farmaco"
                             android:layout_width="@dimen/img_pill_scrollview"
                             android:layout_height="@dimen/img_pill_scrollview"
                             android:layout_alignParentLeft="true"
@@ -110,7 +110,7 @@
                         android:background="@drawable/rounded_shape_stroke">
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/img_iniezione"
                             android:layout_width="@dimen/img_pill_scrollview"
                             android:layout_height="@dimen/img_pill_scrollview"
                             android:layout_alignParentLeft="true"
@@ -157,7 +157,7 @@
                         android:background="@drawable/rounded_shape_stroke">
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/img_pomata"
                             android:layout_width="@dimen/img_pill_scrollview"
                             android:layout_height="@dimen/img_pill_scrollview"
                             android:layout_alignParentLeft="true"
@@ -204,7 +204,7 @@
                         android:background="@drawable/rounded_shape_stroke">
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/img_gocce"
                             android:layout_width="@dimen/img_pill_scrollview"
                             android:layout_height="@dimen/img_pill_scrollview"
                             android:layout_alignParentLeft="true"
