@@ -23,9 +23,9 @@
             android:id="@+id/onclick_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imgcontactphotochosen"
-            android:layout_toEndOf="@+id/imgcontactphotochosen"
-            android:layout_toRightOf="@+id/imgcontactphotochosen"
+            android:layout_alignBottom="@+id/imgpillchosen"
+            android:layout_toEndOf="@+id/imgpillchosen"
+            android:layout_toRightOf="@+id/imgpillchosen"
             android:src="@drawable/ic_camera" />
 
     </RelativeLayout>
