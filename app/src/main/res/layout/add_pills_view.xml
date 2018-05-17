@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,17 +33,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/nome_cura"/>
+            android:text="@string/nome_cura" />
 
         <View
+            android:id="@+id/line1"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/line1" />
+            android:background="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/nome_farmaco"
@@ -53,7 +52,7 @@
             android:layout_alignParentBottom="true"
             android:ems="10"
             android:hint="Nome..."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName" /><!-- input nome cura -->
 
     </RelativeLayout>
 
@@ -80,14 +79,14 @@
             android:text="@string/scorte_farmaco" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/textView3"
@@ -111,18 +110,16 @@
             android:text="Quantità per scatola" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/scorte"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView3"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignLeft="@+id/editText3"
-            android:layout_alignStart="@+id/editText3"
+            android:layout_alignBottom="@+id/text_title2"
+            android:layout_alignStart="@+id/rimanenze"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number" /><!-- input scorte -->
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/rimanenze"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView4"
@@ -131,7 +128,7 @@
             android:layout_marginEnd="23dp"
             android:layout_marginRight="23dp"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number" /> <!-- input rimanenze -->
 
     </RelativeLayout>
 
@@ -146,22 +143,23 @@
         android:layout_marginTop="@dimen/marginTop_inserimento_view"
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/dosi_farmaco"/>
+            android:text="@string/dosi_farmaco" />
 
         <View
+            android:id="@+id/line3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/line3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -171,11 +169,11 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/img_add_dosi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/green_plus" />
+            <ImageView
+                android:id="@+id/img_add_dosi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/green_plus" />
 
         </RelativeLayout>
 
@@ -193,22 +191,23 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 1"/>
+            android:text="Dose 1" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -291,22 +290,23 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 2"/>
+            android:text="Dose 2" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -389,22 +389,23 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 3"/>
+            android:text="Dose 3" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -487,22 +488,23 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 4"/>
+            android:text="Dose 4" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -585,22 +587,23 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
+
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 5"/>
+            android:text="Dose 5" />
 
         <View
+            android:id="@+id/view3"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view3" />
+            android:background="@color/colorPrimaryDark" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -688,17 +691,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/periodo_assunzione"/>
+            android:text="@string/periodo_assunzione" />
 
         <View
+            android:id="@+id/view2"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view2" />
+            android:background="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/dateinit"
@@ -707,7 +710,7 @@
             android:layout_alignBottom="@+id/imgdateinit"
             android:layout_centerHorizontal="true"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="date" /><!-- input inizio cura -->
 
         <ImageView
             android:id="@+id/imgdateinit"
@@ -737,7 +740,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/dateinit"
             android:ems="10"
-            android:inputType="date" />
+            android:inputType="date" /> <!-- input fine cura -->
 
         <TextView
             android:id="@+id/textView3"
@@ -779,7 +782,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/importanza_farmaco"/>
+            android:text="@string/importanza_farmaco" />
 
         <View
             android:layout_width="fill_parent"
@@ -806,9 +809,9 @@
         android:id="@+id/btn_conferma_inserimento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginLeft_view"
         android:background="@color/colorPrimary"
         android:text="Conferma"
-        android:layout_margin="@dimen/marginLeft_view"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 

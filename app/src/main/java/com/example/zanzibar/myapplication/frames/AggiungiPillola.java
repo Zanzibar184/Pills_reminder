@@ -15,7 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.zanzibar.myapplication.Database_cure.Cura;
+import com.example.zanzibar.myapplication.Database_cure.CureDAO;
+import com.example.zanzibar.myapplication.Database_cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
@@ -28,12 +32,16 @@ import java.util.Locale;
  */
 
 public class AggiungiPillola extends Fragment {
+    private CureDAO dao;
 
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_pills = null;
     private EditText text_date_init = null;
     private EditText text_date_end = null;
+    private EditText nome_cura = null;
+    private EditText scorte = null;
+    private EditText rimanenze = null;
     private Calendar myCalendarinit = null;
     private Calendar myCalendarend = null;
     private DatePickerDialog.OnDateSetListener dateinit = null;
@@ -87,6 +95,9 @@ public class AggiungiPillola extends Fragment {
         ImageView img_add_pill = (ImageView) view.findViewById(R.id.img_add_dosi);
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
+        nome_cura = view.findViewById(R.id.nome_farmaco);
+        scorte = view.findViewById(R.id.scorte);
+        rimanenze = view.findViewById(R.id.rimanenze);
 
         img_date_init.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +136,28 @@ public class AggiungiPillola extends Fragment {
                 } else if(nClicks==5) {
                     r5.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
+        btn_conferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dao = new CureDao_DB();
+                dao.open();
+
+                String nome = nome_cura.getText().toString();
+                int qta_ass = 0;
+                int scorta = Integer.parseInt(scorte.getText().toString());
+                int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                String inizio_cura = text_date_init.getText().toString();
+                String fine_cura = text_date_end.getText().toString();
+
+
+
+                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura));
+                dao.close();
             }
         });
     }
