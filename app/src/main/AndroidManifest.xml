@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Personal"
-        android:name=".Database_cure.Pills_reminder">
+        android:name=".Database.Pills_reminder">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

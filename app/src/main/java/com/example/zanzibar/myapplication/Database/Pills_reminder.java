@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication.Database_cure;
+package com.example.zanzibar.myapplication.Database;
 
 import android.app.Application;
 import android.content.Context;

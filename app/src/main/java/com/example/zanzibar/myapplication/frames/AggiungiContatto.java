@@ -25,6 +25,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
+import com.example.zanzibar.myapplication.Database.contatti.Contatti;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Cura;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
@@ -37,6 +42,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class AggiungiContatto extends Fragment {
+    private ContattiDAO dao;
 
     private LinearLayout linearLayout = null;
 
@@ -50,6 +56,7 @@ public class AggiungiContatto extends Fragment {
 
     EditText nomeContatto = null;
     EditText numeroContatto = null;
+    EditText relazioneContatto = null;
 
     Button aggiungiContatto = null;
     Button importaContatto = null;
@@ -90,12 +97,23 @@ public class AggiungiContatto extends Fragment {
 
         nomeContatto = view.findViewById(R.id.nome_contatto);
         numeroContatto = view.findViewById(R.id.numero_contatto);
+        relazioneContatto = view.findViewById(R.id.relazione_contatto);
 
         aggiungiContatto = (Button) view.findViewById(R.id.btn_conferma_contatto);
         aggiungiContatto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                dao = new ContattiDao_DB();
+                dao.open();
+
+                String nome = nomeContatto.getText().toString();
+                String ruolo = relazioneContatto.getText().toString();
+                String numero = numeroContatto.getText().toString();
+
+
+                Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero));
+                dao.close();
             }
         });
 

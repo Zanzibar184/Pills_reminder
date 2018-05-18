@@ -1,9 +1,11 @@
-package com.example.zanzibar.myapplication.Database_cure;
+package com.example.zanzibar.myapplication.Database.cure;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.zanzibar.myapplication.Database.Pills_reminder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -26,11 +26,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.example.zanzibar.myapplication.Database_cure.Cura;
-import com.example.zanzibar.myapplication.Database_cure.CureDAO;
-import com.example.zanzibar.myapplication.Database_cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Cura;
+import com.example.zanzibar.myapplication.Database.cure.CureDAO;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
