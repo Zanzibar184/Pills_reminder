@@ -4,4 +4,24 @@
     <color name="colorPrimaryDark">#007ac1</color>
     <color name="colorAccent">#ffe640</color>
     <color name="colorSecondary">#ff5722</color>
+
+    <color name="colorSlider">#62c5f2</color>
+    <color name="colorActive">#55f9b7</color>
+    <color name="colorInactive">#bebebe</color>
+
+    <array name="array_dot_active">
+        <item>@color/colorActive</item>
+        <item>@color/colorActive</item>
+        <item>@color/colorActive</item>
+        <item>@color/colorActive</item>
+        <item>@color/colorActive</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/colorInactive</item>
+        <item>@color/colorInactive</item>
+        <item>@color/colorInactive</item>
+        <item>@color/colorInactive</item>
+    </array>
+
 </resources>

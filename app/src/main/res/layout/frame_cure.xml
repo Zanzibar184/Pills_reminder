@@ -52,7 +52,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/llayout_view_farmaco">
+
+                    <!--
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -62,15 +65,40 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/rounded_shape_stroke">
 
-                        <ImageView
-                            android:id="@+id/img_farmaco"
-                            android:layout_width="@dimen/img_pill_scrollview"
-                            android:layout_height="@dimen/img_pill_scrollview"
+                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/textView8"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/pill_colored" />
+                            android:layout_below="@+id/textView8">
+
+                            <!-Aggiunta la X rossa e la V verde solo per il primo elemento, per intanto-->
+<!--
+                            <ImageView
+                                android:id="@+id/img_farmaco"
+                                android:layout_width="@dimen/img_pill_scrollview"
+                                android:layout_height="@dimen/img_pill_scrollview"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/pill_colored" />
+
+                            <ImageView
+                                android:id="@+id/img_greenV"
+                                android:layout_width="@dimen/img_pill_scrollview"
+                                android:layout_height="@dimen/img_pill_scrollview"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/green_check"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/img_redX"
+                                android:layout_width="@dimen/img_pill_scrollview"
+                                android:layout_height="@dimen/img_pill_scrollview"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/red_cross"
+                                android:visibility="gone" />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:id="@+id/textView8"
@@ -241,8 +269,9 @@
                             android:layout_alignParentRight="true"
                             android:text="9:00" />
                     </RelativeLayout>
-
+-->
                 </LinearLayout>
+
 
             </HorizontalScrollView>
 
