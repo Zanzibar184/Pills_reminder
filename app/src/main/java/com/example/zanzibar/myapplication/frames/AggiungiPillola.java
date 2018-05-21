@@ -83,6 +83,12 @@ public class AggiungiPillola extends Fragment {
     private EditText text_time_dose4 = null;
     private EditText text_time_dose5 = null;
 
+    private EditText text_dose1 = null;
+    private EditText text_dose2 = null;
+    private EditText text_dose3 = null;
+    private EditText text_dose4 = null;
+    private EditText text_dose5 = null;
+
     Drawable draw;
 
     int resourceId;
@@ -134,11 +140,19 @@ public class AggiungiPillola extends Fragment {
 
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
-        text_time_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
-        text_time_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
-        text_time_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
-        text_time_dose4 = (EditText) view.findViewById(R.id.txt_dose4);
-        text_time_dose5 = (EditText) view.findViewById(R.id.txt_dose5);
+
+        text_time_dose1 = (EditText) view.findViewById(R.id.txt_orario_dose1);
+        text_time_dose2 = (EditText) view.findViewById(R.id.txt_orario_dose2);
+        text_time_dose3 = (EditText) view.findViewById(R.id.txt_orario_dose3);
+        text_time_dose4 = (EditText) view.findViewById(R.id.txt_orario_dose4);
+        text_time_dose5 = (EditText) view.findViewById(R.id.txt_orario_dose5);
+
+        text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
+        text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
+        text_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
+        text_dose4 = (EditText) view.findViewById(R.id.txt_dose4);
+        text_dose5 = (EditText) view.findViewById(R.id.txt_dose5);
+
         nome_cura = view.findViewById(R.id.nome_farmaco);
         scorte = view.findViewById(R.id.scorte);
         rimanenze = view.findViewById(R.id.rimanenze);
@@ -155,6 +169,28 @@ public class AggiungiPillola extends Fragment {
         });
 
         img_date_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                setDateEnd();
+                new DatePickerDialog(getContext(), dateend, myCalendarend
+                        .get(Calendar.YEAR), myCalendarend.get(Calendar.MONTH),
+                        myCalendarend.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        text_date_init.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                setDateInit();
+                new DatePickerDialog(getContext(), dateinit, myCalendarinit
+                        .get(Calendar.YEAR), myCalendarinit.get(Calendar.MONTH),
+                        myCalendarinit.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        text_date_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -227,6 +263,41 @@ public class AggiungiPillola extends Fragment {
         });
 
         img_time_dose_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose5);
+            }
+        });
+
+        text_time_dose1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose1);
+            }
+        });
+
+        text_time_dose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose2);
+            }
+        });
+
+        text_time_dose3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose3);
+            }
+        });
+
+        text_time_dose4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerDosi(text_time_dose4);
+            }
+        });
+
+        text_time_dose5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setTimePickerDosi(text_time_dose5);

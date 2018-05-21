@@ -30,8 +30,6 @@
 
     </RelativeLayout>
 
-    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
-
     <RelativeLayout
         android:id="@+id/myview1"
         android:layout_width="match_parent"
@@ -257,7 +255,7 @@
                 android:text="Numero:" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txt_dose1"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
@@ -269,16 +267,30 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/txt_orario_dose1"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txt_dose1"
+                android:layout_alignBottom="@+id/txt_dose1"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_toLeftOf="@+id/img_time_1"
+                android:layout_toStartOf="@+id/img_time_1"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose1"
-                android:layout_alignBottom="@+id/txt_dose1"
+                android:layout_alignBaseline="@+id/txt_orario_dose1"
+                android:layout_alignBottom="@+id/txt_orario_dose1"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_dose1"
-                android:layout_toStartOf="@+id/txt_dose1"
+                android:layout_toLeftOf="@+id/txt_orario_dose1"
+                android:layout_toStartOf="@+id/txt_orario_dose1"
                 android:text="Ora:" />
 
             <ImageView
@@ -292,20 +304,7 @@
                 android:layout_marginRight="9dp"
                 app:srcCompat="@drawable/ic_clock" />
 
-            <EditText
-                android:id="@+id/txt_dose1"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editText"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_1"
-                android:layout_toStartOf="@+id/img_time_1"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -356,7 +355,7 @@
                 android:text="Numero:" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txt_dose2"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
@@ -368,16 +367,30 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/txt_orario_dose2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txt_dose2"
+                android:layout_alignBottom="@+id/txt_dose2"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_toLeftOf="@+id/img_time_2"
+                android:layout_toStartOf="@+id/img_time_2"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose2"
-                android:layout_alignBottom="@+id/txt_dose2"
+                android:layout_alignBaseline="@+id/txt_orario_dose2"
+                android:layout_alignBottom="@+id/txt_orario_dose2"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_dose2"
-                android:layout_toStartOf="@+id/txt_dose2"
+                android:layout_toLeftOf="@+id/txt_orario_dose2"
+                android:layout_toStartOf="@+id/txt_orario_dose2"
                 android:text="Ora:" />
 
             <ImageView
@@ -391,20 +404,7 @@
                 android:layout_marginRight="9dp"
                 app:srcCompat="@drawable/ic_clock" />
 
-            <EditText
-                android:id="@+id/txt_dose2"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editText"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_2"
-                android:layout_toStartOf="@+id/img_time_2"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -455,7 +455,7 @@
                 android:text="Numero:" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txt_dose3"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
@@ -467,16 +467,30 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/txt_orario_dose3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txt_dose3"
+                android:layout_alignBottom="@+id/txt_dose3"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_toLeftOf="@+id/img_time_3"
+                android:layout_toStartOf="@+id/img_time_3"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose3"
-                android:layout_alignBottom="@+id/txt_dose3"
+                android:layout_alignBaseline="@+id/txt_orario_dose3"
+                android:layout_alignBottom="@+id/txt_orario_dose3"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_dose3"
-                android:layout_toStartOf="@+id/txt_dose3"
+                android:layout_toLeftOf="@+id/txt_orario_dose3"
+                android:layout_toStartOf="@+id/txt_orario_dose3"
                 android:text="Ora:" />
 
             <ImageView
@@ -490,20 +504,7 @@
                 android:layout_marginRight="9dp"
                 app:srcCompat="@drawable/ic_clock" />
 
-            <EditText
-                android:id="@+id/txt_dose3"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editText"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_3"
-                android:layout_toStartOf="@+id/img_time_3"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -554,7 +555,7 @@
                 android:text="Numero:" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txt_dose4"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
@@ -566,16 +567,30 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/txt_orario_dose4"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txt_dose4"
+                android:layout_alignBottom="@+id/txt_dose4"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_toLeftOf="@+id/img_time_4"
+                android:layout_toStartOf="@+id/img_time_4"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose4"
-                android:layout_alignBottom="@+id/txt_dose4"
+                android:layout_alignBaseline="@+id/txt_orario_dose4"
+                android:layout_alignBottom="@+id/txt_orario_dose4"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_dose4"
-                android:layout_toStartOf="@+id/txt_dose4"
+                android:layout_toLeftOf="@+id/txt_orario_dose4"
+                android:layout_toStartOf="@+id/txt_orario_dose4"
                 android:text="Ora:" />
 
             <ImageView
@@ -589,20 +604,7 @@
                 android:layout_marginRight="9dp"
                 app:srcCompat="@drawable/ic_clock" />
 
-            <EditText
-                android:id="@+id/txt_dose4"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editText"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_4"
-                android:layout_toStartOf="@+id/img_time_4"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -653,7 +655,7 @@
                 android:text="Numero:" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txt_dose5"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView6"
@@ -665,16 +667,30 @@
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/txt_orario_dose5"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txt_dose5"
+                android:layout_alignBottom="@+id/txt_dose5"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_toLeftOf="@+id/img_time_5"
+                android:layout_toStartOf="@+id/img_time_5"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose5"
-                android:layout_alignBottom="@+id/txt_dose5"
+                android:layout_alignBaseline="@+id/txt_orario_dose5"
+                android:layout_alignBottom="@+id/txt_orario_dose5"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_dose5"
-                android:layout_toStartOf="@+id/txt_dose5"
+                android:layout_toLeftOf="@+id/txt_orario_dose5"
+                android:layout_toStartOf="@+id/txt_orario_dose5"
                 android:text="Ora:" />
 
             <ImageView
@@ -688,20 +704,7 @@
                 android:layout_marginRight="9dp"
                 app:srcCompat="@drawable/ic_clock" />
 
-            <EditText
-                android:id="@+id/txt_dose5"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/editText"
-                android:layout_alignBottom="@+id/editText"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_5"
-                android:layout_toStartOf="@+id/img_time_5"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout

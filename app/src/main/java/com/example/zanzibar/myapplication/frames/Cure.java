@@ -39,7 +39,7 @@ public class Cure extends Fragment {
 
     String conferma_farmaco = "Conferma assunzione farmaco";
     String non_conferma_farmaco = "Farmaco non assunto";
-    String ripristina_stato_farmaco = "Posticipa";
+    String ripristina_stato_farmaco = "Annulla";
 
     FloatingActionButton fab_cure = null;
     private CureDAO dao;
@@ -160,17 +160,17 @@ public class Cure extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getTitle().equals(conferma_farmaco)) {
-                    Log.i("farmaco si", "ok");
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
+                    //TODO: inserire codice per gestire farmaco assunto
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
-                    Log.i("farmaco no", "ok");
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
+                    //TODO: inserire codice per gestire farmaco NON assunto
                 } else if (item.getTitle().equals(ripristina_stato_farmaco)) {
-                    Log.i("posticipa", "ok");
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.GONE);
+                    //TODO: inserire codice per gestire annullamento assunzione farmaco
                 }
                 return true;
             }
