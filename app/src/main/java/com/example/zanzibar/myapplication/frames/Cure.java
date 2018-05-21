@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.zanzibar.myapplication.Database.cure.Cura;
@@ -61,6 +62,13 @@ public class Cure extends Fragment {
         list_cure = dao.getAllCure();
         dao.close();
 
+        /*
+        View inflatedScroll = getLayoutInflater().inflate(R.layout.content_main, null);
+        scrollView = (ScrollView) inflatedScroll.findViewById(R.id.fragmentmanager);
+        scrollView.fullScroll(ScrollView.FOCUS_UP);
+        Button btn =
+                */
+
         return inflater.inflate(R.layout.sfondo_cure, container, false);
     }
 
@@ -85,12 +93,6 @@ public class Cure extends Fragment {
         for (int i = 1; i <= numberOfFrames; i++) {
             addLayoutCure(i);
         }
-
-
-
-
-
-
 
     }
 

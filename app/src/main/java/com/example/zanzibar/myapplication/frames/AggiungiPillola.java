@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TimePicker;
 
 import com.example.zanzibar.myapplication.Database.cure.Cura;
@@ -49,6 +51,7 @@ public class AggiungiPillola extends Fragment {
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_pills = null;
+
     private EditText text_date_init = null;
     private EditText text_date_end = null;
     private EditText nome_cura = null;
@@ -325,6 +328,12 @@ public class AggiungiPillola extends Fragment {
 
                 Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura));
                 dao.close();
+
+                fab_pills.show();
+                Cure cure = new Cure(fab_pills);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+
             }
         });
     }

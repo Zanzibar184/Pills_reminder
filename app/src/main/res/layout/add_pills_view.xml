@@ -743,6 +743,7 @@
             android:layout_alignBottom="@+id/imgdateinit"
             android:layout_centerHorizontal="true"
             android:ems="10"
+            android:focusable="false"
             android:inputType="date" /><!-- input inizio cura -->
 
         <ImageView
@@ -773,6 +774,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/dateinit"
             android:ems="10"
+            android:focusable="false"
             android:inputType="date" /> <!-- input fine cura -->
 
         <TextView
