@@ -9,9 +9,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.stacktips.view.CalendarListener;
+import com.stacktips.view.CustomCalendarView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -45,6 +53,36 @@ public class Calendario extends Fragment {
             public void onClick(View view) {
                 Snackbar.make(view, "Ci troviamo in CALENDARIO() :-)", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+
+
+
+        //Initialize CustomCalendarView from layout
+        CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
+
+        //Initialize calendar with date
+        Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
+
+        //Show Monday as first date of week
+        calendarView.setFirstDayOfWeek(Calendar.MONDAY);
+
+        //call refreshCalendar to update calendar the view
+        calendarView.refreshCalendar(currentCalendar);
+
+        //Handling custom calendar events
+        calendarView.setCalendarListener(new CalendarListener() {
+            @Override
+            public void onDateSelected(Date date) {
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onMonthChanged(Date date) {
+                SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
+                Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });
     }

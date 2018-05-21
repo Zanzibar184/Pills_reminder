@@ -10,6 +10,6 @@
     <com.stacktips.view.CustomCalendarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@id/llayoutcalendario"/>
+        android:id="@+id/calendario"/>
 
 </LinearLayout>
