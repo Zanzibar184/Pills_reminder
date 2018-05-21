@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -46,6 +47,8 @@ public class Cure extends Fragment {
     private CureDAO dao;
     private List<Cura> list_cure;
 
+    ScrollView v;
+
     public Cure() {
         // Required empty public constructor
     }
@@ -62,12 +65,7 @@ public class Cure extends Fragment {
         list_cure = dao.getAllCure();
         dao.close();
 
-        /*
-        View inflatedScroll = getLayoutInflater().inflate(R.layout.content_main, null);
-        scrollView = (ScrollView) inflatedScroll.findViewById(R.id.fragmentmanager);
-        scrollView.fullScroll(ScrollView.FOCUS_UP);
-        Button btn =
-                */
+        v = container.findViewById(R.id.fragmentmanager);
 
         return inflater.inflate(R.layout.sfondo_cure, container, false);
     }
@@ -93,6 +91,10 @@ public class Cure extends Fragment {
         for (int i = 1; i <= numberOfFrames; i++) {
             addLayoutCure(i);
         }
+
+        v.setScrollX(0);
+        v.setScrollY(0);
+
 
     }
 
