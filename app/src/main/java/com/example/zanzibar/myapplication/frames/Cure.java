@@ -106,7 +106,7 @@ public class Cure extends Fragment {
                 for(int i=0;i<list_cure.size(); i++)
                 {
                     Cura tmp = list_cure.get(i);
-                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura());
+                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione());
                 }
 
             } else if (n == 2) {
@@ -123,7 +123,7 @@ public class Cure extends Fragment {
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura) {
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione) {
 
             View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout_pills, false);
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
@@ -139,7 +139,7 @@ public class Cure extends Fragment {
                 Drawable drawable_farmaco = getResources().getDrawable(getDrawIcons(tipo_cura));
                 img_farmaco.setImageDrawable(drawable_farmaco);
                 txt_nome.setText(nome);
-                txt_orario_assunzione.setText("18:00"); //da aggiornare
+                txt_orario_assunzione.setText(orario_assunzione); //da aggiornare
                 txt_qta_ass.setText("x" + qta_ass);
 
 

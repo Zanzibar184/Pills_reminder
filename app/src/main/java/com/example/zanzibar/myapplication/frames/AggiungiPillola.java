@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TimePicker;
 
 import com.example.zanzibar.myapplication.Database.cure.Cura;
@@ -57,7 +56,7 @@ public class AggiungiPillola extends Fragment {
     private EditText nome_cura = null;
     private EditText scorte = null;
     private EditText rimanenze = null;
-    private EditText orario_di_assunzione1 = null;
+
     private Calendar myCalendarinit = null;
     private Calendar myCalendarend = null;
     private DatePickerDialog.OnDateSetListener dateinit = null;
@@ -79,9 +78,9 @@ public class AggiungiPillola extends Fragment {
 
     ImageView imgpill;
 
-    private EditText text_time_dose1 = null;
-    private EditText text_time_dose2 = null;
-    private EditText text_time_dose3 = null;
+    private EditText orario_di_assunzione1 = null;
+    private EditText orario_di_assunzione2 = null;
+    private EditText orario_di_assunzione3 = null;
 
     private EditText text_dose1 = null;
     private EditText text_dose2 = null;
@@ -135,9 +134,9 @@ public class AggiungiPillola extends Fragment {
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
 
-        text_time_dose1 = (EditText) view.findViewById(R.id.txt_orario_dose1);
-        text_time_dose2 = (EditText) view.findViewById(R.id.txt_orario_dose2);
-        text_time_dose3 = (EditText) view.findViewById(R.id.txt_orario_dose3);
+        orario_di_assunzione1 = (EditText) view.findViewById(R.id.txt_orario_dose1);
+        orario_di_assunzione2 = (EditText) view.findViewById(R.id.txt_orario_dose2);
+        orario_di_assunzione3 = (EditText) view.findViewById(R.id.txt_orario_dose3);
 
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
@@ -148,6 +147,8 @@ public class AggiungiPillola extends Fragment {
         scorte = view.findViewById(R.id.scorte);
         rimanenze = view.findViewById(R.id.rimanenze);
         orario_di_assunzione1 = view.findViewById(R.id.txt_orario_dose1);
+        orario_di_assunzione2 = view.findViewById(R.id.txt_orario_dose2);
+        orario_di_assunzione3 = view.findViewById(R.id.txt_orario_dose3);
 
 
         img_date_init.setOnClickListener(new View.OnClickListener() {
@@ -226,43 +227,43 @@ public class AggiungiPillola extends Fragment {
         img_time_dose_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose1);
+                setTimePickerDosi(orario_di_assunzione1);
             }
         });
 
         img_time_dose_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose2);
+                setTimePickerDosi(orario_di_assunzione2);
             }
         });
 
         img_time_dose_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose3);
+                setTimePickerDosi(orario_di_assunzione3);
             }
         });
 
 
-        text_time_dose1.setOnClickListener(new View.OnClickListener() {
+        orario_di_assunzione1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose1);
+                setTimePickerDosi(orario_di_assunzione1);
             }
         });
 
-        text_time_dose2.setOnClickListener(new View.OnClickListener() {
+        orario_di_assunzione2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose2);
+                setTimePickerDosi(orario_di_assunzione2);
             }
         });
 
-        text_time_dose3.setOnClickListener(new View.OnClickListener() {
+        orario_di_assunzione3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimePickerDosi(text_time_dose3);
+                setTimePickerDosi(orario_di_assunzione3);
             }
         });
 
@@ -276,17 +277,36 @@ public class AggiungiPillola extends Fragment {
                 dao.open();
 
                 String nome = nome_cura.getText().toString();
-                int qta_ass = 0;
 
                 int scorta = Integer.parseInt(scorte.getText().toString());
                 int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
                 String inizio_cura = text_date_init.getText().toString();
                 String fine_cura = text_date_end.getText().toString();
                 int tipo_cura = resourceId;
-                String orario_assunzione1 = orario_di_assunzione1.getText().toString();
+                String orario_assunzione = null;
+                int qta_ass = 0;
 
 
-                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione1));
+
+                if(nClicks >= 1)
+                {
+                    orario_assunzione = orario_di_assunzione1.getText().toString();
+                    qta_ass = Integer.parseInt(text_dose1.getText().toString());
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                }
+                if(nClicks >= 2)
+                {
+                    orario_assunzione = orario_di_assunzione2.getText().toString();
+                    qta_ass = Integer.parseInt(text_dose2.getText().toString());
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                }
+                if(nClicks >= 3)
+                {
+                    orario_assunzione = orario_di_assunzione3.getText().toString();
+                    qta_ass = Integer.parseInt(text_dose3.getText().toString());
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                }
+
                 dao.close();
 
                 fab_pills.show();
