@@ -38,6 +38,8 @@ public class AggiungiNota extends Fragment {
     CheckBox c;
     private int nClicks = 1;
 
+    String dateSelected = null;
+
     private EditText text_date = null;
     private EditText text_time = null;
     private Calendar myCalendardate = null;
@@ -51,6 +53,11 @@ public class AggiungiNota extends Fragment {
 
     public AggiungiNota(FloatingActionButton fab_nota) {
         this.fab_nota = fab_nota;
+    }
+
+    public AggiungiNota(FloatingActionButton fab_nota, String dateSelected) {
+        this.fab_nota = fab_nota;
+        this.dateSelected = dateSelected;
     }
 
     @Override
@@ -76,6 +83,12 @@ public class AggiungiNota extends Fragment {
         text_time = (EditText) view.findViewById(R.id.textora);
 
         c = (CheckBox) view.findViewById(R.id.checkBox);
+
+        if(dateSelected!=null) {
+            c.setChecked(true);
+            setDateAndTimeVisibility();
+            text_date.setText(dateSelected);
+        }
 
         c.setOnClickListener(new View.OnClickListener() {
             @Override

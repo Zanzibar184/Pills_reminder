@@ -1,6 +1,8 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +11,9 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
@@ -51,8 +55,11 @@ public class Note extends Fragment {
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
-        linearLayout.addView(frame);
+
+        for(int i = 0; i < 5; i++) {
+            addLayoutNote();
+        }
+
     }
 
     @Override
@@ -61,6 +68,15 @@ public class Note extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Note");
     }
 
+    public void addLayoutNote() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
+
+        //TODO: dichiarare le textview qui
+        TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
+        nome_nota.setText("Prova titolo");
+
+        linearLayout.addView(frame);
+    }
 
 
 }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
@@ -55,23 +56,10 @@ public class ContattiImportanti extends Fragment {
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcontatti);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
-        linearLayout.addView(frame);
 
-        //prendo il numero di telefono che è inserito e
-
-        TextView txt_telephone_num = (TextView) view.findViewById(R.id.tel_number);
-        final String tel_num = txt_telephone_num.getText().toString();
-
-        ImageView img_dial = (ImageView) view.findViewById(R.id.imagePhoneDial);
-        img_dial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+tel_num));
-                startActivity(intent);
-            }
-        });
+        for(int i = 0; i < 3; i++) {
+            addLayoutContatti();
+        }
 
     }
 
@@ -79,6 +67,28 @@ public class ContattiImportanti extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Contatti importanti");
+    }
+
+    public void addLayoutContatti() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
+
+        TextView nome_contatto = (TextView) frame.findViewById(R.id.txt_nome_contatto);
+        TextView ruolo = (TextView) frame.findViewById(R.id.txt_ruolo);
+        TextView telephone_num = (TextView) frame.findViewById(R.id.tel_number);
+
+        final String tel_num = telephone_num.getText().toString();
+
+        ImageView img_dial = (ImageView) frame.findViewById(R.id.imagePhoneDial);
+        img_dial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + tel_num));
+                startActivity(intent);
+            }
+        });
+
+        linearLayout.addView(frame);
     }
 
 }

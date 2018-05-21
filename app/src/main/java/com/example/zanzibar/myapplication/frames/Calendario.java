@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ public class Calendario extends Fragment {
 
     FloatingActionButton fab_cal = null;
 
+    private String dateSelected = null;
+
     public Calendario() {
         // Required empty public constructor
     }
@@ -48,16 +51,17 @@ public class Calendario extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+
+        fab_cal.show();
+
         fab_cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Ci troviamo in CALENDARIO() :-)", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AggiungiNota aggiungiNota = new AggiungiNota(fab_cal, dateSelected);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();
             }
         });
-
-
-
 
         //Initialize CustomCalendarView from layout
         CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
@@ -74,14 +78,14 @@ public class Calendario extends Fragment {
         //Handling custom calendar events
         calendarView.setCalendarListener(new CalendarListener() {
             @Override
-            public void onDateSelected(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
+            public void onDateSelected(final Date date) {
+                final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                dateSelected = df.format(date);
             }
 
             @Override
             public void onMonthChanged(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("MM-yyyy");
+                SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
                 Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });

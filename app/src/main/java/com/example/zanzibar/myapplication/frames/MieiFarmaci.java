@@ -51,16 +51,27 @@ public class MieiFarmaci extends Fragment {
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutfarmaci);
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout, false);
-        TextView txt_title = (TextView) frame.findViewById(R.id.text_title);
-        txt_title.setText("Pillola XYZ");
-        linearLayout.addView(frame);
+
+        for(int i = 0; i < 2; i++) {
+            addLayoutMieifarmaci();
+        }
+
     }
 
     @Override
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("I miei farmaci");
+    }
+
+    public void addLayoutMieifarmaci() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout, false);
+
+        //TODO: dichiarare le textview qui
+        TextView txt_title = (TextView) frame.findViewById(R.id.txt_titolo_farmaco);
+        txt_title.setText("Pillola XYZ");
+
+        linearLayout.addView(frame);
     }
 
 }

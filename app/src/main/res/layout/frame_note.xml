@@ -22,10 +22,10 @@
         android:elevation="12dp">
 
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/txt_note_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal" />
 
         <View
             android:layout_width="fill_parent"
