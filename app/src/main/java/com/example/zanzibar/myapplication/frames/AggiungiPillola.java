@@ -243,15 +243,16 @@ public class AggiungiPillola extends Fragment {
 
                 String nome = nome_cura.getText().toString();
                 int qta_ass = 0;
-                int tipo_cura = resourceId;
+
                 int scorta = Integer.parseInt(scorte.getText().toString());
                 int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
                 String inizio_cura = text_date_init.getText().toString();
                 String fine_cura = text_date_end.getText().toString();
+                int tipo_cura = resourceId;
 
 
 
-                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura));
+                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura));
                 dao.close();
             }
         });

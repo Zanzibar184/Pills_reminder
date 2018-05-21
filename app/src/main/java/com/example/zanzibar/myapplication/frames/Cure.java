@@ -18,8 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.cure.Cura;
+import com.example.zanzibar.myapplication.Database.cure.CureDAO;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+
+import java.util.List;
 
 
 /**
@@ -37,14 +42,8 @@ public class Cure extends Fragment {
     String ripristina_stato_farmaco = "Posticipa";
 
     FloatingActionButton fab_cure = null;
-    /*
-    ImageView img_farmaco = null;
-    ImageView img_iniezione = null;
-    ImageView img_pomata = null;
-    ImageView img_gocce = null;
-    ImageView img_greenV = null;
-    ImageView img_redX = null;
-    */
+    private CureDAO dao;
+    private List<Cura> list_cure;
 
     public Cure() {
         // Required empty public constructor
@@ -57,6 +56,11 @@ public class Cure extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new CureDao_DB();
+        dao.open();
+        list_cure = dao.getAllCure();
+        dao.close();
+
         return inflater.inflate(R.layout.sfondo_cure, container, false);
     }
 
@@ -82,26 +86,11 @@ public class Cure extends Fragment {
             addLayoutCure(i);
         }
 
-        /*
-        img_farmaco = (ImageView) view.findViewById(R.id.img_farmaco);
-        img_iniezione = (ImageView) view.findViewById(R.id.img_iniezione);
-        img_pomata = (ImageView) view.findViewById(R.id.img_pomata);
-        img_gocce = (ImageView) view.findViewById(R.id.img_gocce);
 
-        img_greenV = (ImageView) view.findViewById(R.id.img_greenV);
-        img_redX = (ImageView) view.findViewById(R.id.img_redX);
 
-        ImageView list_img[] = {img_farmaco, img_iniezione, img_pomata, img_gocce};
 
-        for(ImageView i : list_img) {
-            i.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setPopupMenuImages(getContext());
-                }
-            });
-        }
-        */
+
+
 
     }
 
@@ -111,48 +100,56 @@ public class Cure extends Fragment {
         TextView txt_title = (TextView) frame.findViewById(R.id.text_title);
             if (n == 1) {
                 txt_title.setText("Mattina");
-                addLayoutFarmaco(2);
+
+                for(int i=0;i<list_cure.size(); i++)
+                {
+                    Cura tmp = list_cure.get(i);
+                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura());
+                }
+
             } else if (n == 2) {
                 txt_title.setText("Pomeriggio");
-                addLayoutFarmaco(4);
-                //frame.setVisibility(View.GONE);
+
             } else if (n == 3) {
                 txt_title.setText("Sera");
-                addLayoutFarmaco(1);
+
             } else if(n == 4){
                 txt_title.setText("Notte");
-                addLayoutFarmaco(3);
+
             }
 
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (int n) { // n è il numero di farmaco per mattina/pomeriggio/sera/notte
-        for(int i = 0; i < n; i++){
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura) {
+
             View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout_pills, false);
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
             final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
             final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
+            final TextView txt_nome = (TextView) frame.findViewById(R.id.txt_nome_pillola);
+            final TextView txt_orario_assunzione = (TextView) frame.findViewById(R.id.txt_ora);
+            final TextView txt_qta_ass = (TextView) frame.findViewById(R.id.txt_numero_dosi);
 
             //Qui va il codice per le altre TextView e altro da gestire
 
-            if(i==1) {
-                Drawable drawable_farmaco = getResources().getDrawable(R.drawable.sciroppo);
-                Log.i("drawable_farmaco", drawable_farmaco.toString());
+
+                Drawable drawable_farmaco = getResources().getDrawable(getDrawIcons(tipo_cura));
                 img_farmaco.setImageDrawable(drawable_farmaco);
-            } else if(i==3) {
-                Drawable drawable_farmaco = getResources().getDrawable(R.drawable.gocce);
-                img_farmaco.setImageDrawable(drawable_farmaco);
-            }
+                txt_nome.setText(nome);
+                txt_orario_assunzione.setText("18:00"); //da aggiornare
+                txt_qta_ass.setText("x" + qta_ass);
+
+
+
             frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("frame click", "hello clicker");
                     setPopupMenuImages(getContext(),img_farmaco, img_greenV, img_redX);
                 }
             });
             layout_pills.addView(frame);
-        }
+
     }
 
 
@@ -189,4 +186,18 @@ public class Cure extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Cure");
     }
 
+
+    private int getDrawIcons(int id){
+        switch(id){
+            case 1: return R.drawable.pill_colored;
+            case 2: return R.drawable.syringe;
+            case 3: return R.drawable.sciroppo;
+            case 4: return R.drawable.gocce;
+            case 5: return R.drawable.pomata;
+            case 6: return R.drawable.spray;
+        }
+
+        return 0;
+    }
 }
+

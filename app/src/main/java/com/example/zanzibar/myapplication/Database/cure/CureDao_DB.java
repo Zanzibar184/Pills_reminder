@@ -22,6 +22,7 @@ public class CureDao_DB implements CureDAO {
                     query.COLUMN_RIMANENZE,
                     query.COLUMN_INIZIO_CURA,
                     query.COLUMN_FINE_CURA,
+                    query.COLUMN_TIPO_CURA,
             };
 
     @Override
@@ -47,6 +48,7 @@ public class CureDao_DB implements CureDAO {
         values.put(query.COLUMN_RIMANENZE, cura.getRimanenze());
         values.put(query.COLUMN_INIZIO_CURA, cura.getInizio_cura());
         values.put(query.COLUMN_FINE_CURA, cura.getFine_cura());
+        values.put(query.COLUMN_TIPO_CURA, cura.getTipo_cura());
         return values;
     }
 
@@ -60,8 +62,9 @@ public class CureDao_DB implements CureDAO {
         int rimanenze = cursor.getInt(3);
         String inizio_cura = cursor.getString(4);
         String fine_cura = cursor.getString(5);
+        int tipo_cura = cursor.getInt(6);
 
-        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura);
+        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura);
     }
 
     @Override

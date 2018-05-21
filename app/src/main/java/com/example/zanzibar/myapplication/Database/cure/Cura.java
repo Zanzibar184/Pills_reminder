@@ -8,21 +8,22 @@ public class Cura {
     private int rimanenze;
     private String inizio_cura;
     private String fine_cura;
+    private int tipo_cura;
 
-    public Cura(){}
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
         this.rimanenze = rimanenze;
         this.inizio_cura = inizio_cura;
         this.fine_cura = fine_cura;
+        this.tipo_cura = tipo_cura;
     }
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura;
     }
 
 
@@ -74,4 +75,11 @@ public class Cura {
         this.inizio_cura = inizio_cura;
     }
 
+    public int getTipo_cura() {
+        return tipo_cura;
+    }
+
+    public void setTipo_cura(int tipo_cura) {
+        this.tipo_cura = tipo_cura;
+    }
 }
