@@ -138,6 +138,7 @@ public class Cure extends Fragment {
 
             if(i==1) {
                 Drawable drawable_farmaco = getResources().getDrawable(R.drawable.sciroppo);
+                Log.i("drawable_farmaco", drawable_farmaco.toString());
                 img_farmaco.setImageDrawable(drawable_farmaco);
             } else if(i==3) {
                 Drawable drawable_farmaco = getResources().getDrawable(R.drawable.gocce);

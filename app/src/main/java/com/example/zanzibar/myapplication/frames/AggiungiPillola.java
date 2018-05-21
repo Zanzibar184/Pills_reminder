@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,13 +85,16 @@ public class AggiungiPillola extends Fragment {
 
     Drawable draw;
 
+    int resourceId;
+
     public AggiungiPillola() {
         // Required empty public constructor
     }
 
-    public AggiungiPillola(FloatingActionButton fab_pills, Drawable draw) {
+    public AggiungiPillola(FloatingActionButton fab_pills, Drawable draw, int resourceId) {
         this.fab_pills = fab_pills;
         this.draw = draw;
+        this.resourceId = resourceId;
     }
 
     @Override
@@ -116,6 +120,7 @@ public class AggiungiPillola extends Fragment {
 
         imgpill = (ImageView) view.findViewById(R.id.imgpillchosen);
         imgpill.setImageDrawable(draw);
+        Log.i("resourceId", resourceId+"");
         ImageView img_date_init = (ImageView) view.findViewById(R.id.imgdateinit);
         ImageView img_date_end = (ImageView) view.findViewById(R.id.imgdateend);
         ImageView img_add_pill = (ImageView) view.findViewById(R.id.img_add_dosi);
@@ -238,6 +243,7 @@ public class AggiungiPillola extends Fragment {
 
                 String nome = nome_cura.getText().toString();
                 int qta_ass = 0;
+                int tipo_cura = resourceId;
                 int scorta = Integer.parseInt(scorte.getText().toString());
                 int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
                 String inizio_cura = text_date_init.getText().toString();

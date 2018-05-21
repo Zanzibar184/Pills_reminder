@@ -38,6 +38,8 @@ public class ScegliPillola extends Fragment {
 
     Drawable img_state = null;
 
+    int resourceId;
+
     public ScegliPillola() {
         // Required empty public constructor
     }
@@ -128,7 +130,20 @@ public class ScegliPillola extends Fragment {
         pill_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_sceglipillola,pill_image.getDrawable());
+                if(areDrawablesIdentical(pill_image.getDrawable(), id_img_pill)) {
+                    resourceId = 1;
+                } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_siringa)) {
+                    resourceId = 2;
+                } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_sciroppo)) {
+                    resourceId = 3;
+                } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_gocce)) {
+                    resourceId = 4;
+                } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_pomata)) {
+                    resourceId = 5;
+                } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_spray)) {
+                    resourceId = 6;
+                }
+                AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_sceglipillola,pill_image.getDrawable(), resourceId);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiPillola).addToBackStack(null).commit();
             }
@@ -173,5 +188,6 @@ public class ScegliPillola extends Fragment {
         }
         return result;
     }
+
 
 }
