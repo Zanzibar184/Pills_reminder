@@ -9,9 +9,10 @@ public class Cura {
     private String inizio_cura;
     private String fine_cura;
     private int tipo_cura;
+    private String orario_assunzione;
 
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -19,11 +20,12 @@ public class Cura {
         this.inizio_cura = inizio_cura;
         this.fine_cura = fine_cura;
         this.tipo_cura = tipo_cura;
+        this.orario_assunzione = orario_assunzione;
     }
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione;
     }
 
 
@@ -81,5 +83,13 @@ public class Cura {
 
     public void setTipo_cura(int tipo_cura) {
         this.tipo_cura = tipo_cura;
+    }
+
+    public String getOrario_assunzione() {
+        return orario_assunzione;
+    }
+
+    public void setOrario_assunzione(String orario_assunzione) {
+        this.orario_assunzione = orario_assunzione;
     }
 }

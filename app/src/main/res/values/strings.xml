@@ -23,7 +23,7 @@
     <string name="dosi_farmaco">Dosi e Orari</string>
     <string name="periodo_assunzione">Periodo di assunzione</string>
     <string name="importanza_farmaco">Importanza</string>
-    <string name="dosiorario_txt">Qui puoi aggiungere le dosi e l\'orario del farmaco (max 5)</string>
+    <string name="dosiorario_txt">Qui puoi aggiungere le dosi e l\'orario del farmaco (max 3)</string>
 
     <string name="scatta_fotocamera">Scatta foto</string>
     <string name="scatta_galleria">Scegli da galleria</string>

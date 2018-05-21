@@ -23,6 +23,7 @@ public class CureDao_DB implements CureDAO {
                     query.COLUMN_INIZIO_CURA,
                     query.COLUMN_FINE_CURA,
                     query.COLUMN_TIPO_CURA,
+                    query.COLUMN_ORARIO_ASSUNZIONE,
             };
 
     @Override
@@ -49,6 +50,7 @@ public class CureDao_DB implements CureDAO {
         values.put(query.COLUMN_INIZIO_CURA, cura.getInizio_cura());
         values.put(query.COLUMN_FINE_CURA, cura.getFine_cura());
         values.put(query.COLUMN_TIPO_CURA, cura.getTipo_cura());
+        values.put(query.COLUMN_ORARIO_ASSUNZIONE, cura.getOrario_assunzione());
         return values;
     }
 
@@ -63,8 +65,9 @@ public class CureDao_DB implements CureDAO {
         String inizio_cura = cursor.getString(4);
         String fine_cura = cursor.getString(5);
         int tipo_cura = cursor.getInt(6);
+        String orario_assunzione = cursor.getString(7);
 
-        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura);
+        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione);
     }
 
     @Override
@@ -95,6 +98,30 @@ public class CureDao_DB implements CureDAO {
                 query.TABLE_CURE,
                 allColumns,
                 null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Cura person = cursorToCura(cursor);
+            people.add(person);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return people;
+
+    }    public List<Cura> getTodayCure() {
+
+        List<Cura> people = new ArrayList<Cura>();
+        Cursor cursor = database.query(
+                query.TABLE_CURE,
+                allColumns,
+                "date('now') between INIZIO_CURA and FINE_CURA",
                 null,
                 null,
                 null,

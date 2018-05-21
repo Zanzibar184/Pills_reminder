@@ -10,4 +10,5 @@ public interface CureDAO {
     public Cura insertCura(Cura person);
     public void deleteCura(Cura person);
     public List<Cura> getAllCure();
+    public List<Cura> getTodayCure();
 }

@@ -87,7 +87,6 @@ public class AggiungiNota extends Fragment {
         img_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 setDateNote();
                 new DatePickerDialog(getContext(), datenote, myCalendardate
                         .get(Calendar.YEAR), myCalendardate.get(Calendar.MONTH),
@@ -116,7 +115,6 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendardate.set(Calendar.YEAR, year);
                 myCalendardate.set(Calendar.MONTH, monthOfYear);
                 myCalendardate.set(Calendar.DAY_OF_MONTH, dayOfMonth);

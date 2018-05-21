@@ -57,6 +57,7 @@ public class AggiungiPillola extends Fragment {
     private EditText nome_cura = null;
     private EditText scorte = null;
     private EditText rimanenze = null;
+    private EditText orario_di_assunzione1 = null;
     private Calendar myCalendarinit = null;
     private Calendar myCalendarend = null;
     private DatePickerDialog.OnDateSetListener dateinit = null;
@@ -73,8 +74,6 @@ public class AggiungiPillola extends Fragment {
     RelativeLayout r1;
     RelativeLayout r2;
     RelativeLayout r3;
-    RelativeLayout r4;
-    RelativeLayout r5;
 
     ImageView img_call_camera;
 
@@ -83,14 +82,10 @@ public class AggiungiPillola extends Fragment {
     private EditText text_time_dose1 = null;
     private EditText text_time_dose2 = null;
     private EditText text_time_dose3 = null;
-    private EditText text_time_dose4 = null;
-    private EditText text_time_dose5 = null;
 
     private EditText text_dose1 = null;
     private EditText text_dose2 = null;
     private EditText text_dose3 = null;
-    private EditText text_dose4 = null;
-    private EditText text_dose5 = null;
 
     Drawable draw;
 
@@ -122,8 +117,6 @@ public class AggiungiPillola extends Fragment {
         r1 = view.findViewById(R.id.myview3_1);
         r2 = view.findViewById(R.id.myview3_2);
         r3 = view.findViewById(R.id.myview3_3);
-        r4 = view.findViewById(R.id.myview3_4);
-        r5 = view.findViewById(R.id.myview3_5);
 
         fab_pills.hide();
 
@@ -136,8 +129,6 @@ public class AggiungiPillola extends Fragment {
         ImageView img_time_dose_1 = (ImageView) view.findViewById(R.id.img_time_1);
         ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
         ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
-        ImageView img_time_dose_4 = (ImageView) view.findViewById(R.id.img_time_4);
-        ImageView img_time_dose_5 = (ImageView) view.findViewById(R.id.img_time_5);
 
         img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
 
@@ -147,23 +138,21 @@ public class AggiungiPillola extends Fragment {
         text_time_dose1 = (EditText) view.findViewById(R.id.txt_orario_dose1);
         text_time_dose2 = (EditText) view.findViewById(R.id.txt_orario_dose2);
         text_time_dose3 = (EditText) view.findViewById(R.id.txt_orario_dose3);
-        text_time_dose4 = (EditText) view.findViewById(R.id.txt_orario_dose4);
-        text_time_dose5 = (EditText) view.findViewById(R.id.txt_orario_dose5);
 
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
         text_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
-        text_dose4 = (EditText) view.findViewById(R.id.txt_dose4);
-        text_dose5 = (EditText) view.findViewById(R.id.txt_dose5);
+
 
         nome_cura = view.findViewById(R.id.nome_farmaco);
         scorte = view.findViewById(R.id.scorte);
         rimanenze = view.findViewById(R.id.rimanenze);
+        orario_di_assunzione1 = view.findViewById(R.id.txt_orario_dose1);
+
 
         img_date_init.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 setDateInit();
                 new DatePickerDialog(getContext(), dateinit, myCalendarinit
                         .get(Calendar.YEAR), myCalendarinit.get(Calendar.MONTH),
@@ -174,7 +163,6 @@ public class AggiungiPillola extends Fragment {
         img_date_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 setDateEnd();
                 new DatePickerDialog(getContext(), dateend, myCalendarend
                         .get(Calendar.YEAR), myCalendarend.get(Calendar.MONTH),
@@ -185,7 +173,6 @@ public class AggiungiPillola extends Fragment {
         text_date_init.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 setDateInit();
                 new DatePickerDialog(getContext(), dateinit, myCalendarinit
                         .get(Calendar.YEAR), myCalendarinit.get(Calendar.MONTH),
@@ -196,7 +183,6 @@ public class AggiungiPillola extends Fragment {
         text_date_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 setDateEnd();
                 new DatePickerDialog(getContext(), dateend, myCalendarend
                         .get(Calendar.YEAR), myCalendarend.get(Calendar.MONTH),
@@ -258,19 +244,6 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
-        img_time_dose_4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTimePickerDosi(text_time_dose4);
-            }
-        });
-
-        img_time_dose_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTimePickerDosi(text_time_dose5);
-            }
-        });
 
         text_time_dose1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,19 +266,6 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
-        text_time_dose4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTimePickerDosi(text_time_dose4);
-            }
-        });
-
-        text_time_dose5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTimePickerDosi(text_time_dose5);
-            }
-        });
 
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
@@ -323,10 +283,10 @@ public class AggiungiPillola extends Fragment {
                 String inizio_cura = text_date_init.getText().toString();
                 String fine_cura = text_date_end.getText().toString();
                 int tipo_cura = resourceId;
+                String orario_assunzione1 = orario_di_assunzione1.getText().toString();
 
 
-
-                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura));
+                Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione1));
                 dao.close();
 
                 fab_pills.show();
@@ -440,11 +400,10 @@ public class AggiungiPillola extends Fragment {
             r2.setVisibility(View.VISIBLE);
         } else if(nClicks==3) {
             r3.setVisibility(View.VISIBLE);
-        } else if(nClicks==4) {
-            r4.setVisibility(View.VISIBLE);
-        } else if(nClicks==5) {
-            r5.setVisibility(View.VISIBLE);
         }
+
+        if(nClicks > 3)
+            nClicks = 3;
     }
 
     private void setTimePickerDosi(EditText editText) {
