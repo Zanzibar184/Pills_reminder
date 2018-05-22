@@ -35,7 +35,10 @@ import java.util.List;
 public class Cure extends Fragment {
 
     private LinearLayout linearLayout = null;
-    private LinearLayout layout_pills = null;
+    private LinearLayout layout_pills_mattina = null;
+    private LinearLayout layout_pills_pomeriggio = null;
+    private LinearLayout layout_pills_sera = null;
+    private LinearLayout layout_pills_notte = null;
 
     final int numberOfFrames = 4;
 
@@ -89,9 +92,7 @@ public class Cure extends Fragment {
 
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcure);
 
-        for (int i = 1; i <= numberOfFrames; i++) {
-            addLayoutCure(i);
-        }
+        addLayoutCure();
 
         v.setScrollX(0);
         v.setScrollY(0);
@@ -99,36 +100,27 @@ public class Cure extends Fragment {
 
     }
 
-    public void addLayoutCure(int n) {
+    public void addLayoutCure() {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_cure, linearLayout, false);
-        layout_pills = (LinearLayout) frame.findViewById(R.id.llayout_view_farmaco);
-        TextView txt_title = (TextView) frame.findViewById(R.id.text_title);
-            if (n == 1) {
-                txt_title.setText("Mattina");
+        layout_pills_mattina = (LinearLayout) frame.findViewById(R.id.layout_mattina);
+        layout_pills_pomeriggio = (LinearLayout) frame.findViewById(R.id.layout_pomeriggio);
+        layout_pills_sera = (LinearLayout) frame.findViewById(R.id.layout_sera);
+        layout_pills_notte = (LinearLayout) frame.findViewById(R.id.layout_notte);
 
                 for(int i=0;i<list_cure.size(); i++)
                 {
                     Cura tmp = list_cure.get(i);
-                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione());
+                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina);
                 }
 
-            } else if (n == 2) {
-                txt_title.setText("Pomeriggio");
 
-            } else if (n == 3) {
-                txt_title.setText("Sera");
-
-            } else if(n == 4){
-                txt_title.setText("Notte");
-
-            }
 
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione) {
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout) {
 
-            View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout_pills, false);
+            View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
             final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
             final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
@@ -153,7 +145,7 @@ public class Cure extends Fragment {
                     setPopupMenuImages(getContext(),img_farmaco, img_greenV, img_redX);
                 }
             });
-            layout_pills.addView(frame);
+            layout.addView(frame);
 
     }
 

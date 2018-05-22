@@ -79,13 +79,13 @@ public class Calendario extends Fragment {
         calendarView.setCalendarListener(new CalendarListener() {
             @Override
             public void onDateSelected(final Date date) {
-                final SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 dateSelected = df.format(date);
             }
 
             @Override
             public void onMonthChanged(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });

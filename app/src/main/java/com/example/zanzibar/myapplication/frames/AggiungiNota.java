@@ -42,6 +42,8 @@ public class AggiungiNota extends Fragment {
 
     private EditText text_date = null;
     private EditText text_time = null;
+    private EditText text_titolo_nota = null;
+    private EditText text_contenuto_nota = null;
     private Calendar myCalendardate = null;
     private DatePickerDialog.OnDateSetListener datenote = null;
 
@@ -81,6 +83,8 @@ public class AggiungiNota extends Fragment {
         ImageView img_time = (ImageView) view.findViewById(R.id.imageviewtime);
         text_date = (EditText) view.findViewById(R.id.textdate);
         text_time = (EditText) view.findViewById(R.id.textora);
+        text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
+        text_titolo_nota = (EditText) view.findViewById(R.id.title_nota);
 
         c = (CheckBox) view.findViewById(R.id.checkBox);
 
@@ -94,6 +98,23 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onClick(View v) {
                 setDateAndTimeVisibility();
+            }
+        });
+
+        text_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDateNote();
+                new DatePickerDialog(getContext(), datenote, myCalendardate
+                        .get(Calendar.YEAR), myCalendardate.get(Calendar.MONTH),
+                        myCalendardate.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        text_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimePickerNota();
             }
         });
 
@@ -137,7 +158,7 @@ public class AggiungiNota extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date.setText(sdf.format(myCalendardate.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));

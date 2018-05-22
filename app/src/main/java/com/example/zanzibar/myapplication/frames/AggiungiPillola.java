@@ -370,14 +370,14 @@ public class AggiungiPillola extends Fragment {
     }
 
     private void updateLabelInit() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date_init.setText(sdf.format(myCalendarinit.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabelEnd() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date_end.setText(sdf.format(myCalendarend.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));

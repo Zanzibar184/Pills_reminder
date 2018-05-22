@@ -25,7 +25,8 @@
             android:id="@+id/text_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:text="Mattina"/>
 
         <View
             android:layout_width="fill_parent"
@@ -50,10 +51,10 @@
                 android:gravity="center">
 
                 <LinearLayout
+                    android:id="@+id/layout_mattina"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:id="@+id/llayout_view_farmaco">
+                    android:orientation="horizontal">
 
                     <!--
 
@@ -74,7 +75,7 @@
                             android:layout_below="@+id/textView8">
 
                             <!-Aggiunta la X rossa e la V verde solo per il primo elemento, per intanto-->
-<!--
+                    <!--
                             <ImageView
                                 android:id="@+id/img_farmaco"
                                 android:layout_width="@dimen/img_pill_scrollview"
@@ -270,6 +271,819 @@
                             android:text="9:00" />
                     </RelativeLayout>
 -->
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_listpill_cure"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="12dp">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Pomeriggio"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view5"
+            android:gravity="center">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/layout_pomeriggio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!--
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rounded_shape_stroke">
+
+                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/textView8">
+
+                            <!-Aggiunta la X rossa e la V verde solo per il primo elemento, per intanto-->
+                    <!--
+                                                <ImageView
+                                                    android:id="@+id/img_farmaco"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/pill_colored" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_greenV"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/green_check"
+                                                    android:visibility="gone" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_redX"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/red_cross"
+                                                    android:visibility="gone" />
+
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_iniezione"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/syringe" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_pomata"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/pomata" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_gocce"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/gocce" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+                    -->
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_listpill_cure"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="12dp">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Sera"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view5"
+            android:gravity="center">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/layout_sera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!--
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rounded_shape_stroke">
+
+                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/textView8">
+
+                            <!-Aggiunta la X rossa e la V verde solo per il primo elemento, per intanto-->
+                    <!--
+                                                <ImageView
+                                                    android:id="@+id/img_farmaco"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/pill_colored" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_greenV"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/green_check"
+                                                    android:visibility="gone" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_redX"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/red_cross"
+                                                    android:visibility="gone" />
+
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_iniezione"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/syringe" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_pomata"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/pomata" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_gocce"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/gocce" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+                    -->
+                </LinearLayout>
+
+
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_listpill_cure"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="12dp">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Notte"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view5"
+            android:gravity="center">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/layout_notte"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!--
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/rounded_shape_stroke">
+
+                        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/textView8">
+
+                            <!-Aggiunta la X rossa e la V verde solo per il primo elemento, per intanto-->
+                    <!--
+                                                <ImageView
+                                                    android:id="@+id/img_farmaco"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/pill_colored" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_greenV"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/green_check"
+                                                    android:visibility="gone" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_redX"
+                                                    android:layout_width="@dimen/img_pill_scrollview"
+                                                    android:layout_height="@dimen/img_pill_scrollview"
+                                                    android:layout_marginTop="10dp"
+                                                    android:src="@drawable/red_cross"
+                                                    android:visibility="gone" />
+
+                                            </RelativeLayout>
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_iniezione"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/syringe" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_pomata"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/pomata" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:background="@drawable/rounded_shape_stroke">
+
+                                            <ImageView
+                                                android:id="@+id/img_gocce"
+                                                android:layout_width="@dimen/img_pill_scrollview"
+                                                android:layout_height="@dimen/img_pill_scrollview"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_below="@+id/textView8"
+                                                android:layout_marginTop="10dp"
+                                                android:src="@drawable/gocce" />
+
+                                            <TextView
+                                                android:id="@+id/textView8"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentTop="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:text="Pillola X" />
+
+                                            <TextView
+                                                android:id="@+id/textView9"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginLeft="7dp"
+                                                android:layout_marginStart="7dp"
+                                                android:text="x2" />
+
+                                            <TextView
+                                                android:id="@+id/textView10"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_alignParentRight="true"
+                                                android:text="9:00" />
+                                        </RelativeLayout>
+                    -->
                 </LinearLayout>
 
 

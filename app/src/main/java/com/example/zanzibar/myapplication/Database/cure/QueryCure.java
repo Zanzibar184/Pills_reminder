@@ -19,7 +19,7 @@ public class QueryCure extends SQLiteOpenHelper {
     public static final String COLUMN_ORARIO_ASSUNZIONE = "ORARIO_ASSUNZIONE";
     public static final String DATABASE_NAME = "pills_reminder.db";
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE = "create table "
             + TABLE_CURE + "( "
