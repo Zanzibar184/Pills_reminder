@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.MainActivity;
@@ -29,6 +31,10 @@ import java.util.Locale;
 public class Calendario extends Fragment {
 
     FloatingActionButton fab_cal = null;
+
+    private LinearLayout layout = null;
+
+   // ScrollView sv = null;
 
     private String dateSelected = null;
 
@@ -89,12 +95,26 @@ public class Calendario extends Fragment {
                 Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });
+
+        layout = (LinearLayout) view.findViewById(R.id.scrollable_linearlayout);
+
+        for(int i = 0; i < 5; i++) {
+            addLayoutCalendar();
+        }
+
+
+
     }
 
     @Override
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Calendario");
+    }
+
+    private void addLayoutCalendar() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, layout, false);
+        layout.addView(frame);
     }
 
 }

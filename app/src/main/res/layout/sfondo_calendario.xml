@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".frames.Calendario"
     android:orientation="vertical"
-    android:id="@+id/llayoutcalendario">
+    android:id="@+id/layoutcalendario">
 
     <com.stacktips.view.CustomCalendarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calendario"/>
+        android:id="@+id/calendario"
+        android:layout_gravity="top"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/scrollable_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+</FrameLayout>

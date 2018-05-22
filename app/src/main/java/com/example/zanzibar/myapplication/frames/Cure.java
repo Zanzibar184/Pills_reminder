@@ -114,19 +114,19 @@ public class Cure extends Fragment {
 
                     if((ora >= 6) && (ora <12))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina);
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId());
                     }
                     if((ora >= 12) && (ora <18))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio);
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId());
                     }
                     if((ora >= 18) && (ora <24))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera);
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId());
                     }
                     if((ora >= 0) && (ora <6))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte);
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId());
                     }
 
                 }
@@ -136,15 +136,16 @@ public class Cure extends Fragment {
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout) {
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id) {
 
-            View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
+            final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
             final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
             final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
             final TextView txt_nome = (TextView) frame.findViewById(R.id.txt_nome_pillola);
             final TextView txt_orario_assunzione = (TextView) frame.findViewById(R.id.txt_ora);
             final TextView txt_qta_ass = (TextView) frame.findViewById(R.id.txt_numero_dosi);
+            final TextView cura_id = (TextView) frame.findViewById(R.id.cura_id);
 
             //Qui va il codice per le altre TextView e altro da gestire
 
@@ -154,13 +155,13 @@ public class Cure extends Fragment {
                 txt_nome.setText(nome);
                 txt_orario_assunzione.setText(orario_assunzione); //da aggiornare
                 txt_qta_ass.setText("x" + qta_ass);
-
+                cura_id.setText(Integer.toString(id));
 
 
             frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setPopupMenuImages(getContext(),img_farmaco, img_greenV, img_redX);
+                    setPopupMenuImages(getContext(),frame, img_greenV, img_redX);
                 }
             });
             layout.addView(frame);
@@ -168,8 +169,8 @@ public class Cure extends Fragment {
     }
 
 
-    public void setPopupMenuImages(Context c, final ImageView imgfarmaco, final ImageView imgok, final ImageView imgno) {
-        PopupMenu popup = new PopupMenu(c,imgfarmaco);
+    public void setPopupMenuImages(Context c, final View v, final ImageView imgok, final ImageView imgno) {
+        PopupMenu popup = new PopupMenu(c,v);
         popup.getMenuInflater().inflate(R.menu.menu_conferma_assunzione, popup.getMenu());
 
         if(imgok.getVisibility() == View.VISIBLE) {
@@ -184,10 +185,13 @@ public class Cure extends Fragment {
                 dao = new CureDao_DB();
                 dao.open();
 
+                TextView id = (TextView) v.findViewById(R.id.cura_id);
+
+
                 if (item.getTitle().equals(conferma_farmaco)) {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
-                    
+                    Log.i("id cura scelta", id.getText()+"");
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
