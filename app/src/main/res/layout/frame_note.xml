@@ -47,21 +47,7 @@
             android:layout_below="@+id/view7"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="50dp"
-            android:lines="8"
-            android:maxLines="15"
-            android:minLines="6"
-            android:scrollbars="vertical"
-            android:text="cxzoccjjdjjjahjfgdsfhjsdgfhjsdgfhjsfgsdjhfghjfgsdhjfgsdfgjhsdfgsdhjfgsjhfgsdhjfgdsfgsdhjfgsdhjfgdjshfgsjhfgsdhjfgsdhjfgsdjhfgsdhjgfdshjfghjdsgfhjsdgfsdjhfgdshjfgdshjfgsdhjfgsdjhskldjaskldjaskldjakdjsadaskdsajdklsajdklasjdsakldjaskldjsakldjsalkdjsalkdjsalkdjsakldjaskldjaslkdjaskldjalskdjaskldjaskldjaskldjaklsdjaslkdjasldasjsffhsfhsdjkhfsdjkfhdsjkfhsdfhdsjfhsdjfhdsfsjfhsdkjfhskjfhsdjkfhskjfhsdjkfhsdkjfhksjdfhskjfhksjfhskjdfhskjdfhskfhskjfhsjkfhsjkfhksjfhsjkhfjksfhsdkjfhsdjkfhkjsfhskjfhsjkfhskjhfskjfhjkshfjksfhsdkjfhsdkjhfsdjkfhsdkj" />
-
-        <View
-            android:id="@+id/view8"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignBottom="@+id/txt_note_title"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="35dp"
-            android:background="@color/colorPrimaryDark" />
+            android:text="Testo" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -69,7 +55,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relativeLayout2">
 
             <TextView
                 android:id="@+id/data_nota"
