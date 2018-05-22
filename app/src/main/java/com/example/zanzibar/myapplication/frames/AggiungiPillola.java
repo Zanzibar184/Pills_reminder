@@ -224,6 +224,32 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
+        imgpill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), img_call_camera);
+                popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getTitle().equals(choose_from_camera)) {
+                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(takePicture,
+                                    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                        } else if(item.getTitle().equals(choose_from_gallery)) {
+                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(pickPhoto,
+                                    CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE);
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
         img_time_dose_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
