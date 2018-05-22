@@ -66,7 +66,7 @@ public class Cure extends Fragment {
                              Bundle savedInstanceState) {
         dao = new CureDao_DB();
         dao.open();
-        list_cure = dao.getAllCure();
+        list_cure = dao.getTodayCure();
         dao.close();
 
         v = container.findViewById(R.id.fragmentmanager);
@@ -110,7 +110,25 @@ public class Cure extends Fragment {
                 for(int i=0;i<list_cure.size(); i++)
                 {
                     Cura tmp = list_cure.get(i);
-                    addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina);
+                    int ora = Integer.parseInt(tmp.getOrario_assunzione().substring(0,2));
+
+                    if((ora >= 6) && (ora <12))
+                    {
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina);
+                    }
+                    if((ora >= 12) && (ora <18))
+                    {
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio);
+                    }
+                    if((ora >= 18) && (ora <24))
+                    {
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera);
+                    }
+                    if((ora >= 0) && (ora <6))
+                    {
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte);
+                    }
+
                 }
 
 
