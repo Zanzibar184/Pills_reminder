@@ -10,9 +10,11 @@ public class Cura {
     private String fine_cura;
     private int tipo_cura;
     private String orario_assunzione;
+    private String stato_cura;
+    private int id;
 
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -21,11 +23,26 @@ public class Cura {
         this.fine_cura = fine_cura;
         this.tipo_cura = tipo_cura;
         this.orario_assunzione = orario_assunzione;
+        this.stato_cura = stato_cura;
+        this.id = -1;
+    }
+
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, int id){
+        this.nome = nome;
+        this.quantità_assunzione = quantità_assunzione;
+        this.scorta = scorta;
+        this.rimanenze = rimanenze;
+        this.inizio_cura = inizio_cura;
+        this.fine_cura = fine_cura;
+        this.tipo_cura = tipo_cura;
+        this.orario_assunzione = orario_assunzione;
+        this.stato_cura = stato_cura;
+        this.id = id;
     }
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura;
     }
 
 
@@ -91,5 +108,21 @@ public class Cura {
 
     public void setOrario_assunzione(String orario_assunzione) {
         this.orario_assunzione = orario_assunzione;
+    }
+
+    public String getStato_cura() {
+        return stato_cura;
+    }
+
+    public void setStato_cura(String stato_cura) {
+        this.stato_cura = stato_cura;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -24,6 +24,8 @@ public class CureDao_DB implements CureDAO {
                     query.COLUMN_FINE_CURA,
                     query.COLUMN_TIPO_CURA,
                     query.COLUMN_ORARIO_ASSUNZIONE,
+                    query.COLUMN_STATO_CURA,
+                    query.COLUMN_ID,
             };
 
     @Override
@@ -51,6 +53,7 @@ public class CureDao_DB implements CureDAO {
         values.put(query.COLUMN_FINE_CURA, cura.getFine_cura());
         values.put(query.COLUMN_TIPO_CURA, cura.getTipo_cura());
         values.put(query.COLUMN_ORARIO_ASSUNZIONE, cura.getOrario_assunzione());
+        values.put(query.COLUMN_STATO_CURA, cura.getStato_cura());
         return values;
     }
 
@@ -66,8 +69,10 @@ public class CureDao_DB implements CureDAO {
         String fine_cura = cursor.getString(5);
         int tipo_cura = cursor.getInt(6);
         String orario_assunzione = cursor.getString(7);
+        String stato_cura = cursor.getString(8);
+        int id = cursor.getInt(9);
 
-        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione);
+        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione, stato_cura, id);
     }
 
     @Override
@@ -88,6 +93,23 @@ public class CureDao_DB implements CureDAO {
                 new String[]{ ""+id}
         );
 
+    }
+
+    @Override
+    public void updateCura(Cura cura) {
+        ContentValues values = new ContentValues();
+
+        values.put(query.COLUMN_NOME, cura.getNome());
+        values.put(query.COLUMN_QTA_ASS, cura.getQuantità_assunzione());
+        values.put(query.COLUMN_SCORTA, cura.getScorta());
+        values.put(query.COLUMN_RIMANENZE, cura.getRimanenze());
+        values.put(query.COLUMN_INIZIO_CURA, cura.getInizio_cura());
+        values.put(query.COLUMN_FINE_CURA, cura.getFine_cura());
+        values.put(query.COLUMN_TIPO_CURA, cura.getTipo_cura());
+        values.put(query.COLUMN_ORARIO_ASSUNZIONE, cura.getOrario_assunzione());
+        values.put(query.COLUMN_STATO_CURA, cura.getStato_cura());
+
+        database.update(query.TABLE_CURE,values,"id="+cura.getId(),null);
     }
 
     @Override

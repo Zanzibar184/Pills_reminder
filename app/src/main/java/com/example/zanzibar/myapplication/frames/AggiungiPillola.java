@@ -318,19 +318,19 @@ public class AggiungiPillola extends Fragment {
                 {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
                     qta_ass = Integer.parseInt(text_dose1.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
                 }
                 if(nClicks >= 2)
                 {
                     orario_assunzione = orario_di_assunzione2.getText().toString();
                     qta_ass = Integer.parseInt(text_dose2.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
                 }
                 if(nClicks >= 3)
                 {
                     orario_assunzione = orario_di_assunzione3.getText().toString();
                     qta_ass = Integer.parseInt(text_dose3.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
                 }
 
                 dao.close();

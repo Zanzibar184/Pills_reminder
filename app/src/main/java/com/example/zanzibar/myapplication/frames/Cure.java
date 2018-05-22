@@ -180,10 +180,14 @@ public class Cure extends Fragment {
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
+
+                dao = new CureDao_DB();
+                dao.open();
+
                 if (item.getTitle().equals(conferma_farmaco)) {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
-                    //TODO: inserire codice per gestire farmaco assunto
+                    
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);

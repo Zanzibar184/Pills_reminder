@@ -7,8 +7,9 @@ public interface CureDAO {
     public void open();
     public void close();
 
-    public Cura insertCura(Cura person);
-    public void deleteCura(Cura person);
+    public Cura insertCura(Cura cura);
+    public void deleteCura(Cura cura);
+    public void updateCura(Cura cura);
     public List<Cura> getAllCure();
     public List<Cura> getTodayCure();
 }
