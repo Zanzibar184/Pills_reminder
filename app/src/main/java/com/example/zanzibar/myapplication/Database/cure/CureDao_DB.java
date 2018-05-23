@@ -85,11 +85,11 @@ public class CureDao_DB implements CureDAO {
     @Override
     public void deleteCura(Cura cura) {
 
-        String id = cura.getNome();
+         int id = cura.getId();
 
         database.delete(
                 query.TABLE_CURE,
-                query.COLUMN_NOME + " =? ",
+                query.COLUMN_ID + " =? ",
                 new String[]{ ""+id}
         );
 

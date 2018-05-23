@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
@@ -40,7 +41,8 @@ import static com.example.zanzibar.myapplication.frames.Cure.getDrawIcons;
 public class MieiFarmaci extends Fragment {
     private CureDAO dao;
     private List<Cura> list_cure;
-
+    public static String MODIFICA = "Modifica informazioni";
+    public static String ELIMINA = "Elimina";
 
     private LinearLayout linearLayout = null;
 
@@ -80,7 +82,7 @@ public class MieiFarmaci extends Fragment {
         for(int i = 0; i<list_cure.size();i++)
         {
             Cura tmp = list_cure.get(i);
-            addFarmaci(tmp.getNome(), tmp.getRimanenze(), tmp.getScorta(), tmp.getInizio_cura(), tmp.getFine_cura(),tmp.getTipo_cura());
+            addFarmaci(tmp.getNome(), tmp.getRimanenze(), tmp.getScorta(), tmp.getInizio_cura(), tmp.getFine_cura(),tmp.getTipo_cura(), tmp.getId());
         }
 
 
@@ -92,7 +94,7 @@ public class MieiFarmaci extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("I miei farmaci");
     }
 
-    public void addFarmaci(String nome, int qta_rimasta, int qta_totale, String start_cura, String end_cura, int tipo_cura) {
+    public void addFarmaci(String nome, int qta_rimasta, int qta_totale, String start_cura, String end_cura, int tipo_cura, int id) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout, false);
 
         Date inizio = StringToDate(start_cura);
@@ -104,6 +106,7 @@ public class MieiFarmaci extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_qta_rimasta)).setText("Quantità rimanente: " +qta_rimasta);
         ((TextView) frame.findViewById(R.id.txt_start_cura)).setText("Dal: " + dateFormat.format(inizio) );
         ((TextView) frame.findViewById(R.id.txt_end_cura)).setText("Fino al: " + dateFormat.format(fine));
+        ((TextView) frame.findViewById(R.id.txt_id_hidden)).setText(id + "");
         ((ImageView) frame.findViewById(R.id.imgCura)).setImageDrawable(getResources().getDrawable(getDrawIcons(tipo_cura)));
 
         frame.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +146,19 @@ public class MieiFarmaci extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
 
-                return true;
+            if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
+
+                Toast.makeText(getContext(), "modifica" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
+
+            } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
+
+                Toast.makeText(getContext(), "elimina" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
+                //dao.open();
+
+
+            }
+            return true;
+
             }
         });
 
