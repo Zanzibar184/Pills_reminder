@@ -10,8 +10,11 @@ public class Cura {
     private String fine_cura;
     private int tipo_cura;
     private String orario_assunzione;
-    private String stato_cura;
+    private String stato_cura; //da_assumere - assunta - non_assunta
     private int id;
+    public static final String ASSUNTA = "assunta";
+    public static final String NON_ASSUNTA = "non_assunta";
+    public static final String DA_ASSUMERE = "da_assumere";
 
 
     public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura){

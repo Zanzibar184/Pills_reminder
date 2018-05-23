@@ -38,7 +38,7 @@
             android:id="@+id/view" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/imgCura"
             android:layout_width="@dimen/img_pill_scrollview"
             android:layout_height="@dimen/img_pill_scrollview"
             android:layout_alignParentBottom="true"
@@ -48,16 +48,38 @@
             app:srcCompat="@drawable/pill_colored" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txt_qta_rimasta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView16"
+            android:layout_alignBottom="@+id/txt_start_cura"
             android:layout_marginBottom="21dp"
             android:layout_marginLeft="27dp"
             android:layout_marginStart="27dp"
-            android:layout_toEndOf="@+id/imageView16"
-            android:layout_toRightOf="@+id/imageView16"
-            android:text="Qui compariranno tutte le informazioni\n sul farmaco" />
+            android:layout_toEndOf="@+id/imgCura"
+            android:layout_toRightOf="@+id/imgCura"
+            android:text="qta rimasta" />
+        <TextView
+            android:id="@+id/txt_start_cura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/txt_end_cura"
+            android:layout_marginBottom="21dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_toEndOf="@+id/imgCura"
+            android:layout_toRightOf="@+id/imgCura"
+            android:text="inizio cura" />
+            <TextView
+            android:id="@+id/txt_end_cura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imgCura"
+            android:layout_marginBottom="21dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_toEndOf="@+id/imgCura"
+            android:layout_toRightOf="@+id/imgCura"
+            android:text="end cura" />
 
     </RelativeLayout>
 

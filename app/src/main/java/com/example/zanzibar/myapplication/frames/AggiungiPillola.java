@@ -297,7 +297,7 @@ public class AggiungiPillola extends Fragment {
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+        public void onClick(View view) {
 
                 dao = new CureDao_DB();
                 dao.open();
@@ -318,19 +318,19 @@ public class AggiungiPillola extends Fragment {
                 {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
                     qta_ass = Integer.parseInt(text_dose1.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 2)
                 {
                     orario_assunzione = orario_di_assunzione2.getText().toString();
                     qta_ass = Integer.parseInt(text_dose2.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 3)
                 {
                     orario_assunzione = orario_di_assunzione3.getText().toString();
                     qta_ass = Integer.parseInt(text_dose3.getText().toString());
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, "non_assunta"));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
 
                 dao.close();

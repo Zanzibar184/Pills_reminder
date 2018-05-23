@@ -114,19 +114,19 @@ public class Cure extends Fragment {
 
                     if((ora >= 6) && (ora <12))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp.getStato_cura());
                     }
                     if((ora >= 12) && (ora <18))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp.getStato_cura());
                     }
                     if((ora >= 18) && (ora <24))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp.getStato_cura());
                     }
                     if((ora >= 0) && (ora <6))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp.getStato_cura());
                     }
 
                 }
@@ -136,7 +136,7 @@ public class Cure extends Fragment {
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id) {
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura) {
 
             final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
@@ -147,15 +147,27 @@ public class Cure extends Fragment {
             final TextView txt_qta_ass = (TextView) frame.findViewById(R.id.txt_numero_dosi);
             final TextView cura_id = (TextView) frame.findViewById(R.id.cura_id);
 
+
             //Qui va il codice per le altre TextView e altro da gestire
 
 
                 Drawable drawable_farmaco = getResources().getDrawable(getDrawIcons(tipo_cura));
                 img_farmaco.setImageDrawable(drawable_farmaco);
                 txt_nome.setText(nome);
-                txt_orario_assunzione.setText(orario_assunzione); //da aggiornare
+                txt_orario_assunzione.setText(orario_assunzione);
                 txt_qta_ass.setText("x" + qta_ass);
                 cura_id.setText(Integer.toString(id));
+
+                if (stato_cura.equals(Cura.NON_ASSUNTA))
+                {
+                    Log.i("stato cura_: ", stato_cura);
+                    img_redX.setVisibility(View.VISIBLE);
+                }
+                else if (stato_cura.equals(Cura.ASSUNTA))
+                {
+                    Log.i("stato cura_: ", stato_cura);
+                    img_greenV.setVisibility(View.VISIBLE);
+                }
 
 
             frame.setOnClickListener(new View.OnClickListener() {
@@ -187,22 +199,33 @@ public class Cure extends Fragment {
 
                 TextView id = (TextView) v.findViewById(R.id.cura_id);
 
+                Cura updated_cura = getCurabyId(Integer.parseInt(id.getText().toString()));
 
                 if (item.getTitle().equals(conferma_farmaco)) {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
-                    Log.i("id cura scelta", id.getText()+"");
+
+                    //aggiorno lo stato del record
+                    updated_cura.setStato_cura(Cura.ASSUNTA);
+                    dao.updateCura(updated_cura);
+
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
-                    //TODO: inserire codice per gestire farmaco NON assunto
+
+                    updated_cura.setStato_cura(Cura.NON_ASSUNTA);
+                    dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(ripristina_stato_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.GONE);
-                    //TODO: inserire codice per gestire annullamento assunzione farmaco
+
+                    updated_cura.setStato_cura(Cura.DA_ASSUMERE);
+                    dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
                     //TODO: inserire codice per visualizzare informazioni sul farmaco
                 }
+
+                dao.close();
                 return true;
             }
         });
@@ -218,7 +241,7 @@ public class Cure extends Fragment {
     }
 
 
-    private int getDrawIcons(int id){
+    public static int getDrawIcons(int id){
         switch(id){
             case 1: return R.drawable.pill_colored;
             case 2: return R.drawable.syringe;
@@ -229,6 +252,19 @@ public class Cure extends Fragment {
         }
 
         return 0;
+    }
+
+    private Cura getCurabyId(int id){
+
+        for(int i=0;i<list_cure.size(); i++)
+        {
+            if ((list_cure.get(i).getId()) == id)
+            {
+                return list_cure.get(i);
+            }
+        }
+        Cura cura = null;
+        return cura;
     }
 }
 

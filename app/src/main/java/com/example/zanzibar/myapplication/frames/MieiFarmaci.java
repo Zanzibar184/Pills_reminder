@@ -1,25 +1,42 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.cure.Cura;
+import com.example.zanzibar.myapplication.Database.cure.CureDAO;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import static com.example.zanzibar.myapplication.frames.Cure.getDrawIcons;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MieiFarmaci extends Fragment {
+    private CureDAO dao;
+    private List<Cura> list_cure;
+
 
     private LinearLayout linearLayout = null;
 
@@ -52,9 +69,16 @@ public class MieiFarmaci extends Fragment {
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutfarmaci);
 
-        for(int i = 0; i < 2; i++) {
-            addLayoutMieifarmaci();
+        dao = new CureDao_DB();
+        dao.open();
+        list_cure = dao.getAllCure();
+
+        for(int i = 0; i<list_cure.size();i++)
+        {
+            Cura tmp = list_cure.get(i);
+            addFarmaci(tmp.getNome(), tmp.getRimanenze(), tmp.getInizio_cura(), tmp.getFine_cura(),tmp.getTipo_cura());
         }
+
 
     }
 
@@ -64,14 +88,37 @@ public class MieiFarmaci extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("I miei farmaci");
     }
 
-    public void addLayoutMieifarmaci() {
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout, false);
+    public void addFarmaci(String nome, int qta_rimasta, String start_cura, String end_cura, int tipo_cura) {
+        final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout, false);
 
-        //TODO: dichiarare le textview qui
-        TextView txt_title = (TextView) frame.findViewById(R.id.txt_titolo_farmaco);
-        txt_title.setText("Pillola XYZ");
+        Date inizio = StringToDate(start_cura);
+        Date fine = StringToDate(end_cura);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
+        ((TextView) frame.findViewById(R.id.txt_qta_rimasta)).setText("Quantità rimanente: " +qta_rimasta);
+        ((TextView) frame.findViewById(R.id.txt_start_cura)).setText("Dal: " + dateFormat.format(inizio) );
+        ((TextView) frame.findViewById(R.id.txt_end_cura)).setText("Fino al: " + dateFormat.format(fine));
+        ((ImageView) frame.findViewById(R.id.imgCura)).setImageDrawable(getResources().getDrawable(getDrawIcons(tipo_cura)));
 
         linearLayout.addView(frame);
     }
 
+    private Date StringToDate(String s) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        try {
+
+            date = formatter.parse(s);
+            Log.i("data: ",formatter.format(date));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
+
+    }
 }
