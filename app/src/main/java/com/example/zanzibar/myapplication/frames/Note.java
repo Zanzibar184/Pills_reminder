@@ -73,7 +73,7 @@ public class Note extends Fragment {
 
         //TODO: dichiarare le textview qui
         TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
-        TextView contenuto = (TextView) frame.findViewById(R.id.contenuto_nota);
+        TextView contenuto = (TextView) frame.findViewById(R.id.txt_contenuto);
         TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
         TextView ora = (TextView) frame.findViewById(R.id.ora);
 

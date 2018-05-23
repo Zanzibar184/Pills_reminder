@@ -5,18 +5,15 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.MainActivity;
@@ -116,8 +113,11 @@ public class Calendario extends Fragment {
         layout1.setLayoutParams(lp);
         layout2.setLayoutParams(lp);
 
-        for(int i =0; i < 3; i++) {
-            addLayoutCalendar();
+        for(int i =0; i < 10; i++) {
+            if(i%2==0) {
+                addLayoutFarmaciCalendario();
+            } else
+                addLayoutNoteCalendario();
         }
 
     }
@@ -128,8 +128,22 @@ public class Calendario extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Calendario");
     }
 
-    private void addLayoutCalendar() {
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note_calendario, layout3, false);
+    public void addLayoutNoteCalendario() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
+
+        TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
+        TextView contenuto = (TextView) frame.findViewById(R.id.txt_contenuto);
+        TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
+        TextView ora = (TextView) frame.findViewById(R.id.ora);
+
+        layout3.addView(frame);
+    }
+
+    private void addLayoutFarmaciCalendario() {
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
+
+        TextView txt = (TextView) frame.findViewById(R.id.txt_titolo_farmaco);
+
         layout3.addView(frame);
     }
 

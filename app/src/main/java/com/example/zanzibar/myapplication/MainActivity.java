@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     protected NavigationView navigationView;
     FloatingActionButton fab = null;
+
+    int tmpClicksBackPressed = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,23 +73,40 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mDrawerLayout.closeDrawer(Gravity.START);
+        }
+        if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mDrawerLayout.closeDrawer(Gravity.START);
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if ((getSupportFragmentManager().getBackStackEntryCount() == 0)){
+            super.onBackPressed();
+        }
+        /*
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
             int count = getSupportFragmentManager().getBackStackEntryCount();
-            if (count>0) {
+            if (count>1) {
                 //Log.e("count", "is getBackStackEntryCount -> " + count);
-                for (int i = 0; i < count; ++i) {
+                for (int i = 1; i <= count; ++i) {
                     getSupportFragmentManager().popBackStackImmediate();
                     //Log.e("getBackStack", "IS REMOVED " + i);
                 }
+            } else if(count == 1){
+                fab.show();
+                Cure cure = new Cure(fab);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+                //Log.i("super", "sto usando onBackPressed di default");
             } else {
                 super.onBackPressed();
-                //Log.i("super", "sto usando onBackPressed di default");
             }
         }
+        */
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -99,47 +119,47 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fab.show();
             Cure cure = new Cure(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_pills) {
             fab.show();
             MieiFarmaci mieiFarmaci = new MieiFarmaci(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_calendar) {
             fab.show();
             Calendario calendario = new Calendario(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_pharamarcy) {
             fab.hide();
             startActivity(new Intent(this, MapsActivity.class));
             Cure cure = new Cure(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
             navigationView.getMenu().getItem(0).setChecked(true);
 
 
         } else if (id == R.id.nav_contacts) {
             fab.show();
             ContattiImportanti contattiImportanti = new ContattiImportanti(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_sms) {
             fab.hide();
             SmsAvviso smsAvviso = new SmsAvviso();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_notes) {
             fab.show();
             Note note = new Note(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_settings) {
             fab.hide();
             Impostazioni impostazioni = new Impostazioni();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).addToBackStack(null).commit();
 
         }
 
