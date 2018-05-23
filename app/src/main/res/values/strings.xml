@@ -35,8 +35,11 @@
     <string name="importa_contatto">Importa nome e telefono da contatto</string>
     <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
 
+    <string name="modifica_cura">Modifica informazioni</string>
+    <string name="elimina_cura">Elimina</string>
 
-    <!--jkdhsdhjkdhdkjhdjkahdajksdhaksjdhkjdhjkdahs-->
+
+    <!--jkdhsdhjkdhdkjhdjkahdajksdhaksjdhkjdhjkdahs (fantastico)-->
 
 
     <string name="title_activity_welcome">Home Screen</string>

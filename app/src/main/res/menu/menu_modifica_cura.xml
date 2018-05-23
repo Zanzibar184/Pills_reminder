@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/ottieni_info">
+        <item
+            android:id="@+id/modifica_cura"
+            android:title="@string/modifica_cura"/>
+
+        <item
+            android:id="@+id/elimina_cura"
+            android:title="@string/elimina_cura"/>
+
+    </group>
+
+
+</menu>
