@@ -39,8 +39,6 @@ public class Calendario extends Fragment {
 
     private LinearLayout layout3= null;
 
-    ScrollView mainScroll = null;
-
     private String dateSelected = null;
 
     private int height = 0;
@@ -60,7 +58,6 @@ public class Calendario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mainScroll = (ScrollView) container.findViewById(R.id.fragmentmanager);
         return inflater.inflate(R.layout.sfondo_calendario, container, false);
     }
 
@@ -105,14 +102,6 @@ public class Calendario extends Fragment {
             public void onMonthChanged(Date date) {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Disabilito lo scorrimento della ScrollView principale
-        mainScroll.setOnTouchListener( new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
             }
         });
 
