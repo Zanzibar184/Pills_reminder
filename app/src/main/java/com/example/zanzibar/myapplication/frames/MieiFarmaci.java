@@ -150,6 +150,7 @@ public class MieiFarmaci extends Fragment {
             if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
 
                 Toast.makeText(getContext(), "modifica" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
+                //TODO: implementare aggiornamento di un medicinale
 
             } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
 
