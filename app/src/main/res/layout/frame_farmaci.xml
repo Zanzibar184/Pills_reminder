@@ -1,98 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
+    android:id="@+id/rlfarmaci"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="@dimen/height_view"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/marginBottom_view"
+    android:layout_marginLeft="@dimen/marginLeft_view"
+    android:layout_marginRight="@dimen/marginRight_view"
+    android:layout_marginTop="@dimen/marginTop_view"
+    android:background="@drawable/rounded_shape"
+    android:elevation="12dp">
 
-    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
-
-    <RelativeLayout
-        android:id="@+id/rlfarmaci"
+    <TextView
+        android:id="@+id/txt_titolo_farmaco"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/marginBottom_view"
-        android:layout_marginLeft="@dimen/marginLeft_view"
-        android:layout_marginRight="@dimen/marginRight_view"
-        android:layout_marginTop="@dimen/marginTop_view"
-        android:background="@drawable/rounded_shape"
-        android:elevation="12dp">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/view" />
+
+    <ImageView
+        android:id="@+id/imgCura"
+        android:layout_width="@dimen/img_pill_scrollview"
+        android:layout_height="@dimen/img_pill_scrollview"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        app:srcCompat="@drawable/pill_colored" />
+
+
+    <TextView
+        android:id="@+id/txt_qta_totale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txt_qta_rimasta"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_toEndOf="@+id/imgCura"
+        android:layout_toRightOf="@+id/imgCura"
+        android:text="qta totale" />
+    <TextView
+        android:id="@+id/txt_qta_rimasta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txt_start_cura"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_toEndOf="@+id/imgCura"
+        android:layout_toRightOf="@+id/imgCura"
+        android:text="qta rimasta" />
+    <TextView
+        android:id="@+id/txt_start_cura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txt_end_cura"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_toEndOf="@+id/imgCura"
+        android:layout_toRightOf="@+id/imgCura"
+        android:text="inizio cura" />
         <TextView
-            android:id="@+id/txt_titolo_farmaco"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view" />
-
-        <ImageView
-            android:id="@+id/imgCura"
-            android:layout_width="@dimen/img_pill_scrollview"
-            android:layout_height="@dimen/img_pill_scrollview"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="13dp"
-            app:srcCompat="@drawable/pill_colored" />
-
-
-        <TextView
-            android:id="@+id/txt_qta_totale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/txt_qta_rimasta"
-            android:layout_marginBottom="21dp"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp"
-            android:layout_toEndOf="@+id/imgCura"
-            android:layout_toRightOf="@+id/imgCura"
-            android:text="qta totale" />
-        <TextView
-            android:id="@+id/txt_qta_rimasta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/txt_start_cura"
-            android:layout_marginBottom="21dp"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp"
-            android:layout_toEndOf="@+id/imgCura"
-            android:layout_toRightOf="@+id/imgCura"
-            android:text="qta rimasta" />
-        <TextView
-            android:id="@+id/txt_start_cura"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/txt_end_cura"
-            android:layout_marginBottom="21dp"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp"
-            android:layout_toEndOf="@+id/imgCura"
-            android:layout_toRightOf="@+id/imgCura"
-            android:text="inizio cura" />
-            <TextView
-            android:id="@+id/txt_end_cura"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imgCura"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp"
-            android:layout_toEndOf="@+id/imgCura"
-            android:layout_toRightOf="@+id/imgCura"
-            android:text="end cura" />
-
-    </RelativeLayout>
+        android:id="@+id/txt_end_cura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgCura"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_toEndOf="@+id/imgCura"
+        android:layout_toRightOf="@+id/imgCura"
+        android:text="end cura" />
 
 </RelativeLayout>
