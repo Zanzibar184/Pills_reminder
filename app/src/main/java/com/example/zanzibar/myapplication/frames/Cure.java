@@ -222,7 +222,9 @@ public class Cure extends Fragment {
                     updated_cura.setStato_cura(Cura.DA_ASSUMERE);
                     dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
-                    //TODO: inserire codice per visualizzare informazioni sul farmaco
+                    MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_cure);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
                 }
 
                 dao.close();

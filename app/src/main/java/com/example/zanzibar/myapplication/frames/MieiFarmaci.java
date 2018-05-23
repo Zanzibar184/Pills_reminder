@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -152,8 +153,16 @@ public class MieiFarmaci extends Fragment {
 
             } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
 
-                Toast.makeText(getContext(), "elimina" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
-                //dao.open();
+                //Toast.makeText(getContext(), "elimina" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
+
+                Cura remove_cura = getCurabyId(Integer.parseInt(((TextView) v.findViewById(R.id.txt_id_hidden)).getText().toString()));
+                dao.open();
+                dao.deleteCura(remove_cura);
+                dao.close();
+
+                MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_miei_farmaci);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
 
 
             }
@@ -163,5 +172,19 @@ public class MieiFarmaci extends Fragment {
         });
 
         popup.show();
+    }
+
+
+    private Cura getCurabyId(int id){
+
+        for(int i=0;i<list_cure.size(); i++)
+        {
+            if ((list_cure.get(i).getId()) == id)
+            {
+                return list_cure.get(i);
+            }
+        }
+        Cura cura = null;
+        return cura;
     }
 }
