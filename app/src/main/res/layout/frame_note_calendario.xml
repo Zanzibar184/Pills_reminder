@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/myview1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_view"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/marginBottom_view"
+    android:layout_marginLeft="@dimen/marginLeft_view"
+    android:layout_marginRight="@dimen/marginRight_view"
+    android:layout_marginTop="@dimen/marginTop_view"
+    android:background="@drawable/rounded_shape"
+    android:elevation="12dp">
+
+    <TextView
+        android:id="@+id/txt_titolo_farmaco"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/view" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="@dimen/img_pill_scrollview"
+        android:layout_height="@dimen/img_pill_scrollview"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        app:srcCompat="@drawable/pill_colored" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView16"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp"
+        android:layout_toEndOf="@+id/imageView16"
+        android:layout_toRightOf="@+id/imageView16"
+        android:text="Qui compariranno tutte le informazioni\n sul farmaco" />
+
+</RelativeLayout>
+

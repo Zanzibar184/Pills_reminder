@@ -1,13 +1,18 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -32,11 +37,16 @@ public class Calendario extends Fragment {
 
     FloatingActionButton fab_cal = null;
 
-    private LinearLayout layout = null;
+    private LinearLayout layout3= null;
 
-   // ScrollView sv = null;
+    ScrollView mainScroll = null;
 
     private String dateSelected = null;
+
+    private int height = 0;
+    private int width = 0;
+    private int actionBarHeight = 0;
+    private int statusbarHeight = 0;
 
     public Calendario() {
         // Required empty public constructor
@@ -50,6 +60,7 @@ public class Calendario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mainScroll = (ScrollView) container.findViewById(R.id.fragmentmanager);
         return inflater.inflate(R.layout.sfondo_calendario, container, false);
     }
 
@@ -68,6 +79,7 @@ public class Calendario extends Fragment {
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();
             }
         });
+
 
         //Initialize CustomCalendarView from layout
         CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
@@ -96,13 +108,28 @@ public class Calendario extends Fragment {
             }
         });
 
-        layout = (LinearLayout) view.findViewById(R.id.scrollable_linearlayout);
+        //Disabilito lo scorrimento della ScrollView principale
+        mainScroll.setOnTouchListener( new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
-        for(int i = 0; i < 5; i++) {
+        LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.layout1);
+        LinearLayout layout2 = (LinearLayout) view.findViewById(R.id.layout2);
+        layout3 = (LinearLayout) view.findViewById(R.id.layout3);
+
+        calcolaDimensioniFinestra();
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                (int)(height/2)-(actionBarHeight/2)-(statusbarHeight/2));
+        layout1.setLayoutParams(lp);
+        layout2.setLayoutParams(lp);
+
+        for(int i =0; i < 3; i++) {
             addLayoutCalendar();
         }
-
-
 
     }
 
@@ -113,8 +140,31 @@ public class Calendario extends Fragment {
     }
 
     private void addLayoutCalendar() {
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, layout, false);
-        layout.addView(frame);
+        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note_calendario, layout3, false);
+        layout3.addView(frame);
+    }
+
+    private void calcolaDimensioniFinestra() {
+
+        //Mi faccio restituire l'altezza della ActionBar
+        TypedValue tv = new TypedValue();
+        if (getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        }
+
+        //Mi faccio restituire l'altezza della schermata
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        height = displaymetrics.heightPixels;
+        width = displaymetrics.widthPixels;
+
+        //Mi faccio restituire l'altezza della StatusBar
+        Resources resources = getContext().getResources();
+        statusbarHeight = resources.getIdentifier("status_bar_height", "dimen", "android");
+        if(statusbarHeight>0) {
+            statusbarHeight = resources.getDimensionPixelSize(statusbarHeight);
+        }
     }
 
 }
