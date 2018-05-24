@@ -8,10 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,7 @@ public class Calendario extends Fragment {
     private int width = 0;
     private int actionBarHeight = 0;
     private int statusbarHeight = 0;
+    private int height_layout1 = 0;
 
     public Calendario() {
         // Required empty public constructor
@@ -59,7 +62,7 @@ public class Calendario extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
@@ -74,9 +77,10 @@ public class Calendario extends Fragment {
             }
         });
 
+        LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.layout1);
 
         //Initialize CustomCalendarView from layout
-        CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
+        final CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
 
         //Initialize calendar with date
         Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
@@ -102,23 +106,25 @@ public class Calendario extends Fragment {
             }
         });
 
-        LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.layout1);
-        LinearLayout layout2 = (LinearLayout) view.findViewById(R.id.layout2);
-        layout3 = (LinearLayout) view.findViewById(R.id.layout3);
+        calendarView.post(new Runnable() {
+            @Override
+            public void run() {
+                height_layout1 = calendarView.getHeight(); //height is ready
+                LinearLayout layout2 = (LinearLayout) view.findViewById(R.id.layout2);
+                layout3 = (LinearLayout) view.findViewById(R.id.layout3);
+                calcolaDimensioniFinestra();
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        (int)((height - actionBarHeight - statusbarHeight - height_layout1)));
+                layout2.setLayoutParams(lp);
 
-        calcolaDimensioniFinestra();
-
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                (int)(height/2)-(actionBarHeight/2)-(statusbarHeight/2));
-        layout1.setLayoutParams(lp);
-        layout2.setLayoutParams(lp);
-
-        for(int i =0; i < 10; i++) {
-            if(i%2==0) {
-                addLayoutFarmaciCalendario();
-            } else
-                addLayoutNoteCalendario();
-        }
+                for(int i =0; i < 10; i++) {
+                    if(i%2==0) {
+                        addLayoutFarmaciCalendario();
+                    } else
+                        addLayoutNoteCalendario();
+                }
+            }
+        });
 
     }
 
@@ -127,6 +133,7 @@ public class Calendario extends Fragment {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Calendario");
     }
+
 
     public void addLayoutNoteCalendario() {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
