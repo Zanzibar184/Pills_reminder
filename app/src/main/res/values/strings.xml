@@ -31,6 +31,7 @@
     <string name="nonconferma_farmaco">Farmaco non assunto</string>
     <string name="posticipa_farmaco">Annulla</string>
     <string name="info_farmaco">Info farmaco</string>
+    <string name="foto_farmaco">Foto farmaco</string>
 
     <string name="importa_contatto">Importa nome e telefono da contatto</string>
     <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
