@@ -31,4 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.npanigrahy:Custom-Calendar-View:v1.1'
     implementation 'com.bogdwellers:pinchtozoom:0.1'
+    implementation 'com.android.support:preference-v7:27.1.1'
 }

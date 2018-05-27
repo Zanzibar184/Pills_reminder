@@ -51,13 +51,13 @@
             android:text="Testo" />
 
         <RelativeLayout
+            android:id="@+id/layout_data_ora_nota"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/relativeLayout2">
+            android:layout_centerHorizontal="true">
 
             <TextView
                 android:id="@+id/data_nota"

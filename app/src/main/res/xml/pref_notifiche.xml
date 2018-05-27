@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Notifiche">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notifiche_abilitate"
+            android:summary="Abilitate"
+            android:title="Notifiche" />
+        <!--
+        <RingtonePreference
+            android:defaultValue="content://settings/system/alarm_alert"
+            android:key="ringtone_preference_1"
+            android:ringtoneType="all"
+            android:title="Ringtone preference" />
+            -->
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="vibrazione_abilitata"
+            android:title="Vibrazione" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Scorte">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notifiche_scorta_abilitate"
+            android:summary="Abilitate"
+            android:title="Notifiche per scorta farmaci" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/pillole_per_scorta"
+            android:entryValues="@array/pillole_per_scorta"
+            android:key="list_numero_pillole_avviso_scorta"
+            android:summary="N pillole"
+            android:title="Notifica quando mancano" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/tempo_per_scorta"
+            android:entryValues="@array/tempo_per_scorta"
+            android:key="tempo_scorta"
+            android:summary="N tempo"
+            android:title="Notifica esaurimento scorta ogni" />
+
+    </PreferenceCategory>-->
+
+    <PreferenceCategory android:title="SMS AVVISO">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notifiche_SMSAVVISO_abilitate"
+            android:summary="Abilitate"
+            android:title="Notifiche per SMS AVVISO" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/minuti_per_smsavviso"
+            android:entryValues="@array/minuti_per_smsavviso"
+            android:key="minuti_smsmavviso"
+            android:summary="N tempo"
+            android:title="Manda SMS dopo" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Promemoria farmaci">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notifiche_assunzione_farmaci"
+            android:summary="Abilitate"
+            android:title="Notifiche assunzione farmaco" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/numero_promemoria_farmaci"
+            android:entryValues="@array/numero_promemoria_farmaci"
+            android:key="numero_promemoria_farmaco"
+            android:summary="N promemoria"
+            android:title="Promemoria per farmaco" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/tempo_ripetizione_promemoria_farmaco"
+            android:entryValues="@array/tempo_ripetizione_promemoria_farmaco"
+            android:key="tempo_ripetizione_promemoria"
+            android:summary="N tempo"
+            android:title="Ripetere la notifica ogni" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
