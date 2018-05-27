@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:text="Titolo nota" />
+        android:text="Titolo nota"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="fill_parent"

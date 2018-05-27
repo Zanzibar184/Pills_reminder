@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Mattina"/>
+            android:text="Mattina"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
@@ -297,7 +298,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Pomeriggio"/>
+            android:text="Pomeriggio"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
@@ -568,7 +570,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Sera"/>
+            android:text="Sera"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
@@ -839,7 +842,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Notte"/>
+            android:text="Notte"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"

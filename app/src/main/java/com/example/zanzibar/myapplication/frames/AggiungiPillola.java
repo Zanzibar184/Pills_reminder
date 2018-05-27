@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -101,6 +103,12 @@ public class AggiungiPillola extends Fragment {
     private EditText text_dose2 = null;
     private EditText text_dose3 = null;
 
+    private TextView txt_titolo_foto = null;
+
+    Spinner spin1 = null;
+    Spinner spin2 = null;
+    Spinner spin3 = null;
+
     Drawable draw;
 
     int resourceId;
@@ -144,7 +152,7 @@ public class AggiungiPillola extends Fragment {
         ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
         ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
 
-        img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
+        img_call_camera = (ImageView) view.findViewById(R.id.img_add_photo);
 
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
@@ -156,6 +164,12 @@ public class AggiungiPillola extends Fragment {
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
         text_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
+
+        spin1 = (Spinner) view.findViewById(R.id.spin1);
+        spin2 = (Spinner) view.findViewById(R.id.spin2);
+        spin3 = (Spinner) view.findViewById(R.id.spin3);
+
+        txt_titolo_foto = (TextView) view.findViewById(R.id.txt_spiegazione_fotocamera);
 
 
         nome_cura = view.findViewById(R.id.nome_farmaco);
@@ -285,24 +299,28 @@ public class AggiungiPillola extends Fragment {
                     URI_foto_farmaco = pictureGalleryFilePath;
                 }
                 //fine
+                String unita_misura_dose = null;
 
 
                 if(nClicks >= 1)
                 {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
                     qta_ass = Integer.parseInt(text_dose1.getText().toString());
+                    unita_misura_dose = spin1.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 2)
                 {
                     orario_assunzione = orario_di_assunzione2.getText().toString();
                     qta_ass = Integer.parseInt(text_dose2.getText().toString());
+                    unita_misura_dose = spin2.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 3)
                 {
                     orario_assunzione = orario_di_assunzione3.getText().toString();
                     qta_ass = Integer.parseInt(text_dose3.getText().toString());
+                    unita_misura_dose = spin3.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
 
@@ -508,6 +526,8 @@ public class AggiungiPillola extends Fragment {
         }
         //faccio scomparire il bottone della fotocamera dopo aver preso l'immagine in input
         img_call_camera.setVisibility(View.GONE);
+        txt_titolo_foto.setText("Foto inserita!");
+
     }
 
 }
