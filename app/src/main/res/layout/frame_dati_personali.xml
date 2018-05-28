@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/imgfotoutente"
+            android:layout_width="@dimen/img_pill_info"
+            android:layout_height="@dimen/img_pill_info"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/profile" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/nome_utente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Nome farmaco"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <RelativeLayout
+        android:id="@+id/myview1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_eta_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="Pippo XYZ"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="NOME"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview2"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_genere_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="40 anni"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="ETA'"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview3"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_datanascita_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="10-10-1970"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="DATA DI NASCITA"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview4"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_CF_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="HJHJ67HJHD74HJHDJ643"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="CODICE FISCALE"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview5"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_residenza_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="Trento"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="CITTA' DI RESIDENZA"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview6"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_nome_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="7384729472893"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="NUMERO DI TELEFONO"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview7"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottomInfoFarmaco"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="4dp">
+
+        <TextView
+            android:id="@+id/txt_nome_utente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textview2"
+            android:layout_marginBottom="12dp"
+            android:text="pippo@pippo.com"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:text="EMAIL"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_modifica_dati"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginLeft_view"
+        android:background="@drawable/drawable_btn_modifica_dati"
+        android:layout_gravity="center"
+        android:text="MODIFICA"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

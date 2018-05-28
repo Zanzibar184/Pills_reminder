@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.settings.FragmentDatiPersonali;
 import com.example.zanzibar.myapplication.settings.FragmentNotifiche;
 
 import java.io.ByteArrayOutputStream;
@@ -86,6 +87,15 @@ public class Impostazioni extends Fragment {
             }
         });
 
+        dati_personali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentDatiPersonali datiPersonali = new FragmentDatiPersonali();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, datiPersonali).addToBackStack(null).commit();
+            }
+        });
+
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,36 +103,6 @@ public class Impostazioni extends Fragment {
             }
         });
 
-
-        /*
-        img_profile = (ImageView) view.findViewById(R.id.img_user_profile);
-
-        img_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(getContext(), img_profile);
-                popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals(choose_from_camera)) {
-                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePicture,
-                                    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                        } else if(item.getTitle().equals(choose_from_gallery)) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(pickPhoto,
-                                    CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE);
-                        }
-                        return true;
-                    }
-                });
-
-                popup.show();
-            }
-        });
-        */
     }
 
     @Override
