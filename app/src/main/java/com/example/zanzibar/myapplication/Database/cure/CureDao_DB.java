@@ -124,7 +124,7 @@ public class CureDao_DB implements CureDAO {
     @Override
     public List<Cura> getAllCure() {
 
-        List<Cura> people = new ArrayList<Cura>();
+        List<Cura> cure = new ArrayList<Cura>();
         Cursor cursor = database.query(
                 query.TABLE_CURE,
                 allColumns,
@@ -138,13 +138,13 @@ public class CureDao_DB implements CureDAO {
 
         while(!cursor.isAfterLast()){
             Cura person = cursorToCura(cursor);
-            people.add(person);
+            cure.add(person);
             cursor.moveToNext();
         }
 
         cursor.close();
 
-        return people;
+        return cure;
 
     }
 

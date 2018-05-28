@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
-import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
