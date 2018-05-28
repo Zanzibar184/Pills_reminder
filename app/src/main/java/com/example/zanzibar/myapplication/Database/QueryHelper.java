@@ -27,12 +27,21 @@ public class QueryHelper extends SQLiteOpenHelper {
 
     //-----CONTATTI
     public static final String TABLE_CONTATTI = "contatti";
-    public static final String COLUMN_NOME_CONTATTI = "nome";
-    public static final String COLUMN_RUOLO = "ruolo";
-    public static final String COLUMN_NUMERO = "numero";
+    public static final String COLUMN_NOME_CONTATTI = "NOME";
+    public static final String COLUMN_RUOLO = "RUOLO";
+    public static final String COLUMN_NUMERO = "NUMERO";
+
+    //-----NOTE
+    public static final String TABLE_NOTE = "note";
+    public static final String COLUMN_TITOLO = "TITOLO";
+    public static final String COLUMN_TESTO = "TESTO";
+    public static final String COLUMN_DATA_NOTA = "DATA";
+    public static final String COLUMN_ORA_NOTA = "ORA";
+    public static final String COLUMN_TIPO_MEMO = "TIPO_MEMO";
+    public static final String COLUMN_ID_MEMO = "ID_MEMO";
 
     public static final String DATABASE_NAME = "pills_reminder.db";
-    public static int DATABASE_VERSION = 1;
+    public static int DATABASE_VERSION = 2;
 
 
     private static final String DATABASE_CREATE_CONTATTI = "create table "
@@ -40,6 +49,15 @@ public class QueryHelper extends SQLiteOpenHelper {
             + COLUMN_NOME_CONTATTI + " text not null, "
             + COLUMN_RUOLO + " text not null,"
             + COLUMN_NUMERO + " text primary key);" ;
+
+    private static final String DATABASE_CREATE_NOTE = "create table "
+            + TABLE_NOTE + "( "
+            + COLUMN_TITOLO + " text, "
+            + COLUMN_TESTO + " text not null,"
+            + COLUMN_DATA_NOTA + " text,"
+            + COLUMN_ORA_NOTA + " text,"
+            + COLUMN_TIPO_MEMO + " integer not null,"
+            + COLUMN_ID_MEMO + " integer primary key autoincrement);" ;
 
 
     private static final String DATABASE_CREATE_CURE = "create table "
@@ -64,12 +82,14 @@ public class QueryHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database){
         database.execSQL(DATABASE_CREATE_CONTATTI);
         database.execSQL(DATABASE_CREATE_CURE);
+        database.execSQL(DATABASE_CREATE_NOTE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CURE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTATTI);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
         onCreate(db);
     }
 }

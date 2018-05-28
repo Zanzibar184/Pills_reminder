@@ -56,9 +56,7 @@ public class Note extends Fragment {
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
 
-        for(int i = 0; i < 5; i++) {
-            addLayoutNote();
-        }
+
 
     }
 
@@ -72,11 +70,13 @@ public class Note extends Fragment {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
 
         //TODO: dichiarare le textview qui
-        TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
-        TextView contenuto = (TextView) frame.findViewById(R.id.txt_contenuto);
+        TextView titolo = (TextView) frame.findViewById(R.id.txt_note_title);
+        TextView testo = (TextView) frame.findViewById(R.id.txt_contenuto);
         TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
         TextView ora = (TextView) frame.findViewById(R.id.ora);
         TextView categoria = (TextView) frame.findViewById(R.id.categoria_nota);
+        int tipo_nota=1;
+
 
         linearLayout.addView(frame);
     }

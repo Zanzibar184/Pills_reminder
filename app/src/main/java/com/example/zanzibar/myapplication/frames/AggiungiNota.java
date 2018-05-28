@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,12 +20,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.zanzibar.myapplication.Database.Note.Nota;
+import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
+import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -32,6 +38,9 @@ import java.util.Locale;
  */
 
 public class AggiungiNota extends Fragment {
+
+    NoteDao dao;
+    List<Nota> list_note;
 
     private LinearLayout linearLayout = null;
 
@@ -46,6 +55,7 @@ public class AggiungiNota extends Fragment {
     private EditText text_time = null;
     private EditText text_titolo_nota = null;
     private EditText text_contenuto_nota = null;
+    private Button conferma = null;
     private Calendar myCalendardate = null;
     private DatePickerDialog.OnDateSetListener datenote = null;
 
@@ -69,6 +79,7 @@ public class AggiungiNota extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new NoteDAO_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiunginota, container, false);
     }
@@ -87,6 +98,7 @@ public class AggiungiNota extends Fragment {
         ImageView img_time = (ImageView) view.findViewById(R.id.imageviewtime);
         text_date = (EditText) view.findViewById(R.id.textdate);
         text_time = (EditText) view.findViewById(R.id.textora);
+        conferma = (Button) view.findViewById(R.id.btn_conferma_inserimento_nota);
         text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
         text_titolo_nota = (EditText) view.findViewById(R.id.title_nota);
 
@@ -149,6 +161,18 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onClick(View v) {
                 setTimePickerNota();
+            }
+        });
+
+        conferma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dao.open();
+                int tipo_memo = 1; //TODO: renderre tipo_memo dinamico
+                String data = "data";
+                String ora = "ora";
+                dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),data,ora,tipo_memo));
+                dao.close();
             }
         });
 
@@ -220,4 +244,5 @@ public class AggiungiNota extends Fragment {
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
     }
+
 }
