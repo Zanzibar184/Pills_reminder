@@ -15,14 +15,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.Note.Nota;
+import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
+import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Note extends Fragment {
+
+    NoteDao dao;
+    List<Nota> list_note;
 
     private LinearLayout linearLayout = null;
 
@@ -39,6 +43,7 @@ public class Note extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new NoteDAO_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_note, container, false);
     }
@@ -56,6 +61,7 @@ public class Note extends Fragment {
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
 
+        showNote();
 
 
     }
@@ -66,16 +72,28 @@ public class Note extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Note");
     }
 
-    public void addLayoutNote() {
+    private void showNote(){
+        dao.open();
+
+        list_note = dao.getAllNote();
+
+        for(int i=0; i<list_note.size();i++){
+            Nota tmp = list_note.get(i);
+            addLayoutNote(tmp.getTitolo(),tmp.getTesto(),tmp.getData(),tmp.getOra(),tmp.getTipo_memo());
+        }
+
+        dao.close();
+
+    }
+
+    private void addLayoutNote(String titolo, String testo, String data, String ora, int tipo_memo) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
 
-        //TODO: dichiarare le textview qui
-        TextView titolo = (TextView) frame.findViewById(R.id.txt_note_title);
-        TextView testo = (TextView) frame.findViewById(R.id.txt_contenuto);
-        TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
-        TextView ora = (TextView) frame.findViewById(R.id.ora);
+        ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
+        ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
+        ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
+        ((TextView) frame.findViewById(R.id.ora)).setText(ora);
         TextView categoria = (TextView) frame.findViewById(R.id.categoria_nota);
-        int tipo_nota=1;
 
 
         linearLayout.addView(frame);
