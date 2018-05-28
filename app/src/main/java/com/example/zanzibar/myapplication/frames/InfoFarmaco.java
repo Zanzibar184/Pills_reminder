@@ -63,18 +63,20 @@ public class InfoFarmaco extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + cura.getFine_cura());
 
         //TODO: non far crashare nel caso non ci sia la foto nella cura
+        if(cura.getFoto() != null){
+            File imgFile = new  File(cura.getFoto());
 
-        File imgFile = new  File(cura.getFoto());
+            if(imgFile.exists()){
 
-        if(imgFile.exists()){
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView myImage = (ImageView) frame.findViewById(R.id.imgpillchosen);
 
-            ImageView myImage = (ImageView) frame.findViewById(R.id.imgpillchosen);
+                myImage.setImageBitmap(myBitmap);
 
-            myImage.setImageBitmap(myBitmap);
-
+            }
         }
+
 
         linearLayout.addView(frame);
     }
