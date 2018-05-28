@@ -169,9 +169,7 @@ public class AggiungiNota extends Fragment {
             public void onClick(View v) {
                 dao.open();
                 int tipo_memo = 1; //TODO: renderre tipo_memo dinamico
-                String data = "data";
-                String ora = "ora";
-                dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),data,ora,tipo_memo));
+                dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),text_date.getText().toString(),text_time.getText().toString(),tipo_memo));
                 dao.close();
             }
         });
