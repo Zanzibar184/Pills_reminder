@@ -94,6 +94,12 @@
         <item>1 ora</item>
     </string-array>
 
+    <string-array name="generi">
+        <item>Maschio</item>
+        <item>Femmina</item>
+        <item>Altro</item>
+    </string-array>
+
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>

@@ -17,6 +17,8 @@ public class FragmentDatiPersonali extends Fragment {
 
     private LinearLayout linearLayout = null;
 
+    Button btn_modifica_dati = null;
+
     public FragmentDatiPersonali() {
         // Required empty public constructor
     }
@@ -35,7 +37,7 @@ public class FragmentDatiPersonali extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutdatipersonali);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_dati_personali, linearLayout, false);
 
-        Button btn_modifica_dati = (Button) view.findViewById(R.id.btn_modifica_dati);
+        btn_modifica_dati = (Button) frame.findViewById(R.id.btn_modifica_dati);
         btn_modifica_dati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

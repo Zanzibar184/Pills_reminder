@@ -1,31 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/img_utente"
+            android:layout_width="@dimen/img_pill_addfarmaco"
+            android:layout_height="@dimen/img_pill_addfarmaco"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/marginTop_image"
+            android:src="@drawable/profile" />
+
+        <ImageView
+            android:id="@+id/img_add_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_utente"
+            android:layout_toEndOf="@+id/img_utente"
+            android:elevation="8dp"
+            app:srcCompat="@drawable/ic_camera" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/myview1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
+        android:layout_height="@dimen/height_inserimento_view"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
         android:layout_marginLeft="@dimen/marginLeft_view"
         android:layout_marginRight="@dimen/marginRight_view"
-        android:layout_marginTop="@dimen/marginTop_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
         android:background="@drawable/rounded_shape"
-        android:elevation="12dp">
+        android:elevation="@dimen/shadow_view">
+
 
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/text_title1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:text="Nome"
+            android:textStyle="bold" />
 
         <View
+            android:id="@+id/line1"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
@@ -34,6 +61,372 @@
             android:layout_marginTop="@dimen/line_title_space"
             android:background="@color/colorPrimaryDark" />
 
+        <EditText
+            android:id="@+id/nome_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Nome..."
+            android:inputType="textPersonName" />
+
     </RelativeLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/myview2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Cognome"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/cognome_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Cognome..."
+            android:inputType="textPersonName" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/myview3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Età"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/eta_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Età..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Genere"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <Spinner
+            android:id="@+id/spinner_genere"
+            android:layout_width="196dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
+            android:entries="@array/generi" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+        <TextView
+            android:id="@+id/text_title4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Data di nascita"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/data_nascita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_title4"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="date" />
+
+        <ImageView
+            android:id="@+id/imgdatanascita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/data_nascita"
+            app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Codice fiscale"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/cf_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Codice Fiscale..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview7"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Città di residenza"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/citta_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Città..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Numero di telegono"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/numerotel_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Numero..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview9"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_inserimento_view"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view">
+
+
+        <TextView
+            android:id="@+id/text_title1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Email"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/email_utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Email..."
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_modifica_dati"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginLeft_view"
+        android:background="@color/colorPrimary"
+        android:text="Conferma"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+</LinearLayout>
