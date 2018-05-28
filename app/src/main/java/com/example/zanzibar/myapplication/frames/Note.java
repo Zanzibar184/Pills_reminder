@@ -76,6 +76,7 @@ public class Note extends Fragment {
         TextView contenuto = (TextView) frame.findViewById(R.id.txt_contenuto);
         TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
         TextView ora = (TextView) frame.findViewById(R.id.ora);
+        TextView categoria = (TextView) frame.findViewById(R.id.categoria_nota);
 
         linearLayout.addView(frame);
     }

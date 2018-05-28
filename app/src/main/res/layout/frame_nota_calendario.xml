@@ -33,12 +33,22 @@
         android:id="@+id/view7" />
 
     <TextView
+        android:id="@+id/categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="APPUNTAMENTO"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/txt_contenuto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/view7"
+        android:layout_below="@+id/categoria"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
         android:text="Testo" />

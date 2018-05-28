@@ -15,6 +15,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
@@ -46,6 +48,8 @@ public class AggiungiNota extends Fragment {
     private EditText text_contenuto_nota = null;
     private Calendar myCalendardate = null;
     private DatePickerDialog.OnDateSetListener datenote = null;
+
+    private String categoria_nota = null;
 
     FloatingActionButton fab_nota = null;
 
@@ -86,6 +90,26 @@ public class AggiungiNota extends Fragment {
         text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
         text_titolo_nota = (EditText) view.findViewById(R.id.title_nota);
 
+        final RadioButton cat_generale = view.findViewById(R.id.rbtn_generale);
+        final RadioButton cat_appuntamento = view.findViewById(R.id.rbtn_appuntamento);
+        final RadioButton cat_promemoria = view.findViewById(R.id.rbtn_promemoria);
+        final RadioButton cat_sintomi = view.findViewById(R.id.rbtn_sintomi);
+
+        RadioGroup rgroup = view.findViewById(R.id.radioGroup_cat);
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked)
+                {
+                    String s = checkedRadioButton.getText().toString();
+                    categoria_nota = s;
+                    Log.i("Checked:", categoria_nota);
+                }
+            }
+        });
+
         c = (CheckBox) view.findViewById(R.id.checkBox);
 
         if(dateSelected!=null) {
@@ -93,13 +117,6 @@ public class AggiungiNota extends Fragment {
             setDateAndTimeVisibility();
             text_date.setText(dateSelected);
         }
-
-        c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setDateAndTimeVisibility();
-            }
-        });
 
         text_date.setOnClickListener(new View.OnClickListener() {
             @Override
