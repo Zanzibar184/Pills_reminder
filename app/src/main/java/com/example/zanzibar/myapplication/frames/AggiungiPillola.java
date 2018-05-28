@@ -103,8 +103,6 @@ public class AggiungiPillola extends Fragment {
     private EditText text_dose2 = null;
     private EditText text_dose3 = null;
 
-    private TextView txt_titolo_foto = null;
-
     Spinner spin1 = null;
     Spinner spin2 = null;
     Spinner spin3 = null;
@@ -168,8 +166,6 @@ public class AggiungiPillola extends Fragment {
         spin1 = (Spinner) view.findViewById(R.id.spin1);
         spin2 = (Spinner) view.findViewById(R.id.spin2);
         spin3 = (Spinner) view.findViewById(R.id.spin3);
-
-        txt_titolo_foto = (TextView) view.findViewById(R.id.txt_spiegazione_fotocamera);
 
 
         nome_cura = view.findViewById(R.id.nome_farmaco);
@@ -524,9 +520,6 @@ public class AggiungiPillola extends Fragment {
             Uri pickedImage = data.getData();
             setPillImageCapturedFromGallery(pickedImage);
         }
-        //faccio scomparire il bottone della fotocamera dopo aver preso l'immagine in input
-        img_call_camera.setVisibility(View.GONE);
-        txt_titolo_foto.setText("Foto inserita!");
 
     }
 
