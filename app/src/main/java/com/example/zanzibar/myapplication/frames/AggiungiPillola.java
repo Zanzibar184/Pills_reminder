@@ -307,21 +307,21 @@ public class AggiungiPillola extends Fragment {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
                     qta_ass = Integer.parseInt(text_dose1.getText().toString());
                     unita_misura_dose = spin1.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
                 }
                 if(nClicks >= 2)
                 {
                     orario_assunzione = orario_di_assunzione2.getText().toString();
                     qta_ass = Integer.parseInt(text_dose2.getText().toString());
                     unita_misura_dose = spin2.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
                 }
                 if(nClicks >= 3)
                 {
                     orario_assunzione = orario_di_assunzione3.getText().toString();
                     qta_ass = Integer.parseInt(text_dose3.getText().toString());
                     unita_misura_dose = spin3.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
+                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
                 }
 
                 dao.close();

@@ -21,6 +21,8 @@ public class QueryCure extends SQLiteOpenHelper {
     public static final String COLUMN_ORARIO_ASSUNZIONE = "ORARIO_ASSUNZIONE";
     public static final String COLUMN_STATO_CURA = "STATO_CURA";
     public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_FOTO = "FOTO";
+    public static final String COLUMN_UDM = "UNITA_MISURA";
     public static final String DATABASE_NAME = "pills_reminder.db";
 
     public static final int DATABASE_VERSION = 1;
@@ -36,7 +38,9 @@ public class QueryCure extends SQLiteOpenHelper {
             + COLUMN_ORARIO_ASSUNZIONE + " text not null,"
             + COLUMN_TIPO_CURA + " integer not null,"
             + COLUMN_STATO_CURA + " text not null,"
-            + COLUMN_ID + " integer primary key autoincrement);" ;
+            + COLUMN_ID + " integer primary key autoincrement,"
+            + COLUMN_UDM + " text,"
+            + COLUMN_FOTO + " text);" ;
     public QueryCure(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }

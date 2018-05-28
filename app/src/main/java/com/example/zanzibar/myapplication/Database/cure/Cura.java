@@ -12,12 +12,18 @@ public class Cura {
     private String orario_assunzione;
     private String stato_cura; //da_assumere - assunta - non_assunta
     private int id;
+    private String foto;
+    private String unità_misura;
+
+
+
+
     public static final String ASSUNTA = "assunta";
     public static final String NON_ASSUNTA = "non_assunta";
     public static final String DA_ASSUMERE = "da_assumere";
 
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, String foto,String unità_misura){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -28,9 +34,11 @@ public class Cura {
         this.orario_assunzione = orario_assunzione;
         this.stato_cura = stato_cura;
         this.id = -1;
+        this.foto = foto;
+        this.unità_misura = unità_misura;
     }
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, int id){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, int id, String foto, String unità_misura){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -41,11 +49,13 @@ public class Cura {
         this.orario_assunzione = orario_assunzione;
         this.stato_cura = stato_cura;
         this.id = id;
+        this.foto = foto;
+        this.unità_misura = unità_misura;
     }
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura + " " + foto + " " + unità_misura;
     }
 
 
@@ -127,5 +137,21 @@ public class Cura {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getUnità_misura() {
+        return unità_misura;
+    }
+
+    public void setUnità_misura(String unità_misura) {
+        this.unità_misura = unità_misura;
     }
 }

@@ -239,8 +239,9 @@ public class Cure extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
                 } else if(item.getTitle().equals(foto_farmaco)) {
-                    //TODO: passare alla funzione sottostante la stringa che rappresenta l'url dell'immagine come parametro
-                    showFotoFarmaco(AggiungiPillola.pictureFilePath);
+
+
+                    showFotoFarmaco(updated_cura.getFoto());
                 }
 
                 dao.close();
