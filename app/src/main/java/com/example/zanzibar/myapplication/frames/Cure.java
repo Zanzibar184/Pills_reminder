@@ -1,8 +1,10 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,12 +23,14 @@ import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,10 +53,15 @@ public class Cure extends Fragment {
     String non_conferma_farmaco = "Farmaco non assunto";
     String ripristina_stato_farmaco = "Annulla";
     String informazioni_farmaco = "Info farmaco";
+    String foto_farmaco = "Foto farmaco";
 
     FloatingActionButton fab_cure = null;
     private CureDAO dao;
     private List<Cura> list_cure;
+
+    //Dati nuovi
+    ImageView ivPreview;
+    //---
 
     ScrollView v;
 
@@ -228,6 +238,9 @@ public class Cure extends Fragment {
                     MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_cure);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
+                } else if(item.getTitle().equals(foto_farmaco)) {
+                    //TODO: passare alla funzione sottostante la stringa che rappresenta l'url dell'immagine come parametro
+                    showFotoFarmaco(AggiungiPillola.pictureFilePath);
                 }
 
                 dao.close();
@@ -270,6 +283,28 @@ public class Cure extends Fragment {
         }
         Cura cura = null;
         return cura;
+    }
+
+    private void showFotoFarmaco(String file) {
+        final Dialog nagDialog = new Dialog(getContext(),android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        nagDialog.setCancelable(false);
+        nagDialog.setContentView(R.layout.preview_image);
+        Button btnClose = (Button)nagDialog.findViewById(R.id.btnIvClose);
+        ivPreview = (ImageView)nagDialog.findViewById(R.id.iv_preview_image);
+        File f = new File(file);
+        ivPreview.setImageURI(Uri.fromFile(f));
+        ivPreview.setOnTouchListener(new ImageMatrixTouchHandler(getContext()));
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                nagDialog.dismiss();
+            }
+        });
+
+        nagDialog.show();
     }
 }
 

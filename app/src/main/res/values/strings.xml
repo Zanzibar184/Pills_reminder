@@ -18,12 +18,14 @@
     <string name="nav_title_notes">Note</string>
     <string name="nav_title_settings">Impostazioni</string>
 
+    <string name="foto_pillola">Foto del farmaco</string>
     <string name="nome_cura">Nome del farmaco</string>
     <string name="scorte_farmaco">Scorte</string>
     <string name="dosi_farmaco">Dosi e Orari</string>
     <string name="periodo_assunzione">Periodo di assunzione</string>
     <string name="importanza_farmaco">Importanza</string>
     <string name="dosiorario_txt">Qui puoi aggiungere le dosi e l\'orario del farmaco (max 3)</string>
+    <string name="pillola_foto_txt">Qui puoi inserire una foto per il tuo farmaco</string>
 
     <string name="scatta_fotocamera">Scatta foto</string>
     <string name="scatta_galleria">Scegli da galleria</string>
@@ -31,6 +33,7 @@
     <string name="nonconferma_farmaco">Farmaco non assunto</string>
     <string name="posticipa_farmaco">Annulla</string>
     <string name="info_farmaco">Info farmaco</string>
+    <string name="foto_farmaco">Foto farmaco</string>
 
     <string name="importa_contatto">Importa nome e telefono da contatto</string>
     <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
@@ -38,9 +41,58 @@
     <string name="modifica_cura">Modifica informazioni</string>
     <string name="elimina_cura">Elimina</string>
 
+    <string-array name="pill_units">
+        <item>mg</item>
+        <item>gr</item>
+        <item>cc</item>
+        <item>ml</item>
+        <item>gocce</item>
+        <item>cucchiai</item>
+        <item>unità</item>
+    </string-array>
 
-    <!--jkdhsdhjkdhdkjhdjkahdajksdhaksjdhkjdhjkdahs (fantastico)-->
+    <string-array name="pillole_per_scorta">
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+    </string-array>
 
+    <string-array name="minuti_per_smsavviso">
+        <item>5 minuti</item>
+        <item>10 minuti</item>
+        <item>20 minuti</item>
+        <item>30 minuti</item>
+        <item>1 ora</item>
+        <item>2 ore</item>
+    </string-array>
+
+    <string-array name="tempo_per_scorta">
+        <item>5 ore</item>
+        <item>10 ore</item>
+        <item>1 giorno</item>
+        <item>2 giorni</item>
+    </string-array>
+
+    <string-array name="numero_promemoria_farmaci">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="tempo_ripetizione_promemoria_farmaco">
+        <item>1 minuto</item>
+        <item>2 minuti</item>
+        <item>5 minuti</item>
+        <item>10 minuti</item>
+        <item>20 minuti</item>
+        <item>30 minuti</item>
+        <item>1 ora</item>
+    </string-array>
 
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>

@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +21,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.settings.FragmentNotifiche;
 
 import java.io.ByteArrayOutputStream;
 
@@ -38,6 +43,12 @@ public class Impostazioni extends Fragment {
     private String choose_from_gallery = "Scegli da galleria";
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
     private static final int CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE = 2888;
+
+    RelativeLayout notifiche = null;
+    RelativeLayout dati_personali = null;
+    RelativeLayout infoapp = null;
+    RelativeLayout feedback = null;
+    RelativeLayout sincronizzazione = null;
 
     public Impostazioni() {
         // Required empty public constructor
@@ -58,6 +69,32 @@ public class Impostazioni extends Fragment {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_impostazioni, linearLayout, false);
         linearLayout.addView(frame);
 
+        notifiche = (RelativeLayout) view.findViewById(R.id.myview1);
+        dati_personali = (RelativeLayout) view.findViewById(R.id.myview2);
+        infoapp = (RelativeLayout) view.findViewById(R.id.myview3);
+        feedback = (RelativeLayout) view.findViewById(R.id.myview4);
+        sincronizzazione = (RelativeLayout) view.findViewById(R.id.myview5);
+
+        notifiche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentNotifiche fragmentNotifiche = new FragmentNotifiche();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentmanager, fragmentNotifiche);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendFeedbackMail();
+            }
+        });
+
+
+        /*
         img_profile = (ImageView) view.findViewById(R.id.img_user_profile);
 
         img_profile.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +122,7 @@ public class Impostazioni extends Fragment {
                 popup.show();
             }
         });
+        */
     }
 
     @Override
@@ -108,7 +146,7 @@ public class Impostazioni extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Impostazioni");
     }
 
-    public void setProfileImageCapturedFromCamera(Bitmap bmp) {
+    private void setProfileImageCapturedFromCamera(Bitmap bmp) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -122,7 +160,7 @@ public class Impostazioni extends Fragment {
         img_profile.setImageBitmap(bitmap);
     }
 
-    public void setProfileImageCapturedFromGallery(Uri pickedImage) {
+    private void setProfileImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
         cursor.moveToFirst();
@@ -135,6 +173,14 @@ public class Impostazioni extends Fragment {
         img_profile.setImageBitmap(bitmap);
 
         cursor.close();
+    }
+
+    private void sendFeedbackMail() {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("application/octet-stream");
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"pillsreminderapp@app.com"});
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback Pills Reminder");
+        startActivity(Intent.createChooser(sendIntent, "Lascia un feedback"));
     }
 
 }

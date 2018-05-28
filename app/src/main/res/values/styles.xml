@@ -22,7 +22,10 @@
     </style>
 
     <style name="Personal2" parent="AppTheme.NoActionBar" >
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="colorAccent">@color/colorSecondary</item>
     </style>
+
+
 
 </resources>

@@ -10,11 +10,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,7 +29,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
@@ -36,8 +41,11 @@ import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -47,6 +55,16 @@ import java.util.Locale;
     //TODO: aggiungere la scelta del tipo di qta: pillole/ml/numero generico/cucchiai ecc..
 public class AggiungiPillola extends Fragment {
     private CureDAO dao;
+
+    static final int REQUEST_PICTURE_CAPTURE = 1;
+    static final int REQUEST_PICTURE_GALLERY = 2;
+
+    //Stringa che ci da il percorso della foto scattata
+    protected static String pictureFilePath;
+    //Stringa che ci da il percorso della foto presa da galleria
+    protected static String pictureGalleryFilePath;
+    //intero che ci dice se la foto è presa da fotocamera o da galleria
+    int id_tipo_foto = 0;
 
     private LinearLayout linearLayout = null;
 
@@ -67,8 +85,6 @@ public class AggiungiPillola extends Fragment {
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
-    private static final int CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE = 2888;
 
     int nClicks = 0;
     RelativeLayout r1;
@@ -86,6 +102,12 @@ public class AggiungiPillola extends Fragment {
     private EditText text_dose1 = null;
     private EditText text_dose2 = null;
     private EditText text_dose3 = null;
+
+    private TextView txt_titolo_foto = null;
+
+    Spinner spin1 = null;
+    Spinner spin2 = null;
+    Spinner spin3 = null;
 
     Drawable draw;
 
@@ -130,7 +152,7 @@ public class AggiungiPillola extends Fragment {
         ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
         ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
 
-        img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
+        img_call_camera = (ImageView) view.findViewById(R.id.img_add_photo);
 
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
         text_date_end = (EditText) view.findViewById(R.id.dateend);
@@ -142,6 +164,12 @@ public class AggiungiPillola extends Fragment {
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
         text_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
+
+        spin1 = (Spinner) view.findViewById(R.id.spin1);
+        spin2 = (Spinner) view.findViewById(R.id.spin2);
+        spin3 = (Spinner) view.findViewById(R.id.spin3);
+
+        txt_titolo_foto = (TextView) view.findViewById(R.id.txt_spiegazione_fotocamera);
 
 
         nome_cura = view.findViewById(R.id.nome_farmaco);
@@ -199,57 +227,8 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
-        img_call_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(getContext(), img_call_camera);
-                popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals(choose_from_camera)) {
-                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePicture,
-                                    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                        } else if(item.getTitle().equals(choose_from_gallery)) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(pickPhoto,
-                                    CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE);
-                        }
-                        return true;
-                    }
-                });
-
-                popup.show();
-            }
-        });
-
-        imgpill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(getContext(), img_call_camera);
-                popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals(choose_from_camera)) {
-                            Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePicture,
-                                    CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-                        } else if(item.getTitle().equals(choose_from_gallery)) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(pickPhoto,
-                                    CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE);
-                        }
-                        return true;
-                    }
-                });
-
-                popup.show();
-            }
-        });
+        img_call_camera.setOnClickListener(popupPhotoListener);
+        imgpill.setOnClickListener(popupPhotoListener);
 
         img_time_dose_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,25 +291,36 @@ public class AggiungiPillola extends Fragment {
                 int tipo_cura = resourceId;
                 String orario_assunzione = null;
                 int qta_ass = 0;
-
+                //TODO:gestire qui l'inserimento della stringa che rappresenta l'immagine
+                String URI_foto_farmaco = null;
+                if(id_tipo_foto == 1) {
+                    URI_foto_farmaco = pictureFilePath;
+                } else if (id_tipo_foto == 2) {
+                    URI_foto_farmaco = pictureGalleryFilePath;
+                }
+                //fine
+                String unita_misura_dose = null;
 
 
                 if(nClicks >= 1)
                 {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
                     qta_ass = Integer.parseInt(text_dose1.getText().toString());
+                    unita_misura_dose = spin1.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 2)
                 {
                     orario_assunzione = orario_di_assunzione2.getText().toString();
                     qta_ass = Integer.parseInt(text_dose2.getText().toString());
+                    unita_misura_dose = spin2.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
                 if(nClicks >= 3)
                 {
                     orario_assunzione = orario_di_assunzione3.getText().toString();
                     qta_ass = Integer.parseInt(text_dose3.getText().toString());
+                    unita_misura_dose = spin3.getSelectedItem().toString();
                     Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE));
                 }
 
@@ -349,21 +339,6 @@ public class AggiungiPillola extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi farmaco");
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                Bitmap bmp = (Bitmap) data.getExtras().get("data");
-                setPillImageCapturedFromCamera(bmp);
-            }
-        } else if (requestCode == CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE) {
-            if(resultCode == Activity.RESULT_OK) {
-                Uri pickedImage = data.getData();
-                setPillImageCapturedFromGallery(pickedImage);
-            }
-        }
     }
 
     private void setDateInit() {
@@ -410,31 +385,20 @@ public class AggiungiPillola extends Fragment {
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private void setPillImageCapturedFromCamera(Bitmap bmp) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        // convert byte array to Bitmap
-
-        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
-                byteArray.length);
-
-        imgpill.setImageBitmap(bitmap);
-    }
-
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
         cursor.moveToFirst();
         String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
+        pictureGalleryFilePath = imagePath;
+        id_tipo_foto = 2;
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 
-        imgpill.setImageBitmap(bitmap);
+        //imgpill.setImageBitmap(bitmap);
 
         cursor.close();
     }
@@ -482,6 +446,88 @@ public class AggiungiPillola extends Fragment {
         }, hour, minute, true);//Yes 24 hour time
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+    }
+
+    private View.OnClickListener popupPhotoListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            PopupMenu popup = new PopupMenu(getContext(), img_call_camera);
+            popup.getMenuInflater().inflate(R.menu.menu_choose_photo, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    if(item.getTitle().equals(choose_from_camera)) {
+                        sendTakePictureIntent();
+                    } else if(item.getTitle().equals(choose_from_gallery)) {
+                        sendTakeGalleryIntent();
+                    }
+                    return true;
+                }
+            });
+
+            popup.show();
+        }
+    };
+
+    private void sendTakePictureIntent() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra( MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
+        if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            //startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
+
+            File pictureFile = null;
+            try {
+                pictureFile = getPictureFile();
+            } catch (IOException ex) {
+                Toast.makeText(getContext(),
+                        "Photo file can't be created, please try again",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (pictureFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getContext(),
+                        "com.example.zanzibar.myapplication.fileprovider",
+                        pictureFile);
+                id_tipo_foto = 1;
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
+            }
+        }
+    }
+
+    private void sendTakeGalleryIntent() {
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickPhoto, REQUEST_PICTURE_GALLERY);
+    }
+
+    private File getPictureFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String pictureFile = "PILL_" + timeStamp;
+        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
+        pictureFilePath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_PICTURE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            File imgFile = new  File(pictureFilePath);
+            if(imgFile.exists()){
+                //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
+                //imgpill.setImageURI(Uri.fromFile(imgFile));
+                Log.i("picturefilepath", pictureFilePath+"");
+            }
+        } else if (requestCode == REQUEST_PICTURE_GALLERY && resultCode == Activity.RESULT_OK) {
+            //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
+            Uri pickedImage = data.getData();
+            setPillImageCapturedFromGallery(pickedImage);
+        }
+        //faccio scomparire il bottone della fotocamera dopo aver preso l'immagine in input
+        img_call_camera.setVisibility(View.GONE);
+        txt_titolo_foto.setText("Foto inserita!");
+
     }
 
 }

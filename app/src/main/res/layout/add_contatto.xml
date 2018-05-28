@@ -67,7 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Nome del contatto"/>
+            android:text="Nome del contatto"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
@@ -107,7 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Relazione (ad esempio medico, figlia, ecc...)"/>
+            android:text="Relazione (ad esempio medico, figlia, ecc...)"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
@@ -147,7 +149,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Numero di telefono"/>
+            android:text="Numero di telefono"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
