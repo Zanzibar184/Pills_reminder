@@ -14,10 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zanzibar.myapplication.Database.cure.Cura;
+import com.example.zanzibar.myapplication.Database.cure.CureDAO;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.stacktips.view.CalendarListener;
@@ -26,6 +30,7 @@ import com.stacktips.view.CustomCalendarView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -46,6 +51,9 @@ public class Calendario extends Fragment {
     private int statusbarHeight = 0;
     private int height_layout1 = 0;
 
+    private CureDAO dao;
+    private List<Cura> list_cure;
+
     public Calendario() {
         // Required empty public constructor
     }
@@ -57,6 +65,7 @@ public class Calendario extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new CureDao_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_calendario, container, false);
     }
@@ -97,12 +106,13 @@ public class Calendario extends Fragment {
             public void onDateSelected(final Date date) {
                 final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 dateSelected = df.format(date);
+                refreshData(dateSelected);
             }
 
             @Override
             public void onMonthChanged(Date date) {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -117,12 +127,6 @@ public class Calendario extends Fragment {
                         (int)((height - actionBarHeight - statusbarHeight - height_layout1)));
                 layout2.setLayoutParams(lp);
 
-                for(int i =0; i < 10; i++) {
-                    if(i%2==0) {
-                        addLayoutFarmaciCalendario();
-                    } else
-                        addLayoutNoteCalendario();
-                }
             }
         });
 
@@ -134,8 +138,20 @@ public class Calendario extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Calendario");
     }
 
+    private void refreshData(String date){
+        layout3.removeAllViews();
+        dao.open();
+        list_cure = dao.getCureByDate(date);
+        for(int i=0; i<list_cure.size();i++){
+            Cura tmp = list_cure.get(i);
+            addLayoutFarmaciCalendario(tmp.getNome(),tmp.getOrario_assunzione(),tmp.getQuantità_assunzione(),tmp.getUnità_misura(), tmp.getTipo_cura());
+        }
 
-    public void addLayoutNoteCalendario() {
+        dao.close();
+    }
+
+
+    private void addLayoutNoteCalendario() {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
 
         TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
@@ -143,13 +159,17 @@ public class Calendario extends Fragment {
         TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
         TextView ora = (TextView) frame.findViewById(R.id.ora);
 
+
         layout3.addView(frame);
     }
 
-    private void addLayoutFarmaciCalendario() {
+    private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
 
-        TextView txt = (TextView) frame.findViewById(R.id.txt_titolo_farmaco);
+        ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
+        ((TextView) frame.findViewById(R.id.txt_dose)).setText("Assumere "+qta_ass+" "+udm);
+        ((TextView) frame.findViewById(R.id.txt_ora_dose)).setText(orario);
+        setImage(tipo_cura, ((ImageView) frame.findViewById(R.id.img_pillola_nota)));
 
         layout3.addView(frame);
     }
@@ -174,6 +194,29 @@ public class Calendario extends Fragment {
         statusbarHeight = resources.getIdentifier("status_bar_height", "dimen", "android");
         if(statusbarHeight>0) {
             statusbarHeight = resources.getDimensionPixelSize(statusbarHeight);
+        }
+    }
+
+    private void setImage(int tipo_cura, ImageView imgCura){
+
+        if(tipo_cura ==2) {
+            imgCura.setImageResource(R.drawable.syringe);
+
+        } else if(tipo_cura ==3) {
+            imgCura.setImageResource(R.drawable.sciroppo);
+
+        } else if(tipo_cura ==4) {
+            imgCura.setImageResource(R.drawable.gocce);
+
+        } else if(tipo_cura ==5) {
+            imgCura.setImageResource(R.drawable.pomata);
+
+        } else if(tipo_cura ==6) {
+            imgCura.setImageResource(R.drawable.spray);
+
+        } else if(tipo_cura ==1) {
+            imgCura.setImageResource(R.drawable.pill_colored);
+
         }
     }
 
