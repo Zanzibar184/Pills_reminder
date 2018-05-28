@@ -123,7 +123,6 @@
 
     </RelativeLayout>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,7 +135,7 @@
         android:elevation="@dimen/shadow_view">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -156,95 +155,95 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
         android:visibility="gone">
-    <TextView
-        android:id="@+id/text_title3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:text="Imposta data e orario"/>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/line_title_space"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/view3" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
         <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/text_title3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Imposta data e orario"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="45dp"
-            android:text="Giorno:" />
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/view3" />
 
-        <EditText
-            android:id="@+id/textdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView6"
-            android:layout_alignBottom="@+id/textView6"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
-            android:layout_toEndOf="@+id/textView6"
-            android:layout_toRightOf="@+id/textView6"
-            android:ems="10"
-            android:focusable="false"
-            android:inputType="numberDecimal" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/ora_dose_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textora"
-            android:layout_alignBottom="@+id/textora"
-            android:layout_alignLeft="@+id/textView6"
-            android:layout_alignStart="@+id/textView6"
-            android:text="Ora:" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="45dp"
+                android:text="Giorno:" />
 
-        <ImageView
-            android:id="@+id/imageviewtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ora_dose_1"
-            android:layout_marginLeft="11dp"
-            android:layout_marginStart="11dp"
-            android:layout_toEndOf="@+id/textora"
-            android:layout_toRightOf="@+id/textora"
-            app:srcCompat="@drawable/ic_clock" />
+            <EditText
+                android:id="@+id/textdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView6"
+                android:layout_alignBottom="@+id/textView6"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:layout_toEndOf="@+id/textView6"
+                android:layout_toRightOf="@+id/textView6"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
 
-        <EditText
-            android:id="@+id/textora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textdate"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/textdate"
-            android:ems="10"
-            android:focusable="false"
-            android:inputType="numberDecimal" />
+            <TextView
+                android:id="@+id/ora_dose_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textora"
+                android:layout_alignBottom="@+id/textora"
+                android:layout_alignLeft="@+id/textView6"
+                android:layout_alignStart="@+id/textView6"
+                android:text="Ora:" />
 
-        <ImageView
-            android:id="@+id/imageviewdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageviewtime"
-            android:layout_alignStart="@+id/imageviewtime"
-            android:layout_alignTop="@+id/textView6"
-            app:srcCompat="@drawable/ic_date_range_black_24dp" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageviewtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ora_dose_1"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_toEndOf="@+id/textora"
+                android:layout_toRightOf="@+id/textora"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <EditText
+                android:id="@+id/textora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textdate"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/textdate"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
+            <ImageView
+                android:id="@+id/imageviewdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imageviewtime"
+                android:layout_alignStart="@+id/imageviewtime"
+                android:layout_alignTop="@+id/textView6"
+                app:srcCompat="@drawable/ic_date_range_black_24dp" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <Button

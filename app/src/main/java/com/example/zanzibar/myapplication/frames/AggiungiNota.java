@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,9 +48,10 @@ public class AggiungiNota extends Fragment {
     private RelativeLayout rdatetimeselect = null;
 
     CheckBox c;
-    private int nClicks = 1;
 
     String dateSelected = null;
+
+    Boolean date_time_visible = false;
 
     private EditText text_date = null;
     private EditText text_time = null;
@@ -122,10 +124,19 @@ public class AggiungiNota extends Fragment {
             }
         });
 
-        c = (CheckBox) view.findViewById(R.id.checkBox);
+        c = (CheckBox) view.findViewById(R.id.checkbox);
+        c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+             @Override
+             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                     setDateAndTimeVisibility();
+
+             }
+         }
+        );
 
         if(dateSelected!=null) {
             c.setChecked(true);
+            date_time_visible = false;
             setDateAndTimeVisibility();
             text_date.setText(dateSelected);
         }
@@ -204,12 +215,12 @@ public class AggiungiNota extends Fragment {
     }
 
     private void setDateAndTimeVisibility() {
-        if(nClicks==1) {
-            nClicks++;
-            rdatetimeselect.setVisibility(View.VISIBLE);
-        } else if (nClicks==2) {
-            nClicks--;
+        if(date_time_visible==true) {
             rdatetimeselect.setVisibility(View.GONE);
+            date_time_visible = false;
+        } else if (date_time_visible==false) {
+            rdatetimeselect.setVisibility(View.VISIBLE);
+            date_time_visible = true;
         }
     }
 
