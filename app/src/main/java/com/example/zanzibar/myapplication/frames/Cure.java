@@ -26,6 +26,8 @@ import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -66,7 +68,8 @@ public class Cure extends Fragment {
                              Bundle savedInstanceState) {
         dao = new CureDao_DB();
         dao.open();
-        list_cure = dao.getTodayCure();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        list_cure = dao.getCureByDate(formatter.format(new Date()));
         dao.close();
 
         v = container.findViewById(R.id.fragmentmanager);

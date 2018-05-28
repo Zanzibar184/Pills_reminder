@@ -11,5 +11,5 @@ public interface CureDAO {
     public void deleteCura(Cura cura);
     public void updateCura(Cura cura);
     public List<Cura> getAllCure();
-    public List<Cura> getTodayCure();
+    public List<Cura> getCureByDate(String date);
 }

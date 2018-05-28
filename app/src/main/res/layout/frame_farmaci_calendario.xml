@@ -45,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/imageView15"
+        android:layout_alignLeft="@+id/imageView15"
         android:layout_centerVertical="true"
         android:text="xdose" />
 
@@ -54,7 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/img_pillola_nota"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
         android:text="ore:00" />
 
     <ImageView
@@ -65,6 +68,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="81dp"
         app:srcCompat="@drawable/ic_clock" />
+
+
 
 </RelativeLayout>
 

@@ -7,14 +7,5 @@
     tools:context=".frames.AggiungiPillola"
     android:id="@+id/llayoutaddpill">
 
-    <!--Qui ho un linear layout per gestire meglio l'ordine dei vari contenuti, che appunto andranno inseriti qui-->
-
-    <!--
-    <Button
-        android:id="@+id/add_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ADD" />
-     -->
 
 </LinearLayout>

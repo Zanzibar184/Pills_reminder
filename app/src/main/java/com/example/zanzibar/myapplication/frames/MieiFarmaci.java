@@ -149,8 +149,15 @@ public class MieiFarmaci extends Fragment {
 
             if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
 
-                Toast.makeText(getContext(), "modifica" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
-                //TODO: implementare aggiornamento di un medicinale
+                int id = Integer.parseInt(((TextView) v.findViewById(R.id.txt_id_hidden)).getText().toString());
+                Cura modify = getCurabyId(id);
+                ImageView cura = v.findViewById(R.id.imgCura);
+
+                ModificaPillola modificaPillola = new ModificaPillola(fab_miei_farmaci,cura.getDrawable(),modify.getTipo_cura());
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modificaPillola).addToBackStack(null).commit();
+
+
 
             } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
 

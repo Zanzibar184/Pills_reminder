@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.zanzibar.myapplication.Database.Pills_reminder;
 
@@ -137,13 +138,15 @@ public class CureDao_DB implements CureDAO {
 
         return people;
 
-    }    public List<Cura> getTodayCure() {
+    }
+
+    public List<Cura> getCureByDate(String date) {
 
         List<Cura> people = new ArrayList<Cura>();
         Cursor cursor = database.query(
                 query.TABLE_CURE,
                 allColumns,
-                "date('now') between INIZIO_CURA and FINE_CURA",
+                "'"+date+ "'" + " between INIZIO_CURA and FINE_CURA",
                 null,
                 null,
                 null,
