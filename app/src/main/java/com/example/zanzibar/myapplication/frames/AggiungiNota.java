@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,6 +183,11 @@ public class AggiungiNota extends Fragment {
                 int tipo_memo = 1; //TODO: renderre tipo_memo dinamico
                 dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),text_date.getText().toString(),text_time.getText().toString(),tipo_memo));
                 dao.close();
+
+                Note nota = new Note(fab_nota);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+
             }
         });
 

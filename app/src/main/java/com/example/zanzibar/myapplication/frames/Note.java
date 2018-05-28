@@ -51,6 +51,9 @@ public class Note extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fab_note.show();
+
         fab_note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
