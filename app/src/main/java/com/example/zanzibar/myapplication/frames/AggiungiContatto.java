@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,6 +115,11 @@ public class AggiungiContatto extends Fragment {
 
                 Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero));
                 dao.close();
+
+                ContattiImportanti cure = new ContattiImportanti(fab_contatto);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+
             }
         });
 
@@ -189,6 +195,7 @@ public class AggiungiContatto extends Fragment {
                 });
 
                 popup.show();
+
             }
         });
 

@@ -10,6 +10,7 @@
     <dimen name="height_inserimento_view">100dp</dimen>
     <dimen name="img_pill_scrollview">80dp</dimen>
     <dimen name="img_pill_addfarmaco">150dp</dimen>
+    <dimen name="img_pill_info">200dp</dimen>
     <dimen name="img_contact_addphoto">150dp</dimen>
     <dimen name="img_contact">80dp</dimen>
     <dimen name="height_listpill_cure">200dp</dimen>
@@ -18,12 +19,14 @@
     <dimen name="marginRight_view">15dp</dimen>
     <dimen name="marginBottom_view">15dp</dimen>
     <dimen name="marginBottom_high">50dp</dimen>
+    <dimen name="marginBottomInfoFarmaco">10dp</dimen>
     <dimen name="marginTop_view">45dp</dimen>
     <dimen name="marginTop_image">20dp</dimen>
     <dimen name="marginTop_settings_view">10dp</dimen>
     <dimen name="marginTop_inserimento_view">20dp</dimen>
     <dimen name="margin_daily_pills_cure">10dp</dimen>
     <dimen name="shadow_view">12dp</dimen>
+    <dimen name="shadow_little">4dp</dimen>
     <dimen name="line_title_space">20dp</dimen>
 
 

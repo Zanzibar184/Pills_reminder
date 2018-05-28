@@ -56,6 +56,9 @@ public class ContattiImportanti extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fab_contatti.show();
+
         fab_contatti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

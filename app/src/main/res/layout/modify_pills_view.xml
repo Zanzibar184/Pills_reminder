@@ -253,7 +253,7 @@
                 android:inputType="numberDecimal" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/ora_dose_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/txt_orario_dose1"
@@ -268,7 +268,7 @@
                 android:id="@+id/img_time_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView7"
+                android:layout_alignBottom="@+id/ora_dose_1"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="9dp"

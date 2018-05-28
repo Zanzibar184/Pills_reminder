@@ -235,9 +235,15 @@ public class Cure extends Fragment {
                     updated_cura.setStato_cura(Cura.DA_ASSUMERE);
                     dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
+                    //TODO: aggiungere qui il fragment di riepilogo delle info farmaco
+                    InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
+                    /*
                     MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_cure);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
+                    */
                 } else if(item.getTitle().equals(foto_farmaco)) {
 
 

@@ -208,14 +208,14 @@
                 android:id="@+id/txt_orario_dose1"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBaseline="@+id/ora_dose_1"
                 android:layout_alignStart="@+id/txt_dose1"
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="numberDecimal" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/ora_dose_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -363,14 +363,14 @@
                 android:id="@+id/txt_orario_dose2"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBaseline="@+id/ora_dose_1"
                 android:layout_alignStart="@+id/txt_dose2"
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="numberDecimal" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/ora_dose_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -457,14 +457,14 @@
                 android:id="@+id/txt_orario_dose3"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBaseline="@+id/ora_dose_1"
                 android:layout_alignStart="@+id/txt_dose3"
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="numberDecimal" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/ora_dose_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
