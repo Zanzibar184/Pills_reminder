@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication.Database.cure;
+package com.example.zanzibar.myapplication.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,10 +8,11 @@ import android.util.Log;
 import java.net.IDN;
 
 
-public class QueryCure extends SQLiteOpenHelper {
+public class QueryHelper extends SQLiteOpenHelper {
 
+    //-----CURE
     public static final String TABLE_CURE = "cure";
-    public static final String COLUMN_NOME = "NOME";
+    public static final String COLUMN_NOME_CURE = "NOME";
     public static final String COLUMN_QTA_ASS = "QTA_ASS";
     public static final String COLUMN_SCORTA = "SCORTA";
     public static final String COLUMN_RIMANENZE = "RIMANENZE";
@@ -23,13 +24,27 @@ public class QueryCure extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_FOTO = "FOTO";
     public static final String COLUMN_UDM = "UNITA_MISURA";
+
+    //-----CONTATTI
+    public static final String TABLE_CONTATTI = "contatti";
+    public static final String COLUMN_NOME_CONTATTI = "nome";
+    public static final String COLUMN_RUOLO = "ruolo";
+    public static final String COLUMN_NUMERO = "numero";
+
     public static final String DATABASE_NAME = "pills_reminder.db";
+    public static int DATABASE_VERSION = 1;
 
-    public static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_CREATE = "create table "
+    private static final String DATABASE_CREATE_CONTATTI = "create table "
+            + TABLE_CONTATTI + "( "
+            + COLUMN_NOME_CONTATTI + " text not null, "
+            + COLUMN_RUOLO + " text not null,"
+            + COLUMN_NUMERO + " text primary key);" ;
+
+
+    private static final String DATABASE_CREATE_CURE = "create table "
             + TABLE_CURE + "( "
-            + COLUMN_NOME + " text not null, "
+            + COLUMN_NOME_CURE + " text not null, "
             + COLUMN_QTA_ASS + " integer not null, "
             + COLUMN_SCORTA + " integer not null, "
             + COLUMN_RIMANENZE + " integer not null,"
@@ -41,20 +56,20 @@ public class QueryCure extends SQLiteOpenHelper {
             + COLUMN_ID + " integer primary key autoincrement,"
             + COLUMN_UDM + " text,"
             + COLUMN_FOTO + " text);" ;
-    public QueryCure(Context context){
+    public QueryHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase database){
-        database.execSQL(DATABASE_CREATE);
+        database.execSQL(DATABASE_CREATE_CONTATTI);
+        database.execSQL(DATABASE_CREATE_CURE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        Log.w(QueryCure.class.getName(), "Upgrade database"+
-                oldVersion + "to" + newVersion);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CURE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTATTI);
         onCreate(db);
     }
 }

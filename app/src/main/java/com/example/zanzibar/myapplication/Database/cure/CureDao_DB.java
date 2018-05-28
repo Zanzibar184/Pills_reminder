@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.zanzibar.myapplication.Database.Pills_reminder;
+import com.example.zanzibar.myapplication.Database.QueryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.List;
 public class CureDao_DB implements CureDAO {
 
     private SQLiteDatabase database;
-    private QueryCure query;
+    private QueryHelper query;
     private String[] allColumns =
             {
-                    query.COLUMN_NOME,
+                    query.COLUMN_NOME_CURE,
                     query.COLUMN_QTA_ASS,
                     query.COLUMN_SCORTA,
                     query.COLUMN_RIMANENZE,
@@ -35,7 +35,7 @@ public class CureDao_DB implements CureDAO {
     public void open() throws SQLException {
 
         if (query ==  null)
-            query = new QueryCure(Pills_reminder.getAppContext());
+            query = new QueryHelper(Pills_reminder.getAppContext());
         database = query.getWritableDatabase();
     }
 
@@ -48,7 +48,7 @@ public class CureDao_DB implements CureDAO {
 
         ContentValues values = new ContentValues();
 
-        values.put(query.COLUMN_NOME, cura.getNome());
+        values.put(query.COLUMN_NOME_CURE, cura.getNome());
         values.put(query.COLUMN_QTA_ASS, cura.getQuantità_assunzione());
         values.put(query.COLUMN_SCORTA, cura.getScorta());
         values.put(query.COLUMN_RIMANENZE, cura.getRimanenze());
@@ -106,7 +106,7 @@ public class CureDao_DB implements CureDAO {
     public void updateCura(Cura cura) {
         ContentValues values = new ContentValues();
 
-        values.put(query.COLUMN_NOME, cura.getNome());
+        values.put(query.COLUMN_NOME_CURE, cura.getNome());
         values.put(query.COLUMN_QTA_ASS, cura.getQuantità_assunzione());
         values.put(query.COLUMN_SCORTA, cura.getScorta());
         values.put(query.COLUMN_RIMANENZE, cura.getRimanenze());

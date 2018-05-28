@@ -86,7 +86,7 @@ public class AggiungiPillola extends Fragment {
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
 
-    int nClicks = 0;
+    int nClicks = 1;
     RelativeLayout r1;
     RelativeLayout r2;
     RelativeLayout r3;

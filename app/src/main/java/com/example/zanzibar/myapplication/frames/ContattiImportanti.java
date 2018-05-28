@@ -15,9 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.contatti.Contatti;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+
+import java.util.List;
 
 
 /**
@@ -28,6 +33,9 @@ public class ContattiImportanti extends Fragment {
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_contatti = null;
+
+    ContattiDAO dao;
+    List<Contatti> list_contatti;
 
     public ContattiImportanti() {
         // Required empty public constructor
@@ -40,6 +48,7 @@ public class ContattiImportanti extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new ContattiDao_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_contatti_importanti, container, false);
     }
@@ -57,9 +66,7 @@ public class ContattiImportanti extends Fragment {
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcontatti);
 
-        for(int i = 0; i < 3; i++) {
-            addLayoutContatti();
-        }
+        showContatti();
 
     }
 
@@ -69,21 +76,35 @@ public class ContattiImportanti extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Contatti importanti");
     }
 
-    public void addLayoutContatti() {
+    private void showContatti(){
+        dao.open();
+
+        list_contatti = dao.getAllContatti();
+
+        for(int i=0; i<list_contatti.size();i++){
+            Contatti tmp = list_contatti.get(i);
+            addLayoutContatti(tmp.getNome(),tmp.getNumero(),tmp.getRuolo());
+        }
+
+        dao.close();
+
+    }
+
+    private void addLayoutContatti(String nome, final String numero, String ruolo) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
 
-        TextView nome_contatto = (TextView) frame.findViewById(R.id.txt_nome_contatto);
-        TextView ruolo = (TextView) frame.findViewById(R.id.txt_ruolo);
-        TextView telephone_num = (TextView) frame.findViewById(R.id.tel_number);
+        ((TextView) frame.findViewById(R.id.txt_nome_contatto)).setText(nome);
+        ((TextView) frame.findViewById(R.id.txt_ruolo)).setText(ruolo);
+        ((TextView) frame.findViewById(R.id.tel_number)).setText(numero);
 
-        final String tel_num = telephone_num.getText().toString();
+
 
         ImageView img_dial = (ImageView) frame.findViewById(R.id.imagePhoneDial);
         img_dial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + tel_num));
+                intent.setData(Uri.parse("tel:" + numero));
                 startActivity(intent);
             }
         });

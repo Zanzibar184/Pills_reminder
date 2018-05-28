@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.zanzibar.myapplication.Database.Pills_reminder;
+import com.example.zanzibar.myapplication.Database.QueryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,10 @@ import java.util.List;
 public class ContattiDao_DB implements ContattiDAO {
 
     private SQLiteDatabase database;
-    private QueryContatti query;
+    private QueryHelper query;
     private String[] allColumns =
             {
-                    query.COLUMN_NOME,
+                    query.COLUMN_NOME_CONTATTI,
                     query.COLUMN_RUOLO,
                     query.COLUMN_NUMERO,
             };
@@ -25,7 +26,7 @@ public class ContattiDao_DB implements ContattiDAO {
     public void open() throws SQLException {
 
         if (query ==  null)
-            query = new QueryContatti(Pills_reminder.getAppContext());
+            query = new QueryHelper(Pills_reminder.getAppContext());
         database = query.getWritableDatabase();
     }
 
@@ -38,7 +39,7 @@ public class ContattiDao_DB implements ContattiDAO {
 
         ContentValues values = new ContentValues();
 
-        values.put(query.COLUMN_NOME, contatti.getNome());
+        values.put(query.COLUMN_NOME_CONTATTI, contatti.getNome());
         values.put(query.COLUMN_RUOLO, contatti.getRuolo());
         values.put(query.COLUMN_NUMERO, contatti.getNumero());
         return values;
