@@ -236,7 +236,7 @@ public class Cure extends Fragment {
                     dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
                     //TODO: aggiungere qui il fragment di riepilogo delle info farmaco
-                    InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure);
+                    InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure,updated_cura);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
                     /*

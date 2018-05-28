@@ -19,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zanzibar.myapplication.Database.Note.Nota;
+import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
+import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
@@ -54,6 +57,9 @@ public class Calendario extends Fragment {
     private CureDAO dao;
     private List<Cura> list_cure;
 
+    private NoteDao dao_note;
+    private List<Nota> list_note;
+
     public Calendario() {
         // Required empty public constructor
     }
@@ -66,6 +72,7 @@ public class Calendario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         dao = new CureDao_DB();
+        dao_note = new NoteDAO_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_calendario, container, false);
     }
@@ -148,18 +155,27 @@ public class Calendario extends Fragment {
         }
 
         dao.close();
+
+        /*
+        dao_note.open();
+        list_note = dao_note.getNoteByDate(date);
+        for(int i=0; i<list_note.size();i++){
+            Nota tmp = list_note.get(i);
+            addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getData(),tmp.getOra(),tmp.getTipo_memo());
+        }
+
+        dao_note.close();
+        */
     }
 
 
-    private void addLayoutNoteCalendario() {
+    private void addLayoutNoteCalendario(String titolo, String testo, String data, String ora, int tipo_memo) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
 
-        TextView nome_nota = (TextView) frame.findViewById(R.id.txt_note_title);
-        TextView contenuto = (TextView) frame.findViewById(R.id.txt_contenuto);
-        TextView data_nota = (TextView) frame.findViewById(R.id.data_nota);
-        TextView ora = (TextView) frame.findViewById(R.id.ora);
-
-
+        ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
+        ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
+        ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
+        ((TextView) frame.findViewById(R.id.ora)).setText(ora);
         layout3.addView(frame);
     }
 
