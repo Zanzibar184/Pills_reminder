@@ -1,53 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
-
     <RelativeLayout
         android:id="@+id/myview1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/marginBottom_view"
-        android:background="@drawable/rectangular_shape"
-        android:elevation="12dp">
-
-        <TextView
-            android:id="@+id/sms_spiegazione"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="testo di descrizione dell'SMS AVVISO" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/myview2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="186dp"
-        android:background="@drawable/rounded_shape">
-
+        android:background="@drawable/rounded_shape"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="40dp"
+        android:elevation="12dp"
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/text_title1"
+            android:id="@+id/textview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Testo SMS Avviso"
+            android:text="Come funziona"
             android:textStyle="bold" />
 
         <View
-            android:id="@+id/line1"
+            android:id="@+id/view4"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
@@ -56,30 +39,189 @@
             android:layout_marginTop="@dimen/line_title_space"
             android:background="@color/colorPrimaryDark" />
 
-        <EditText
-            android:id="@+id/txt_sms"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:text="PillsReminder ti ricorda che la persona x doveva prendere un farmaco alle ore 9:00 ma non l'ha ancora preso. Ricordaglielo!"
-            android:inputType="textMultiLine"
-            android:lines="6"
-            android:maxLines="8"
-            android:scrollbars="vertical" />
+            android:layout_below="@+id/view4"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/txt_spiegaizone_SMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text='Con il servizio SMS AVVISO puoi avverire un tuo contatto nel caso in cui non venga portata a termine una cura importante. Le cure importanti verranno marcate di rosso nella sezione "Cure"'
+                android:textAlignment="center" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
+<!--
+    <RelativeLayout
+        android:id="@+id/myview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_shape"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="40dp"
+        android:elevation="12dp"
+        android:gravity="center">
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/textview5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Numeri da avvisare"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view5"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_contattoSMS1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="7857493875398 Paolo Rossi (Medico)"
+                    android:layout_gravity="center"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/txt_contattoSMS2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="7857493875398 Paolo Rossi (Medico)"
+                    android:layout_gravity="center"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/txt_contattoSMS3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="7857493875398 Paolo Rossi (Medico)"
+                    android:layout_gravity="center"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>-->
+
+    <RelativeLayout
         android:id="@+id/myview3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="0dp"
-        android:orientation="vertical"
-        android:elevation="12dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_shape"
+        android:elevation="12dp"
+        android:gravity="center">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Testo dell'SMS"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/modify_sms_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textview2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="70dp"
+            app:srcCompat="@drawable/ic_edit_big" />
+
+        <ImageView
+            android:id="@+id/save_sms_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="72dp"
+            app:srcCompat="@drawable/ic_save" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="45dp"
+            android:background="@color/colorPrimaryDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/view6"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/contenuto_nota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:ems="2"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:text="Avviso Pills Reminder: la persona X doveva prendere il farmaco Y alle ore Z, ma sono passati W minuti e non l'ha ancora preso. Ricordaglielo!!" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
