@@ -35,6 +35,10 @@ public class InfoFarmaco extends Fragment {
 
     FloatingActionButton fab_info = null;
 
+    Button modifica = null;
+
+    ImageView image;
+
     public InfoFarmaco() {
         // Required empty public constructor
     }
@@ -58,7 +62,11 @@ public class InfoFarmaco extends Fragment {
 
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutinfofarmaco);
 
+
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_info_farmaco, linearLayout, false);
+
+        image = (ImageView) frame.findViewById(R.id.imgpillchosen);
+        image.setImageDrawable(getResources().getDrawable(Cure.getDrawIcons(cura.getTipo_cura())));
 
         ((TextView) frame.findViewById(R.id.nome_farmaco_info)).setText(cura.getNome());
         ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText("Confezione da: "+ cura.getScorta() + " " + cura.getUnità_misura());
@@ -67,7 +75,6 @@ public class InfoFarmaco extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText("Cominciata il: " + cura.getInizio_cura());
         ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + cura.getFine_cura());
 
-        //TODO: non far crashare nel caso non ci sia la foto nella cura
         if(cura.getFoto() != null){
             File imgFile = new  File(cura.getFoto());
 
@@ -91,6 +98,20 @@ public class InfoFarmaco extends Fragment {
 
 
         linearLayout.addView(frame);
+
+        modifica = frame.findViewById(R.id.btn_modifica_faramco);
+        modifica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                ModificaPillola modificaPillola = new ModificaPillola(fab_info, cura);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modificaPillola).addToBackStack(null).commit();
+
+            }
+        });
+
     }
 
     @Override

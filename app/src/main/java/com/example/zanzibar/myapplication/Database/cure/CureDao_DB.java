@@ -104,21 +104,7 @@ public class CureDao_DB implements CureDAO {
 
     @Override
     public void updateCura(Cura cura) {
-        ContentValues values = new ContentValues();
-
-        values.put(query.COLUMN_NOME_CURE, cura.getNome());
-        values.put(query.COLUMN_QTA_ASS, cura.getQuantità_assunzione());
-        values.put(query.COLUMN_SCORTA, cura.getScorta());
-        values.put(query.COLUMN_RIMANENZE, cura.getRimanenze());
-        values.put(query.COLUMN_INIZIO_CURA, cura.getInizio_cura());
-        values.put(query.COLUMN_FINE_CURA, cura.getFine_cura());
-        values.put(query.COLUMN_TIPO_CURA, cura.getTipo_cura());
-        values.put(query.COLUMN_ORARIO_ASSUNZIONE, cura.getOrario_assunzione());
-        values.put(query.COLUMN_STATO_CURA, cura.getStato_cura());
-        values.put(query.COLUMN_FOTO, cura.getFoto());
-        values.put(query.COLUMN_UDM, cura.getUnità_misura());
-
-        database.update(query.TABLE_CURE,values,"id="+cura.getId(),null);
+                database.update(query.TABLE_CURE,curaToValues(cura),"id="+cura.getId(),null);
     }
 
     @Override

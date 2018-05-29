@@ -153,7 +153,7 @@ public class MieiFarmaci extends Fragment {
                 Cura modify = getCurabyId(id);
                 ImageView cura = v.findViewById(R.id.imgCura);
 
-                ModificaPillola modificaPillola = new ModificaPillola(fab_miei_farmaci,cura.getDrawable(),modify.getTipo_cura());
+                ModificaPillola modificaPillola = new ModificaPillola(fab_miei_farmaci, modify);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modificaPillola).addToBackStack(null).commit();
 

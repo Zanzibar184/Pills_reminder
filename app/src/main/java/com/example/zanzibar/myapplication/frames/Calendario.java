@@ -146,7 +146,20 @@ public class Calendario extends Fragment {
     }
 
     private void refreshData(String date){
+
         layout3.removeAllViews();
+
+        dao_note.open();
+
+        list_note = dao_note.getNoteByDate(date);
+        for(int i=0; i<list_note.size();i++){
+            Nota tmp = list_note.get(i);
+            addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getData(),tmp.getOra(),tmp.getTipo_memo());
+        }
+
+        dao_note.close();
+
+
         dao.open();
         list_cure = dao.getCureByDate(date);
         for(int i=0; i<list_cure.size();i++){
@@ -156,16 +169,9 @@ public class Calendario extends Fragment {
 
         dao.close();
 
-        /*
-        dao_note.open();
-        list_note = dao_note.getNoteByDate(date);
-        for(int i=0; i<list_note.size();i++){
-            Nota tmp = list_note.get(i);
-            addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getData(),tmp.getOra(),tmp.getTipo_memo());
-        }
 
-        dao_note.close();
-        */
+
+
     }
 
 

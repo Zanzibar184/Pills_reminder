@@ -287,7 +287,7 @@ public class AggiungiPillola extends Fragment {
                 int tipo_cura = resourceId;
                 String orario_assunzione = null;
                 int qta_ass = 0;
-                //TODO:gestire qui l'inserimento della stringa che rappresenta l'immagine
+
                 String URI_foto_farmaco = null;
                 if(id_tipo_foto == 1) {
                     URI_foto_farmaco = pictureFilePath;

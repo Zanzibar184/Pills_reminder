@@ -20,13 +20,13 @@
             android:src="@drawable/pill_colored"/>
 
         <ImageView
-            android:id="@+id/onclick_camera"
+            android:id="@+id/img_add_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imgpillchosen"
             android:layout_toEndOf="@+id/imgpillchosen"
-            android:layout_toRightOf="@+id/imgpillchosen"
-            android:src="@drawable/ic_camera" />
+            android:elevation="8dp"
+            app:srcCompat="@drawable/ic_camera" />
 
     </RelativeLayout>
 
@@ -48,7 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/nome_cura" />
+            android:text="@string/nome_cura"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/line1"
@@ -91,7 +92,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:gravity="center_horizontal"
-            android:text="@string/scorte_farmaco" />
+            android:text="@string/scorte_farmaco"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/view3"
@@ -129,7 +131,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/text_title2"
-            android:layout_alignStart="@+id/rimanenze"
+            android:layout_alignStart="@+id/scorte"
             android:ems="10"
             android:inputType="number" /><!-- input scorte -->
 
@@ -148,40 +150,9 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/myview3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/marginBottom_view"
-        android:layout_marginLeft="@dimen/marginLeft_view"
-        android:layout_marginRight="@dimen/marginRight_view"
-        android:layout_marginTop="@dimen/marginTop_inserimento_view"
-        android:background="@drawable/rounded_shape"
-        android:elevation="@dimen/shadow_view">
-
-        <TextView
-            android:id="@+id/text_title3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="@string/dosi_farmaco" />
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/myview3_1"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
         android:layout_marginLeft="@dimen/marginLeft_view"
@@ -189,14 +160,15 @@
         android:layout_marginTop="@dimen/marginTop_inserimento_view"
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/text_title3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 1" />
+            android:text="Dose 1"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/view3"
@@ -217,24 +189,18 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="17dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginStart="11dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
                 android:text="Numero:" />
 
             <EditText
                 android:id="@+id/txt_dose1"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView6"
-                android:layout_alignBottom="@+id/textView6"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/textView6"
-                android:layout_toRightOf="@+id/textView6"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="95dp"
                 android:ems="10"
                 android:inputType="numberDecimal" />
 
@@ -242,12 +208,8 @@
                 android:id="@+id/txt_orario_dose1"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_dose1"
-                android:layout_alignBottom="@+id/txt_dose1"
-                android:layout_marginEnd="17dp"
-                android:layout_marginRight="17dp"
-                android:layout_toLeftOf="@+id/img_time_1"
-                android:layout_toStartOf="@+id/img_time_1"
+                android:layout_alignBaseline="@+id/ora_dose_1"
+                android:layout_alignStart="@+id/txt_dose1"
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="numberDecimal" />
@@ -256,24 +218,217 @@
                 android:id="@+id/ora_dose_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/txt_orario_dose1"
-                android:layout_alignBottom="@+id/txt_orario_dose1"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_toLeftOf="@+id/txt_orario_dose1"
-                android:layout_toStartOf="@+id/txt_orario_dose1"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/textView6"
+                android:layout_marginTop="106dp"
                 android:text="Ora:" />
 
             <ImageView
                 android:id="@+id/img_time_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/ora_dose_1"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="9dp"
-                android:layout_marginRight="9dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/spin1"
                 app:srcCompat="@drawable/ic_clock" />
+
+            <Spinner
+                android:id="@+id/spin1"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="191dp"
+                android:entries="@array/pill_units" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/myview3_2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_title3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Dose 2"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:text="Numero:" />
+
+            <EditText
+                android:id="@+id/txt_dose2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="95dp"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/txt_orario_dose2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ora_dose_1"
+                android:layout_alignStart="@+id/txt_dose2"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/ora_dose_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/textView6"
+                android:layout_marginTop="106dp"
+                android:text="Ora:" />
+
+            <ImageView
+                android:id="@+id/img_time_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/spin2"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <Spinner
+                android:id="@+id/spin2"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="191dp"
+                android:entries="@array/pill_units" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myview3_3"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/marginBottom_view"
+        android:layout_marginLeft="@dimen/marginLeft_view"
+        android:layout_marginRight="@dimen/marginRight_view"
+        android:layout_marginTop="@dimen/marginTop_inserimento_view"
+        android:background="@drawable/rounded_shape"
+        android:elevation="@dimen/shadow_view"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_title3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Dose 3"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/line_title_space"
+            android:background="@color/colorPrimaryDark" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:text="Numero:" />
+
+            <EditText
+                android:id="@+id/txt_dose3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="95dp"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/txt_orario_dose3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/ora_dose_1"
+                android:layout_alignStart="@+id/txt_dose3"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/ora_dose_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/textView6"
+                android:layout_marginTop="106dp"
+                android:text="Ora:" />
+
+            <ImageView
+                android:id="@+id/img_time_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/spin3"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <Spinner
+                android:id="@+id/spin3"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="191dp"
+                android:entries="@array/pill_units" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -295,7 +450,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/periodo_assunzione" />
+            android:text="@string/periodo_assunzione"
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/view2"
@@ -388,7 +544,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/importanza_farmaco" />
+            android:text="@string/importanza_farmaco"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="fill_parent"
