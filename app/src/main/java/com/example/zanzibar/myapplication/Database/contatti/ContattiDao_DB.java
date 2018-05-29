@@ -20,6 +20,7 @@ public class ContattiDao_DB implements ContattiDAO {
                     query.COLUMN_NOME_CONTATTI,
                     query.COLUMN_RUOLO,
                     query.COLUMN_NUMERO,
+                    query.COLUMN_FOTO,
             };
 
     @Override
@@ -42,6 +43,7 @@ public class ContattiDao_DB implements ContattiDAO {
         values.put(query.COLUMN_NOME_CONTATTI, contatti.getNome());
         values.put(query.COLUMN_RUOLO, contatti.getRuolo());
         values.put(query.COLUMN_NUMERO, contatti.getNumero());
+        values.put(query.COLUMN_FOTO_CONTATTO, contatti.getFoto());
         return values;
     }
 
@@ -52,10 +54,11 @@ public class ContattiDao_DB implements ContattiDAO {
         String nome = cursor.getString(0);
         String cognome = cursor.getString(1);
         String numero = cursor.getString(2);
+        String foto = cursor.getString(3);
 
 
 
-        return  new Contatti(nome, cognome, numero);
+        return  new Contatti(nome, cognome, numero, foto);
     }
 
     @Override
@@ -76,6 +79,11 @@ public class ContattiDao_DB implements ContattiDAO {
                 new String[]{ ""+id}
         );
 
+    }
+
+    @Override
+    public void updateContatto(Contatti contatti,  String numero) {
+        database.update(query.TABLE_CONTATTI,contattiToValues(contatti),"numero="+numero,null);
     }
 
     @Override

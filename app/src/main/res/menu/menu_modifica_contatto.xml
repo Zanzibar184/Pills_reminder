@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/ottieni_info">
+
+        <item
+            android:id="@+id/modifica_contatto"
+            android:title="@string/modifica_cura"/>
+
+        <item
+            android:id="@+id/elimina_contatto"
+            android:title="@string/elimina_cura"/>
+
+    </group>
+
+
+</menu>

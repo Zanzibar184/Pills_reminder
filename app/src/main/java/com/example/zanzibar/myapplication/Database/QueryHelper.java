@@ -30,6 +30,7 @@ public class QueryHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NOME_CONTATTI = "NOME";
     public static final String COLUMN_RUOLO = "RUOLO";
     public static final String COLUMN_NUMERO = "NUMERO";
+    public static final String COLUMN_FOTO_CONTATTO = "FOTO";
 
     //-----NOTE
     public static final String TABLE_NOTE = "note";
@@ -48,7 +49,8 @@ public class QueryHelper extends SQLiteOpenHelper {
             + TABLE_CONTATTI + "( "
             + COLUMN_NOME_CONTATTI + " text not null, "
             + COLUMN_RUOLO + " text not null,"
-            + COLUMN_NUMERO + " text primary key);" ;
+            + COLUMN_NUMERO + " text primary key,"
+            + COLUMN_FOTO_CONTATTO + " text);" ;
 
     private static final String DATABASE_CREATE_NOTE = "create table "
             + TABLE_NOTE + "( "

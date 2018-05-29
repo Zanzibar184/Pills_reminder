@@ -5,6 +5,7 @@ public class Contatti {
     private String nome;
     private String ruolo;
     private String numero;
+    private String foto;
 
 
 
@@ -14,6 +15,13 @@ public class Contatti {
         this.nome = nome;
         this.ruolo = ruolo;
         this.numero = numero;
+        this.foto=null;
+    }
+    public Contatti(String nome, String ruolo, String numero, String foto){
+        this.nome = nome;
+        this.ruolo = ruolo;
+        this.numero = numero;
+        this.foto=foto;
     }
 
     @Override
@@ -43,5 +51,13 @@ public class Contatti {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return foto;
     }
 }

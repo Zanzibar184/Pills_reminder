@@ -1,14 +1,10 @@
 package com.example.zanzibar.myapplication.frames;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,32 +23,24 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
-import com.example.zanzibar.myapplication.Database.cure.Cura;
-import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
-import static android.app.Activity.RESULT_OK;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_CAPTURE;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 
@@ -60,7 +48,7 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_
  * Created by user on 11/05/18.
  */
 
-public class AggiungiContatto extends Fragment {
+public class ModifciaContatto extends Fragment {
     private ContattiDAO dao;
 
     private LinearLayout linearLayout = null;
@@ -91,12 +79,15 @@ public class AggiungiContatto extends Fragment {
     //Stringa che ci da il percorso della foto presa da galleria
     protected static String pictureGalleryFilePath;
 
-    public AggiungiContatto() {
+    Contatti contatto;
+
+    public ModifciaContatto() {
         // Required empty public constructor
     }
 
-    public AggiungiContatto(FloatingActionButton fab_contatto) {
+    public ModifciaContatto(FloatingActionButton fab_contatto, Contatti contatti) {
         this.fab_contatto = fab_contatto;
+        this.contatto = contatti;
     }
 
     @Override
@@ -122,8 +113,14 @@ public class AggiungiContatto extends Fragment {
         img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
 
         nomeContatto = view.findViewById(R.id.nome_contatto);
+        nomeContatto.setText(contatto.getNome());
         numeroContatto = view.findViewById(R.id.numero_contatto);
+        numeroContatto.setText(contatto.getNumero());
         relazioneContatto = view.findViewById(R.id.relazione_contatto);
+        relazioneContatto.setText(contatto.getRuolo());
+
+        if(contatto.getFoto() != null)
+        setImage(imgcontact,contatto.getFoto());
 
         aggiungiContatto = (Button) view.findViewById(R.id.btn_conferma_contatto);
         aggiungiContatto.setOnClickListener(new View.OnClickListener() {
@@ -141,11 +138,11 @@ public class AggiungiContatto extends Fragment {
 
 
                 if(id_tipo_foto == 1) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureFilePath));
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureFilePath), contatto.getNumero());
                 } else if (id_tipo_foto == 2) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath));
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath), contatto.getNumero());
                 }else if(id_tipo_foto == 0){
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero));
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,contatto.getFoto()),contatto.getNumero());
                 }
                 dao.close();
 
@@ -175,7 +172,6 @@ public class AggiungiContatto extends Fragment {
         check_SMSAVVISO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: implementare metodo per agiungere contatto al servizio SMS AVVISO
             }
         });
 
@@ -189,7 +185,7 @@ public class AggiungiContatto extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Aggiungi contatto");
+        ((MainActivity) getActivity()).setActionBarTitle("Modifica contatto");
     }
 
 
@@ -261,7 +257,7 @@ public class AggiungiContatto extends Fragment {
 
     private void sendTakeGalleryIntent() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhoto, REQUEST_PICTURE_GALLERY);
     }
 

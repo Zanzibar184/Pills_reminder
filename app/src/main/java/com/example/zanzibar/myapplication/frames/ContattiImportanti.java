@@ -1,7 +1,10 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,18 +12,23 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -91,19 +99,33 @@ public class ContattiImportanti extends Fragment {
 
         for(int i=0; i<list_contatti.size();i++){
             Contatti tmp = list_contatti.get(i);
-            addLayoutContatti(tmp.getNome(),tmp.getNumero(),tmp.getRuolo());
+            addLayoutContatti(tmp.getNome(),tmp.getNumero(),tmp.getRuolo(), tmp.getFoto());
         }
 
         dao.close();
 
     }
 
-    private void addLayoutContatti(String nome, final String numero, String ruolo) {
-        View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
+    private void addLayoutContatti(String nome, final String numero, String ruolo, String foto) {
+        final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
 
         ((TextView) frame.findViewById(R.id.txt_nome_contatto)).setText(nome);
         ((TextView) frame.findViewById(R.id.txt_ruolo)).setText(ruolo);
         ((TextView) frame.findViewById(R.id.tel_number)).setText(numero);
+
+        ImageView foto_contatto = (ImageView) frame.findViewById(R.id.imgcontatto);
+
+        if(foto != null){
+            File imgFile = new  File(foto);
+
+            if(imgFile.exists()){
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                foto_contatto.setImageBitmap(myBitmap);
+
+            }
+        }
 
 
 
@@ -117,7 +139,63 @@ public class ContattiImportanti extends Fragment {
             }
         });
 
+        frame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPopupMenuImages(getContext(), frame);
+            }
+        });
+
         linearLayout.addView(frame);
     }
+
+    public void setPopupMenuImages(Context c, final View v) {
+        PopupMenu popup = new PopupMenu(c,v);
+        popup.getMenuInflater().inflate(R.menu.menu_modifica_contatto, popup.getMenu());
+
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
+
+
+
+                    Contatti modify = getContattobyId(((TextView) v.findViewById(R.id.tel_number)).getText().toString());
+
+
+
+                    ModifciaContatto modifciaContatto = new ModifciaContatto(fab_contatti, modify);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modifciaContatto).addToBackStack(null).commit();
+
+
+
+                } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
+
+
+
+                }
+                return true;
+
+            }
+        });
+
+        popup.show();
+    }
+
+    private Contatti getContattobyId(String numero){
+
+        for(int i=0;i<list_contatti.size(); i++)
+        {
+            if ((list_contatti.get(i).getNumero()) == numero)
+            {
+                return list_contatti.get(i);
+            }
+        }
+        Contatti contatti = null;
+        return contatti;
+    }
+
 
 }

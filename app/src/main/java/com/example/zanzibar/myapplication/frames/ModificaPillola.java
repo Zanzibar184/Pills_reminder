@@ -55,7 +55,6 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.pictureFilePath;
 
-//TODO: settare sempre in alto la visualizzazione
 public class ModificaPillola extends Fragment {
     private CureDAO dao;
 
@@ -89,8 +88,6 @@ public class ModificaPillola extends Fragment {
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
-    private static final int CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE = 2888;
 
     int nClicks = 0;
     RelativeLayout r1;
@@ -525,7 +522,7 @@ public class ModificaPillola extends Fragment {
         }
     }
 
-    public void setImage(final ImageView img, final String path){
+    private void setImage(final ImageView img, final String path){
 
         File imgFile = new  File(path);
 
