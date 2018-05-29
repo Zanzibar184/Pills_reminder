@@ -161,12 +161,16 @@ public class AggiungiContatto extends Fragment {
             @Override
             public void onClick(View v) {
                 if(check_import.isChecked()) {
+                    Log.i("msg", "Ciao");
                     Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                     pickContact.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
                     startActivityForResult(pickContact, IMPORT_CONTACT_NAME_NUMBER);
                 } else {
+                    Log.i("msg", "Bye");
+                    /*
                     nomeContatto.setText("");
                     numeroContatto.setText("");
+                    */
                 }
             }
         });
@@ -310,6 +314,9 @@ public class AggiungiContatto extends Fragment {
             Uri pickedImage = data.getData();
             setPillImageCapturedFromGallery(pickedImage);
 
+        } else if (requestCode == IMPORT_CONTACT_NAME_NUMBER && resultCode == Activity.RESULT_OK) {
+            Uri contactData = data.getData();
+            getNameNumberFromContact(getContext(), contactData);
         }
 
         if(id_tipo_foto == 1) {
@@ -338,6 +345,18 @@ public class AggiungiContatto extends Fragment {
 
         }
 
+    }
+
+    public void getNameNumberFromContact(Context c, Uri contactData) {
+        Cursor cursor = c.getContentResolver().query(contactData, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+            int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+            String num = cursor.getString(phoneIndex);
+            String nome = cursor.getString(nameIndex);
+            nomeContatto.setText(nome);
+            numeroContatto.setText(num);
+        }
     }
 
 }

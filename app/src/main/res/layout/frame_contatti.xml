@@ -3,98 +3,72 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/myview1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <!--probabilmente il layout_height di myview1 sarà da cambiare con wrap content ma per il momento va bene così-->
+    android:layout_height="@dimen/height_listpill_cure"
+    android:layout_marginBottom="@dimen/marginBottom_view"
+    android:layout_marginLeft="@dimen/marginLeft_view"
+    android:layout_marginRight="@dimen/marginRight_view"
+    android:layout_marginTop="@dimen/marginTop_view"
+    android:background="@drawable/rounded_shape"
+    android:elevation="12dp">
 
     <RelativeLayout
-        android:id="@+id/myview1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_view"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/marginBottom_view"
-        android:layout_marginLeft="@dimen/marginLeft_view"
-        android:layout_marginRight="@dimen/marginRight_view"
-        android:layout_marginTop="@dimen/marginTop_view"
-        android:background="@drawable/rounded_shape"
-        android:elevation="12dp">
-
-        <TextView
-            android:id="@+id/txt_nome_contatto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="Paolo Rossi" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/view4" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/view4">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgcontatto"
             android:layout_width="@dimen/img_contact"
             android:layout_height="@dimen/img_contact"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="14dp"
             app:srcCompat="@drawable/contatto" />
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout3"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="109dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_nome_contatto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="9dp"
-                android:layout_marginStart="9dp"
-                android:layout_toEndOf="@+id/imgcontatto"
-                android:layout_toRightOf="@+id/imgcontatto">
+                android:layout_marginTop="10dp"
+                android:text="Paolo Rossi"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txt_ruolo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/tel_number"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/tel_number"
-                    android:text="Medico" />
+            <TextView
+                android:id="@+id/txt_ruolo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Medico" />
 
-                <TextView
-                    android:id="@+id/tel_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:text="345483939248"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tel_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="345483939248"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            </RelativeLayout>
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imagePhoneDial"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignBottom="@+id/imageView2"
-                android:layout_toEndOf="@+id/relativeLayout3"
-                android:layout_toRightOf="@+id/relativeLayout3"
-                android:layout_centerInParent="true"
-                app:srcCompat="@drawable/ic_phone_call" />
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imagePhoneDial"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_phone_call" />
 
     </RelativeLayout>
 

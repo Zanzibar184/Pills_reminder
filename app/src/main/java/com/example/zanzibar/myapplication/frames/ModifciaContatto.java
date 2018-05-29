@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
@@ -107,6 +108,9 @@ public class ModifciaContatto extends Fragment {
         linearLayout.addView(frame);
 
         fab_contatto.hide();
+
+        RelativeLayout r_checkbox = (RelativeLayout) frame.findViewById(R.id.relativeLayoutcheckbox);
+        r_checkbox.setVisibility(View.GONE);
 
         imgcontact = (ImageView) view.findViewById(R.id.imgcontactphotochosen);
 
