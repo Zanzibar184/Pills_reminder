@@ -185,6 +185,7 @@ public class ModificaPillola extends Fragment {
 
         if(modify_cura.getFoto() != null){
             setImage(imgpill, modify_cura.getFoto());
+            //ciao
         }
 
 
