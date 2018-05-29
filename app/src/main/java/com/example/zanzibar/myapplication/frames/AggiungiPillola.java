@@ -52,7 +52,6 @@ import java.util.Locale;
  * Created by user on 07/05/18.
  */
     //TODO: rendere opzionale l'inserimento di alcuni campi (es quantità rimaste/qta nella scatola)
-    //TODO: aggiungere la scelta del tipo di qta: pillole/ml/numero generico/cucchiai ecc..
 public class AggiungiPillola extends Fragment {
     private CureDAO dao;
 

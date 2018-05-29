@@ -36,7 +36,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 
-//TODO: rendere modificabile un contatto
 public class ContattiImportanti extends Fragment {
 
     private LinearLayout linearLayout = null;
