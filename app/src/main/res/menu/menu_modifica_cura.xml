@@ -3,6 +3,10 @@
     <group
         android:id="@+id/ottieni_info">
         <item
+            android:id="@+id/info_cura"
+            android:title="@string/info_farmaco"/>
+
+        <item
             android:id="@+id/modifica_cura"
             android:title="@string/modifica_cura"/>
 

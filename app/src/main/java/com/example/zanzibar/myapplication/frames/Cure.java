@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
@@ -34,6 +35,7 @@ import com.example.zanzibar.myapplication.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +43,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//TODO: migliorare visualizzazione dati
 public class Cure extends Fragment {
 
     private LinearLayout linearLayout = null;
@@ -50,6 +54,7 @@ public class Cure extends Fragment {
     private LinearLayout layout_pills_notte = null;
 
     final int numberOfFrames = 4;
+    int currentHour;
 
     String conferma_farmaco = "Conferma assunzione farmaco";
     String non_conferma_farmaco = "Farmaco non assunto";
@@ -65,7 +70,7 @@ public class Cure extends Fragment {
     ImageView ivPreview;
     //---
 
-    ScrollView v;
+    static ScrollView v;
 
     public Cure() {
         // Required empty public constructor
@@ -109,8 +114,36 @@ public class Cure extends Fragment {
 
         addLayoutCure();
 
-        v.setScrollX(0);
-        v.setScrollY(0);
+        Calendar rightNow = Calendar.getInstance();
+        currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
+
+        linearLayout.post(new Runnable(){
+            public void run(){
+                int height = linearLayout.getHeight();
+
+                if((currentHour >= 6) && (currentHour <12))
+                {
+                    v.setScrollY(0);
+
+                }
+                if((currentHour >= 12) && (currentHour <18))
+                {
+                    v.setScrollY(height/4);
+                }
+                if((currentHour >= 18) && (currentHour <24))
+                {
+                    v.setScrollY(height);
+                }
+                if((currentHour >= 0) && (currentHour <6))
+                {
+                    v.setScrollY(height);
+                }
+
+
+
+            }
+        });
+
 
 
     }

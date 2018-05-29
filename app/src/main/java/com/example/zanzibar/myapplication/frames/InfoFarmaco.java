@@ -51,6 +51,7 @@ public class InfoFarmaco extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_infofarmaco, container, false);
     }
@@ -58,6 +59,9 @@ public class InfoFarmaco extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         fab_info.hide();
 
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutinfofarmaco);

@@ -82,6 +82,7 @@ public class AggiungiNota extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         dao = new NoteDAO_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiunginota, container, false);
@@ -90,6 +91,8 @@ public class AggiungiNota extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddnota);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_nota, linearLayout, false);
         linearLayout.addView(frame);
@@ -105,11 +108,6 @@ public class AggiungiNota extends Fragment {
         text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
         text_titolo_nota = (EditText) view.findViewById(R.id.title_nota);
 
-        final RadioButton cat_generale = view.findViewById(R.id.rbtn_generale);
-        final RadioButton cat_appuntamento = view.findViewById(R.id.rbtn_appuntamento);
-        final RadioButton cat_promemoria = view.findViewById(R.id.rbtn_promemoria);
-        final RadioButton cat_sintomi = view.findViewById(R.id.rbtn_sintomi);
-
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_cat);
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -120,7 +118,7 @@ public class AggiungiNota extends Fragment {
                 {
                     String s = checkedRadioButton.getText().toString();
                     categoria_nota = s;
-                    Log.i("Checked:", categoria_nota);
+                    Log.i("Checked:", categoria_nota + " " + CheckId(categoria_nota));
                 }
             }
         });
@@ -180,7 +178,7 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onClick(View v) {
                 dao.open();
-                int tipo_memo = 1; //TODO: renderre tipo_memo dinamico
+                int tipo_memo = CheckId(categoria_nota);
                 dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),text_date.getText().toString(),text_time.getText().toString(),tipo_memo));
                 dao.close();
 
@@ -259,5 +257,17 @@ public class AggiungiNota extends Fragment {
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
     }
+
+    private int CheckId(String scelta){
+        switch(scelta){
+            case "Generale": return 1;
+            case "Sintomi": return 2;
+            case "Appuntamento": return 3;
+            case "Promemoria": return 4;
+        }
+
+        return 0;
+    }
+
 
 }

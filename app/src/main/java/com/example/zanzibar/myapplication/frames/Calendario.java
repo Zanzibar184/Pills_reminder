@@ -1,6 +1,6 @@
 package com.example.zanzibar.myapplication.frames;
 
-
+//TODO: aggiungere colori per richiamare la nota nel suo giorno
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -72,6 +72,7 @@ public class Calendario extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         dao = new CureDao_DB();
         dao_note = new NoteDAO_DB();
         // Inflate the layout for this fragment
@@ -82,7 +83,8 @@ public class Calendario extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         fab_cal.show();
 
         fab_cal.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +157,7 @@ public class Calendario extends Fragment {
         list_note = dao_note.getNoteByDate(date);
         for(int i=0; i<list_note.size();i++){
             Nota tmp = list_note.get(i);
-            addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getData(),tmp.getOra(),tmp.getTipo_memo());
+            addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getOra(),tmp.getTipo_memo());
         }
 
         dao_note.close();
@@ -176,12 +178,12 @@ public class Calendario extends Fragment {
     }
 
 
-    private void addLayoutNoteCalendario(String titolo, String testo, String data, String ora, int tipo_memo) {
+    private void addLayoutNoteCalendario(String titolo, String testo, String ora, int tipo_memo) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
 
         ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
-        ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
+        //((TextView) frame.findViewById(R.id.data_nota)).setText(data);
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
 
         layout3.addView(frame);

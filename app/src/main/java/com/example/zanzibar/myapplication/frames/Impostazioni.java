@@ -29,7 +29,7 @@ import com.example.zanzibar.myapplication.settings.FragmentDatiPersonali;
 import com.example.zanzibar.myapplication.settings.FragmentNotifiche;
 
 import java.io.ByteArrayOutputStream;
-
+//TODO: salvare dati personali/creare db
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +59,7 @@ public class Impostazioni extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_impostazioni, container, false);
     }
@@ -66,6 +67,8 @@ public class Impostazioni extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutimpostazioni);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_impostazioni, linearLayout, false);
         linearLayout.addView(frame);

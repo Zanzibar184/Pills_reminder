@@ -44,6 +44,7 @@ public class MieiFarmaci extends Fragment {
     private List<Cura> list_cure;
     public static String MODIFICA = "Modifica informazioni";
     public static String ELIMINA = "Elimina";
+    public static String INFO = "Info farmaco";
 
     private LinearLayout linearLayout = null;
 
@@ -67,6 +68,9 @@ public class MieiFarmaci extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         fab_miei_farmaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +175,17 @@ public class MieiFarmaci extends Fragment {
                 MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_miei_farmaci);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
+
+
+            } else if (item.getTitle().equals(MieiFarmaci.INFO)) {
+
+                //Toast.makeText(getContext(), "elimina" + ((TextView) v.findViewById(R.id.txt_id_hidden)).getText(), Toast.LENGTH_LONG).show();
+
+                Cura info_cura = getCurabyId(Integer.parseInt(((TextView) v.findViewById(R.id.txt_id_hidden)).getText().toString()));
+
+                InfoFarmaco infoFarmaco = new InfoFarmaco(fab_miei_farmaci,info_cura);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
 
 
             }

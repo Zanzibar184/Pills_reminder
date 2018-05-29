@@ -20,7 +20,7 @@
     <dimen name="marginBottom_view">15dp</dimen>
     <dimen name="marginBottom_high">50dp</dimen>
     <dimen name="marginBottomInfoFarmaco">10dp</dimen>
-    <dimen name="marginTop_view">45dp</dimen>
+    <dimen name="marginTop_view">25dp</dimen>
     <dimen name="marginTop_image">20dp</dimen>
     <dimen name="marginTop_settings_view">10dp</dimen>
     <dimen name="marginTop_inserimento_view">20dp</dimen>

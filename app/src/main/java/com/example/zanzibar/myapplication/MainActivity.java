@@ -25,7 +25,7 @@ import com.example.zanzibar.myapplication.frames.MieiFarmaci;
 import com.example.zanzibar.myapplication.frames.Note;
 import com.example.zanzibar.myapplication.frames.SmsAvviso;
 import com.example.zanzibar.myapplication.maps.MapsActivity;
-
+//TODO: foto drawer cliccabile che porta ai dati personali, renderlo dinamico
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     protected NavigationView navigationView;

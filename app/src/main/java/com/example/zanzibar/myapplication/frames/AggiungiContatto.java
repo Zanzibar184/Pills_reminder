@@ -1,5 +1,5 @@
 package com.example.zanzibar.myapplication.frames;
-
+//TODO: gestire input foto
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -86,6 +86,8 @@ public class AggiungiContatto extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddcontatto);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_contatto, linearLayout, false);
         linearLayout.addView(frame);

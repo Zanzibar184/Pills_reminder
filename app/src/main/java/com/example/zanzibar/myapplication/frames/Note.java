@@ -25,6 +25,9 @@ import com.example.zanzibar.myapplication.R;
 
 import java.util.List;
 
+
+//TODO: rendere modificabile note
+//TODO: aggiustare stile
 public class Note extends Fragment {
 
     NoteDao dao;
@@ -45,6 +48,7 @@ public class Note extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         dao = new NoteDAO_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_note, container, false);
@@ -53,6 +57,9 @@ public class Note extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
 
         fab_note.show();
 

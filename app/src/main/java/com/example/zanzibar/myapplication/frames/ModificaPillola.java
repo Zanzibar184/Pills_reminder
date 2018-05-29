@@ -55,7 +55,7 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.pictureFilePath;
 
-
+//TODO: settare sempre in alto la visualizzazione
 public class ModificaPillola extends Fragment {
     private CureDAO dao;
 
@@ -124,6 +124,7 @@ public class ModificaPillola extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiungipillola, container, false);
     }
@@ -131,6 +132,8 @@ public class ModificaPillola extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddpill);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.modify_pills_view, linearLayout, false);
         linearLayout.addView(frame);

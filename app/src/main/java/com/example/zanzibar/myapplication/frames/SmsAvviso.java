@@ -30,6 +30,7 @@ public class SmsAvviso extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_sms_avviso, container, false);
     }
@@ -37,6 +38,9 @@ public class SmsAvviso extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutsms);
         layout_contattiSMS = (LinearLayout) view.findViewById(R.id.myview2);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_sms, linearLayout, false);

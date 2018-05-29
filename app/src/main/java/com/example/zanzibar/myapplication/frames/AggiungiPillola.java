@@ -124,6 +124,7 @@ public class AggiungiPillola extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiungipillola, container, false);
     }
@@ -131,6 +132,8 @@ public class AggiungiPillola extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddpill);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_pills_view, linearLayout, false);
         linearLayout.addView(frame);
@@ -343,7 +346,6 @@ public class AggiungiPillola extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendarinit.set(Calendar.YEAR, year);
                 myCalendarinit.set(Calendar.MONTH, monthOfYear);
                 myCalendarinit.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -358,7 +360,6 @@ public class AggiungiPillola extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendarend.set(Calendar.YEAR, year);
                 myCalendarend.set(Calendar.MONTH, monthOfYear);
                 myCalendarend.set(Calendar.DAY_OF_MONTH, dayOfMonth);

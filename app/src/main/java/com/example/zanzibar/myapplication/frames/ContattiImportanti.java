@@ -27,6 +27,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//TODO: rendere modificabile un contatto
 public class ContattiImportanti extends Fragment {
 
     private LinearLayout linearLayout = null;
@@ -47,6 +49,7 @@ public class ContattiImportanti extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         dao = new ContattiDao_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_contatti_importanti, container, false);
@@ -55,6 +58,9 @@ public class ContattiImportanti extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Cure.v.setScrollY(0);
+        Cure.v.setScrollX(0);
 
         fab_contatti.show();
 
