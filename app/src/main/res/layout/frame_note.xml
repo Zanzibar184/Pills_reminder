@@ -23,8 +23,8 @@
 
         <TextView
             android:id="@+id/txt_note_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Titolo nota"
             android:textStyle="bold" />
@@ -43,10 +43,11 @@
             android:id="@+id/categoria_nota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_alignEnd="@+id/view7"
+            android:layout_alignTop="@+id/txt_note_title"
             android:text="APPUNTAMENTO"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
