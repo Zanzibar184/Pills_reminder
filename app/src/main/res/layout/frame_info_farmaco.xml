@@ -192,4 +192,15 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_modifica_faramco"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginLeft_view"
+        android:background="@drawable/drawable_btn_modifica_dati"
+        android:layout_gravity="center"
+        android:text="MODIFICA"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
 </LinearLayout>
