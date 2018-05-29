@@ -20,9 +20,6 @@
         <item
             android:id="@+id/menu_info_farmaco"
             android:title="@string/info_farmaco" />
-        <item
-            android:id="@+id/menu_foto_farmaco"
-            android:title="@string/foto_farmaco" />
     </group>
 
 </menu>

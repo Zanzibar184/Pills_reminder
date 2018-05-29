@@ -1,7 +1,9 @@
 package com.example.zanzibar.myapplication.frames;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,10 +12,13 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.MainActivity;
@@ -70,9 +75,16 @@ public class InfoFarmaco extends Fragment {
 
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
-                ImageView myImage = (ImageView) frame.findViewById(R.id.imgpillchosen);
+                final ImageView myImage = (ImageView) frame.findViewById(R.id.imgpillchosen);
 
                 myImage.setImageBitmap(myBitmap);
+
+                myImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFotoFarmaco(cura.getFoto(),myImage);
+                    }
+                });
 
             }
         }
@@ -87,6 +99,26 @@ public class InfoFarmaco extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Info farmaco");
     }
 
+    private void showFotoFarmaco(String file, ImageView ivPreview) {
+        final Dialog nagDialog = new Dialog(getContext(),android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        nagDialog.setCancelable(false);
+        nagDialog.setContentView(R.layout.preview_image);
+        Button btnClose = (Button)nagDialog.findViewById(R.id.btnIvClose);
+        ivPreview = (ImageView)nagDialog.findViewById(R.id.iv_preview_image);
+        File f = new File(file);
+        ivPreview.setImageURI(Uri.fromFile(f));
+        ivPreview.setOnTouchListener(new ImageMatrixTouchHandler(getContext()));
 
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                nagDialog.dismiss();
+            }
+        });
+
+        nagDialog.show();
+    }
 
 }

@@ -3,7 +3,9 @@ package com.example.zanzibar.myapplication.frames;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -235,19 +237,9 @@ public class Cure extends Fragment {
                     updated_cura.setStato_cura(Cura.DA_ASSUMERE);
                     dao.updateCura(updated_cura);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
-                    //TODO: aggiungere qui il fragment di riepilogo delle info farmaco
                     InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure,updated_cura);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
-                    /*
-                    MieiFarmaci mieiFarmaci = new MieiFarmaci(fab_cure);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
-                    */
-                } else if(item.getTitle().equals(foto_farmaco)) {
-
-
-                    showFotoFarmaco(updated_cura.getFoto());
                 }
 
                 dao.close();
@@ -290,28 +282,6 @@ public class Cure extends Fragment {
         }
         Cura cura = null;
         return cura;
-    }
-
-    private void showFotoFarmaco(String file) {
-        final Dialog nagDialog = new Dialog(getContext(),android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
-        nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        nagDialog.setCancelable(false);
-        nagDialog.setContentView(R.layout.preview_image);
-        Button btnClose = (Button)nagDialog.findViewById(R.id.btnIvClose);
-        ivPreview = (ImageView)nagDialog.findViewById(R.id.iv_preview_image);
-        File f = new File(file);
-        ivPreview.setImageURI(Uri.fromFile(f));
-        ivPreview.setOnTouchListener(new ImageMatrixTouchHandler(getContext()));
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                nagDialog.dismiss();
-            }
-        });
-
-        nagDialog.show();
     }
 }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,26 +15,15 @@
         android:layout_height="@dimen/height_view"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
-        android:layout_marginLeft="@dimen/marginLeft_view"
-        android:layout_marginRight="@dimen/marginRight_view"
-        android:layout_marginTop="@dimen/marginTop_view"
-        android:background="@drawable/rounded_shape"
+        android:background="@drawable/rectangular_shape"
         android:elevation="12dp">
 
         <TextView
-            android:id="@+id/text_title"
+            android:id="@+id/sms_spiegazione"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"/>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark" />
+            android:gravity="center_horizontal"
+            android:text="testo di descrizione dell'SMS AVVISO" />
 
     </RelativeLayout>
 
