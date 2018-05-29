@@ -60,7 +60,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout2">
+        android:id="@+id/layout_nota_calendario">
 
         <TextView
             android:id="@+id/data_nota"

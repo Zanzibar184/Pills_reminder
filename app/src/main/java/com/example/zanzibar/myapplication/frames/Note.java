@@ -8,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zanzibar.myapplication.Database.Note.Nota;
@@ -97,6 +99,12 @@ public class Note extends Fragment {
         ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
         TextView categoria = (TextView) frame.findViewById(R.id.categoria_nota);
+
+        if ((data.equals("")) && (ora.equals("")))
+        {
+            ((RelativeLayout)frame.findViewById(R.id.layout_data_ora_nota)).setVisibility(View.GONE);
+        }
+
 
 
         linearLayout.addView(frame);

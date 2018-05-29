@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -182,6 +183,7 @@ public class Calendario extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
         ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
+
         layout3.addView(frame);
     }
 
