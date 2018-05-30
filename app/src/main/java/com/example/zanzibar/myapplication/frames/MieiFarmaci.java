@@ -124,7 +124,7 @@ public class MieiFarmaci extends Fragment {
         linearLayout.addView(frame);
     }
 
-    private Date StringToDate(String s) {
+    public static Date StringToDate(String s) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();

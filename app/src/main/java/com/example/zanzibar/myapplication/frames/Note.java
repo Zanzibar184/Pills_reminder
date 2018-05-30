@@ -27,7 +27,11 @@ import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 
 public class Note extends Fragment {
@@ -105,7 +109,11 @@ public class Note extends Fragment {
 
         ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
-        ((TextView) frame.findViewById(R.id.data_nota)).setText(data);
+
+        Date data_format = StringToDate(data);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        ((TextView) frame.findViewById(R.id.data_nota)).setText(dateFormat.format(data_format));
+
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
         ((TextView) frame.findViewById(R.id.id_nota_hidden)).setText(id_memo + "");
         ((TextView) frame.findViewById(R.id.categoria_nota)).setText(CheckType(tipo_memo));

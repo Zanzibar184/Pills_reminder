@@ -25,7 +25,11 @@ import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 public class InfoFarmaco extends Fragment {
 
@@ -76,8 +80,12 @@ public class InfoFarmaco extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText("Confezione da: "+ cura.getScorta() + " " + cura.getUnità_misura());
         ((TextView) frame.findViewById(R.id.txt_pillole_rimanenti)).setText("Quantità rimasta: " + cura.getRimanenze() + " " + cura.getUnità_misura());
         ((TextView) frame.findViewById(R.id.txt_dose)).setText("Quantità di assunzione: " + cura.getQuantità_assunzione() + " " + cura.getUnità_misura() + " alle " + cura.getOrario_assunzione());
-        ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText("Cominciata il: " + cura.getInizio_cura());
-        ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + cura.getFine_cura());
+
+        Date inizio = StringToDate(cura.getInizio_cura());
+        Date fine = StringToDate(cura.getFine_cura());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText("Cominciata il: " +dateFormat.format(inizio));
+        ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + dateFormat.format(fine));
 
         if(cura.getFoto() != null){
             File imgFile = new  File(cura.getFoto());
