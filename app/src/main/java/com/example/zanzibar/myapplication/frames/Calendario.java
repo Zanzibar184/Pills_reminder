@@ -183,8 +183,8 @@ public class Calendario extends Fragment {
 
         ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
-        //((TextView) frame.findViewById(R.id.data_nota)).setText(data);
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
+        ((TextView) frame.findViewById(R.id.categoria)).setText(Note.CheckType(tipo_memo));
 
         layout3.addView(frame);
     }
