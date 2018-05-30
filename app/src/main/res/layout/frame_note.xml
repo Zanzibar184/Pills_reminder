@@ -40,6 +40,12 @@
             android:id="@+id/view7" />
 
         <TextView
+            android:id="@+id/id_nota_hidden"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/categoria_nota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

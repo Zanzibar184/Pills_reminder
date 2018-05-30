@@ -85,15 +85,7 @@ public class NoteDAO_DB implements  NoteDao{
     @Override
     public void updateNota(Nota nota) {
 
-        ContentValues values = new ContentValues();
-
-        values.put(query.COLUMN_TITOLO, nota.getTitolo());
-        values.put(query.COLUMN_TESTO, nota.getTitolo());
-        values.put(query.COLUMN_DATA_NOTA, nota.getTitolo());
-        values.put(query.COLUMN_ORA_NOTA, nota.getTitolo());
-        values.put(query.COLUMN_TIPO_MEMO, nota.getTitolo());
-
-        database.update(query.TABLE_NOTE,values,"id="+ nota.getId_memo(),null);
+        database.update(query.TABLE_NOTE,NoteToValues(nota),"id_memo="+ nota.getId_memo(),null);
 
     }
 
