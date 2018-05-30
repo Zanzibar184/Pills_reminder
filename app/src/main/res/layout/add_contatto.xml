@@ -72,14 +72,14 @@
             android:textStyle="bold" />
 
         <View
+            android:id="@+id/line1"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/line1" />
+            android:background="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/nome_contatto"
@@ -89,6 +89,15 @@
             android:ems="10"
             android:hint="Nome..."
             android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/img_mic_nomecontatto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_title1"
+            android:layout_alignTop="@+id/nome_contatto"
+            app:srcCompat="@drawable/ic_mic_black"
+            android:onClick="getSpeechInput"/>
 
     </RelativeLayout>
 
@@ -130,6 +139,14 @@
             android:ems="10"
             android:hint="Relazione..."
             android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/img_mic_relationship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_title2"
+            android:layout_alignTop="@+id/relazione_contatto"
+            app:srcCompat="@drawable/ic_mic_black" />
 
     </RelativeLayout>
 

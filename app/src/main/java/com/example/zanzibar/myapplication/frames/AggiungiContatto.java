@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -48,6 +49,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -70,6 +72,9 @@ public class AggiungiContatto extends Fragment {
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
     private static final int IMPORT_CONTACT_NAME_NUMBER = 5000;
+
+    private static final int GET_SPEECH_CONTACT_NAME = 100;
+    private static final int GET_SPEECH_RELATIONSHIP = 200;
 
     EditText nomeContatto = null;
     EditText numeroContatto = null;
@@ -120,6 +125,9 @@ public class AggiungiContatto extends Fragment {
         imgcontact = (ImageView) view.findViewById(R.id.imgcontactphotochosen);
 
         img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);
+
+        ImageView img_mic_nome = (ImageView) view.findViewById(R.id.img_mic_nomecontatto);
+        ImageView img_mic_rel = (ImageView) view.findViewById(R.id.img_mic_relationship);
 
         nomeContatto = view.findViewById(R.id.nome_contatto);
         numeroContatto = view.findViewById(R.id.numero_contatto);
@@ -186,6 +194,20 @@ public class AggiungiContatto extends Fragment {
         img_call_camera.setOnClickListener(popupPhotoListener);
 
         imgcontact.setOnClickListener(popupPhotoListener);
+
+        img_mic_nome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_CONTACT_NAME);
+            }
+        });
+
+        img_mic_rel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_RELATIONSHIP);
+            }
+        });
 
     }
 
@@ -317,6 +339,16 @@ public class AggiungiContatto extends Fragment {
         } else if (requestCode == IMPORT_CONTACT_NAME_NUMBER && resultCode == Activity.RESULT_OK) {
             Uri contactData = data.getData();
             getNameNumberFromContact(getContext(), contactData);
+        } else if(requestCode == GET_SPEECH_CONTACT_NAME && resultCode == Activity.RESULT_OK) {
+            if(data!=null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                nomeContatto.setText(result.get(0));
+            }
+        } else if(requestCode == GET_SPEECH_RELATIONSHIP && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                relazioneContatto.setText(result.get(0));
+            }
         }
 
         if(id_tipo_foto == 1) {
@@ -356,6 +388,18 @@ public class AggiungiContatto extends Fragment {
             String nome = cursor.getString(nameIndex);
             nomeContatto.setText(nome);
             numeroContatto.setText(num);
+        }
+    }
+
+    public void getSpeechInput(int req_code){
+        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (i.resolveActivity(getContext().getPackageManager())!=null){
+            startActivityForResult(i,req_code);
+        } else {
+            Toast.makeText(getContext(), "Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale", Toast.LENGTH_LONG).show();
         }
     }
 
