@@ -265,8 +265,16 @@ public class ModificaPillola extends Fragment {
 
                 String nome = nome_cura.getText().toString();
 
-                int scorta = Integer.parseInt(scorte.getText().toString());
-                int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                int scorta;
+                if (!scorte.getText().toString().equals(""))
+                    scorta = Integer.parseInt(scorte.getText().toString());
+                else
+                    scorta = 0;
+                int qta_rimasta;
+                if (!rimanenze.getText().toString().equals(""))
+                    qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                else
+                    qta_rimasta =0;
                 String inizio_cura = text_date_init.getText().toString();
                 String fine_cura = text_date_end.getText().toString();
                 int tipo_cura = resourceId;

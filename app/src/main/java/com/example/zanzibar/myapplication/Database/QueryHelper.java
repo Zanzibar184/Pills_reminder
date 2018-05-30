@@ -48,7 +48,7 @@ public class QueryHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_CONTATTI = "create table "
             + TABLE_CONTATTI + "( "
             + COLUMN_NOME_CONTATTI + " text not null, "
-            + COLUMN_RUOLO + " text not null,"
+            + COLUMN_RUOLO + " text,"
             + COLUMN_NUMERO + " text primary key,"
             + COLUMN_FOTO_CONTATTO + " text);" ;
 
@@ -66,8 +66,8 @@ public class QueryHelper extends SQLiteOpenHelper {
             + TABLE_CURE + "( "
             + COLUMN_NOME_CURE + " text not null, "
             + COLUMN_QTA_ASS + " integer not null, "
-            + COLUMN_SCORTA + " integer not null, "
-            + COLUMN_RIMANENZE + " integer not null,"
+            + COLUMN_SCORTA + " integer, "
+            + COLUMN_RIMANENZE + " integer,"
             + COLUMN_INIZIO_CURA + " text not null,"
             + COLUMN_FINE_CURA + " text not null,"
             + COLUMN_ORARIO_ASSUNZIONE + " text not null,"

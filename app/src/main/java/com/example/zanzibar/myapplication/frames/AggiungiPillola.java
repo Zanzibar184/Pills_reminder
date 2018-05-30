@@ -282,13 +282,23 @@ public class AggiungiPillola extends Fragment {
 
                 String nome = nome_cura.getText().toString();
 
-                int scorta = Integer.parseInt(scorte.getText().toString());
-                int qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                int scorta;
+                if (!scorte.getText().toString().equals(""))
+                scorta = Integer.parseInt(scorte.getText().toString());
+                else
+                scorta = 0;
+
+                int qta_rimasta;
+                if (!rimanenze.getText().toString().equals(""))
+                qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                else
+                qta_rimasta =0;
+
                 String inizio_cura = text_date_init.getText().toString();
                 String fine_cura = text_date_end.getText().toString();
                 int tipo_cura = resourceId;
                 String orario_assunzione = null;
-                int qta_ass = 0;
+
 
                 String URI_foto_farmaco = null;
                 if(id_tipo_foto == 1) {
@@ -299,7 +309,7 @@ public class AggiungiPillola extends Fragment {
                 //fine
                 String unita_misura_dose = null;
 
-
+                int qta_ass;
                 if(nClicks >= 1)
                 {
                     orario_assunzione = orario_di_assunzione1.getText().toString();
