@@ -38,7 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+//TODO: sistemare la visualizzazione delle date in varie parti dell'app, nel stile gg-MM-YYYY
 
 /**
  * A simple {@link Fragment} subclass.

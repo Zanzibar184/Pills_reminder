@@ -30,7 +30,6 @@ import com.example.zanzibar.myapplication.R;
 import java.util.List;
 
 
-//TODO: rendere modificabile note
 public class Note extends Fragment {
 
     NoteDao dao;
