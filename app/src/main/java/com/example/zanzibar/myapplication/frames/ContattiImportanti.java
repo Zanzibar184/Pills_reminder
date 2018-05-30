@@ -156,11 +156,13 @@ public class ContattiImportanti extends Fragment {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
 
+                Contatti modify = getContattobyId(((TextView) v.findViewById(R.id.tel_number)).getText().toString());
+
                 if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
 
 
 
-                    Contatti modify = getContattobyId(((TextView) v.findViewById(R.id.tel_number)).getText().toString());
+
 
 
 
@@ -172,7 +174,13 @@ public class ContattiImportanti extends Fragment {
 
                 } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
 
+                    dao.open();
+                    dao.deleteContatto(modify);
+                    dao.close();
 
+                    ContattiImportanti contattiImportanti = new ContattiImportanti(fab_contatti);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).addToBackStack(null).commit();
 
                 }
                 return true;
