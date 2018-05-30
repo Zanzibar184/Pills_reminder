@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -44,6 +45,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -57,6 +59,10 @@ public class AggiungiPillola extends Fragment {
 
     static final int REQUEST_PICTURE_CAPTURE = 1;
     static final int REQUEST_PICTURE_GALLERY = 2;
+
+    private static final int GET_SPEECH_PILL_NAME = 300;
+    private static final int GET_SPEECH_SCORTA = 400;
+    private static final int GET_SPEECH_RIMANENZA = 500;
 
     //Stringa che ci da il percorso della foto scattata
     protected static String pictureFilePath;
@@ -152,6 +158,10 @@ public class AggiungiPillola extends Fragment {
         ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
         ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
 
+        ImageView img_mic_pillname = (ImageView) view.findViewById(R.id.img_mic_pillname);
+        ImageView img_mic_rimanenze = (ImageView) view.findViewById(R.id.img_mic_rimanenza);
+        ImageView img_mic_scorta = (ImageView) view.findViewById(R.id.img_mic_scorte);
+
         img_call_camera = (ImageView) view.findViewById(R.id.img_add_photo);
 
         text_date_init = (EditText) view.findViewById(R.id.dateinit);
@@ -177,6 +187,26 @@ public class AggiungiPillola extends Fragment {
         orario_di_assunzione2 = view.findViewById(R.id.txt_orario_dose2);
         orario_di_assunzione3 = view.findViewById(R.id.txt_orario_dose3);
 
+        img_mic_pillname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_PILL_NAME);
+            }
+        });
+
+        img_mic_scorta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_SCORTA);
+            }
+        });
+
+        img_mic_rimanenze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_RIMANENZA);
+            }
+        });
 
         img_date_init.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -529,8 +559,35 @@ public class AggiungiPillola extends Fragment {
             //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
             Uri pickedImage = data.getData();
             setPillImageCapturedFromGallery(pickedImage);
+        } else if(requestCode == GET_SPEECH_PILL_NAME && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                nome_cura.setText(result.get(0));
+            }
+        } else if(requestCode == GET_SPEECH_RIMANENZA && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                rimanenze.setText(result.get(0));
+            }
+        } else if(requestCode == GET_SPEECH_SCORTA && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                scorte.setText(result.get(0));
+            }
         }
 
+    }
+
+    public void getSpeechInput(int req_code){
+        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (i.resolveActivity(getContext().getPackageManager())!=null){
+            startActivityForResult(i,req_code);
+        } else {
+            Toast.makeText(getContext(), "Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

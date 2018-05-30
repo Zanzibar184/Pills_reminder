@@ -111,6 +111,9 @@ public class ModificaNota extends Fragment {
 
         ImageView img_time = (ImageView) view.findViewById(R.id.imageviewtime);
 
+        ((ImageView) view.findViewById(R.id.img_mic_titolo_nota)).setVisibility(View.GONE);
+        ((ImageView) view.findViewById(R.id.img_mic_contenuto)).setVisibility(View.GONE);
+
         text_date = (EditText) view.findViewById(R.id.textdate);
         text_date.setText(nota.getData());
 

@@ -112,6 +112,9 @@ public class ModifciaContatto extends Fragment {
         RelativeLayout r_checkbox = (RelativeLayout) frame.findViewById(R.id.relativeLayoutcheckbox);
         r_checkbox.setVisibility(View.GONE);
 
+        ((ImageView) view.findViewById(R.id.img_mic_nomecontatto)).setVisibility(View.GONE);
+        ((ImageView) view.findViewById(R.id.img_mic_relationship)).setVisibility(View.GONE);
+
         imgcontact = (ImageView) view.findViewById(R.id.imgcontactphotochosen);
 
         img_call_camera = (ImageView) view.findViewById(R.id.onclick_camera);

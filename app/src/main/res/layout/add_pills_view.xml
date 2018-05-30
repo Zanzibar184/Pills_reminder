@@ -68,7 +68,15 @@
             android:layout_alignParentBottom="true"
             android:ems="10"
             android:hint="Nome..."
-            android:inputType="textPersonName" /><!-- input nome cura -->
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/img_mic_pillname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_title1"
+            android:layout_alignTop="@+id/nome_farmaco"
+            app:srcCompat="@drawable/ic_mic_black" /><!-- input nome cura -->
 
     </RelativeLayout>
 
@@ -139,13 +147,26 @@
             android:id="@+id/scorte"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="23dp"
-            android:layout_marginRight="23dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/img_mic_rimanenza"
             android:ems="10"
-            android:inputType="number" /> <!-- input rimanenze -->
+            android:inputType="number" />
+
+        <ImageView
+            android:id="@+id/img_mic_rimanenza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_title2"
+            android:layout_alignEnd="@+id/text_title2"
+            app:srcCompat="@drawable/ic_mic_black" />
+
+        <ImageView
+            android:id="@+id/img_mic_scorte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_title2"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_mic_black" /> <!-- input rimanenze -->
 
     </RelativeLayout>
 

@@ -1,8 +1,11 @@
 package com.example.zanzibar.myapplication.frames;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -31,6 +34,7 @@ import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -40,6 +44,9 @@ import java.util.Locale;
  */
 
 public class AggiungiNota extends Fragment {
+
+    private static final int GET_SPEECH_TITOLO_NOTA = 600;
+    private static final int GET_SPEECH_CONTENUTO_NOTA = 700;
 
     NoteDao dao;
     List<Nota> list_note;
@@ -107,6 +114,8 @@ public class AggiungiNota extends Fragment {
         conferma = (Button) view.findViewById(R.id.btn_conferma_inserimento_nota);
         text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
         text_titolo_nota = (EditText) view.findViewById(R.id.title_nota);
+        ImageView img_mic_titolo = (ImageView) view.findViewById(R.id.img_mic_titolo_nota);
+        ImageView img_mic_contenuto = (ImageView) view.findViewById(R.id.img_mic_contenuto);
 
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_cat);
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -171,6 +180,20 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onClick(View v) {
                 setTimePickerNota();
+            }
+        });
+
+        img_mic_titolo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_TITOLO_NOTA);
+            }
+        });
+
+        img_mic_contenuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSpeechInput(GET_SPEECH_CONTENUTO_NOTA);
             }
         });
 
@@ -267,6 +290,33 @@ public class AggiungiNota extends Fragment {
         }
 
         return 0;
+    }
+
+    public void getSpeechInput(int req_code){
+        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (i.resolveActivity(getContext().getPackageManager())!=null){
+            startActivityForResult(i,req_code);
+        } else {
+            Toast.makeText(getContext(), "Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == GET_SPEECH_TITOLO_NOTA && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                text_titolo_nota.setText(result.get(0));
+            }
+        } else if(requestCode == GET_SPEECH_CONTENUTO_NOTA && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                text_contenuto_nota.setText(result.get(0));
+            }
+        }
     }
 
 
