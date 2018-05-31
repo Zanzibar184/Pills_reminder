@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
@@ -22,8 +23,7 @@ import com.example.zanzibar.myapplication.R;
 public class SmsAvviso extends Fragment {
 
     private LinearLayout linearLayout = null;
-
-    private LinearLayout layout_contattiSMS = null;
+    private LinearLayout linearLayoutNumeri = null;
 
     ImageView modifySMS = null;
     ImageView saveSMS = null;
@@ -79,6 +79,11 @@ public class SmsAvviso extends Fragment {
             }
         });
 
+        linearLayoutNumeri = (LinearLayout) frame.findViewById(R.id.layout_numeri_avvisare);
+
+        for(int i=0; i < 3; i++) {
+            addLayoutNumeri();
+        }
 
         linearLayout.addView(frame);
     }
@@ -87,6 +92,13 @@ public class SmsAvviso extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("SMS AVVISO");
+    }
+
+    private void addLayoutNumeri() {
+        final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_numeri_da_avvvisare, linearLayoutNumeri, false);
+        TextView info = (TextView) frame.findViewById(R.id.txt_contattoSMS);
+        info.setText("Testo da inserire");
+        linearLayoutNumeri.addView(frame);
     }
 
 }
