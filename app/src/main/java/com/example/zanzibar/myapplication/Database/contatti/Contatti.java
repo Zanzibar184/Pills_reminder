@@ -6,22 +6,25 @@ public class Contatti {
     private String ruolo;
     private String numero;
     private String foto;
+    private int importante;
 
 
 
     public Contatti(){}
 
-    public Contatti(String nome, String ruolo, String numero){
+    public Contatti(String nome, String ruolo, String numero, int importante){
         this.nome = nome;
         this.ruolo = ruolo;
         this.numero = numero;
         this.foto=null;
+        this.importante = importante;
     }
-    public Contatti(String nome, String ruolo, String numero, String foto){
+    public Contatti(String nome, String ruolo, String numero, String foto, int importante){
         this.nome = nome;
         this.ruolo = ruolo;
         this.numero = numero;
         this.foto=foto;
+        this.importante = importante;
     }
 
     @Override
@@ -59,5 +62,13 @@ public class Contatti {
 
     public String getFoto() {
         return foto;
+    }
+
+    public int getImportante() {
+        return importante;
+    }
+
+    public void setImportante(int importante) {
+        this.importante = importante;
     }
 }

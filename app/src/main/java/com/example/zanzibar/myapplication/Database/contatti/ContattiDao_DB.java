@@ -21,6 +21,7 @@ public class ContattiDao_DB implements ContattiDAO {
                     query.COLUMN_RUOLO,
                     query.COLUMN_NUMERO,
                     query.COLUMN_FOTO,
+                    query.COLUMN_IMPORTANTE,
             };
 
     @Override
@@ -44,6 +45,7 @@ public class ContattiDao_DB implements ContattiDAO {
         values.put(query.COLUMN_RUOLO, contatti.getRuolo());
         values.put(query.COLUMN_NUMERO, contatti.getNumero());
         values.put(query.COLUMN_FOTO_CONTATTO, contatti.getFoto());
+        values.put(query.COLUMN_IMPORTANTE, contatti.getImportante());
         return values;
     }
 
@@ -55,10 +57,11 @@ public class ContattiDao_DB implements ContattiDAO {
         String cognome = cursor.getString(1);
         String numero = cursor.getString(2);
         String foto = cursor.getString(3);
+        int importante = cursor.getInt(4);
 
 
 
-        return  new Contatti(nome, cognome, numero, foto);
+        return  new Contatti(nome, cognome, numero, foto, importante);
     }
 
     @Override
@@ -111,6 +114,32 @@ public class ContattiDao_DB implements ContattiDAO {
 
         return contatti_list;
 
+    }
+
+    @Override
+    public List<Contatti> getContattiImportanti() {
+
+        List<Contatti> contatti_list = new ArrayList<Contatti>();
+        Cursor cursor = database.query(
+                query.TABLE_CONTATTI,
+                allColumns,
+                query.COLUMN_IMPORTANTE + "= 1",
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Contatti contatti1 = cursorToContatti(cursor);
+            contatti_list.add(contatti1);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return contatti_list;
     }
 
 

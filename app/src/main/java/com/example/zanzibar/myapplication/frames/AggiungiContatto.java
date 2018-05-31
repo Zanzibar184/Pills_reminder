@@ -67,7 +67,7 @@ public class AggiungiContatto extends Fragment {
 
     private LinearLayout linearLayout = null;
 
-    FloatingActionButton fab_contatto = null;
+    private FloatingActionButton fab_contatto = null;
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
@@ -76,19 +76,21 @@ public class AggiungiContatto extends Fragment {
     private static final int GET_SPEECH_CONTACT_NAME = 100;
     private static final int GET_SPEECH_RELATIONSHIP = 200;
 
-    EditText nomeContatto = null;
-    EditText numeroContatto = null;
-    EditText relazioneContatto = null;
+    private EditText nomeContatto = null;
+    private EditText numeroContatto = null;
+    private EditText relazioneContatto = null;
 
-    Button aggiungiContatto = null;
+    private Button aggiungiContatto = null;
 
-    ImageView imgcontact;
-    ImageView img_call_camera;
+    private ImageView imgcontact;
+    private ImageView img_call_camera;
 
-    CheckBox check_import;
-    CheckBox check_SMSAVVISO;
+    private CheckBox check_import;
+    private CheckBox check_SMSAVVISO;
 
-    int id_tipo_foto = 0;
+    private int id_tipo_foto = 0;
+
+    int sms_avviso = 0;
 
 
     //Stringa che ci da il percorso della foto scattata
@@ -114,6 +116,8 @@ public class AggiungiContatto extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         Cure.v.setScrollY(0);
         Cure.v.setScrollX(0);
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddcontatto);
@@ -149,11 +153,11 @@ public class AggiungiContatto extends Fragment {
 
 
                 if(id_tipo_foto == 1) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureFilePath));
+                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureFilePath, sms_avviso));
                 } else if (id_tipo_foto == 2) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath));
+                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath, sms_avviso));
                 }else if(id_tipo_foto == 0){
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero));
+                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero, sms_avviso));
                 }
                 dao.close();
 
@@ -169,12 +173,10 @@ public class AggiungiContatto extends Fragment {
             @Override
             public void onClick(View v) {
                 if(check_import.isChecked()) {
-                    Log.i("msg", "Ciao");
                     Intent pickContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                     pickContact.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
                     startActivityForResult(pickContact, IMPORT_CONTACT_NAME_NUMBER);
                 } else {
-                    Log.i("msg", "Bye");
                     /*
                     nomeContatto.setText("");
                     numeroContatto.setText("");
@@ -187,7 +189,10 @@ public class AggiungiContatto extends Fragment {
         check_SMSAVVISO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: implementare metodo per agiungere contatto al servizio SMS AVVISO
+                if (check_SMSAVVISO.isChecked())
+                    sms_avviso = 1;
+                else
+                    sms_avviso = 0;
             }
         });
 

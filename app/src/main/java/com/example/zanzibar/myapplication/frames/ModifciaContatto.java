@@ -74,6 +74,8 @@ public class ModifciaContatto extends Fragment {
 
     int id_tipo_foto = 0;
 
+    private int sms_avviso = 0;
+
 
     //Stringa che ci da il percorso della foto scattata
     protected static String pictureFilePath;
@@ -145,11 +147,11 @@ public class ModifciaContatto extends Fragment {
 
 
                 if(id_tipo_foto == 1) {
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureFilePath), contatto.getNumero());
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureFilePath, sms_avviso), contatto.getNumero());
                 } else if (id_tipo_foto == 2) {
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath), contatto.getNumero());
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath, sms_avviso), contatto.getNumero());
                 }else if(id_tipo_foto == 0){
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,contatto.getFoto()),contatto.getNumero());
+                    dao.updateContatto(new Contatti(nome,ruolo,numero,contatto.getFoto(), sms_avviso),contatto.getNumero());
                 }
                 dao.close();
 
@@ -176,9 +178,19 @@ public class ModifciaContatto extends Fragment {
         });
 
         check_SMSAVVISO = (CheckBox) view.findViewById(R.id.checkBox_setContact_SMSAVVISO);
+
+        if (contatto.getImportante() == 1)
+            check_SMSAVVISO.setChecked(true);
+
         check_SMSAVVISO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (check_SMSAVVISO.isChecked())
+                    sms_avviso = 1;
+                else
+                    sms_avviso = 0;
+
             }
         });
 
