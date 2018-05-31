@@ -29,6 +29,7 @@ public class CureDao_DB implements CureDAO {
                     query.COLUMN_ID,
                     query.COLUMN_FOTO,
                     query.COLUMN_UDM,
+                    query.COLUMN_CURA_IMPORTANTE,
             };
 
     @Override
@@ -59,6 +60,7 @@ public class CureDao_DB implements CureDAO {
         values.put(query.COLUMN_STATO_CURA, cura.getStato_cura());
         values.put(query.COLUMN_FOTO, cura.getFoto());
         values.put(query.COLUMN_UDM, cura.getUnità_misura());
+        values.put(query.COLUMN_CURA_IMPORTANTE, cura.getImportante());
         return values;
     }
 
@@ -78,8 +80,9 @@ public class CureDao_DB implements CureDAO {
         int id = cursor.getInt(9);
         String foto = cursor.getString(10);
         String udm = cursor.getString(11);
+        int importante = cursor.getInt(12);
 
-        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione, stato_cura, id, foto, udm);
+        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione, stato_cura, id, foto, udm, importante);
     }
 
     @Override

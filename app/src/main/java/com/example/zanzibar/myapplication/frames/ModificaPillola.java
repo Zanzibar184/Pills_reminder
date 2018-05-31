@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -77,6 +78,8 @@ public class ModificaPillola extends Fragment {
     private EditText scorte = null;
     private EditText rimanenze = null;
 
+    private CheckBox check_importante = null;
+
     Spinner spin1 = null;
 
     private Calendar myCalendarinit = null;
@@ -89,10 +92,7 @@ public class ModificaPillola extends Fragment {
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
 
-    int nClicks = 0;
     RelativeLayout r1;
-    RelativeLayout r2;
-    RelativeLayout r3;
 
     ImageView img_call_camera;
 
@@ -105,6 +105,8 @@ public class ModificaPillola extends Fragment {
     Drawable draw;
 
     int resourceId;
+
+    private int importante = 0;
 
 
     public ModificaPillola() {
@@ -252,7 +254,16 @@ public class ModificaPillola extends Fragment {
             }
         });
 
-
+        check_importante = view.findViewById(R.id.checkBox);
+        check_importante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(check_importante.isChecked())
+                    importante = 1;
+                else
+                    importante = 0;
+            }
+        });
 
 
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
@@ -305,7 +316,8 @@ public class ModificaPillola extends Fragment {
                                 Cura.DA_ASSUMERE,
                                 modify_cura.getId(),
                                 URI_foto_farmaco,
-                                unità_misura
+                                unità_misura,
+                                importante
                         ));
 
                 dao.close();
