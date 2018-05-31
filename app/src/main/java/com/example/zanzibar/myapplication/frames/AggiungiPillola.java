@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -311,6 +313,7 @@ public class AggiungiPillola extends Fragment {
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
                         && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
                 {
+                    colorInputUnfilled();
                     dao = new CureDao_DB();
                     dao.open();
 
@@ -373,6 +376,8 @@ public class AggiungiPillola extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
                 }
+                else
+                    colorInputUnfilled();
 
 
 
@@ -384,6 +389,39 @@ public class AggiungiPillola extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi farmaco");
+    }
+
+    private void colorInputUnfilled(){
+
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (nome_cura.getText().toString().equals(""))
+            nome_cura.setBackground(alert);
+        else
+            nome_cura.setBackground(null);
+
+        if (text_dose1.getText().toString().equals(""))
+            text_dose1.setBackground(alert);
+        else
+            text_dose1.setBackground(null);
+
+        if (text_date_init.getText().toString().equals(""))
+            text_date_init.setBackground(alert);
+        else
+            text_date_init.setBackground(null);
+
+        if (text_date_end.getText().toString().equals(""))
+            text_date_end.setBackground(alert);
+        else
+            text_date_end.setBackground(null);
+
+        if (orario_di_assunzione1.getText().toString().equals(""))
+            orario_di_assunzione1.setBackground(alert);
+        else
+            orario_di_assunzione1.setBackground(null);
     }
 
     private void setDateInit() {

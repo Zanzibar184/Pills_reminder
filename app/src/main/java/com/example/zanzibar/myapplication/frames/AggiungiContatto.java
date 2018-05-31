@@ -143,11 +143,7 @@ public class AggiungiContatto extends Fragment {
 
 
 
-        /*
-        GradientDrawable backgroundGradient = new GradientDrawable();
-        backgroundGradient.setStroke(5, Color.RED);
-        nomeContatto.setBackground(backgroundGradient);
-        */
+
 
 
         aggiungiContatto = (Button) view.findViewById(R.id.btn_conferma_contatto);
