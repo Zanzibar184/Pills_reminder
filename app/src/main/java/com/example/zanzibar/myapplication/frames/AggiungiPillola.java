@@ -307,67 +307,74 @@ public class AggiungiPillola extends Fragment {
             @Override
         public void onClick(View view) {
 
-                dao = new CureDao_DB();
-                dao.open();
 
-                String nome = nome_cura.getText().toString();
-
-                int scorta;
-                if (!scorte.getText().toString().equals(""))
-                scorta = Integer.parseInt(scorte.getText().toString());
-                else
-                scorta = 0;
-
-                int qta_rimasta;
-                if (!rimanenze.getText().toString().equals(""))
-                qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
-                else
-                qta_rimasta =0;
-
-                String inizio_cura = text_date_init.getText().toString();
-                String fine_cura = text_date_end.getText().toString();
-                int tipo_cura = resourceId;
-                String orario_assunzione = null;
-
-
-                String URI_foto_farmaco = null;
-                if(id_tipo_foto == 1) {
-                    URI_foto_farmaco = pictureFilePath;
-                } else if (id_tipo_foto == 2) {
-                    URI_foto_farmaco = pictureGalleryFilePath;
-                }
-                //fine
-                String unita_misura_dose = null;
-
-                int qta_ass;
-                if(nClicks >= 1)
+                if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
+                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
                 {
-                    orario_assunzione = orario_di_assunzione1.getText().toString();
-                    qta_ass = Integer.parseInt(text_dose1.getText().toString());
-                    unita_misura_dose = spin1.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
-                }
-                if(nClicks >= 2)
-                {
-                    orario_assunzione = orario_di_assunzione2.getText().toString();
-                    qta_ass = Integer.parseInt(text_dose2.getText().toString());
-                    unita_misura_dose = spin2.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
-                }
-                if(nClicks >= 3)
-                {
-                    orario_assunzione = orario_di_assunzione3.getText().toString();
-                    qta_ass = Integer.parseInt(text_dose3.getText().toString());
-                    unita_misura_dose = spin3.getSelectedItem().toString();
-                    Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                    dao = new CureDao_DB();
+                    dao.open();
+
+                    String nome = nome_cura.getText().toString();
+
+                    int scorta;
+                    if (!scorte.getText().toString().equals(""))
+                        scorta = Integer.parseInt(scorte.getText().toString());
+                    else
+                        scorta = 0;
+
+                    int qta_rimasta;
+                    if (!rimanenze.getText().toString().equals(""))
+                        qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                    else
+                        qta_rimasta =0;
+
+                    String inizio_cura = text_date_init.getText().toString();
+                    String fine_cura = text_date_end.getText().toString();
+                    int tipo_cura = resourceId;
+                    String orario_assunzione = null;
+
+
+                    String URI_foto_farmaco = null;
+                    if(id_tipo_foto == 1) {
+                        URI_foto_farmaco = pictureFilePath;
+                    } else if (id_tipo_foto == 2) {
+                        URI_foto_farmaco = pictureGalleryFilePath;
+                    }
+                    //fine
+                    String unita_misura_dose = null;
+
+                    int qta_ass;
+                    if(nClicks >= 1)
+                    {
+                        orario_assunzione = orario_di_assunzione1.getText().toString();
+                        qta_ass = Integer.parseInt(text_dose1.getText().toString());
+                        unita_misura_dose = spin1.getSelectedItem().toString();
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                    }
+                    if(nClicks >= 2)
+                    {
+                        orario_assunzione = orario_di_assunzione2.getText().toString();
+                        qta_ass = Integer.parseInt(text_dose2.getText().toString());
+                        unita_misura_dose = spin2.getSelectedItem().toString();
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                    }
+                    if(nClicks >= 3)
+                    {
+                        orario_assunzione = orario_di_assunzione3.getText().toString();
+                        qta_ass = Integer.parseInt(text_dose3.getText().toString());
+                        unita_misura_dose = spin3.getSelectedItem().toString();
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                    }
+
+                    dao.close();
+
+                    fab_pills.show();
+                    Cure cure = new Cure(fab_pills);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
                 }
 
-                dao.close();
 
-                fab_pills.show();
-                Cure cure = new Cure(fab_pills);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
 
             }
         });

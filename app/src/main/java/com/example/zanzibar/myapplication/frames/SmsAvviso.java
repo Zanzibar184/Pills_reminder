@@ -13,8 +13,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zanzibar.myapplication.Database.contatti.Contatti;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
+import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+
+import java.util.List;
 
 
 /**
@@ -30,6 +35,9 @@ public class SmsAvviso extends Fragment {
 
     EditText editSMS = null;
 
+    ContattiDAO dao;
+    List<Contatti> list_contatti;
+
     public SmsAvviso() {
         // Required empty public constructor
     }
@@ -38,6 +46,10 @@ public class SmsAvviso extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dao = new ContattiDao_DB();
+        dao.open();
+        list_contatti = dao.getContattiImportanti();
+        dao.close();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_sms_avviso, container, false);
@@ -81,9 +93,13 @@ public class SmsAvviso extends Fragment {
 
         linearLayoutNumeri = (LinearLayout) frame.findViewById(R.id.layout_numeri_avvisare);
 
-        for(int i=0; i < 3; i++) {
-            addLayoutNumeri();
+
+
+        for (int i = 0; i < list_contatti.size(); i++){
+            Contatti tmp = list_contatti.get(i);
+            addLayoutNumeri(tmp);
         }
+
 
         linearLayout.addView(frame);
     }
@@ -94,10 +110,10 @@ public class SmsAvviso extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("SMS AVVISO");
     }
 
-    private void addLayoutNumeri() {
+    private void addLayoutNumeri(Contatti contatti) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_numeri_da_avvvisare, linearLayoutNumeri, false);
         TextView info = (TextView) frame.findViewById(R.id.txt_contattoSMS);
-        info.setText("Testo da inserire");
+        info.setText(contatti.toString());
         linearLayoutNumeri.addView(frame);
     }
 
