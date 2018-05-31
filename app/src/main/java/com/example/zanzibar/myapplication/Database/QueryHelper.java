@@ -24,6 +24,7 @@ public class QueryHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_FOTO = "FOTO";
     public static final String COLUMN_UDM = "UNITA_MISURA";
+    public static final String COLUMN_CURA_IMPORTANTE = "CURA_IMPORTANTE";
 
     //-----CONTATTI
     public static final String TABLE_CONTATTI = "contatti";
@@ -43,7 +44,7 @@ public class QueryHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID_MEMO = "ID_MEMO";
 
     public static final String DATABASE_NAME = "pills_reminder.db";
-    public static int DATABASE_VERSION = 2;
+    public static int DATABASE_VERSION = 3;
 
 
     private static final String DATABASE_CREATE_CONTATTI = "create table "
@@ -77,7 +78,9 @@ public class QueryHelper extends SQLiteOpenHelper {
             + COLUMN_STATO_CURA + " text not null,"
             + COLUMN_ID + " integer primary key autoincrement,"
             + COLUMN_UDM + " text,"
-            + COLUMN_FOTO + " text);" ;
+            + COLUMN_FOTO + " text,"
+            + COLUMN_CURA_IMPORTANTE + " integer not null);" ;
+
     public QueryHelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }

@@ -13,6 +13,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -83,6 +85,8 @@ public class AggiungiPillola extends Fragment {
     private EditText scorte = null;
     private EditText rimanenze = null;
 
+    private CheckBox check_importante = null;
+
     private Calendar myCalendarinit = null;
     private Calendar myCalendarend = null;
     private DatePickerDialog.OnDateSetListener dateinit = null;
@@ -117,6 +121,8 @@ public class AggiungiPillola extends Fragment {
     Drawable draw;
 
     int resourceId;
+
+    private int importante = 0;
 
     public AggiungiPillola() {
         // Required empty public constructor
@@ -303,6 +309,17 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
+        check_importante = view.findViewById(R.id.checkBox);
+        check_importante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(check_importante.isChecked())
+                    importante = 1;
+                else
+                    importante = 0;
+            }
+        });
+
 
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
@@ -352,21 +369,21 @@ public class AggiungiPillola extends Fragment {
                         orario_assunzione = orario_di_assunzione1.getText().toString();
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
                     }
                     if(nClicks >= 2)
                     {
                         orario_assunzione = orario_di_assunzione2.getText().toString();
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
                     }
                     if(nClicks >= 3)
                     {
                         orario_assunzione = orario_di_assunzione3.getText().toString();
                         qta_ass = Integer.parseInt(text_dose3.getText().toString());
                         unita_misura_dose = spin3.getSelectedItem().toString();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
                     }
 
                     dao.close();

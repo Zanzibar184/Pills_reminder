@@ -14,6 +14,7 @@ public class Cura {
     private int id;
     private String foto;
     private String unità_misura;
+    private int importante;
 
 
 
@@ -23,7 +24,7 @@ public class Cura {
     public static final String DA_ASSUMERE = "da_assumere";
 
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, String foto,String unità_misura){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, String foto,String unità_misura, int importante){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -36,9 +37,10 @@ public class Cura {
         this.id = -1;
         this.foto = foto;
         this.unità_misura = unità_misura;
+        this.importante = importante;
     }
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, int id, String foto, String unità_misura){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, String stato_cura, int id, String foto, String unità_misura, int importante){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -51,11 +53,12 @@ public class Cura {
         this.id = id;
         this.foto = foto;
         this.unità_misura = unità_misura;
+        this.importante = importante;
     }
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura + " " + foto + " " + unità_misura;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura + " " + foto + " " + unità_misura + " " + importante;
     }
 
 
@@ -153,5 +156,13 @@ public class Cura {
 
     public void setUnità_misura(String unità_misura) {
         this.unità_misura = unità_misura;
+    }
+
+    public void setImportante(int importante) {
+        this.importante = importante;
+    }
+
+    public int getImportante() {
+        return importante;
     }
 }
