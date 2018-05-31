@@ -8,14 +8,18 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -137,6 +141,15 @@ public class AggiungiContatto extends Fragment {
         numeroContatto = view.findViewById(R.id.numero_contatto);
         relazioneContatto = view.findViewById(R.id.relazione_contatto);
 
+
+        /*
+        ----coloro di rosso
+        GradientDrawable backgroundGradient = new GradientDrawable();
+        backgroundGradient.setStroke(5, Color.RED);
+        nomeContatto.setBackground(backgroundGradient);
+        -----
+        */
+
         aggiungiContatto = (Button) view.findViewById(R.id.btn_conferma_contatto);
         aggiungiContatto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +161,7 @@ public class AggiungiContatto extends Fragment {
                 String nome = nomeContatto.getText().toString();
                 String ruolo = relazioneContatto.getText().toString();
                 String numero = numeroContatto.getText().toString();
+
 
 
 

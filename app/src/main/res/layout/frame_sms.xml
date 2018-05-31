@@ -103,10 +103,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/layout_contatti">
 
                 <TextView
-                    android:id="@+id/txt_contattoSMS1"
+                    android:id="@+id/txt_contattoSMS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -114,23 +115,6 @@
                     android:layout_gravity="center"
                     android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/txt_contattoSMS2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="7857493875398 Paolo Rossi (Medico)"
-                    android:layout_gravity="center"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/txt_contattoSMS3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="7857493875398 Paolo Rossi (Medico)"
-                    android:layout_gravity="center"
-                    android:textAlignment="center" />
 
             </LinearLayout>
 
@@ -194,12 +178,12 @@
         <RelativeLayout
             android:id="@+id/layout_data_ora_nota"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="0dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            >
+            android:layout_marginBottom="101dp">
 
             <ImageView
                 android:id="@+id/save_sms_text"
