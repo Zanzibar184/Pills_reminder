@@ -161,19 +161,19 @@ public class Cure extends Fragment {
 
                     if((ora >= 6) && (ora <12))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp.getStato_cura());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
                     }
                     if((ora >= 12) && (ora <18))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp.getStato_cura());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
                     }
                     if((ora >= 18) && (ora <24))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp.getStato_cura());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp.getStato_cura(), tmp.getImportante());
                     }
                     if((ora >= 0) && (ora <6))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp.getStato_cura());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
                     }
 
                 }
@@ -183,9 +183,15 @@ public class Cure extends Fragment {
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura) {
+    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura, int importante) {
 
-            final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
+            View frame = null;
+
+            if (importante == 1)
+                frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola_importante, layout, false);
+            else
+                frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
+
             final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
             final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
             final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
@@ -217,10 +223,11 @@ public class Cure extends Fragment {
                 }
 
 
-            frame.setOnClickListener(new View.OnClickListener() {
+        final View finalFrame = frame;
+        frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setPopupMenuImages(getContext(),frame, img_greenV, img_redX);
+                    setPopupMenuImages(getContext(), finalFrame, img_greenV, img_redX);
                 }
             });
             layout.addView(frame);
