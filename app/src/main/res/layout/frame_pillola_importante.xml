@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/rounded_shape_importante">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/txt_nome_pillola">
+
+        <ImageView
+            android:id="@+id/img_farmaco"
+            android:layout_width="@dimen/img_pill_scrollview"
+            android:layout_height="@dimen/img_pill_scrollview"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/pill_colored" />
+
+        <ImageView
+            android:id="@+id/img_greenV"
+            android:layout_width="@dimen/img_pill_scrollview"
+            android:layout_height="@dimen/img_pill_scrollview"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/green_check"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/img_redX"
+            android:layout_width="@dimen/img_pill_scrollview"
+            android:layout_height="@dimen/img_pill_scrollview"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/red_cross"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_nome_pillola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Pillola X"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_numero_dosi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:text="x2" />
+
+    <TextView
+        android:id="@+id/txt_ora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="9:00" />
+
+    <TextView
+        android:id="@+id/cura_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</RelativeLayout>
