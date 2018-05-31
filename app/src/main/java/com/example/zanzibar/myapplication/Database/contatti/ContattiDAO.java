@@ -11,4 +11,5 @@ public interface ContattiDAO {
     public void deleteContatto(Contatti contatti);
     public void updateContatto(Contatti contatti, String numero);
     public List<Contatti> getAllContatti();
+    public List<Contatti> getContattiImportanti();
 }

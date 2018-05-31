@@ -74,8 +74,9 @@ public class MieiFarmaci extends Fragment {
         fab_miei_farmaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Ci troviamo in MIEI FARMACI() :-)", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                ScegliPillola scegliPillola = new ScegliPillola(fab_miei_farmaci);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, scegliPillola).addToBackStack(null).commit();
             }
         });
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutfarmaci);
@@ -107,10 +108,13 @@ public class MieiFarmaci extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
-        ((TextView) frame.findViewById(R.id.txt_qta_totale)).setText("Quantità della confezione: " +qta_totale);
-        ((TextView) frame.findViewById(R.id.txt_qta_rimasta)).setText("Quantità rimanente: " +qta_rimasta);
         ((TextView) frame.findViewById(R.id.txt_start_cura)).setText("Dal: " + dateFormat.format(inizio) );
         ((TextView) frame.findViewById(R.id.txt_end_cura)).setText("Fino al: " + dateFormat.format(fine));
+
+
+        ((TextView) frame.findViewById(R.id.txt_terminata)).setText("Cura " + compareStringDate(inizio,fine));
+
+
         ((TextView) frame.findViewById(R.id.txt_id_hidden)).setText(id + "");
         ((ImageView) frame.findViewById(R.id.imgCura)).setImageDrawable(getResources().getDrawable(getDrawIcons(tipo_cura)));
 
@@ -209,5 +213,18 @@ public class MieiFarmaci extends Fragment {
         }
         Cura cura = null;
         return cura;
+    }
+
+    private String compareStringDate( Date inizio, Date fine) {
+
+        if (System.currentTimeMillis() > fine.getTime())
+            return "terminata";
+        else if ((fine.getTime() > System.currentTimeMillis() && (inizio.getTime() < System.currentTimeMillis())))
+            return "in corso";
+        else if (inizio.getTime() > System.currentTimeMillis())
+            return "non ancora cominciata";
+
+        return "";
+
     }
 }
