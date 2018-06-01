@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -255,6 +257,12 @@ public class ModificaPillola extends Fragment {
         });
 
         check_importante = view.findViewById(R.id.checkBox);
+
+        if ( modify_cura.getImportante() == 1) {
+            check_importante.setChecked(true);
+            importante = 1;
+        }
+
         check_importante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,66 +274,75 @@ public class ModificaPillola extends Fragment {
         });
 
 
+
+
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View view) {
 
-                dao = new CureDao_DB();
-                dao.open();
+                if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
+                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
+                {
 
-                String nome = nome_cura.getText().toString();
+                    dao = new CureDao_DB();
+                    dao.open();
 
-                int scorta;
-                if (!scorte.getText().toString().equals(""))
-                    scorta = Integer.parseInt(scorte.getText().toString());
-                else
-                    scorta = 0;
-                int qta_rimasta;
-                if (!rimanenze.getText().toString().equals(""))
-                    qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
-                else
-                    qta_rimasta =0;
-                String inizio_cura = text_date_init.getText().toString();
-                String fine_cura = text_date_end.getText().toString();
-                int tipo_cura = resourceId;
-                String orario_assunzione = null;
-                int qta_ass = Integer.parseInt(text_dose1.getText().toString());
-                orario_assunzione = orario_di_assunzione1.getText().toString();
+                    String nome = nome_cura.getText().toString();
 
-                String URI_foto_farmaco = null;
-                if(id_tipo_foto == 1) {
-                    URI_foto_farmaco = pictureFilePath;
-                } else if (id_tipo_foto == 2) {
-                    URI_foto_farmaco = pictureGalleryFilePath;
+                    int scorta;
+                    if (!scorte.getText().toString().equals(""))
+                        scorta = Integer.parseInt(scorte.getText().toString());
+                    else
+                        scorta = 0;
+                    int qta_rimasta;
+                    if (!rimanenze.getText().toString().equals(""))
+                        qta_rimasta = Integer.parseInt(rimanenze.getText().toString());
+                    else
+                        qta_rimasta =0;
+                    String inizio_cura = text_date_init.getText().toString();
+                    String fine_cura = text_date_end.getText().toString();
+                    int tipo_cura = resourceId;
+                    String orario_assunzione = null;
+                    int qta_ass = Integer.parseInt(text_dose1.getText().toString());
+                    orario_assunzione = orario_di_assunzione1.getText().toString();
+
+                    String URI_foto_farmaco = null;
+                    if(id_tipo_foto == 1) {
+                        URI_foto_farmaco = pictureFilePath;
+                    } else if (id_tipo_foto == 2) {
+                        URI_foto_farmaco = pictureGalleryFilePath;
+                    }
+
+                    String unità_misura = spin1.getSelectedItem().toString();
+
+                    Log.i("foto: ", URI_foto_farmaco+"");
+                    dao.updateCura(
+                            new Cura(
+                                    nome,
+                                    qta_ass,
+                                    scorta,
+                                    qta_rimasta,
+                                    inizio_cura,
+                                    fine_cura,
+                                    tipo_cura,
+                                    orario_assunzione,
+                                    Cura.DA_ASSUMERE,
+                                    modify_cura.getId(),
+                                    URI_foto_farmaco,
+                                    unità_misura,
+                                    importante
+                            ));
+
+                    dao.close();
+
+                    fab_pills.show();
+                    Cure cure = new Cure(fab_pills);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
                 }
-
-                String unità_misura = spin1.getSelectedItem().toString();
-
-                Log.i("foto: ", URI_foto_farmaco+"");
-                dao.updateCura(
-                        new Cura(
-                                nome,
-                                qta_ass,
-                                scorta,
-                                qta_rimasta,
-                                inizio_cura,
-                                fine_cura,
-                                tipo_cura,
-                                orario_assunzione,
-                                Cura.DA_ASSUMERE,
-                                modify_cura.getId(),
-                                URI_foto_farmaco,
-                                unità_misura,
-                                importante
-                        ));
-
-                dao.close();
-
-                fab_pills.show();
-                Cure cure = new Cure(fab_pills);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+                else
+                    colorInputUnfilled();
 
             }
         });
@@ -335,6 +352,39 @@ public class ModificaPillola extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Modifica cura");
+    }
+
+    private void colorInputUnfilled(){
+
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (nome_cura.getText().toString().equals(""))
+            nome_cura.setBackground(alert);
+        else
+            nome_cura.setBackground(null);
+
+        if (text_dose1.getText().toString().equals(""))
+            text_dose1.setBackground(alert);
+        else
+            text_dose1.setBackground(null);
+
+        if (text_date_init.getText().toString().equals(""))
+            text_date_init.setBackground(alert);
+        else
+            text_date_init.setBackground(null);
+
+        if (text_date_end.getText().toString().equals(""))
+            text_date_end.setBackground(alert);
+        else
+            text_date_end.setBackground(null);
+
+        if (orario_di_assunzione1.getText().toString().equals(""))
+            orario_di_assunzione1.setBackground(alert);
+        else
+            orario_di_assunzione1.setBackground(null);
     }
 
     private void setDateInit() {

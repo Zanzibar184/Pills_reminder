@@ -151,29 +151,38 @@ public class AggiungiContatto extends Fragment {
             @Override
             public void onClick(View v) {
 
-                dao = new ContattiDao_DB();
-                dao.open();
+                if((!nomeContatto.getText().toString().equals("")) && (!numeroContatto.getText().toString().equals("")))
+                {
 
-                String nome = nomeContatto.getText().toString();
-                String ruolo = relazioneContatto.getText().toString();
-                String numero = numeroContatto.getText().toString();
+                    dao = new ContattiDao_DB();
+                    dao.open();
+
+                    String nome = nomeContatto.getText().toString();
+                    String ruolo = relazioneContatto.getText().toString();
+                    String numero = numeroContatto.getText().toString();
 
 
 
 
 
-                if(id_tipo_foto == 1) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureFilePath, sms_avviso));
-                } else if (id_tipo_foto == 2) {
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath, sms_avviso));
-                }else if(id_tipo_foto == 0){
-                    Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero, sms_avviso));
+                    if(id_tipo_foto == 1) {
+                        Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureFilePath, sms_avviso));
+                    } else if (id_tipo_foto == 2) {
+                        Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath, sms_avviso));
+                    }else if(id_tipo_foto == 0){
+                        Contatti contatti = dao.insertContatto(new Contatti(nome,ruolo,numero, sms_avviso));
+                    }
+                    dao.close();
+
+                    ContattiImportanti cure = new ContattiImportanti(fab_contatto);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
                 }
-                dao.close();
+                else
+                    colorInputUnfilled();
 
-                ContattiImportanti cure = new ContattiImportanti(fab_contatto);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+
+
 
             }
         });
@@ -233,7 +242,24 @@ public class AggiungiContatto extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi contatto");
     }
 
+    private void colorInputUnfilled(){
 
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (nomeContatto.getText().toString().equals(""))
+            nomeContatto.setBackground(alert);
+        else
+            nomeContatto.setBackground(null);
+
+        if (numeroContatto.getText().toString().equals(""))
+            numeroContatto.setBackground(alert);
+        else
+            numeroContatto.setBackground(null);
+
+    }
 
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };

@@ -57,7 +57,7 @@ import java.util.Locale;
 /**
  * Created by user on 07/05/18.
  */
-    //TODO: rendere opzionale l'inserimento di alcuni campi (es quantità rimaste/qta nella scatola)
+
 public class AggiungiPillola extends Fragment {
     private CureDAO dao;
 
@@ -330,7 +330,6 @@ public class AggiungiPillola extends Fragment {
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
                         && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
                 {
-                    colorInputUnfilled();
                     dao = new CureDao_DB();
                     dao.open();
 

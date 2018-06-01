@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -136,28 +138,32 @@ public class ModifciaContatto extends Fragment {
             @Override
             public void onClick(View v) {
 
-                dao = new ContattiDao_DB();
-                dao.open();
+                if((!nomeContatto.getText().toString().equals("")) && (!numeroContatto.getText().toString().equals(""))) {
 
-                String nome = nomeContatto.getText().toString();
-                String ruolo = relazioneContatto.getText().toString();
-                String numero = numeroContatto.getText().toString();
+                    dao = new ContattiDao_DB();
+                    dao.open();
+
+                    String nome = nomeContatto.getText().toString();
+                    String ruolo = relazioneContatto.getText().toString();
+                    String numero = numeroContatto.getText().toString();
 
 
+                    if (id_tipo_foto == 1) {
+                        dao.updateContatto(new Contatti(nome, ruolo, numero, pictureFilePath, sms_avviso), contatto.getNumero());
+                    } else if (id_tipo_foto == 2) {
+                        dao.updateContatto(new Contatti(nome, ruolo, numero, pictureGalleryFilePath, sms_avviso), contatto.getNumero());
+                    } else if (id_tipo_foto == 0) {
+                        dao.updateContatto(new Contatti(nome, ruolo, numero, contatto.getFoto(), sms_avviso), contatto.getNumero());
+                    }
+                    dao.close();
 
-
-                if(id_tipo_foto == 1) {
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureFilePath, sms_avviso), contatto.getNumero());
-                } else if (id_tipo_foto == 2) {
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,pictureGalleryFilePath, sms_avviso), contatto.getNumero());
-                }else if(id_tipo_foto == 0){
-                    dao.updateContatto(new Contatti(nome,ruolo,numero,contatto.getFoto(), sms_avviso),contatto.getNumero());
+                    ContattiImportanti cure = new ContattiImportanti(fab_contatto);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
                 }
-                dao.close();
+                else
+                    colorInputUnfilled();
 
-                ContattiImportanti cure = new ContattiImportanti(fab_contatto);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
 
             }
         });
@@ -208,7 +214,24 @@ public class ModifciaContatto extends Fragment {
     }
 
 
+    private void colorInputUnfilled(){
 
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (nomeContatto.getText().toString().equals(""))
+            nomeContatto.setBackground(alert);
+        else
+            nomeContatto.setBackground(null);
+
+        if (numeroContatto.getText().toString().equals(""))
+            numeroContatto.setBackground(alert);
+        else
+            numeroContatto.setBackground(null);
+
+    }
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
