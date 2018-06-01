@@ -41,6 +41,9 @@
     <string name="modifica_cura">Modifica informazioni</string>
     <string name="elimina_cura">Elimina</string>
 
+    <string name="info_positivo_sms">Nel caso non venga confermata l\'assunzione della cura agli orari prestabiliti, i contatti importanti verranno avvertiti via SMS</string>
+    <string name="info_negativo_sms">Cura non inserita nel servizio SMS AVVISO</string>
+
     <string-array name="pill_units">
         <item>mg</item>
         <item>gr</item>

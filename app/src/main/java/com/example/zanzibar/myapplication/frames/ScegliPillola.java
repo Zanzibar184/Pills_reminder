@@ -96,7 +96,7 @@ public class ScegliPillola extends Fragment {
                     name_pill.setText("Iniezione");
                 } else if(areDrawablesIdentical(img_state,id_img_siringa)) {
                     pill_image.setImageResource(R.drawable.pill_colored);
-                    name_pill.setText("Pillola");
+                    name_pill.setText("Pastiglia");
                 }
             }
         });

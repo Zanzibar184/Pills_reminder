@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
@@ -86,6 +87,15 @@ public class InfoFarmaco extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText("Cominciata il: " +dateFormat.format(inizio));
         ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + dateFormat.format(fine));
+
+        if(cura.getImportante() == 1){
+            ((TextView) frame.findViewById(R.id.txt_sms)).setText(R.string.info_positivo_sms);
+        }
+        else
+        {
+            ((TextView) frame.findViewById(R.id.txt_sms)).setText(R.string.info_negativo_sms);
+        }
+
 
         if(cura.getFoto() != null){
             File imgFile = new  File(cura.getFoto());
