@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
@@ -118,6 +120,8 @@ public class AggiungiNota extends Fragment {
         ImageView img_mic_contenuto = (ImageView) view.findViewById(R.id.img_mic_contenuto);
 
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_cat);
+        rgroup.check(R.id.rbtn_generale);
+        categoria_nota = "Generale";
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -200,14 +204,19 @@ public class AggiungiNota extends Fragment {
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.open();
                 int tipo_memo = CheckId(categoria_nota);
-                dao.insertNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),text_date.getText().toString(),text_time.getText().toString(),tipo_memo));
-                dao.close();
+                if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
 
-                Note nota = new Note(fab_nota);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                    dao.open();
+                    dao.insertNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo));
+                    dao.close();
+
+                    Note nota = new Note(fab_nota);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                }
+                else
+                    colorInputUnfilled();
 
             }
         });
@@ -218,6 +227,20 @@ public class AggiungiNota extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi nota");
+    }
+
+    private void colorInputUnfilled(){
+
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (text_contenuto_nota.getText().toString().equals(""))
+            text_contenuto_nota.setBackground(alert);
+        else
+            text_contenuto_nota.setBackground(null);
+
     }
 
     private void setDateNote() {

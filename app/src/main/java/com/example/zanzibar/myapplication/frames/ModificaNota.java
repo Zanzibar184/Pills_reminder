@@ -2,6 +2,8 @@ package com.example.zanzibar.myapplication.frames;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -200,16 +202,20 @@ public class ModificaNota extends Fragment {
             @Override
             public void onClick(View v) {
 
-                dao.open();
-
                 int tipo_memo = Note.CheckId(categoria_nota);
-                dao.updateNota(new Nota(text_titolo_nota.getText().toString(),text_contenuto_nota.getText().toString(),text_date.getText().toString(),text_time.getText().toString(),tipo_memo, nota.getId_memo()));
+                if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
+                    dao.open();
 
-                dao.close();
+                    dao.updateNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo, nota.getId_memo()));
 
-                Note nota = new Note(fab_nota);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                    dao.close();
+
+                    Note nota = new Note(fab_nota);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                }
+                else
+                    colorInputUnfilled();
 
             }
         });
@@ -221,6 +227,21 @@ public class ModificaNota extends Fragment {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Modifica nota");
     }
+
+    private void colorInputUnfilled(){
+
+
+        GradientDrawable alert = new GradientDrawable();
+        alert.setStroke(3, Color.RED);
+
+
+        if (text_contenuto_nota.getText().toString().equals(""))
+            text_contenuto_nota.setBackground(alert);
+        else
+            text_contenuto_nota.setBackground(null);
+
+    }
+
 
     private void setDateNote() {
         myCalendardate = Calendar.getInstance();
