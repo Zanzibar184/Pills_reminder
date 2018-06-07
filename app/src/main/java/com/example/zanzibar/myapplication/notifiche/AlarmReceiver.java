@@ -34,8 +34,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     static int COUNTER = 0;
 
     public String CHANNEL_ID = "Channel_ID";
-    public String contentText = "Hai un farmaco da prendere";
-    public String contentTitle = "Scorri per confermare l'assunzione del farmaco!";
+    public String contentText = "prova";
+    public String contentTitle = "Hai un farmaco da prendere";
     public String contentTicker = "New Message Alert!";
 
     NotificationManager nm;
@@ -52,12 +52,27 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent resultIntent = new Intent(context, ProvaNotifica.class);
         Bundle b = intent.getExtras();
-        String title_notification = b.getString("titolo");
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
-        contentTitle = title_notification;
+        int numero_giorni = b.getInt("n_giorni");
+        String key = b.getString("key");
         contentText = content_notification;
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,0,b);
+
+        //intent.putExtra("contatore_giorni", ++contatore_giorni);
+        //Log.i("contatore giorni", contatore_giorni+"");
+
+        SharedPreferences prefs = context.getSharedPreferences("ContatoreGiorniPreferenze", MODE_PRIVATE);
+        int counter = prefs.getInt(key,0);
+
+        counter = counter+1;
+
+        SharedPreferences.Editor editor = context.getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
+        editor.putInt(key, counter);
+        editor.apply();
+
+        Log.i("counter giorni", counter+"");
+        Log.i("numero giorni", numero_giorni+"");
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(ProvaNotifica.class);
@@ -94,11 +109,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
         nm.notify(m, notification);
 
-        if(COUNTER >= 1) {
+        if(counter==numero_giorni) {
             int alarmId = intent.getExtras().getInt("req_code");
             PendingIntent alarmIntent;
             alarmIntent = PendingIntent.getBroadcast(context, alarmId, new Intent(context, AlarmReceiver.class),
                     0);
+
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             alarmManager.cancel(alarmIntent);
             Log.e("Alarm","Cancellata Notifica");

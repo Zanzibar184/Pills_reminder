@@ -683,27 +683,34 @@ public class AggiungiPillola extends Fragment {
         SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
 
-        Bundle c = new Bundle();
-        c.putString("titolo", "Hai un farmaco da prendere");
+        SharedPreferences.Editor editor2 = getContext().getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
+        editor.putInt(key, 0);
+        editor.apply();
 
-        c.putString("nome", nome);
-        c.putString("unità", unità);
-        c.putInt("quantità", quantità);
-        c.putString("orario", orario);
-
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-        c.putInt("req_code", request_code);
-        intent.putExtras(c);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Date date = null;
         SimpleDateFormat formatdate = new SimpleDateFormat("H:mm");
+        Date cal1 = null;
+        SimpleDateFormat formatcal1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date cal2 = null;
+        SimpleDateFormat formatcal2 = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             date = formatdate.parse(orario);
+            cal1 = formatcal1.parse(data_inizio);
+            cal2 = formatcal2.parse(data_fine);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+        Bundle c = new Bundle();
+        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+        c.putInt("req_code", request_code);
+        c.putInt("n_giorni", (int) printDifference(cal1, cal2) );
+        c.putInt("contatore_giorni", 0);
+        c.putString("key", key);
+        intent.putExtras(c);
+        Log.i("numero giorni",printDifference(cal1, cal2)+"" );
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -714,7 +721,9 @@ public class AggiungiPillola extends Fragment {
         cal.set(Calendar.HOUR_OF_DAY, hours);
         cal.set(Calendar.MINUTE, minutes);
         cal.set(Calendar.SECOND, seconds);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60, pendingIntent);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
