@@ -1,7 +1,11 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +30,7 @@ import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.Cure.getDrawIcons;
 
 
@@ -173,6 +179,9 @@ public class MieiFarmaci extends Fragment {
 
                 Cura remove_cura = getCurabyId(Integer.parseInt(((TextView) v.findViewById(R.id.txt_id_hidden)).getText().toString()));
                 dao.open();
+
+                deleteNotification(remove_cura.getNome(), remove_cura.getQuantità_assunzione(), remove_cura.getUnità_misura(), remove_cura.getOrario_assunzione(), remove_cura.getInizio_cura(), remove_cura.getFine_cura());
+
                 dao.deleteCura(remove_cura);
                 dao.close();
 
@@ -227,4 +236,24 @@ public class MieiFarmaci extends Fragment {
         return "";
 
     }
+
+    private void deleteNotification(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+
+        String key = nome + "_" + quantità + "_" + orario;
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+
+        Bundle c = new Bundle();
+        c.putString("titolo", "Hai un farmaco da prendere");
+        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+        c.putInt("req_code", request_code);
+        intent.putExtras(c);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
+    }
+
 }

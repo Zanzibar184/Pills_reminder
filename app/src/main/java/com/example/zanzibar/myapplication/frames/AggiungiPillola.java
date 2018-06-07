@@ -1,9 +1,13 @@
 package com.example.zanzibar.myapplication.frames;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,15 +48,19 @@ import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by user on 07/05/18.
@@ -369,13 +377,15 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                     }
                     if(nClicks >= 2)
                     {
                         orario_assunzione = orario_di_assunzione2.getText().toString();
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante)); setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                     }
                     if(nClicks >= 3)
                     {
@@ -383,6 +393,7 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose3.getText().toString());
                         unita_misura_dose = spin3.getSelectedItem().toString();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                     }
 
                     dao.close();
@@ -649,6 +660,82 @@ public class AggiungiPillola extends Fragment {
         } else {
             Toast.makeText(getContext(), "Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void setNotify(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
+
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        //Bundle c = new Bundle();
+        //c.putString("titolo", "Hai un farmaco da prendere");
+        //c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+        //c.putInt("req_code", 1);
+        //intent.setAction("" + Math.random());
+        //intent.putExtras(c);
+
+        String key = nome + "_" + quantità + "_" + orario;
+        int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+        editor.putInt(key, req_code_int);
+        editor.apply();
+
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+
+        Bundle c = new Bundle();
+        c.putString("titolo", "Hai un farmaco da prendere");
+        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+        c.putInt("req_code", request_code);
+        intent.putExtras(c);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Date date = null;
+        SimpleDateFormat formatdate = new SimpleDateFormat("H:mm");
+
+        try {
+            date = formatdate.parse(orario);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int hours = cal.get(Calendar.HOUR_OF_DAY);
+        int minutes = cal.get(Calendar.MINUTE);
+        int seconds = 0;
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.HOUR_OF_DAY, hours);
+        cal.set(Calendar.MINUTE, minutes);
+        cal.set(Calendar.SECOND, seconds);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60*30, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+        Log.i("dati in setNotify()", "key:" + key + "reqcode" + request_code);
+
+    }
+
+    public static long printDifference(Date startDate, Date endDate){
+
+        long different = endDate.getTime() - startDate.getTime();
+
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        long daysInMilli = hoursInMilli * 24;
+
+        long elapsedDays = different / daysInMilli;
+        different = different % daysInMilli;
+
+        long elapsedHours = different / hoursInMilli;
+        different = different % hoursInMilli;
+
+        long elapsedMinutes = different / minutesInMilli;
+        different = different % minutesInMilli;
+
+        long elapsedSeconds = different / secondsInMilli;
+
+        return elapsedDays;
     }
 
 }

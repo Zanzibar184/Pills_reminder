@@ -57,6 +57,9 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
+        <activity android:name=".ProvaNotifica" />
+        <receiver android:name=".notifiche.AlarmReceiver"/>
+
     </application>
 
 </manifest>
