@@ -685,6 +685,12 @@ public class AggiungiPillola extends Fragment {
 
         Bundle c = new Bundle();
         c.putString("titolo", "Hai un farmaco da prendere");
+        /*
+        c.putString("nome", nome);
+        c.putString("unità", unità);
+        c.putInt("quantità", quantità);
+        c.putString("orario", orario);
+        */
         c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
         c.putInt("req_code", request_code);
         intent.putExtras(c);
@@ -708,8 +714,13 @@ public class AggiungiPillola extends Fragment {
         cal.set(Calendar.HOUR_OF_DAY, hours);
         cal.set(Calendar.MINUTE, minutes);
         cal.set(Calendar.SECOND, seconds);
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60*30, pendingIntent);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60, pendingIntent);
+        long tempo = 0;
+        for (int i = 0; i < 3; i++) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() + tempo, pendingIntent);
+            Log.i("tempo", tempo+"");
+            tempo += 1000*60;
+        }
 
         Log.i("dati in setNotify()", "key:" + key + "reqcode" + request_code);
 
