@@ -21,13 +21,33 @@
         android:background="@drawable/rounded_shape"
         android:elevation="12dp">
 
-        <TextView
-            android:id="@+id/text_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="Mattina"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/img_mattina"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:alpha="0.5"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/text_title_mattina"
+                android:src="@drawable/morning" />
+
+            <TextView
+                android:id="@+id/text_title_mattina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/mattina"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="fill_parent"
@@ -44,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/view5"
+            android:background="@drawable/rounded_shape_morning"
             android:gravity="center">
 
             <HorizontalScrollView
@@ -293,13 +314,33 @@
         android:background="@drawable/rounded_shape"
         android:elevation="12dp">
 
-        <TextView
-            android:id="@+id/text_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="Pomeriggio"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/img_pomeriggio"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:alpha="0.5"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/text_title_pomeriggio"
+                android:src="@drawable/afternoon" />
+
+            <TextView
+                android:id="@+id/text_title_pomeriggio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/pomeriggio"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="fill_parent"
@@ -316,6 +357,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/view5"
+            android:background="@drawable/rounded_shape_afternoon"
             android:gravity="center">
 
             <HorizontalScrollView
@@ -565,13 +607,33 @@
         android:background="@drawable/rounded_shape"
         android:elevation="12dp">
 
-        <TextView
-            android:id="@+id/text_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="Sera"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/img_sera"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:alpha="0.5"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/text_title_sera"
+                android:src="@drawable/evening" />
+
+            <TextView
+                android:id="@+id/text_title_sera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/sera"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="fill_parent"
@@ -588,6 +650,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/view5"
+            android:background="@drawable/rounded_shape_evening"
             android:gravity="center">
 
             <HorizontalScrollView
@@ -834,16 +897,36 @@
         android:layout_marginLeft="@dimen/marginLeft_view"
         android:layout_marginRight="@dimen/marginRight_view"
         android:layout_marginTop="@dimen/marginTop_view"
-        android:background="@drawable/rounded_shape"
+        android:background="@drawable/rounded_shape_night"
         android:elevation="12dp">
 
-        <TextView
-            android:id="@+id/text_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="Notte"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/img_notte"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:alpha="0.5"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/text_title_notte"
+                android:src="@drawable/night" />
+
+            <TextView
+                android:id="@+id/text_title_notte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/notte"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="fill_parent"
