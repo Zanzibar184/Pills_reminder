@@ -77,6 +77,7 @@ public class MieiFarmaci extends Fragment {
 
         Cure.v.setScrollY(0);
         Cure.v.setScrollX(0);
+        fab_miei_farmaci.show();
         fab_miei_farmaci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

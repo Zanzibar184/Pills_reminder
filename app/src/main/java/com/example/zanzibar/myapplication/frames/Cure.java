@@ -4,6 +4,7 @@ package com.example.zanzibar.myapplication.frames;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -15,9 +16,11 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -227,10 +230,32 @@ public class Cure extends Fragment {
         frame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    img_farmaco.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.img_click));
+                    v.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.frame_click));
                     setPopupMenuImages(getContext(), finalFrame, img_greenV, img_redX);
                 }
             });
-            layout.addView(frame);
+        /*
+        frame.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+        */
+
+        layout.addView(frame);
 
     }
 
