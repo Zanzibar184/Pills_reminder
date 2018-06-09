@@ -22,6 +22,7 @@
     <string name="pomeriggio">Pomeriggio</string>
     <string name="sera">Sera</string>
     <string name="notte">Notte</string>
+    <string name="conferma_assunzione">Confermare l\'assunzione del farmaco?</string>
 
     <string name="foto_pillola">Foto del farmaco</string>
     <string name="nome_cura">Nome del farmaco</string>

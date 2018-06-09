@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_centerVertical="true"
+    android:layout_marginBottom="@dimen/marginBottom_view"
+    android:layout_marginLeft="@dimen/marginLeft_view"
+    android:layout_marginRight="@dimen/marginRight_view"
+    android:layout_marginTop="@dimen/marginTop_view"
+    android:background="@drawable/rounded_shape"
+    android:elevation="12dp">
+
+    <!--
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/text_title_mattina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:gravity="center_horizontal"
+            android:text="@string/conferma_assunzione"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/line_title_space"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/view5" />
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view5">
+
+        <TextView
+            android:id="@+id/text_title_mattina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="58dp"
+            android:gravity="center_horizontal"
+            android:text="@string/conferma_assunzione"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_conferma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80dp"
+            android:layout_toStartOf="@+id/btn_rimanda"
+            android:background="@android:color/holo_green_light"
+            android:text="SI" />
+
+        <Button
+            android:id="@+id/btn_non_assunto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btn_conferma"
+            android:layout_toEndOf="@+id/btn_rimanda"
+            android:background="@android:color/holo_red_light"
+            android:layout_marginBottom="80dp"
+            android:text="NO" />
+
+        <Button
+            android:id="@+id/btn_rimanda"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#fff200"
+            android:text="Rimanda"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
+</RelativeLayout>

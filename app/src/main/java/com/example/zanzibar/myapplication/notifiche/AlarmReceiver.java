@@ -15,13 +15,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.zanzibar.myapplication.ProvaNotifica;
 import com.example.zanzibar.myapplication.R;
 
 import java.util.Date;
-import java.util.Random;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.content.Context.ALARM_SERVICE;
@@ -50,7 +47,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent resultIntent = new Intent(context, ProvaNotifica.class);
+        Intent resultIntent = new Intent(context, NotificaAssunzione.class);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        resultIntent.putExtra("prova_passaggio_parametri", "passaggio parametri alla classe ProvaNotifica");
+
         Bundle b = intent.getExtras();
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
@@ -75,7 +75,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.i("numero giorni", numero_giorni+"");
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(ProvaNotifica.class);
+        stackBuilder.addParentStack(NotificaAssunzione.class);
         stackBuilder.addNextIntent(resultIntent);
 
         Notification.Builder builder = new Notification.Builder(context);
