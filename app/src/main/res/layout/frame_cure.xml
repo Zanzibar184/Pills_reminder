@@ -897,7 +897,7 @@
         android:layout_marginLeft="@dimen/marginLeft_view"
         android:layout_marginRight="@dimen/marginRight_view"
         android:layout_marginTop="@dimen/marginTop_view"
-        android:background="@drawable/rounded_shape_night"
+        android:background="@drawable/rounded_shape"
         android:elevation="12dp">
 
         <RelativeLayout
@@ -943,6 +943,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/view5"
+            android:background="@drawable/rounded_shape_night"
             android:gravity="center">
 
             <HorizontalScrollView
