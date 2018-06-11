@@ -16,11 +16,6 @@
             android:title="Ringtone preference" />
             -->
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="vibrazione_abilitata"
-            android:title="Vibrazione" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Scorte">
@@ -31,23 +26,7 @@
             android:summary="Abilitate"
             android:title="Notifiche per scorta farmaci" />
 
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/pillole_per_scorta"
-            android:entryValues="@array/pillole_per_scorta"
-            android:key="list_numero_pillole_avviso_scorta"
-            android:summary="N pillole"
-            android:title="Notifica quando mancano" />
-
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/tempo_per_scorta"
-            android:entryValues="@array/tempo_per_scorta"
-            android:key="tempo_scorta"
-            android:summary="N tempo"
-            android:title="Notifica esaurimento scorta ogni" />
-
-    </PreferenceCategory>-->
+    </PreferenceCategory>
 
     <PreferenceCategory android:title="SMS AVVISO">
 
@@ -74,21 +53,6 @@
             android:key="notifiche_assunzione_farmaci"
             android:summary="Abilitate"
             android:title="Notifiche assunzione farmaco" />
-
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/numero_promemoria_farmaci"
-            android:entryValues="@array/numero_promemoria_farmaci"
-            android:key="numero_promemoria_farmaco"
-            android:summary="N promemoria"
-            android:title="Promemoria per farmaco" />
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/tempo_ripetizione_promemoria_farmaco"
-            android:entryValues="@array/tempo_ripetizione_promemoria_farmaco"
-            android:key="tempo_ripetizione_promemoria"
-            android:summary="N tempo"
-            android:title="Ripetere la notifica ogni" />
 
     </PreferenceCategory>
 
