@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -62,7 +63,9 @@ public class MainActivity extends AppCompatActivity
             fab.show();
             Cure cure = new Cure(fab);
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).commit();
+            fragmentManager.beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                            .replace(R.id.fragmentmanager, cure).commit();
         }
 
     }
@@ -119,17 +122,23 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fab.show();
             Cure cure = new Cure(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_pills) {
             fab.show();
             MieiFarmaci mieiFarmaci = new MieiFarmaci(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, mieiFarmaci).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_calendar) {
             fab.show();
             Calendario calendario = new Calendario(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, calendario).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, calendario).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_pharamarcy) {
             fab.hide();
@@ -142,24 +151,32 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_contacts) {
             fab.show();
             ContattiImportanti contattiImportanti = new ContattiImportanti(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, contattiImportanti).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, contattiImportanti).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_sms) {
             fab.hide();
             SmsAvviso smsAvviso = new SmsAvviso();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, smsAvviso).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, smsAvviso).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_notes) {
             fab.show();
             Note note = new Note(fab);
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, note).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, note).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_settings) {
             fab.hide();
             Impostazioni impostazioni = new Impostazioni();
-            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, impostazioni).addToBackStack(null).commit();
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .replace(R.id.fragmentmanager, impostazioni).addToBackStack(null).commit();
 
         }
 
