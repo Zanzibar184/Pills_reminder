@@ -41,7 +41,7 @@
             android:entries="@array/minuti_per_smsavviso"
             android:entryValues="@array/minuti_per_smsavviso"
             android:key="minuti_smsmavviso"
-            android:summary="10 minuti"
+            android:summary="%s"
             android:title="Manda SMS dopo" />
 
     </PreferenceCategory>
