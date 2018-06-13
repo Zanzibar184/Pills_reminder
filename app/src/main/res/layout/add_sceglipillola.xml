@@ -45,8 +45,8 @@
 
         <ImageView
             android:id="@+id/img_pill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/img_dim_base"
+            android:layout_height="@dimen/img_dim_base"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             app:srcCompat="@drawable/pill_colored" />
