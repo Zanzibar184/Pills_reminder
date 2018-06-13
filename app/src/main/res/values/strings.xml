@@ -61,12 +61,12 @@
     </string-array>
 
     <string-array name="pillole_per_scorta">
-        <item>2</item>
-        <item>5</item>
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
-        <item>30</item>
+        <item>2 pillole</item>
+        <item>5 pillole</item>
+        <item>10 pillole</item>
+        <item>15 pillole</item>
+        <item>20 pillole</item>
+        <item>30 pillole</item>
     </string-array>
 
     <string-array name="minuti_per_smsavviso">

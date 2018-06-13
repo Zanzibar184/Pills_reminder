@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--
     <PreferenceCategory android:title="Notifiche">
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="notifiche_abilitate"
-            android:summary="Abilitate"
             android:title="Notifiche" />
-        <!--
-        <RingtonePreference
-            android:defaultValue="content://settings/system/alarm_alert"
-            android:key="ringtone_preference_1"
-            android:ringtoneType="all"
-            android:title="Ringtone preference" />
-            -->
 
     </PreferenceCategory>
+    -->
 
     <PreferenceCategory android:title="Scorte">
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="notifiche_scorta_abilitate"
-            android:summary="Abilitate"
             android:title="Notifiche per scorta farmaci" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/pillole_per_scorta"
+            android:entryValues="@array/pillole_per_scorta"
+            android:key="pillole_scorta"
+            android:title="Avvisa quando mancano" />
 
     </PreferenceCategory>
 
@@ -33,7 +33,6 @@
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="notifiche_SMSAVVISO_abilitate"
-            android:summary="Abilitate"
             android:title="Notifiche per SMS AVVISO" />
 
         <ListPreference
@@ -41,7 +40,6 @@
             android:entries="@array/minuti_per_smsavviso"
             android:entryValues="@array/minuti_per_smsavviso"
             android:key="minuti_smsmavviso"
-            android:summary="%s"
             android:title="Manda SMS dopo" />
 
     </PreferenceCategory>
@@ -51,7 +49,6 @@
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="notifiche_assunzione_farmaci"
-            android:summary="Abilitate"
             android:title="Notifiche assunzione farmaco" />
 
     </PreferenceCategory>

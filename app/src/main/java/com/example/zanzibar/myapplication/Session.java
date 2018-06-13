@@ -2,6 +2,7 @@ package com.example.zanzibar.myapplication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -35,14 +36,16 @@ public class Session {
     }
 
     public void setFirstTimeLaunch(boolean isFirstTime) {
-        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
-        editor.commit();
-        if(isFirstTime) {
+        if (!isFirstTime) {
+            editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+            editor.commit();
+        } else {
             editorprefsettings.putBoolean("imposta_notifiche_app", true);
             editorprefsettings.putBoolean("imposta_notifiche_sms", true);
             editorprefsettings.putBoolean("imposta_notifiche_scorta_app", true);
             editorprefsettings.putBoolean("imposta_notifiche_farmaci", true);
             editorprefsettings.putString("minuti_smsavviso", "30 minuti");
+            editorprefsettings.putString("pillole_scorta", "5 pillole");
             editorprefsettings.apply();
         }
     }
