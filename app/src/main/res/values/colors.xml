@@ -15,9 +15,11 @@
         <item>@color/colorActive</item>
         <item>@color/colorActive</item>
         <item>@color/colorActive</item>
+        <item>@color/colorActive</item>
     </array>
 
     <array name="array_dot_inactive">
+        <item>@color/colorInactive</item>
         <item>@color/colorInactive</item>
         <item>@color/colorInactive</item>
         <item>@color/colorInactive</item>

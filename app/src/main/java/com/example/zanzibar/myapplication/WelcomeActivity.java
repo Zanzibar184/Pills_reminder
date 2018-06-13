@@ -14,7 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +38,9 @@ public class WelcomeActivity extends AppCompatActivity {
     private int[] layouts;
     private Button btnSkip, btnNext;
     private Session session;
+
+    boolean privacyAccepted = false;
+    CheckBox checkPrivacy = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +74,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     R.layout.welcome_slide1,
                     R.layout.welcome_slide2,
                     R.layout.welcome_slide3,
-                    R.layout.welcome_slide4};
+                    R.layout.welcome_slide4,
+                    R.layout.welcome_slide5};
 
             // adding bottom dots
             addBottomDots(0);
@@ -103,7 +113,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
-
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
@@ -141,6 +150,17 @@ public class WelcomeActivity extends AppCompatActivity {
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
                 btnNext.setText(getString(R.string.start));
+                checkPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
+                checkPrivacy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(checkPrivacy.isChecked()){
+                            btnNext.setClickable(true);
+                        } else {
+                            btnNext.setClickable(false);
+                        }
+                    }
+                });
                 btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left
@@ -185,6 +205,16 @@ public class WelcomeActivity extends AppCompatActivity {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(layouts[position], container, false);
+            if(position==1) {
+                RotateAnimation rotateAnimation = new RotateAnimation(0, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setInterpolator(new LinearInterpolator());
+                rotateAnimation.setDuration(10000);
+                rotateAnimation.setRepeatCount(Animation.INFINITE);
+
+                findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
+            } else if(position==5) {
+                checkPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
+            }
             container.addView(view);
 
             return view;
