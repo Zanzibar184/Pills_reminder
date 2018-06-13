@@ -15,7 +15,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -24,8 +25,8 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDAO;
 import com.example.zanzibar.myapplication.Database.contatti.ContattiDao_DB;
-import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
 
 import java.io.File;
@@ -74,6 +75,10 @@ public class ContattiImportanti extends Fragment {
         fab_contatti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.7, 40);
+                myAnim.setInterpolator(interpolator);
+                fab_contatti.startAnimation(myAnim);
                 AggiungiContatto aggiungiContatto = new AggiungiContatto(fab_contatti);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiContatto).addToBackStack(null).commit();

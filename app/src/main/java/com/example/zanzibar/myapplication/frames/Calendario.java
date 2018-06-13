@@ -8,17 +8,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
@@ -27,6 +25,7 @@ import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
 import com.stacktips.view.CalendarListener;
 import com.stacktips.view.CustomCalendarView;
@@ -90,6 +89,10 @@ public class Calendario extends Fragment {
         fab_cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.7, 40);
+                myAnim.setInterpolator(interpolator);
+                fab_cal.startAnimation(myAnim);
                 AggiungiNota aggiungiNota = new AggiungiNota(fab_cal, dateSelected);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();

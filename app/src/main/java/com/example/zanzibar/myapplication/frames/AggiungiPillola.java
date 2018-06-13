@@ -49,6 +49,7 @@ import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiverScorte;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -334,6 +335,9 @@ public class AggiungiPillola extends Fragment {
             @Override
         public void onClick(View view) {
 
+                SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+                boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
+                String scorte_pillole = prefs.getString("pillole_scorta","");
 
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
                         && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
@@ -377,7 +381,9 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
-                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        if(assumi_farmaco_notifica) {
+                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        }
                     }
                     if(nClicks >= 2)
                     {
@@ -385,15 +391,24 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante)); setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
-                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
-                    }
+                        if(assumi_farmaco_notifica) {
+                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        }                    }
                     if(nClicks >= 3)
                     {
                         orario_assunzione = orario_di_assunzione3.getText().toString();
                         qta_ass = Integer.parseInt(text_dose3.getText().toString());
                         unita_misura_dose = spin3.getSelectedItem().toString();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
-                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        if(assumi_farmaco_notifica) {
+                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        }
+                    }
+
+                    int numero_pillole_rimaste = getIntPillole(scorte_pillole);
+
+                    if(qta_rimasta <= numero_pillole_rimaste) {
+                        setNotifyScorta(nome, scorta, qta_rimasta);
                     }
 
                     dao.close();
@@ -416,6 +431,19 @@ public class AggiungiPillola extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Aggiungi farmaco");
+    }
+
+    private int getIntPillole(String s) {
+        int res = 0;
+        switch (s) {
+            case "2 pillole": res=2; break;
+            case "5 pillole": res=5; break;
+            case "10 pillole": res=10; break;
+            case "15 pillole": res=15; break;
+            case "20 pillole": res=20; break;
+            case "30 pillole": res=30; break;
+        }
+        return res;
     }
 
     private void colorInputUnfilled(){
@@ -728,6 +756,27 @@ public class AggiungiPillola extends Fragment {
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
         Log.i("dati in setNotify()", "key:" + key + "reqcode" + request_code);
+
+    }
+
+    private void setNotifyScorta(String nome, int scorta, int qta_rimasta){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiverScorte.class);
+
+        String key = nome + "_" + scorta + "_" + qta_rimasta;
+        int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
+        Bundle c = new Bundle();
+        c.putString("contenuto", "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);
+        c.putInt("req_code", req_code_int);
+        c.putString("key", key);
+        intent.putExtras(c);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() + 1000*60, pendingIntent);
 
     }
 

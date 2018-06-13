@@ -23,7 +23,7 @@
             android:defaultValue="1"
             android:entries="@array/pillole_per_scorta"
             android:entryValues="@array/pillole_per_scorta"
-            android:key="pillole_scorta"
+            android:key="pillole_di_scorta"
             android:title="Avvisa quando mancano" />
 
     </PreferenceCategory>

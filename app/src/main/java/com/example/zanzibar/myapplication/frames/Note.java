@@ -2,19 +2,17 @@ package com.example.zanzibar.myapplication.frames;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -23,8 +21,8 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
-import com.example.zanzibar.myapplication.Database.contatti.Contatti;
 import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
 
 import java.text.SimpleDateFormat;
@@ -72,6 +70,10 @@ public class Note extends Fragment {
         fab_note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Animation myAnim = AnimationUtils.loadAnimation(getContext(), R.anim.bounce);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.7, 40);
+                myAnim.setInterpolator(interpolator);
+                fab_note.startAnimation(myAnim);
                 AggiungiNota aggiungiNota = new AggiungiNota(fab_note);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();

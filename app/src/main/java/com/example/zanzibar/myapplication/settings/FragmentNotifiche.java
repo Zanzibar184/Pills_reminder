@@ -47,7 +47,7 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
             notifiche_scorta.setChecked(false);
         }
 
-        pillole_scorta = (ListPreference) findPreference("pillole_scorta");
+        pillole_scorta = (ListPreference) findPreference("pillole_di_scorta");
         String scorta = prefs.getString("pillole_scorta","");
         pillole_scorta.setSummary(scorta);
 
@@ -192,12 +192,10 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
             Log.i("stringa minuti", b);
         }
 
-        if (key.equals("pillole_scorta")) {
+        if (key.equals("pillole_di_scorta")) {
             preference.setSummary(((ListPreference) preference).getEntry());
             CharSequence currText = pillole_scorta.getEntry();
             String currValue = pillole_scorta.getValue();
-            Log.i("3", currText+"");
-            Log.i("4", currValue);
             editor.putString("pillole_scorta", currValue);
             editor.apply();
             SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
