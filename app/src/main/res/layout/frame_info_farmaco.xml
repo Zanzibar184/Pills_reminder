@@ -192,15 +192,33 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn_modifica_faramco"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marginLeft_view"
-        android:background="@drawable/drawable_btn_modifica_dati"
-        android:layout_gravity="center"
-        android:text="MODIFICA"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp" />
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_modifica_faramco"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginLeft_view"
+            android:background="@drawable/drawable_btn_modifica_dati"
+            android:layout_gravity="center"
+            android:text="MODIFICA"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_delete_farmaco"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginLeft_view"
+            android:background="@drawable/drawable_btn_elimina_dati"
+            android:layout_gravity="center"
+            android:text="ELIMINA"
+            android:textColor="@color/colorSecondary"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

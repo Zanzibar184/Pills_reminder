@@ -41,6 +41,7 @@ public class InfoFarmaco extends Fragment {
     FloatingActionButton fab_info = null;
 
     Button modifica = null;
+    Button elimina = null;
 
     ImageView image;
 
@@ -131,6 +132,14 @@ public class InfoFarmaco extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modificaPillola).addToBackStack(null).commit();
 
+            }
+        });
+
+        elimina = frame.findViewById(R.id.btn_delete_farmaco);
+        elimina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: gestire eliminazione del farmaco anche qui!!!!!
             }
         });
 
