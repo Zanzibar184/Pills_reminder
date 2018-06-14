@@ -246,6 +246,15 @@ public class Calendario extends Fragment {
         } else if(tipo_cura ==1) {
             imgCura.setImageResource(R.drawable.pill_colored);
 
+        } else if(tipo_cura == 9) {
+            imgCura.setImageResource(R.drawable.farmaco_generico);
+
+        } else if(tipo_cura == 7) {
+            imgCura.setImageResource(R.drawable.compressa);
+
+        } else if(tipo_cura == 8) {
+            imgCura.setImageResource(R.drawable.supposta);
+
         }
     }
 

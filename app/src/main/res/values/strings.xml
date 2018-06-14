@@ -66,6 +66,13 @@
     <string name="posticipa_farmaco">Annulla</string>
     <string name="info_farmaco">Info farmaco</string>
     <string name="foto_farmaco">Foto farmaco</string>
+    <string name="photo_from_camera">Scatta foto</string>
+    <string name="photo_from_gallery">Scegli da galleria</string>
+
+    <string name="nota_generale">Generale</string>
+    <string name="nota_sintomi">Sintomi</string>
+    <string name="nota_appuntamento">Appuntamento</string>
+    <string name="nota_promemoria">Promemoria</string>
 
     <string name="importa_contatto">Importa nome e telefono da contatto</string>
     <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
@@ -75,6 +82,8 @@
 
     <string name="info_positivo_sms">Nel caso non venga confermata l\'assunzione della cura agli orari prestabiliti, i contatti importanti verranno avvertiti via SMS</string>
     <string name="info_negativo_sms">Cura non inserita nel servizio SMS AVVISO</string>
+
+    <string name="non_support_speechapi">Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale</string>
 
     <string-array name="pill_units">
         <item>mg</item>

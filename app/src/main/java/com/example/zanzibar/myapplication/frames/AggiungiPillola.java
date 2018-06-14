@@ -694,7 +694,7 @@ public class AggiungiPillola extends Fragment {
         if (i.resolveActivity(getContext().getPackageManager())!=null){
             startActivityForResult(i,req_code);
         } else {
-            Toast.makeText(getContext(), "Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), getString(R.string.non_support_speechapi), Toast.LENGTH_LONG).show();
         }
     }
 
