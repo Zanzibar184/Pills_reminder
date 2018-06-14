@@ -13,20 +13,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.settings.FragmentDatiPersonali;
-import com.example.zanzibar.myapplication.settings.FragmentNotifiche;
 
 import java.io.ByteArrayOutputStream;
 //TODO: salvare dati personali/creare db
@@ -34,7 +30,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Impostazioni extends Fragment {
+public class ImpostazioniOld extends Fragment {
 
     private LinearLayout linearLayout = null;
 
@@ -51,7 +47,7 @@ public class Impostazioni extends Fragment {
     RelativeLayout feedback = null;
     RelativeLayout sincronizzazione = null;
 
-    public Impostazioni() {
+    public ImpostazioniOld() {
         // Required empty public constructor
     }
 
@@ -82,7 +78,7 @@ public class Impostazioni extends Fragment {
         notifiche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentNotifiche fragmentNotifiche = new FragmentNotifiche();
+                FragmentImpostazioni fragmentNotifiche = new FragmentImpostazioni();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragmentmanager, fragmentNotifiche);
                 ft.addToBackStack(null);

@@ -1,4 +1,4 @@
-package com.example.zanzibar.myapplication.settings;
+package com.example.zanzibar.myapplication.frames;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,11 +9,12 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Log;
 
+import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class FragmentNotifiche extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class FragmentImpostazioni extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     boolean bool = true;
     SharedPreferences.Editor editor = null;
@@ -26,13 +27,15 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
     ListPreference tempo_smsavviso = null;
     SwitchPreferenceCompat notifiche_assunzione = null;
     ListPreference pillole_scorta = null;
+    Preference pref_feed = null;
+    Preference pref_infoapp = null;
 
 
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         // Load the preferences from an XML resource
-        setPreferencesFromResource(R.xml.pref_notifiche, rootKey);
+        setPreferencesFromResource(R.xml.pref_settings, rootKey);
         editor = getContext().getSharedPreferences("ImpostazioniNotifiche",MODE_PRIVATE).edit();
         prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
 
@@ -72,6 +75,9 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
         } else {
             notifiche_assunzione.setChecked(false);
         }
+
+        pref_feed = (Preference) findPreference("pref_key_feedback");
+        pref_infoapp = (Preference) findPreference("pref_key_infoapp");
 
         //-----------------------------
 
@@ -168,6 +174,22 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
             }
         });
 
+        pref_feed.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                sendFeedbackMail();
+                return true;
+            }
+        });
+
+        pref_infoapp.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                //TODO: implementare InfoApp
+                return true;
+            }
+        });
+
 
     }
 
@@ -207,6 +229,7 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
     @Override
     public void onResume() {
         super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_impostazioni));
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -215,5 +238,14 @@ public class FragmentNotifiche extends PreferenceFragmentCompat implements Share
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
+
+    private void sendFeedbackMail() {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("application/octet-stream");
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"pillsreminderapp@app.com"});
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback Pills Reminder");
+        startActivity(Intent.createChooser(sendIntent, "Lascia un feedback"));
+    }
+
 
 }

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,17 +13,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.zanzibar.myapplication.frames.Calendario;
 import com.example.zanzibar.myapplication.frames.ContattiImportanti;
 import com.example.zanzibar.myapplication.frames.Cure;
-import com.example.zanzibar.myapplication.frames.Impostazioni;
+import com.example.zanzibar.myapplication.frames.FragmentImpostazioni;
 import com.example.zanzibar.myapplication.frames.MieiFarmaci;
 import com.example.zanzibar.myapplication.frames.Note;
 import com.example.zanzibar.myapplication.frames.SmsAvviso;
 import com.example.zanzibar.myapplication.maps.MapsActivity;
+
 //TODO: foto drawer cliccabile che porta ai dati personali, renderlo dinamico
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -173,7 +171,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             fab.hide();
-            Impostazioni impostazioni = new Impostazioni();
+            FragmentImpostazioni impostazioni = new FragmentImpostazioni();
             fragmentManager.beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
                     .replace(R.id.fragmentmanager, impostazioni).addToBackStack(null).commit();

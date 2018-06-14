@@ -53,5 +53,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Supporto">
+
+        <Preference
+            android:key="pref_key_feedback"
+            android:title="Lascia un feedback"/>
+
+        <Preference
+            android:key="pref_key_infoapp"
+            android:title="Informazioni App"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
