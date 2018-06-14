@@ -61,6 +61,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -344,7 +345,7 @@ public class AggiungiPillola extends Fragment {
                         && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
                 {
                     dao = new CureDao_DB();
-                    dao.open();
+                    //dao.open();
 
                     String nome = nome_cura.getText().toString();
 
@@ -381,7 +382,9 @@ public class AggiungiPillola extends Fragment {
                         orario_assunzione = orario_di_assunzione1.getText().toString();
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
+                        dao.open();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
@@ -391,7 +394,9 @@ public class AggiungiPillola extends Fragment {
                         orario_assunzione = orario_di_assunzione2.getText().toString();
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
+                        dao.open();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante)); setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }                    }
@@ -400,7 +405,9 @@ public class AggiungiPillola extends Fragment {
                         orario_assunzione = orario_di_assunzione3.getText().toString();
                         qta_ass = Integer.parseInt(text_dose3.getText().toString());
                         unita_misura_dose = spin3.getSelectedItem().toString();
+                        dao.open();
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
@@ -412,7 +419,7 @@ public class AggiungiPillola extends Fragment {
                         setNotifyScorta(nome, scorta, qta_rimasta);
                     }
 
-                    dao.close();
+                    //dao.close();
 
                     fab_pills.show();
                     Cure cure = new Cure(fab_pills);
@@ -699,9 +706,14 @@ public class AggiungiPillola extends Fragment {
         Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
         dao.close();
 
-
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         String key = nome + "_" + quantità + "_" + orario;
-        int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        int req_code_int = random_value;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE + next);
 
         SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
         editor.putInt(key, req_code_int);
@@ -721,10 +733,16 @@ public class AggiungiPillola extends Fragment {
         Date cal2 = null;
         SimpleDateFormat formatcal2 = new SimpleDateFormat("yyyy-MM-dd");
 
+        Calendar cal_app = Calendar.getInstance();
+        cal_app.setTimeInMillis(System.currentTimeMillis());
+        Date date_app = null;
+        SimpleDateFormat formatcalapp = new SimpleDateFormat("yyyy-MM-dd");
+
         try {
             date = formatdate.parse(orario);
             cal1 = formatcal1.parse(data_inizio);
             cal2 = formatcal2.parse(data_fine);
+            date_app = cal_app.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -733,7 +751,7 @@ public class AggiungiPillola extends Fragment {
         Bundle c = new Bundle();
         c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
         c.putInt("req_code", request_code);
-        c.putInt("n_giorni", (int) printDifference(cal1, cal2) );
+        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)));
         c.putInt("contatore_giorni", 0);
         c.putString("key", key);
         c.putString("cura", cura_notifica.toString());
@@ -762,8 +780,14 @@ public class AggiungiPillola extends Fragment {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverScorte.class);
 
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         String key = nome + "_" + scorta + "_" + qta_rimasta;
-        int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        int req_code_int = random_value;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
         Bundle c = new Bundle();
         c.putString("contenuto", "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);

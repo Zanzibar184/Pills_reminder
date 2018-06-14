@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.printDifference;
 
@@ -104,9 +105,14 @@ public class NotificaAssunzione extends AppCompatActivity {
         Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
         dao.close();
 
-
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         String key = nome + "_" + quantità + "_" + orario;
-        int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        int req_code_int = random_value;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
         editor.putInt(key, req_code_int);
@@ -126,10 +132,16 @@ public class NotificaAssunzione extends AppCompatActivity {
         Date cal2 = null;
         SimpleDateFormat formatcal2 = new SimpleDateFormat("yyyy-MM-dd");
 
+        Calendar cal_app = Calendar.getInstance();
+        cal_app.setTimeInMillis(System.currentTimeMillis());
+        Date date_app = null;
+        SimpleDateFormat formatcalapp = new SimpleDateFormat("yyyy-MM-dd");
+
         try {
             date = formatdate.parse(orario);
             cal1 = formatcal1.parse(data_inizio);
             cal2 = formatcal2.parse(data_fine);
+            date_app = cal_app.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -138,7 +150,7 @@ public class NotificaAssunzione extends AppCompatActivity {
         Bundle c = new Bundle();
         c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
         c.putInt("req_code", request_code);
-        c.putInt("n_giorni", (int) printDifference(cal1, cal2) );
+        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)));
         c.putInt("contatore_giorni", 0);
         c.putString("key", key);
         c.putString("cura", cura_notifica.toString());

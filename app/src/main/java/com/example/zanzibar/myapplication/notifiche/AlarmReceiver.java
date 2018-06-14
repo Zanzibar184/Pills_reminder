@@ -42,7 +42,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         COUNTER++;
 
-        Log.i("counter notifica", COUNTER+"");
+        //Log.i("counter notifica", COUNTER+"");
 
 
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
