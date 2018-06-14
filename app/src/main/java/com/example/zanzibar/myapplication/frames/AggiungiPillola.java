@@ -407,7 +407,7 @@ public class AggiungiPillola extends Fragment {
 
                     int numero_pillole_rimaste = getIntPillole(scorte_pillole);
 
-                    if(qta_rimasta <= numero_pillole_rimaste) {
+                    if(qta_rimasta <= numero_pillole_rimaste && scorta!=0) {
                         setNotifyScorta(nome, scorta, qta_rimasta);
                     }
 
