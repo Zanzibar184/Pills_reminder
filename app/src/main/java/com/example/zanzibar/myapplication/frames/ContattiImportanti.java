@@ -93,7 +93,7 @@ public class ContattiImportanti extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Contatti importanti");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_contattiimportanti));
     }
 
     private void showContatti(){

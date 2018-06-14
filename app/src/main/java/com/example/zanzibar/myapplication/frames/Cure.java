@@ -299,7 +299,7 @@ public class Cure extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Cure");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_cure));
     }
 
 

@@ -126,7 +126,7 @@ public class Impostazioni extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Impostazioni");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_impostazioni));
     }
 
     private void setProfileImageCapturedFromCamera(Bitmap bmp) {

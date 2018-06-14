@@ -351,7 +351,7 @@ public class ModificaPillola extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Modifica cura");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_modificapillola));
     }
 
     private void colorInputUnfilled(){

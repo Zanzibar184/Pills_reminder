@@ -225,7 +225,7 @@ public class ModificaNota extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Modifica nota");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_note));
     }
 
     private void colorInputUnfilled(){

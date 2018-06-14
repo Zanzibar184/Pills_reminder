@@ -239,7 +239,7 @@ public class AggiungiContatto extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Aggiungi contatto");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiungicontatto));
     }
 
     private void colorInputUnfilled(){

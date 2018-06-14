@@ -226,7 +226,7 @@ public class AggiungiNota extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Aggiungi nota");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiunginota));
     }
 
     private void colorInputUnfilled(){

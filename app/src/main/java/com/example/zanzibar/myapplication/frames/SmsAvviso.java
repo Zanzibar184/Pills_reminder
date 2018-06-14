@@ -107,7 +107,7 @@ public class SmsAvviso extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("SMS AVVISO");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_smsavviso));
     }
 
     private void addLayoutNumeri(Contatti contatti) {

@@ -106,7 +106,7 @@ public class MieiFarmaci extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("I miei farmaci");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_mieifarmaci));
     }
 
     public void addFarmaci(String nome, int qta_rimasta, int qta_totale, String start_cura, String end_cura, int tipo_cura, int id) {

@@ -438,7 +438,7 @@ public class AggiungiPillola extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Aggiungi farmaco");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiungifarmaco));
     }
 
     private int getIntPillole(String s) {

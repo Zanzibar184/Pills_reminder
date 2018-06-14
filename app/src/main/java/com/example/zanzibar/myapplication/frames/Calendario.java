@@ -148,7 +148,7 @@ public class Calendario extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Calendario");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_calendario));
     }
 
     private void refreshData(String date){

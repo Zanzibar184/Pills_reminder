@@ -139,7 +139,7 @@ public class InfoFarmaco extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Info farmaco");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_infofarmaco));
     }
 
     private void showFotoFarmaco(String file, ImageView ivPreview) {

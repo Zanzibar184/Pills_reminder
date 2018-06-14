@@ -34,7 +34,21 @@
     <string name="pomata">Pomata</string>
     <string name="spray">Spray</string>
 
-    <string name="titolo_sceglipillola">Scegli il tipo di pillola</string>
+    <string name="titolo_sceglipillola">Scegli il tipo di farmaco</string>
+    <string name="titolo_aggiungicontatto">Aggiungi contatto</string>
+    <string name="titolo_aggiunginota">Aggiungi nota</string>
+    <string name="titolo_aggiungifarmaco">Aggiungi farmaco</string>
+    <string name="titolo_calendario">Calendario</string>
+    <string name="titolo_contattiimportanti">Contatti importanti</string>
+    <string name="titolo_cure">Cure</string>
+    <string name="titolo_impostazioni">Impostazioni</string>
+    <string name="titolo_infofarmaco">Info Farmaco</string>
+    <string name="titolo_mieifarmaci">I miei farmaci</string>
+    <string name="titolo_modificacontatto">Modifica Contatto</string>
+    <string name="titolo_modificanota">Modifica Nota</string>
+    <string name="titolo_note">Note</string>
+    <string name="titolo_smsavviso">SMS Avviso</string>
+    <string name="titolo_modificapillola">Modifica Farmaco</string>
 
     <string name="foto_pillola">Foto del farmaco</string>
     <string name="nome_cura">Nome del farmaco</string>

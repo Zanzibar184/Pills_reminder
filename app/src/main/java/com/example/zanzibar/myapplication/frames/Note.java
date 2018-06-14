@@ -89,7 +89,7 @@ public class Note extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Note");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_note));
     }
 
     private void showNote(){
