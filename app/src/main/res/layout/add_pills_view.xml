@@ -277,52 +277,31 @@
         android:background="@drawable/rounded_shape"
         android:elevation="@dimen/shadow_view">
 
-        <TextView
-            android:id="@+id/text_title3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="@string/dosi_farmaco"
-            android:textStyle="bold" />
 
-        <View
-            android:id="@+id/line3"
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="@dimen/line_title_space"
-            android:background="@color/colorPrimaryDark" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/line3"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/img_add_dosi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/green_plus" />
 
             <TextView
                 android:id="@+id/txt_spiegazione_dosi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
                 android:text="@string/dosiorario_txt" />
 
-            <ImageView
-                android:id="@+id/img_add_dosi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_spiegazione_dosi"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/green_plus"
-                android:elevation="8dp"/>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 
