@@ -245,10 +245,14 @@ public class Cure extends Fragment {
         PopupMenu popup = new PopupMenu(c,v);
         popup.getMenuInflater().inflate(R.menu.menu_conferma_assunzione, popup.getMenu());
 
+        popup.getMenu().findItem(R.id.menu_posticipa).setVisible(false);
+
         if(imgok.getVisibility() == View.VISIBLE) {
             popup.getMenu().findItem(R.id.menu_conferma).setVisible(false);
+            popup.getMenu().findItem(R.id.menu_posticipa).setVisible(true);
         } else if(imgno.getVisibility() == View.VISIBLE) {
             popup.getMenu().findItem(R.id.menu_non_conferma).setVisible(false);
+            popup.getMenu().findItem(R.id.menu_posticipa).setVisible(true);
         }
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
