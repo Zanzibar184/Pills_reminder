@@ -74,29 +74,51 @@ public class ScegliPillola extends Fragment {
         final Drawable id_img_spray = getResources().getDrawable(R.drawable.spray);
         final Drawable id_img_sciroppo = getResources().getDrawable(R.drawable.sciroppo);
         final Drawable id_img_pomata = getResources().getDrawable(R.drawable.pomata);
+        final Drawable id_img_compressa = getResources().getDrawable(R.drawable.compressa);
+        final Drawable id_img_supposta = getResources().getDrawable(R.drawable.supposta);
+        final Drawable id_img_farmaco_generico = getResources().getDrawable(R.drawable.farmaco_generico);
+
+        final String str_farmaco = getString(R.string.f_generico);
+        final String str_pillola = getString(R.string.pillola);
+        final String str_compressa = getString(R.string.compressa);
+        final String str_pomata = getString(R.string.pomata);
+        final String str_spray = getString(R.string.spray);
+        final String str_gocce = getString(R.string.gocce);
+        final String str_sciroppo = getString(R.string.sciroppo);
+        final String str_supposta = getString(R.string.supposta);
+        final String str_iniezione = getString(R.string.iniezione);
 
         arrow_left_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 img_state = pill_image.getDrawable();
                 if(areDrawablesIdentical(img_state,id_img_pill)) {
+                    pill_image.setImageResource(R.drawable.farmaco_generico);
+                    name_pill.setText(str_farmaco);
+                } else if(areDrawablesIdentical(img_state,id_img_farmaco_generico)) {
+                    pill_image.setImageResource(R.drawable.supposta);
+                    name_pill.setText(str_supposta);
+                } else if(areDrawablesIdentical(img_state,id_img_supposta)) {
                     pill_image.setImageResource(R.drawable.spray);
-                    name_pill.setText("Spray");
+                    name_pill.setText(str_spray);
                 } else if(areDrawablesIdentical(img_state,id_img_spray)) {
                     pill_image.setImageResource(R.drawable.pomata);
-                    name_pill.setText("Pomata");
+                    name_pill.setText(str_pomata);
                 } else if(areDrawablesIdentical(img_state,id_img_pomata)) {
                     pill_image.setImageResource(R.drawable.gocce);
-                    name_pill.setText("Gocce");
+                    name_pill.setText(str_gocce);
                 } else if(areDrawablesIdentical(img_state,id_img_gocce)) {
                     pill_image.setImageResource(R.drawable.sciroppo);
-                    name_pill.setText("Sciroppo");
+                    name_pill.setText(str_sciroppo);
                 } else if(areDrawablesIdentical(img_state,id_img_sciroppo)) {
                     pill_image.setImageResource(R.drawable.syringe);
-                    name_pill.setText("Iniezione");
+                    name_pill.setText(str_iniezione);
                 } else if(areDrawablesIdentical(img_state,id_img_siringa)) {
+                    pill_image.setImageResource(R.drawable.compressa);
+                    name_pill.setText(str_compressa);
+                } else if(areDrawablesIdentical(img_state,id_img_compressa)) {
                     pill_image.setImageResource(R.drawable.pill_colored);
-                    name_pill.setText("Pastiglia");
+                    name_pill.setText(str_pillola);
                 }
             }
         });
@@ -106,23 +128,32 @@ public class ScegliPillola extends Fragment {
             public void onClick(View v) {
                 img_state = pill_image.getDrawable();
                 if(areDrawablesIdentical(img_state,id_img_pill)) {
+                    pill_image.setImageResource(R.drawable.compressa);
+                    name_pill.setText(str_compressa);
+                } else if(areDrawablesIdentical(img_state,id_img_compressa)) {
                     pill_image.setImageResource(R.drawable.syringe);
-                    name_pill.setText("Iniezione");
+                    name_pill.setText(str_iniezione);
                 } else if(areDrawablesIdentical(img_state,id_img_siringa)) {
                     pill_image.setImageResource(R.drawable.sciroppo);
-                    name_pill.setText("Sciroppo");
+                    name_pill.setText(str_sciroppo);
                 } else if(areDrawablesIdentical(img_state,id_img_sciroppo)) {
                     pill_image.setImageResource(R.drawable.gocce);
-                    name_pill.setText("Gocce");
+                    name_pill.setText(str_gocce);
                 } else if(areDrawablesIdentical(img_state,id_img_gocce)) {
                     pill_image.setImageResource(R.drawable.pomata);
-                    name_pill.setText("Pomata");
+                    name_pill.setText(str_pomata);
                 } else if(areDrawablesIdentical(img_state,id_img_pomata)) {
                     pill_image.setImageResource(R.drawable.spray);
-                    name_pill.setText("Spray");
+                    name_pill.setText(str_spray);
                 } else if(areDrawablesIdentical(img_state,id_img_spray)) {
+                    pill_image.setImageResource(R.drawable.supposta);
+                    name_pill.setText(str_supposta);
+                } else if(areDrawablesIdentical(img_state,id_img_supposta)) {
+                    pill_image.setImageResource(R.drawable.farmaco_generico);
+                    name_pill.setText(str_farmaco);
+                } else if(areDrawablesIdentical(img_state,id_img_farmaco_generico)) {
                     pill_image.setImageResource(R.drawable.pill_colored);
-                    name_pill.setText("Pillola");
+                    name_pill.setText(str_pillola);
                 }
             }
         });
@@ -142,6 +173,12 @@ public class ScegliPillola extends Fragment {
                     resourceId = 5;
                 } else if(areDrawablesIdentical(pill_image.getDrawable(), id_img_spray)) {
                     resourceId = 6;
+                } else if (areDrawablesIdentical(pill_image.getDrawable(), id_img_compressa)) {
+                    resourceId = 7;
+                } else if (areDrawablesIdentical(pill_image.getDrawable(), id_img_supposta)) {
+                    resourceId = 8;
+                } else if (areDrawablesIdentical(pill_image.getDrawable(), id_img_farmaco_generico)) {
+                    resourceId = 9;
                 }
                 AggiungiPillola aggiungiPillola = new AggiungiPillola(fab_sceglipillola,pill_image.getDrawable(), resourceId);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -154,7 +191,7 @@ public class ScegliPillola extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Scegli il tipo di pillola");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_sceglipillola));
     }
 
     public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {

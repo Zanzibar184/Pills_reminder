@@ -311,6 +311,9 @@ public class Cure extends Fragment {
             case 4: return R.drawable.gocce;
             case 5: return R.drawable.pomata;
             case 6: return R.drawable.spray;
+            case 7: return R.drawable.compressa;
+            case 8: return  R.drawable.supposta;
+            case 9: return  R.drawable.farmaco_generico;
         }
 
         return 0;

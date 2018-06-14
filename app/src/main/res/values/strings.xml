@@ -24,6 +24,18 @@
     <string name="notte">Notte</string>
     <string name="conferma_assunzione">Confermare l\'assunzione del farmaco?</string>
 
+    <string name="pillola">Pillola</string>
+    <string name="compressa">Compressa</string>
+    <string name="f_generico">Farmaco Generico</string>
+    <string name="iniezione">Iniezione</string>
+    <string name="gocce">Gocce</string>
+    <string name="sciroppo">Sciroppo</string>
+    <string name="supposta">Supposta</string>
+    <string name="pomata">Pomata</string>
+    <string name="spray">Spray</string>
+
+    <string name="titolo_sceglipillola">Scegli il tipo di pillola</string>
+
     <string name="foto_pillola">Foto del farmaco</string>
     <string name="nome_cura">Nome del farmaco</string>
     <string name="scorte_farmaco">Scorte</string>
