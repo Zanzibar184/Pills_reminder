@@ -59,6 +59,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -694,12 +695,10 @@ public class AggiungiPillola extends Fragment {
 
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
-        //Bundle c = new Bundle();
-        //c.putString("titolo", "Hai un farmaco da prendere");
-        //c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-        //c.putInt("req_code", 1);
-        //intent.setAction("" + Math.random());
-        //intent.putExtras(c);
+        dao.open();
+        Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
+        dao.close();
+
 
         String key = nome + "_" + quantità + "_" + orario;
         int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
@@ -737,8 +736,8 @@ public class AggiungiPillola extends Fragment {
         c.putInt("n_giorni", (int) printDifference(cal1, cal2) );
         c.putInt("contatore_giorni", 0);
         c.putString("key", key);
+        c.putString("cura", cura_notifica.toString());
         intent.putExtras(c);
-        Log.i("numero giorni",printDifference(cal1, cal2)+"" );
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -770,6 +769,7 @@ public class AggiungiPillola extends Fragment {
         c.putString("contenuto", "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);
         c.putInt("req_code", req_code_int);
         c.putString("key", key);
+
         intent.putExtras(c);
 
         Calendar cal = Calendar.getInstance();

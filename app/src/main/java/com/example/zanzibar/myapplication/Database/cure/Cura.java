@@ -1,5 +1,7 @@
 package com.example.zanzibar.myapplication.Database.cure;
 
+import android.util.Log;
+
 public class Cura {
 
     private String nome;
@@ -58,7 +60,28 @@ public class Cura {
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura + " " + foto + " " + unità_misura + " " + importante;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + stato_cura + " " + id + " " + foto + " " + unità_misura + " " + importante;
+    }
+
+    public static Cura toCura(String string){
+        String[] splited = string.trim().split("\\s+");
+        String nome = splited[0];
+        int quantità_assunzione = Integer.parseInt(splited[1]);
+        int scorta = Integer.parseInt(splited[2]);
+        int rimanenze = Integer.parseInt(splited[3]);
+        String inizio_cura  = splited[4];
+        String fine_cura  = splited[5];
+        int tipo_cura = Integer.parseInt(splited[6]);
+        String orario_assunzione  = splited[7];
+        String stato_cura  = splited[8]; //da_assumere - assunta - non_assunta
+        int id = Integer.parseInt(splited[9]);
+        String foto  = splited[10];
+        String unità_misura  = splited[11];
+        int importante = Integer.parseInt(splited[12]);
+
+        return new Cura(nome,quantità_assunzione,scorta,rimanenze,inizio_cura,fine_cura,tipo_cura,orario_assunzione,stato_cura,id,foto,unità_misura,importante);
+
+
     }
 
 

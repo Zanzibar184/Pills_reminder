@@ -40,6 +40,8 @@ import java.util.List;
 //TODO: migliorare visualizzazione dati
 public class Cure extends Fragment {
 
+
+
     private LinearLayout linearLayout = null;
     private LinearLayout layout_pills_mattina = null;
     private LinearLayout layout_pills_pomeriggio = null;
@@ -110,6 +112,7 @@ public class Cure extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutcure);
 
         addLayoutCure();
+
 
         Calendar rightNow = Calendar.getInstance();
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);

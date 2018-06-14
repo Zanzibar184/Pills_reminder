@@ -49,14 +49,18 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent resultIntent = new Intent(context, NotificaAssunzione.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        resultIntent.putExtra("prova_passaggio_parametri", "passaggio parametri alla classe ProvaNotifica");
 
         Bundle b = intent.getExtras();
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
         int numero_giorni = b.getInt("n_giorni");
         String key = b.getString("key");
+        String cura = b.getString("cura");
         contentText = content_notification;
+
+        resultIntent.putExtra("prova_passaggio_parametri", "passaggio parametri alla classe ProvaNotifica");
+        resultIntent.putExtra("stringa_cura", cura);
+
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,0,b);
 
         //intent.putExtra("contatore_giorni", ++contatore_giorni);
