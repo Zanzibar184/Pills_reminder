@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -242,7 +243,8 @@ public class Cure extends Fragment {
 
 
     public void setPopupMenuImages(Context c, final View v, final ImageView imgok, final ImageView imgno) {
-        PopupMenu popup = new PopupMenu(c,v);
+        Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
+        PopupMenu popup = new PopupMenu(wrapper,v);
         popup.getMenuInflater().inflate(R.menu.menu_conferma_assunzione, popup.getMenu());
 
         popup.getMenu().findItem(R.id.menu_posticipa).setVisible(false);

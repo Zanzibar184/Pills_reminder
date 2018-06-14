@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,7 +140,8 @@ public class Note extends Fragment {
     }
 
     public void setPopupMenuImages(Context c, final View v) {
-        PopupMenu popup = new PopupMenu(c,v);
+        Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
+        PopupMenu popup = new PopupMenu(wrapper,v);
         popup.getMenuInflater().inflate(R.menu.menu_modifica_nota, popup.getMenu());
 
 

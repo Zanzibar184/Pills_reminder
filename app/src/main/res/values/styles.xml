@@ -26,6 +26,11 @@
         <item name="colorAccent">@color/colorSecondary</item>
     </style>
 
+    <style name="MenuPillsStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:itemBackground">@android:color/holo_green_light</item>
+    </style>
+
 
 
 </resources>
