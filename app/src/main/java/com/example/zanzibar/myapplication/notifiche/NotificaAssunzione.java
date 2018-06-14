@@ -51,6 +51,7 @@ public class NotificaAssunzione extends AppCompatActivity {
             public void onClick(View v) {
                 if(v.getId()==R.id.btn_conferma) {
                     cura_final.setStato_cura(Cura.ASSUNTA);
+                    //cura_final.setRimanenze(cura_final.getRimanenze() - cura_final.getQuantità_assunzione());
                     dao.open();
                     dao.updateCura(cura_final);
                     dao.close();
@@ -60,8 +61,16 @@ public class NotificaAssunzione extends AppCompatActivity {
                     dao.updateCura(cura_final);
                     dao.close();
                 } else if(v.getId()==R.id.btn_rimanda){
-                    Log.i("click3", "hai premuto rimanda");
+                    /*
+                    if(assumi_farmaco_notifica) {
+                        setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                    }
+                    */
                 }
+
+                finish();
+
+
             }
         };
 
