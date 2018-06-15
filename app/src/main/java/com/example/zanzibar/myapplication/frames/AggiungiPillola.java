@@ -388,6 +388,7 @@ public class AggiungiPillola extends Fragment {
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
+
                     }
                     if(nClicks >= 2)
                     {
@@ -395,11 +396,12 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
                         dao.open();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante)); setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
-                        }                    }
+                        }
+                    }
                     if(nClicks >= 3)
                     {
                         orario_assunzione = orario_di_assunzione3.getText().toString();
@@ -411,6 +413,7 @@ public class AggiungiPillola extends Fragment {
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
+
                     }
 
                     int numero_pillole_rimaste = getIntPillole(scorte_pillole);
@@ -700,6 +703,7 @@ public class AggiungiPillola extends Fragment {
 
     private void setNotify(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
 
+
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
         dao.open();
@@ -713,6 +717,7 @@ public class AggiungiPillola extends Fragment {
         }
         String key = nome + "_" + quantità + "_" + orario;
         int req_code_int = random_value;
+
         //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE + next);
 
         SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
@@ -723,8 +728,8 @@ public class AggiungiPillola extends Fragment {
         int request_code = prefs.getInt(key, 0);
 
         SharedPreferences.Editor editor2 = getContext().getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
-        editor.putInt(key, 0);
-        editor.apply();
+        editor2.putInt(key, 0);
+        editor2.apply();
 
         Date date = null;
         SimpleDateFormat formatdate = new SimpleDateFormat("H:mm");
@@ -772,7 +777,7 @@ public class AggiungiPillola extends Fragment {
 
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
-        Log.i("dati in setNotify()", "key:" + key + "reqcode" + request_code);
+        Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
 
     }
 

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
+import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
@@ -35,7 +36,7 @@ import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate
 public class InfoFarmaco extends Fragment {
 
     private Cura cura;
-
+    private CureDAO dao;
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_info = null;
@@ -58,6 +59,7 @@ public class InfoFarmaco extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        dao = new CureDao_DB();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_infofarmaco, container, false);
     }
@@ -139,7 +141,14 @@ public class InfoFarmaco extends Fragment {
         elimina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: gestire eliminazione del farmaco anche qui!!!!!
+                dao.open();
+                dao.deleteCura(cura);
+                dao.close();
+
+                Cure cure = new Cure(fab_info);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, cure).addToBackStack(null).commit();
+
             }
         });
 
