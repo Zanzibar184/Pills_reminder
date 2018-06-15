@@ -70,6 +70,12 @@
         android:layout_marginStart="81dp"
         app:srcCompat="@drawable/ic_clock" />
 
+    <ImageView
+        android:id="@+id/img_check_assunzione"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

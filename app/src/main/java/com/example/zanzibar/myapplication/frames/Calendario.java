@@ -194,11 +194,19 @@ public class Calendario extends Fragment {
 
     private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
-
+        boolean app = false;
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
         ((TextView) frame.findViewById(R.id.txt_dose)).setText("Assumere "+qta_ass+" "+udm);
         ((TextView) frame.findViewById(R.id.txt_ora_dose)).setText(orario);
         setImage(tipo_cura, ((ImageView) frame.findViewById(R.id.img_pillola_nota)));
+        ImageView check_assunzione = (ImageView) frame.findViewById(R.id.img_check_assunzione);
+        if(app) {
+            check_assunzione.setImageResource(R.drawable.green_check);
+            app = false;
+        } else if (!app) {
+            check_assunzione.setImageResource(R.drawable.red_cross);
+            app = true;
+        }
 
         layout3.addView(frame);
     }
