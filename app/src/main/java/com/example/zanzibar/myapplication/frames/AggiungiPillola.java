@@ -545,7 +545,7 @@ public class AggiungiPillola extends Fragment {
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 
-        //imgpill.setImageBitmap(bitmap);
+        imgpill.setImageBitmap(bitmap);
 
         cursor.close();
     }
@@ -663,7 +663,7 @@ public class AggiungiPillola extends Fragment {
             File imgFile = new  File(pictureFilePath);
             if(imgFile.exists()){
                 //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
-                //imgpill.setImageURI(Uri.fromFile(imgFile));
+                imgpill.setImageURI(Uri.fromFile(imgFile));
                 Log.i("picturefilepath", pictureFilePath+"");
             }
         } else if (requestCode == REQUEST_PICTURE_GALLERY && resultCode == Activity.RESULT_OK) {
