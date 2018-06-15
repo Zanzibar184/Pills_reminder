@@ -131,7 +131,14 @@ public class MieiFarmaci extends Fragment {
         frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setPopupMenuImages(getContext(), frame);
+                Cura info_cura = getCurabyId(Integer.parseInt(((TextView) v.findViewById(R.id.txt_id_hidden)).getText().toString()));
+
+                InfoFarmaco infoFarmaco = new InfoFarmaco(fab_miei_farmaci,info_cura);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
+
+                //per inserire il menu di visualizzazione delle opzioni per il farmaco
+                //setPopupMenuImages(getContext(), frame);
             }
         });
 
@@ -157,6 +164,7 @@ public class MieiFarmaci extends Fragment {
     }
 
 
+    /*
     public void setPopupMenuImages(Context c, final View v) {
         Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
         PopupMenu popup = new PopupMenu(wrapper,v);
@@ -214,7 +222,7 @@ public class MieiFarmaci extends Fragment {
 
         popup.show();
     }
-
+    */
 
     private Cura getCurabyId(int id){
 
