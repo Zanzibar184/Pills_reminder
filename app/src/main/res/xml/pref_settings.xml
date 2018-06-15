@@ -53,6 +53,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Note">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="notifiche_note"
+            android:title="Notifiche Note" />
+
+    </PreferenceCategory>
+
+
     <PreferenceCategory android:title="Supporto">
 
         <Preference
