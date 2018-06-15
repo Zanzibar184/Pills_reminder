@@ -1,7 +1,11 @@
 package com.example.zanzibar.myapplication.frames;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -25,11 +29,13 @@ import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 
@@ -160,7 +166,10 @@ public class Note extends Fragment {
 
                 } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
 
+                    SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+
                     dao.open();
+                    deleteNotification(modify.getTitolo(),modify.getData(),modify.getOra(),modify.getTipo_memo());
                     dao.deleteNota(modify);
                     dao.close();
 
@@ -221,6 +230,25 @@ public class Note extends Fragment {
         }
         Nota nota = null;
         return nota;
+    }
+
+    private void deleteNotification(String titolo, String data, String ora, int tipo) {
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+
+        String key = titolo + "_" + data + "_" + ora + "_" + tipo;
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+
+        Bundle c = new Bundle();
+        c.putString("contenuto", titolo);
+        c.putInt("req_code", request_code);
+        c.putString("key", key);
+        intent.putExtras(c);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
     }
 
 

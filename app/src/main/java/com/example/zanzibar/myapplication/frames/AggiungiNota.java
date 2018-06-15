@@ -228,7 +228,7 @@ public class AggiungiNota extends Fragment {
                     String txt_date = text_date.getText().toString();
                     String txt_time = text_time.getText().toString();
                     dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
-                    if((ricevi_notifica_nota) && (txt_date.equals("") && txt_time.equals(""))) {
+                    if((ricevi_notifica_nota) && (!(txt_date.equals("") && txt_time.equals("")))) {
                         setNotifyNota(txt_titolo, txt_date, txt_time, tipo_memo);
                     }
                     dao.close();
@@ -268,6 +268,13 @@ public class AggiungiNota extends Fragment {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date date_nota = null;
 
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+        editor.putInt(key, req_code_int);
+        editor.apply();
+
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+
         try {
             date_nota = format.parse(myStrDate);
             System.out.println(date_nota);
@@ -286,7 +293,7 @@ public class AggiungiNota extends Fragment {
         cal.setTime(date_nota);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60, pendingIntent);
 
     }
 
