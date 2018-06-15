@@ -1,6 +1,11 @@
 package com.example.zanzibar.myapplication.frames;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -25,12 +30,14 @@ import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 public class InfoFarmaco extends Fragment {
@@ -142,6 +149,7 @@ public class InfoFarmaco extends Fragment {
             @Override
             public void onClick(View view) {
                 dao.open();
+                deleteNotification(cura.getNome(), cura.getQuantità_assunzione(), cura.getUnità_misura(), cura.getOrario_assunzione(), cura.getInizio_cura(), cura.getFine_cura());
                 dao.deleteCura(cura);
                 dao.close();
 
@@ -180,6 +188,27 @@ public class InfoFarmaco extends Fragment {
         });
 
         nagDialog.show();
+    }
+
+    private void deleteNotification(String nome, int quantita, String unita, String orario, String data_inizio, String data_fine) {
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+
+        String key = nome + "_" + quantita + "_" + orario;
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+
+        /*
+        Bundle c = new Bundle();
+        c.putString("titolo", "Hai un farmaco da prendere");
+        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unita + " di " + nome);
+        c.putInt("req_code", request_code);
+        intent.putExtras(c);
+        */
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.cancel(pendingIntent);
     }
 
 }

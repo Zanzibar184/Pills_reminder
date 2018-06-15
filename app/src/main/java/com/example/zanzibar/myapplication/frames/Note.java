@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.view.ContextThemeWrapper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +31,14 @@ import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiverNote;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
@@ -234,20 +239,19 @@ public class Note extends Fragment {
 
     private void deleteNotification(String titolo, String data, String ora, int tipo) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
 
         String key = titolo + "_" + data + "_" + ora + "_" + tipo;
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
-        Bundle c = new Bundle();
-        c.putString("contenuto", titolo);
-        c.putInt("req_code", request_code);
-        c.putString("key", key);
-        intent.putExtras(c);
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE);
+        int req = prefs.getInt(key, 0);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.i("contenut aggiunginota", titolo);
+        Log.i("reqcode in aggiunginota", req+"");
+        Log.i("key in aggiunginota", key);
 
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
     }
 

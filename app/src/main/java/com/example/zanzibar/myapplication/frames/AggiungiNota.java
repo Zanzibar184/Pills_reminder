@@ -272,8 +272,10 @@ public class AggiungiNota extends Fragment {
         editor.putInt(key, req_code_int);
         editor.apply();
 
+        /*
         SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
+        */
 
         try {
             date_nota = format.parse(myStrDate);
@@ -282,12 +284,20 @@ public class AggiungiNota extends Fragment {
             e.printStackTrace();
         }
 
+
         Bundle c = new Bundle();
         c.putString("contenuto", titolo);
         c.putInt("req_code", req_code_int);
         c.putString("key", key);
 
+        /*
+        Log.i("contenut aggiunginota", titolo);
+        Log.i("reqcode in aggiunginota", req_code_int+"");
+        Log.i("key in aggiunginota", key);
+        */
+
         intent.putExtras(c);
+
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_nota);

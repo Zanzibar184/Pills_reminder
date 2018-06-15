@@ -250,23 +250,4 @@ public class MieiFarmaci extends Fragment {
 
     }
 
-    private void deleteNotification(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
-        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-
-        String key = nome + "_" + quantità + "_" + orario;
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
-
-        Bundle c = new Bundle();
-        c.putString("titolo", "Hai un farmaco da prendere");
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-        c.putInt("req_code", request_code);
-        intent.putExtras(c);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        alarmManager.cancel(pendingIntent);
-    }
-
 }
