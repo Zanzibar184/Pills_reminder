@@ -24,6 +24,7 @@ import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Dosi;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
@@ -56,6 +57,7 @@ public class Calendario extends Fragment {
 
     private CureDAO dao;
     private List<Cura> list_cure;
+    private List<Dosi> list_dosi;
 
     private NoteDao dao_note;
     private List<Nota> list_note;
@@ -158,6 +160,7 @@ public class Calendario extends Fragment {
         dao_note.open();
 
         list_note = dao_note.getNoteByDate(date);
+
         for(int i=0; i<list_note.size();i++){
             Nota tmp = list_note.get(i);
             addLayoutNoteCalendario(tmp.getTitolo(),tmp.getTesto(),tmp.getOra(),tmp.getTipo_memo());
@@ -168,9 +171,11 @@ public class Calendario extends Fragment {
 
         dao.open();
         list_cure = dao.getCureByDate(date);
+        list_dosi = dao.getDosiByDate(date);
         for(int i=0; i<list_cure.size();i++){
             Cura tmp = list_cure.get(i);
-            addLayoutFarmaciCalendario(tmp.getNome(),tmp.getOrario_assunzione(),tmp.getQuantità_assunzione(),tmp.getUnità_misura(), tmp.getTipo_cura());
+            Dosi tmp_dose = findDoseFromCura(tmp);
+            addLayoutFarmaciCalendario(tmp.getNome(),tmp.getOrario_assunzione(),tmp.getQuantità_assunzione(),tmp.getUnità_misura(), tmp.getTipo_cura(), tmp_dose.getStato_cura());
         }
 
         dao.close();
@@ -192,20 +197,17 @@ public class Calendario extends Fragment {
         layout3.addView(frame);
     }
 
-    private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura) {
+    private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura, String stato_cura) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
-        boolean app = false;
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
         ((TextView) frame.findViewById(R.id.txt_dose)).setText("Assumere "+qta_ass+" "+udm);
         ((TextView) frame.findViewById(R.id.txt_ora_dose)).setText(orario);
         setImage(tipo_cura, ((ImageView) frame.findViewById(R.id.img_pillola_nota)));
         ImageView check_assunzione = (ImageView) frame.findViewById(R.id.img_check_assunzione);
-        if(app) {
+        if(stato_cura.equals(Dosi.ASSUNTA)) {
             check_assunzione.setImageResource(R.drawable.green_check);
-            app = false;
-        } else if (!app) {
+        } else if (stato_cura.equals(Dosi.NON_ASSUNTA)) {
             check_assunzione.setImageResource(R.drawable.red_cross);
-            app = true;
         }
 
         layout3.addView(frame);
@@ -266,4 +268,17 @@ public class Calendario extends Fragment {
         }
     }
 
+
+    private Dosi findDoseFromCura(Cura cura){
+        Dosi dose = null;
+
+        for(int i=0; i<list_dosi.size();i++){
+            if (list_dosi.get(i).getId() == cura.getId())
+                return list_dosi.get(i);
+        }
+
+
+        return dose;
+
+    }
 }
