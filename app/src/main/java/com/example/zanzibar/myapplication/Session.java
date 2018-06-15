@@ -44,6 +44,7 @@ public class Session {
             editorprefsettings.putBoolean("imposta_notifiche_sms", true);
             editorprefsettings.putBoolean("imposta_notifiche_scorta_app", true);
             editorprefsettings.putBoolean("imposta_notifiche_farmaci", true);
+            editorprefsettings.putBoolean("imposta_notifiche_note", true);
             editorprefsettings.putString("minuti_smsavviso", "30 minuti");
             editorprefsettings.putString("pillole_scorta", "5 pillole");
             editorprefsettings.apply();

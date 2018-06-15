@@ -26,6 +26,7 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
     SwitchPreferenceCompat notifiche_SMSAVVISO = null;
     ListPreference tempo_smsavviso = null;
     SwitchPreferenceCompat notifiche_assunzione = null;
+    SwitchPreferenceCompat notifiche_note = null;
     ListPreference pillole_scorta = null;
     Preference pref_feed = null;
     Preference pref_infoapp = null;
@@ -74,6 +75,15 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
             notifiche_assunzione.setChecked(true);
         } else {
             notifiche_assunzione.setChecked(false);
+        }
+
+        notifiche_note = (SwitchPreferenceCompat) findPreference("notifiche_note");
+        boolean enable_note = prefs.getBoolean("imposta_notifiche_note",false);
+        Log.i("5", enable_note+"");
+        if(enable_note) {
+            notifiche_note.setChecked(true);
+        } else {
+            notifiche_note.setChecked(false);
         }
 
         pref_feed = (Preference) findPreference("pref_key_feedback");
@@ -169,6 +179,24 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
                     editor.apply();
                     boolean b = prefs.getBoolean("imposta_notifiche_farmaci",false);
                     Log.i("notifiche abilitate4_2", b+"");
+                }
+                return true;
+            }
+        });
+
+        notifiche_note.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick (Preference preference) {
+                if(notifiche_note.isChecked()) {
+                    editor.putBoolean("imposta_notifiche_note", true);
+                    editor.apply();
+                    boolean b = prefs.getBoolean("imposta_notifiche_note",false);
+                    Log.i("notifiche abilitate10_1", b+"");
+                } else if (!(notifiche_note.isChecked())){
+                    editor.putBoolean("imposta_notifiche_note", false);
+                    editor.apply();
+                    boolean b = prefs.getBoolean("imposta_notifiche_note",false);
+                    Log.i("notifiche abilitate10_2", b+"");
                 }
                 return true;
             }

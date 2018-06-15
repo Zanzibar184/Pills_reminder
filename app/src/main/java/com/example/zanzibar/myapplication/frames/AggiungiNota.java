@@ -1,9 +1,13 @@
 package com.example.zanzibar.myapplication.frames;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -34,12 +38,19 @@ import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiverNote;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiverScorte;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by user on 11/05/18.
@@ -205,10 +216,21 @@ public class AggiungiNota extends Fragment {
             @Override
             public void onClick(View v) {
                 int tipo_memo = CheckId(categoria_nota);
+
+                SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+                boolean ricevi_notifica_nota = prefs.getBoolean("imposta_notifiche_note",false);
+
                 if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
 
                     dao.open();
-                    dao.insertNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo));
+                    String txt_titolo = text_titolo_nota.getText().toString();
+                    String txt_contenuto = text_contenuto_nota.getText().toString();
+                    String txt_date = text_date.getText().toString();
+                    String txt_time = text_time.getText().toString();
+                    dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
+                    if((ricevi_notifica_nota) && (txt_date.equals("") && txt_time.equals(""))) {
+                        setNotifyNota(txt_titolo, txt_date, txt_time, tipo_memo);
+                    }
                     dao.close();
 
                     Note nota = new Note(fab_nota);
@@ -227,6 +249,45 @@ public class AggiungiNota extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiunginota));
+    }
+
+    private void setNotifyNota(String titolo, String date, String time, int tipo){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
+
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
+        String key = titolo + "_" + date + "_" + time + "_" + tipo;
+        int req_code_int = random_value;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
+        String myStrDate = date + " " + time;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date_nota = null;
+
+        try {
+            date_nota = format.parse(myStrDate);
+            System.out.println(date_nota);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Bundle c = new Bundle();
+        c.putString("contenuto", titolo);
+        c.putInt("req_code", req_code_int);
+        c.putString("key", key);
+
+        intent.putExtras(c);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date_nota);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
     }
 
     private void colorInputUnfilled(){
