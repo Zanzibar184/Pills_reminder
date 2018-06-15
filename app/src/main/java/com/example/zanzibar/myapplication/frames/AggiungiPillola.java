@@ -383,7 +383,7 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
                         dao.open();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
@@ -396,7 +396,7 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose2.getText().toString());
                         unita_misura_dose = spin2.getSelectedItem().toString();
                         dao.open();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
@@ -408,7 +408,7 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose3.getText().toString());
                         unita_misura_dose = spin3.getSelectedItem().toString();
                         dao.open();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, Cura.DA_ASSUMERE, URI_foto_farmaco, unita_misura_dose, importante));
+                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
                             setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);

@@ -13,4 +13,7 @@ public interface CureDAO {
     public List<Cura> getAllCure();
     public List<Cura> getCureByDate(String date);
     public Cura findCura(String nome, String inizio_cura, String fine_cura, String orario);
+    public List<Dosi> getAllDosi();
+    public List<Dosi> getDosiByDate(String date);
+    public void updateDose(Dosi dose);
 }

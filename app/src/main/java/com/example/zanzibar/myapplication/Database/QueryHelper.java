@@ -3,9 +3,6 @@ package com.example.zanzibar.myapplication.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import java.net.IDN;
 
 
 public class QueryHelper extends SQLiteOpenHelper {
@@ -20,11 +17,16 @@ public class QueryHelper extends SQLiteOpenHelper {
     public static final String COLUMN_FINE_CURA = "FINE_CURA";
     public static final String COLUMN_TIPO_CURA = "TIPO_CURA";
     public static final String COLUMN_ORARIO_ASSUNZIONE = "ORARIO_ASSUNZIONE";
-    public static final String COLUMN_STATO_CURA = "STATO_CURA";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_FOTO = "FOTO";
     public static final String COLUMN_UDM = "UNITA_MISURA";
     public static final String COLUMN_CURA_IMPORTANTE = "CURA_IMPORTANTE";
+
+    //------DOSI
+    public static final String TABLE_DOSI = "dosi";
+    public static final String COLUMN_ID_DOSI = "ID";
+    public static final String COLUMN_GIORNO = "GIORNO";
+    public static final String COLUMN_STATO = "STATO";
 
     //-----CONTATTI
     public static final String TABLE_CONTATTI = "contatti";
@@ -44,7 +46,7 @@ public class QueryHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID_MEMO = "ID_MEMO";
 
     public static final String DATABASE_NAME = "pills_reminder.db";
-    public static int DATABASE_VERSION = 3;
+    public static int DATABASE_VERSION = 5;
 
 
     private static final String DATABASE_CREATE_CONTATTI = "create table "
@@ -54,6 +56,12 @@ public class QueryHelper extends SQLiteOpenHelper {
             + COLUMN_NUMERO + " text primary key,"
             + COLUMN_FOTO_CONTATTO + " text,"
             + COLUMN_IMPORTANTE + " integer not null);" ;
+
+    private static final String DATABASE_CREATE_DOSI = "create table "
+            + TABLE_DOSI + "( "
+            + COLUMN_ID_DOSI + " integer not null, "
+            + COLUMN_GIORNO + " text,"
+            + COLUMN_STATO + " text);" ;
 
     private static final String DATABASE_CREATE_NOTE = "create table "
             + TABLE_NOTE + "( "
@@ -75,7 +83,6 @@ public class QueryHelper extends SQLiteOpenHelper {
             + COLUMN_FINE_CURA + " text not null,"
             + COLUMN_ORARIO_ASSUNZIONE + " text not null,"
             + COLUMN_TIPO_CURA + " integer not null,"
-            + COLUMN_STATO_CURA + " text not null,"
             + COLUMN_ID + " integer primary key autoincrement,"
             + COLUMN_UDM + " text,"
             + COLUMN_FOTO + " text,"
@@ -90,6 +97,7 @@ public class QueryHelper extends SQLiteOpenHelper {
         database.execSQL(DATABASE_CREATE_CONTATTI);
         database.execSQL(DATABASE_CREATE_CURE);
         database.execSQL(DATABASE_CREATE_NOTE);
+        database.execSQL(DATABASE_CREATE_DOSI);
     }
 
     @Override
@@ -97,6 +105,7 @@ public class QueryHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CURE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTATTI);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOSI);
         onCreate(db);
     }
 }

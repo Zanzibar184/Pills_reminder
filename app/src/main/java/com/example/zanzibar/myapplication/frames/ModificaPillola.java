@@ -327,7 +327,6 @@ public class ModificaPillola extends Fragment {
                                     fine_cura,
                                     tipo_cura,
                                     orario_assunzione,
-                                    Cura.DA_ASSUMERE,
                                     modify_cura.getId(),
                                     URI_foto_farmaco,
                                     unità_misura,

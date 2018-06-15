@@ -64,13 +64,11 @@ public class NotificaAssunzione extends AppCompatActivity {
                 boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
                 String scorte_pillole = prefs.getString("pillole_scorta","");
                 if(v.getId()==R.id.btn_conferma) {
-                    cura_final.setStato_cura(Cura.ASSUNTA);
                     //cura_final.setRimanenze(cura_final.getRimanenze() - cura_final.getQuantità_assunzione());
                     dao.open();
                     dao.updateCura(cura_final);
                     dao.close();
                 } else if (v.getId()==R.id.btn_non_assunto) {
-                    cura_final.setStato_cura(Cura.NON_ASSUNTA);
                     dao.open();
                     dao.updateCura(cura_final);
                     dao.close();

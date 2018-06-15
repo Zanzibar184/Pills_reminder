@@ -25,11 +25,14 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Dosi;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +64,7 @@ public class Cure extends Fragment {
     FloatingActionButton fab_cure = null;
     private CureDAO dao;
     private List<Cura> list_cure;
+    private List<Dosi> list_dosi;
 
     //Dati nuovi
     ImageView ivPreview;
@@ -83,6 +87,7 @@ public class Cure extends Fragment {
         dao.open();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         list_cure = dao.getCureByDate(formatter.format(new Date()));
+        list_dosi = dao.getDosiByDate(formatter.format(new Date()));
         dao.close();
 
         v = container.findViewById(R.id.fragmentmanager);
@@ -156,26 +161,29 @@ public class Cure extends Fragment {
         layout_pills_sera = (LinearLayout) frame.findViewById(R.id.layout_sera);
         layout_pills_notte = (LinearLayout) frame.findViewById(R.id.layout_notte);
 
+
                 for(int i=0;i<list_cure.size(); i++)
                 {
                     Cura tmp = list_cure.get(i);
+
+                    Dosi tmp_dose = findDoseFromCura(tmp);
                     int ora = Integer.parseInt(tmp.getOrario_assunzione().substring(0,2));
 
                     if((ora >= 6) && (ora <12))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
                     }
                     if((ora >= 12) && (ora <18))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
                     }
                     if((ora >= 18) && (ora <24))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp.getStato_cura(), tmp.getImportante());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp_dose.getStato_cura(), tmp.getImportante());
                     }
                     if((ora >= 0) && (ora <6))
                     {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp.getStato_cura(),tmp.getImportante());
+                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
                     }
 
                 }
@@ -213,14 +221,12 @@ public class Cure extends Fragment {
                 txt_qta_ass.setText("x" + qta_ass);
                 cura_id.setText(Integer.toString(id));
 
-                if (stato_cura.equals(Cura.NON_ASSUNTA))
+                if (stato_cura.equals(Dosi.NON_ASSUNTA))
                 {
-                    Log.i("stato cura_: ", stato_cura);
                     img_redX.setVisibility(View.VISIBLE);
                 }
-                else if (stato_cura.equals(Cura.ASSUNTA))
+                else if (stato_cura.equals(Dosi.ASSUNTA))
                 {
-                    Log.i("stato cura_: ", stato_cura);
                     img_greenV.setVisibility(View.VISIBLE);
                 }
 
@@ -266,27 +272,28 @@ public class Cure extends Fragment {
                 TextView id = (TextView) v.findViewById(R.id.cura_id);
 
                 Cura updated_cura = getCurabyId(Integer.parseInt(id.getText().toString()));
-
+                Dosi dose = findDoseFromCura(updated_cura);
                 if (item.getTitle().equals(conferma_farmaco)) {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
 
                     //aggiorno lo stato del record
-                    updated_cura.setStato_cura(Cura.ASSUNTA);
-                    dao.updateCura(updated_cura);
+                    dose.setStato_cura(Dosi.ASSUNTA);
+                    Log.i("dose:", dose.toString());
+                    dao.updateDose(dose);
 
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
 
-                    updated_cura.setStato_cura(Cura.NON_ASSUNTA);
-                    dao.updateCura(updated_cura);
+                    dose.setStato_cura(Dosi.NON_ASSUNTA);
+                    dao.updateDose(dose);
                 } else if (item.getTitle().equals(ripristina_stato_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.GONE);
 
-                    updated_cura.setStato_cura(Cura.DA_ASSUMERE);
-                    dao.updateCura(updated_cura);
+                    dose.setStato_cura(Dosi.DA_ASSUMERE);
+                    dao.updateDose(dose);
                 } else if (item.getTitle().equals(informazioni_farmaco)) {
                     InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure,updated_cura);
                     FragmentManager fragmentManager = getFragmentManager();
@@ -336,6 +343,19 @@ public class Cure extends Fragment {
         }
         Cura cura = null;
         return cura;
+    }
+
+    private Dosi findDoseFromCura(Cura cura){
+        Dosi dose = null;
+
+        for(int i=0; i<list_dosi.size();i++){
+            if (list_dosi.get(i).getId() == cura.getId())
+                return list_dosi.get(i);
+        }
+
+
+        return dose;
+
     }
 }
 
