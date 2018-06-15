@@ -444,7 +444,7 @@ public class AggiungiPillola extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiungifarmaco));
     }
 
-    private int getIntPillole(String s) {
+    public static int getIntPillole(String s) {
         int res = 0;
         switch (s) {
             case "2 pillole": res=2; break;
@@ -773,7 +773,7 @@ public class AggiungiPillola extends Fragment {
         cal.set(Calendar.SECOND, seconds);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY*60, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
