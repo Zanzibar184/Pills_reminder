@@ -50,6 +50,9 @@ public class AlarmReceiverScorte extends BroadcastReceiver {
         contentText = content_notification;
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT,b);
 
+        SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+        boolean scorta_notifica = prefs_notif.getBoolean("imposta_notifiche_scorta_app",false);
+
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(NotificaAssunzione.class);
         stackBuilder.addNextIntent(resultIntent);
@@ -80,7 +83,9 @@ public class AlarmReceiverScorte extends BroadcastReceiver {
         }
 
         int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
-        nm.notify(m, notification);
+        if(scorta_notifica) {
+            nm.notify(m, notification);
+        }
 
     }
 }

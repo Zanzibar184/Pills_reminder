@@ -8,6 +8,7 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import com.example.zanzibar.myapplication.R;
 import java.util.Date;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class AlarmReceiverNote extends BroadcastReceiver {
@@ -45,6 +47,9 @@ public class AlarmReceiverNote extends BroadcastReceiver {
         String key = b.getString("key");
         contentText = content_notification;
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT,b);
+
+        SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+        boolean notifiche_note = prefs_notif.getBoolean("imposta_notifiche_note",false);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(NotificaAssunzione.class);
@@ -76,7 +81,9 @@ public class AlarmReceiverNote extends BroadcastReceiver {
         }
 
         int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
-        nm.notify(m, notification);
+        if(notifiche_note) {
+            nm.notify(m, notification);
+        }
 
     }
 }

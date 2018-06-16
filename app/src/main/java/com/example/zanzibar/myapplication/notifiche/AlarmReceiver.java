@@ -69,6 +69,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         SharedPreferences prefs = context.getSharedPreferences("ContatoreGiorniPreferenze", MODE_PRIVATE);
         int counter = prefs.getInt(key,0);
 
+        SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+        boolean assumi_farmaco_notifica = prefs_notif.getBoolean("imposta_notifiche_farmaci",false);
+
         counter = counter+1;
 
         SharedPreferences.Editor editor = context.getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
@@ -111,7 +114,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
         int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
-        nm.notify(m, notification);
+        if(assumi_farmaco_notifica) {
+            nm.notify(m, notification);
+        }
 
         if(counter==numero_giorni) {
             int alarmId = intent.getExtras().getInt("req_code");
