@@ -162,6 +162,36 @@ public class CureDao_DB implements CureDAO {
 
 
     }
+    @Override
+    public void reinitDose(Cura cura) {
+
+         int id = cura.getId();
+
+        database.delete(
+                query.TABLE_DOSI,
+                query.COLUMN_ID_DOSI + " =? ",
+                new String[]{ ""+id}
+        );
+
+        int diff_giorni = (int) printDifference(StringtoDate(cura.getInizio_cura()),StringtoDate(cura.getFine_cura()));
+
+        for(int i = 0; i<=diff_giorni;i++){
+
+            Date inizio_cura = StringtoDate(cura.getInizio_cura());
+            Calendar c = Calendar.getInstance();
+            c.setTime(inizio_cura);
+            c.add(Calendar.DATE, i);
+            inizio_cura = c.getTime();
+
+            String giorno = DateToString(inizio_cura);
+
+            database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura.getId(),giorno,Dosi.DA_ASSUMERE)));
+        }
+
+
+
+
+    }
 
     @Override
     public void updateCura(Cura cura) {

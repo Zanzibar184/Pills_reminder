@@ -316,22 +316,23 @@ public class ModificaPillola extends Fragment {
 
                     String unità_misura = spin1.getSelectedItem().toString();
 
-                    Log.i("foto: ", URI_foto_farmaco+"");
-                    dao.updateCura(
-                            new Cura(
-                                    nome,
-                                    qta_ass,
-                                    scorta,
-                                    qta_rimasta,
-                                    inizio_cura,
-                                    fine_cura,
-                                    tipo_cura,
-                                    orario_assunzione,
-                                    modify_cura.getId(),
-                                    URI_foto_farmaco,
-                                    unità_misura,
-                                    importante
-                            ));
+                    Cura cura_updated = new Cura(
+                            nome,
+                            qta_ass,
+                            scorta,
+                            qta_rimasta,
+                            inizio_cura,
+                            fine_cura,
+                            tipo_cura,
+                            orario_assunzione,
+                            modify_cura.getId(),
+                            URI_foto_farmaco,
+                            unità_misura,
+                            importante
+                    );
+                    dao.updateCura(cura_updated);
+                    dao.reinitDose(cura_updated);
+
 
                     dao.close();
 

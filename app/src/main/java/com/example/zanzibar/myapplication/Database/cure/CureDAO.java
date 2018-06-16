@@ -16,4 +16,5 @@ public interface CureDAO {
     public List<Dosi> getAllDosi();
     public List<Dosi> getDosiByDate(String date);
     public void updateDose(Dosi dose);
+    public void reinitDose(Cura cura);
 }
