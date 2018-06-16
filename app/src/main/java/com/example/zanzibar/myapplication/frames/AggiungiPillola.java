@@ -339,6 +339,7 @@ public class AggiungiPillola extends Fragment {
 
                 SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
                 boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
+                boolean notifica_scorte = prefs.getBoolean("imposta_notifiche_scorta_app", false);
                 String scorte_pillole = prefs.getString("pillole_scorta","");
 
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
@@ -418,7 +419,7 @@ public class AggiungiPillola extends Fragment {
 
                     int numero_pillole_rimaste = getIntPillole(scorte_pillole);
 
-                    if(qta_rimasta <= numero_pillole_rimaste && scorta!=0) {
+                    if(qta_rimasta <= numero_pillole_rimaste && scorta!=0 && notifica_scorte) {
                         setNotifyScorta(nome, scorta, qta_rimasta);
                     }
 
@@ -756,7 +757,7 @@ public class AggiungiPillola extends Fragment {
         Bundle c = new Bundle();
         c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
         c.putInt("req_code", request_code);
-        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)));
+        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)) + 1);
         c.putInt("contatore_giorni", 0);
         c.putString("key", key);
         c.putString("cura", cura_notifica.toString());
@@ -773,7 +774,7 @@ public class AggiungiPillola extends Fragment {
         cal.set(Calendar.SECOND, seconds);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60*60*24 , pendingIntent);
 
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
