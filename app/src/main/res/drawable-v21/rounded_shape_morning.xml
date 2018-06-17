@@ -5,7 +5,7 @@
 
         <bitmap
             android:src="@drawable/morning"
-            android:alpha="0.1"
+            android:alpha="0.5"
             android:gravity="center"/>
 
         <size

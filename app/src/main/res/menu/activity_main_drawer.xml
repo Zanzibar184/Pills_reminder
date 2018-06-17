@@ -11,7 +11,7 @@
             android:title="@string/nav_title_home" />
         <item
             android:id="@+id/nav_pills"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_pill"
             android:title="@string/nav_title_pills" />
         <item
             android:id="@+id/nav_calendar"
