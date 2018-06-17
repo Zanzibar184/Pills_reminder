@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Dosi;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.frames.Cure;
 
@@ -32,9 +33,10 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.printDif
 public class NotificaAssunzione extends AppCompatActivity {
 
     private CureDAO dao;
-    private List<Cura> list_cure;
+    private List<Dosi> list_dosi;
     private Cura cura;
     private Cura cura_final;
+    private Dosi dose;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class NotificaAssunzione extends AppCompatActivity {
         setContentView(R.layout.frame_gestione_farmaci);
 
         dao = new CureDao_DB();
+
 
 
         Button conferma = (Button) findViewById(R.id.btn_conferma);
@@ -54,6 +57,12 @@ public class NotificaAssunzione extends AppCompatActivity {
         cura = Cura.toCura(m);
         dao.open();
         cura_final = dao.findCura(cura.getNome(),cura.getInizio_cura(),cura.getFine_cura(),cura.getOrario_assunzione());
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateandTime = sdf.format(new Date());
+        list_dosi = dao.getDosiByDate(currentDateandTime);
+        dose = findDoseFromCura(cura_final);
         dao.close();
 
 
@@ -66,11 +75,13 @@ public class NotificaAssunzione extends AppCompatActivity {
                 if(v.getId()==R.id.btn_conferma) {
                     //cura_final.setRimanenze(cura_final.getRimanenze() - cura_final.getQuantità_assunzione());
                     dao.open();
-                    dao.updateCura(cura_final);
+                    dose.setStato_cura(Dosi.ASSUNTA);
+                    dao.updateDose(dose);
                     dao.close();
                 } else if (v.getId()==R.id.btn_non_assunto) {
                     dao.open();
-                    dao.updateCura(cura_final);
+                    dose.setStato_cura(Dosi.NON_ASSUNTA);
+                    dao.updateDose(dose);
                     dao.close();
                 } else if(v.getId()==R.id.btn_rimanda){
                     if(assumi_farmaco_notifica) {
@@ -174,6 +185,19 @@ public class NotificaAssunzione extends AppCompatActivity {
         //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
         Log.i("dati in setNotify()", "key:" + key + "reqcode" + request_code);
+
+    }
+
+    private Dosi findDoseFromCura(Cura cura){
+        Dosi dose = null;
+
+        for(int i=0; i<list_dosi.size();i++){
+            if (list_dosi.get(i).getId() == cura.getId())
+                return list_dosi.get(i);
+        }
+
+
+        return dose;
 
     }
 
