@@ -19,6 +19,7 @@ import android.util.Log;
 import com.example.zanzibar.myapplication.R;
 
 import java.util.Date;
+import java.util.Random;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.content.Context.ALARM_SERVICE;
@@ -41,13 +42,16 @@ public class AlarmReceiverScorte extends BroadcastReceiver {
 
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent resultIntent = new Intent(context, NotificaAssunzione.class);
+        Intent resultIntent = new Intent(context, NotificaScorta.class);
 
         Bundle b = intent.getExtras();
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
         String key = b.getString("key");
         contentText = content_notification;
+
+        resultIntent.putExtra("contenuto", content_notification);
+
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT,b);
 
         SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
@@ -82,9 +86,14 @@ public class AlarmReceiverScorte extends BroadcastReceiver {
             nm.createNotificationChannel(channel);
         }
 
-        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         if(scorta_notifica) {
-            nm.notify(m, notification);
+            nm.notify(random_value, notification);
         }
 
     }

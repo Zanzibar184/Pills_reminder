@@ -18,6 +18,7 @@ import android.util.Log;
 import com.example.zanzibar.myapplication.R;
 
 import java.util.Date;
+import java.util.Random;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.content.Context.MODE_PRIVATE;
@@ -93,9 +94,14 @@ public class AlarmReceiverNote extends BroadcastReceiver {
             nm.createNotificationChannel(channel);
         }
 
-        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         if(notifiche_note) {
-            nm.notify(m, notification);
+            nm.notify(random_value, notification);
         }
 
     }

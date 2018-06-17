@@ -19,6 +19,7 @@ import android.util.Log;
 import com.example.zanzibar.myapplication.R;
 
 import java.util.Date;
+import java.util.Random;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.content.Context.ALARM_SERVICE;
@@ -113,9 +114,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.i("dati in alarmrevceir()",  "reqcode" + request_code);
 
 
-        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
         if(assumi_farmaco_notifica) {
-            nm.notify(m, notification);
+            nm.notify(random_value, notification);
         }
 
         if(counter==numero_giorni) {
