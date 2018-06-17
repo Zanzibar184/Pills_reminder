@@ -58,6 +58,7 @@
         </provider>
 
         <activity android:name=".notifiche.NotificaAssunzione" />
+        <activity android:name=".notifiche.NotificaNota" />
         <receiver android:name=".notifiche.AlarmReceiver"/>
         <receiver android:name=".notifiche.AlarmReceiverScorte"/>
         <receiver android:name=".notifiche.AlarmReceiverNote"/>

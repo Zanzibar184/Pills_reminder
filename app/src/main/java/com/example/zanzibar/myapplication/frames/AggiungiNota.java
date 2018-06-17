@@ -229,7 +229,7 @@ public class AggiungiNota extends Fragment {
                     String txt_time = text_time.getText().toString();
                     dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
                     if((ricevi_notifica_nota) && (!(txt_date.equals("") && txt_time.equals("")))) {
-                        setNotifyNota(txt_titolo, txt_date, txt_time, tipo_memo);
+                        setNotifyNota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo);
                     }
                     dao.close();
 
@@ -251,7 +251,7 @@ public class AggiungiNota extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiunginota));
     }
 
-    private void setNotifyNota(String titolo, String date, String time, int tipo){
+    private void setNotifyNota(String titolo, String contenuto, String date, String time, int tipo){
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
 
@@ -289,6 +289,11 @@ public class AggiungiNota extends Fragment {
         c.putString("contenuto", titolo);
         c.putInt("req_code", req_code_int);
         c.putString("key", key);
+        c.putString("titolo_nota", titolo);
+        c.putString("contenuto_nota", contenuto);
+        c.putString("data_nota", date);
+        c.putString("orario_nota", time);
+        c.putInt("tipo_nota", tipo);
 
         /*
         Log.i("contenut aggiunginota", titolo);
@@ -303,7 +308,7 @@ public class AggiungiNota extends Fragment {
         cal.setTime(date_nota);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
     }
 

@@ -39,13 +39,26 @@ public class AlarmReceiverNote extends BroadcastReceiver {
 
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent resultIntent = new Intent(context, NotificaAssunzione.class);
+        Intent resultIntent = new Intent(context, NotificaNota.class);
 
         Bundle b = intent.getExtras();
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
         String key = b.getString("key");
         contentText = content_notification;
+
+        String titolo = b.getString("titolo_nota");
+        String contenuto = b.getString("contenuto_nota");
+        String data = b.getString("data_nota");
+        String ora = b.getString("orario_nota");
+        int tipo = b.getInt("tipo_nota");
+
+        resultIntent.putExtra("titolo", titolo);
+        resultIntent.putExtra("contenuto", contenuto);
+        resultIntent.putExtra("data", data);
+        resultIntent.putExtra("ora", ora);
+        resultIntent.putExtra("tipo", tipo);
+
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT,b);
 
         SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);

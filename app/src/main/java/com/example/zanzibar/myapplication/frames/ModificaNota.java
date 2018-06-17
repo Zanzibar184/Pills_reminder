@@ -1,7 +1,12 @@
 package com.example.zanzibar.myapplication.frames;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -30,11 +35,17 @@ import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.notifiche.AlarmReceiverNote;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by user on 11/05/18.
@@ -198,6 +209,8 @@ public class ModificaNota extends Fragment {
             }
         });
 
+        deleteNotification(nota.getTitolo(), nota.getData(), nota.getOra(), nota.getTipo_memo());
+
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,6 +218,8 @@ public class ModificaNota extends Fragment {
                 int tipo_memo = Note.CheckId(categoria_nota);
                 if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
                     dao.open();
+
+                    setNotifyNota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo);
 
                     dao.updateNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo, nota.getId_memo()));
 
@@ -226,6 +241,85 @@ public class ModificaNota extends Fragment {
     public void onResume(){
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_note));
+    }
+
+    private void setNotifyNota(String titolo, String contenuto, String date, String time, int tipo){
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
+
+        Random r = new Random();
+        int random_value = r.nextInt();
+        while(random_value<0) {
+            random_value = r.nextInt();
+        }
+        String key = titolo + "_" + date + "_" + time + "_" + tipo;
+        int req_code_int = random_value;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
+        String myStrDate = date + " " + time;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date_nota = null;
+
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+        editor.putInt(key, req_code_int);
+        editor.apply();
+
+        /*
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        int request_code = prefs.getInt(key, 0);
+        */
+
+        try {
+            date_nota = format.parse(myStrDate);
+            System.out.println(date_nota);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        Bundle c = new Bundle();
+        c.putString("contenuto", titolo);
+        c.putInt("req_code", req_code_int);
+        c.putString("key", key);
+        c.putString("titolo_nota", titolo);
+        c.putString("contenuto_nota", contenuto);
+        c.putString("data_nota", date);
+        c.putString("orario_nota", time);
+        c.putInt("tipo_nota", tipo);
+
+        /*
+        Log.i("contenut aggiunginota", titolo);
+        Log.i("reqcode in aggiunginota", req_code_int+"");
+        Log.i("key in aggiunginota", key);
+        */
+
+        intent.putExtras(c);
+
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date_nota);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+    }
+
+    private void deleteNotification(String titolo, String data, String ora, int tipo) {
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
+
+        String key = titolo + "_" + data + "_" + ora + "_" + tipo;
+        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
+        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE);
+        int req = prefs.getInt(key, 0);
+
+        Log.i("contenut aggiunginota", titolo);
+        Log.i("reqcode in aggiunginota", req+"");
+        Log.i("key in aggiunginota", key);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
     }
 
     private void colorInputUnfilled(){
