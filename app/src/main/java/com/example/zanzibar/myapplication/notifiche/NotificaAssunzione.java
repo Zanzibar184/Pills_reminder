@@ -201,4 +201,13 @@ public class NotificaAssunzione extends AppCompatActivity {
 
     }
 
+
+    /*
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+            intent.putExtra("sms_body", message);
+            startActivity(intent);
+
+            controllare se l'orario attuale ha superato di x l'orario iniziale, quindi inviare l'sms
+     */
+
 }
