@@ -165,6 +165,11 @@ public class ModificaNota extends Fragment {
              public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                      setDateAndTimeVisibility();
 
+                     if(date_time_visible == false){
+                         text_date.setText("");
+                         text_time.setText("");
+                     }
+
              }
          }
         );
@@ -217,17 +222,21 @@ public class ModificaNota extends Fragment {
 
                 int tipo_memo = Note.CheckId(categoria_nota);
                 if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
-                    dao.open();
+                    if(date_time_visible == true && (!text_time.getText().toString().equals("")) && (!text_date.getText().toString().equals(""))) {
+                        dao.open();
+                        if ((!text_date.getText().toString().equals("") && !text_time.getText().toString().equals(""))) {
+                            setNotifyNota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo);
+                        }
+                        dao.updateNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo, nota.getId_memo()));
 
-                    setNotifyNota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo);
+                        dao.close();
 
-                    dao.updateNota(new Nota(text_titolo_nota.getText().toString(), text_contenuto_nota.getText().toString(), text_date.getText().toString(), text_time.getText().toString(), tipo_memo, nota.getId_memo()));
-
-                    dao.close();
-
-                    Note nota = new Note(fab_nota);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                        Note nota = new Note(fab_nota);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                    }
+                    else
+                        colorInputUnfilled();
                 }
                 else
                     colorInputUnfilled();
@@ -333,6 +342,17 @@ public class ModificaNota extends Fragment {
             text_contenuto_nota.setBackground(alert);
         else
             text_contenuto_nota.setBackground(null);
+
+        if(date_time_visible == true){
+            if (text_date.getText().toString().equals(""))
+                text_date.setBackground(alert);
+            else
+                text_date.setBackground(null);
+            if (text_time.getText().toString().equals(""))
+                text_time.setBackground(alert);
+            else
+                text_time.setBackground(null);
+        }
 
     }
 

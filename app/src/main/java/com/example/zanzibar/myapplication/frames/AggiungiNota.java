@@ -123,6 +123,7 @@ public class AggiungiNota extends Fragment {
         ImageView img_date = (ImageView) view.findViewById(R.id.imageviewdate);
         ImageView img_time = (ImageView) view.findViewById(R.id.imageviewtime);
         text_date = (EditText) view.findViewById(R.id.textdate);
+        text_date.setText("");
         text_time = (EditText) view.findViewById(R.id.textora);
         conferma = (Button) view.findViewById(R.id.btn_conferma_inserimento_nota);
         text_contenuto_nota = (EditText) view.findViewById(R.id.contenuto_nota);
@@ -152,6 +153,10 @@ public class AggiungiNota extends Fragment {
              @Override
              public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                      setDateAndTimeVisibility();
+                 if(date_time_visible == false){
+                     text_date.setText("");
+                     text_time.setText("");
+                 }
 
              }
          }
@@ -220,22 +225,27 @@ public class AggiungiNota extends Fragment {
                 SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
                 boolean ricevi_notifica_nota = prefs.getBoolean("imposta_notifiche_note",false);
 
-                if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
+                if((!text_contenuto_nota.getText().toString().equals("")) &&(tipo_memo != 0)) {
+                        if(date_time_visible == true && (!text_time.getText().toString().equals("")) && (!text_date.getText().toString().equals(""))) {
+                            dao.open();
+                            String txt_titolo = text_titolo_nota.getText().toString();
+                            String txt_contenuto = text_contenuto_nota.getText().toString();
+                            String txt_date = text_date.getText().toString();
+                            String txt_time = text_time.getText().toString();
+                            dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
+                            if ((ricevi_notifica_nota)) {
+                                if ((!text_date.getText().toString().equals("") && !text_time.getText().toString().equals(""))) {
+                                    setNotifyNota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo);
+                                }
+                            }
+                            dao.close();
 
-                    dao.open();
-                    String txt_titolo = text_titolo_nota.getText().toString();
-                    String txt_contenuto = text_contenuto_nota.getText().toString();
-                    String txt_date = text_date.getText().toString();
-                    String txt_time = text_time.getText().toString();
-                    dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
-                    if((ricevi_notifica_nota) && (!(txt_date.equals("") && txt_time.equals("")))) {
-                        setNotifyNota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo);
-                    }
-                    dao.close();
-
-                    Note nota = new Note(fab_nota);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                            Note nota = new Note(fab_nota);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
+                        }
+                        else
+                            colorInputUnfilled();
                 }
                 else
                     colorInputUnfilled();
@@ -323,6 +333,17 @@ public class AggiungiNota extends Fragment {
             text_contenuto_nota.setBackground(alert);
         else
             text_contenuto_nota.setBackground(null);
+
+        if(date_time_visible == true){
+            if (text_date.getText().toString().equals(""))
+                text_date.setBackground(alert);
+            else
+                text_date.setBackground(null);
+            if (text_time.getText().toString().equals(""))
+                text_time.setBackground(alert);
+            else
+                text_time.setBackground(null);
+        }
 
     }
 
