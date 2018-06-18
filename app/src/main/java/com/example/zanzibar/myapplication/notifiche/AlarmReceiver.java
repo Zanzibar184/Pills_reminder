@@ -136,9 +136,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                     req_value = rand.nextInt();
                 }
 
+                Intent intent_sms = new Intent(context, AlarmReceiverSMS.class);
+                intent_sms.putExtra("cura_string", cura);
+
                 PendingIntent alarmIntent;
-                alarmIntent = PendingIntent.getBroadcast(context, req_value, new Intent(context, AlarmReceiverSMS.class),
-                        0);
+                alarmIntent = PendingIntent.getBroadcast(context, req_value, intent_sms, 0);
 
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(System.currentTimeMillis() + (minuti_smsavviso * 60 * 1000));
