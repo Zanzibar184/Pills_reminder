@@ -43,13 +43,18 @@ public class AlarmReceiverSMS extends BroadcastReceiver {
 
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        Log.i("AlarmSMS", "sms ricevuto!!");
+        Intent intent_sms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + "748392"));
+        intent.putExtra("sms_body", "corpo del messaggio");
+        context.startActivity(intent_sms);
+
         Intent resultIntent = new Intent(context, NotificaScorta.class);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 200, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 200, intent_sms, PendingIntent.FLAG_UPDATE_CURRENT);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(NotificaAssunzione.class);
-        stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(intent_sms);
 
         Notification.Builder builder = new Notification.Builder(context);
 
@@ -75,11 +80,6 @@ public class AlarmReceiverSMS extends BroadcastReceiver {
             );
             nm.createNotificationChannel(channel);
         }
-
-        Log.i("AlarmSMS", "sms ricevuto!!");
-        Intent intent_sms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + "748392"));
-        intent.putExtra("sms_body", "corpo del messaggio");
-        context.startActivity(intent_sms);
 
         //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
         // nm.notify(random_value, notification);
