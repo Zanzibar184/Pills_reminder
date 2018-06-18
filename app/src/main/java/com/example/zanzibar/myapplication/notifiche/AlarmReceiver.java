@@ -125,18 +125,28 @@ public class AlarmReceiver extends BroadcastReceiver {
         if(assumi_farmaco_notifica) {
             nm.notify(random_value, notification);
 
+            boolean enable_sms = prefs_notif.getBoolean("imposta_notifiche_sms", false);
 
-            PendingIntent alarmIntent;
-            alarmIntent = PendingIntent.getBroadcast(context, 200, new Intent(context, AlarmReceiverSMS.class),
-                    0);
+            if (enable_sms) {
+                int minuti_smsavviso = getMinutiSMS(prefs_notif.getString("minuti_smsavviso", ""));
 
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(System.currentTimeMillis() + 1000 * 60);
+                Random rand = new Random();
+                int req_value = r.nextInt();
+                while (req_value < 0) {
+                    req_value = rand.nextInt();
+                }
 
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-            Log.i("notifica sms", "sms");
-            Log.i("calendario sms", cal.getTime() + "");
-            alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
+                PendingIntent alarmIntent;
+                alarmIntent = PendingIntent.getBroadcast(context, req_value, new Intent(context, AlarmReceiverSMS.class),
+                        0);
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(System.currentTimeMillis() + (minuti_smsavviso * 60));
+                Log.i("minuti sms", cal.getTime() + "");
+
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
+            }
 
         }
 
@@ -153,4 +163,30 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     }
+
+    public static int getMinutiSMS(String s) {
+        int res = 0;
+        switch (s) {
+            case "5 minuti":
+                res = 5;
+                break;
+            case "10 minuti":
+                res = 10;
+                break;
+            case "20 minuti":
+                res = 20;
+                break;
+            case "30 minuti":
+                res = 30;
+                break;
+            case "1 ora":
+                res = 60;
+                break;
+            case "2 ore":
+                res = 120;
+                break;
+        }
+        return res;
+    }
+
 }
