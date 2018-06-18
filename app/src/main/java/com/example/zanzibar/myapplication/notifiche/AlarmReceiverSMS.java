@@ -18,8 +18,6 @@ import android.util.Log;
 
 import com.example.zanzibar.myapplication.R;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
@@ -27,8 +25,8 @@ import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 
+public class AlarmReceiverSMS extends BroadcastReceiver {
 
-public class AlarmReceiver extends BroadcastReceiver {
 
     static int COUNTER = 0;
 
@@ -39,10 +37,71 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     NotificationManager nm;
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        Intent resultIntent = new Intent(context, NotificaScorta.class);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 200, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(NotificaAssunzione.class);
+        stackBuilder.addNextIntent(resultIntent);
+
+        Notification.Builder builder = new Notification.Builder(context);
+
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        Notification notification = builder.setContentTitle(contentTitle)
+                .setSmallIcon(R.drawable.ic_add_alert_black_24dp)
+                .setContentText(contentText)
+                .setTicker(contentTicker)
+                .setSound(alarmSound)
+                .setAutoCancel(true)
+                .setContentIntent(contentIntent).build();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder.setChannelId(CHANNEL_ID);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "NotificationDemo",
+                    IMPORTANCE_DEFAULT
+            );
+            nm.createNotificationChannel(channel);
+        }
+
+        Log.i("AlarmSMS", "sms ricevuto!!");
+        Intent intent_sms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + "748392"));
+        intent.putExtra("sms_body", "corpo del messaggio");
+        context.startActivity(intent_sms);
+
+        //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        // nm.notify(random_value, notification);
+
+
+        /*
+
+        SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
+        boolean sms_notifiche = prefs_notif.getBoolean("imposta_notifiche_sms",false);
+
+        Log.i("entrata in AlarmSMS", "sono entrato!");
+
+        if(sms_notifiche) {
+            Log.i("sms", "sto per inviare un sms");
+            /*
+            Intent intent_sms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + "748392"));
+            intent.putExtra("sms_body", "corpo del messaggio");
+            context.startActivity(intent_sms);
+            */
+        //}
+
+        /*
         COUNTER++;
 
         //Log.i("counter notifica", COUNTER+"");
@@ -124,32 +183,19 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         if(assumi_farmaco_notifica) {
             nm.notify(random_value, notification);
-
-
-            PendingIntent alarmIntent;
-            alarmIntent = PendingIntent.getBroadcast(context, 200, new Intent(context, AlarmReceiverSMS.class),
-                    0);
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(System.currentTimeMillis() + 1000 * 60);
-
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-            Log.i("notifica sms", "sms");
-            Log.i("calendario sms", cal.getTime() + "");
-            alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
-
         }
 
         if(counter==numero_giorni) {
             int alarmId = intent.getExtras().getInt("req_code");
             PendingIntent alarmIntent;
-            alarmIntent = PendingIntent.getBroadcast(context, alarmId, new Intent(context, AlarmReceiver.class),
+            alarmIntent = PendingIntent.getBroadcast(context, alarmId, new Intent(context, AlarmReceiverSMS.class),
                     0);
 
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
             alarmManager.cancel(alarmIntent);
             Log.e("Alarm","Cancellata Notifica");
         }
+        */
 
 
     }
