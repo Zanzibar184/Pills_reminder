@@ -105,6 +105,7 @@
     </string-array>
 
     <string-array name="minuti_per_smsavviso">
+        <item>1 minuto</item>
         <item>5 minuti</item>
         <item>10 minuti</item>
         <item>20 minuti</item>

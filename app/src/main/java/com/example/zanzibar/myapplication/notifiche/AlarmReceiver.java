@@ -141,7 +141,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                         0);
 
                 Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(System.currentTimeMillis() + (minuti_smsavviso * 60));
+                cal.setTimeInMillis(System.currentTimeMillis() + (minuti_smsavviso * 60 * 1000));
                 Log.i("minuti sms", cal.getTime() + "");
 
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
@@ -167,6 +167,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     public static int getMinutiSMS(String s) {
         int res = 0;
         switch (s) {
+            case "1 minuto":
+                res = 1;
+                break;
             case "5 minuti":
                 res = 5;
                 break;
