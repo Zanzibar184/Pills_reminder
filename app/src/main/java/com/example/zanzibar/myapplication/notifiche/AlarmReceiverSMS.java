@@ -46,7 +46,7 @@ public class AlarmReceiverSMS extends BroadcastReceiver {
         Log.i("AlarmSMS", "sms ricevuto!!");
         Intent intent_sms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + "748392"));
         intent.putExtra("sms_body", "corpo del messaggio");
-        context.startActivity(intent_sms);
+        //context.startActivity(intent_sms);
 
         Intent resultIntent = new Intent(context, NotificaScorta.class);
 
