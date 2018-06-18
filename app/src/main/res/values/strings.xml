@@ -167,5 +167,67 @@
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
 
+
+
+
+    <string name="informativa_privacy">Informativa Privacy
+
+Lo scopo del presente documento è di informare gli Utenti relativamente ai Dati Personali raccolti
+dall'applicazione Pills Reminder (di seguito "Applicazione").
+Il Titolare del Trattamento, come successivamente identificato, potrà modificare o semplicemente
+aggiornare, in tutto o in parte, la presente Informativa dandone informazione agli Utenti. Le modifiche e gli
+aggiornamenti saranno vincolanti non appena pubblicati sull'Applicazione. L‘Utente è pertanto invitato a
+leggere l'Informativa Privacy ad ogni accesso all'Applicazione.
+Nel caso di mancata accettazione delle modifiche apportate alla presente Informativa Privacy, l'Utente è
+tenuto a cessare l’utilizzo di questa Applicazione e può richiedere al Titolare del Trattamento di rimuovere i
+propri Dati Personali.
+1. Dati Personali raccolti dall'Applicazione
+
+Il Titolare raccoglie le seguenti tipologie di Dati Personali:
+
+A. Contenuti e informazioni forniti volontariamente dall'Utente
+
+I Dati di contatto, credenziali, contenuti: per esempio dati anagrafici, indirizzo di posta
+elettronica o postale e altri dati di contatto, password e informazioni di sicurezza utilizzati per
+l'autenticazione e l‘accesso all'account, interessi e preferenze personali e altri contenuti personali,
+etc.
+
+Dati sensibili: Dati Personali che rivelino l'origine razziale o etnica, le opinioni politiche, le
+convinzioni religiose o filosofiche, o l‘appartenenza sindacale, nonché dati genetici, dati biometrici
+intesi a identificare in modo univoco una persona fisica, Dati relativi alla salute o alla vita sessuale o
+all'orientamento sessuale della persona.
+
+Il mancato conferimento da parte dell’Utente di alcuni Dati potrebbe impedire a questa Applicazione di
+
+erogare i propri servizi.
+
+L'Utente si assume la responsabilità dei Dati Personali di terzi pubblicati o condivisi mediante questa
+
+Applicazione e garantisce di avere il diritto di comunicarli o diffonderli, liberando il Titolare da qualsiasi
+
+responsabilità verso terzi.
+
+Se l'elaborazione dei Dati Personali si basa sul consenso dell’Utente, lo stesso può revocarlo in qualsiasi
+
+momento.
+
+8. Dati e contenuti acquisiti automaticamente durante l'utilizzo dell'Applicazione
+
+I Dati tecnici: i sistemi informatici e le procedure software preposte al funzionamento di questa
+Applicazione possono acquisire, nel corso del loro normale esercizio, alcuni Dati Personali la cui
+trasmissione è implicita nell'uso dei protocolli di comunicazione internet. Si tratta di informazioni
+che non sono raccolte per essere associate a soggetti interessati identificati, ma che per la loro
+stessa natura, potrebbero, attraverso elaborazioni ed associazioni con Dati detenuti da terzi,
+permettere di identificare gli utenti. In questa categoria rientrano gli indirizzi IP, o i nomi di dominio
+utilizzati dagli Utenti che si connettono all'Applicazione, gli indirizzi in notazione URI (Uniform
+Resource Identifier) delle risorse richieste, l'orario della richiesta, il metodo utilizzato nel sottoporre
+la richiesta al server, la dimensione del file ottenuto, etc.
+
+I Dati di geolocalizzazione: I'Applicazione può raccogliere Dati sulla posizione, che possono essere
+precisi o imprecisi. l Dati precisi sulla posizione possono essere Dati GNSS (Global Navigation
+Satellite System, ad esempio quelli GPS), oltre ai Dati che identificano il ripetitore più vicino, gli
+hotspot Wi-Fi e bluetooth, comunicati quando si abilitano i prodotti o le funzionalità basati sulla
+posizione.</string>
+
 </resources>
 

@@ -2,7 +2,9 @@ package com.example.zanzibar.myapplication.frames;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -83,6 +85,8 @@ public class Cure extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //context.startActivity(intent_sms);
         dao = new CureDao_DB();
         dao.open();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
