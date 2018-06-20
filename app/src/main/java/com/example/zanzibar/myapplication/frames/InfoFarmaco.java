@@ -87,9 +87,19 @@ public class InfoFarmaco extends Fragment {
         image = (ImageView) frame.findViewById(R.id.imgpillchosen);
         image.setImageDrawable(getResources().getDrawable(Cure.getDrawIcons(cura.getTipo_cura())));
 
+        RelativeLayout view_scorte = (RelativeLayout) frame.findViewById(R.id.myview1);
+
+        int resourceId = cura.getTipo_cura();
+
+        if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
+            view_scorte.setVisibility(View.VISIBLE);
+            ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText("Confezione da: " + cura.getScorta() + " " + cura.getUnità_misura());
+            ((TextView) frame.findViewById(R.id.txt_pillole_rimanenti)).setText("Quantità rimasta: " + cura.getRimanenze() + " " + cura.getUnità_misura());
+        } else {
+            view_scorte.setVisibility(View.GONE);
+        }
+
         ((TextView) frame.findViewById(R.id.nome_farmaco_info)).setText(cura.getNome());
-        ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText("Confezione da: "+ cura.getScorta() + " " + cura.getUnità_misura());
-        ((TextView) frame.findViewById(R.id.txt_pillole_rimanenti)).setText("Quantità rimasta: " + cura.getRimanenze() + " " + cura.getUnità_misura());
         ((TextView) frame.findViewById(R.id.txt_dose)).setText("Quantità di assunzione: " + cura.getQuantità_assunzione() + " " + cura.getUnità_misura() + " alle " + cura.getOrario_assunzione());
 
         Date inizio = StringToDate(cura.getInizio_cura());

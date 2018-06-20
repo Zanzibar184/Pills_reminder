@@ -172,6 +172,7 @@ public class ModificaPillola extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Cure.v.setScrollY(0);
         Cure.v.setScrollX(0);
+
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddpill);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.modify_pills_view, linearLayout, false);
         linearLayout.addView(frame);
@@ -179,6 +180,13 @@ public class ModificaPillola extends Fragment {
 
         fab_pills.hide();
 
+        RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
+
+        if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
+            view_scorte.setVisibility(View.VISIBLE);
+        } else {
+            view_scorte.setVisibility(View.GONE);
+        }
 
         imgpill = (ImageView) view.findViewById(R.id.imgpillchosen);
 

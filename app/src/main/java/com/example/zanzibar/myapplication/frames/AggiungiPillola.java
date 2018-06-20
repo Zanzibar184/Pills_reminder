@@ -186,6 +186,15 @@ public class AggiungiPillola extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutaddpill);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_pills_view, linearLayout, false);
         linearLayout.addView(frame);
+
+        RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
+
+        if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
+            view_scorte.setVisibility(View.VISIBLE);
+        } else {
+            view_scorte.setVisibility(View.GONE);
+        }
+
         r1 = view.findViewById(R.id.myview3_1);
         r2 = view.findViewById(R.id.myview3_2);
         r3 = view.findViewById(R.id.myview3_3);
