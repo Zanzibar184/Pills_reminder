@@ -274,7 +274,7 @@ public class Note extends Fragment {
         alarmManager.cancel(pendingIntent);
     }
 
-    private String parseRange(String range){
+    public static String parseRange(String range){
 
         switch(range){
             case "Tutti": return DateAdd(3650);
@@ -288,7 +288,7 @@ public class Note extends Fragment {
         return "";
     }
 
-    private String DateAdd(int add){
+    public static String DateAdd(int add){
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
