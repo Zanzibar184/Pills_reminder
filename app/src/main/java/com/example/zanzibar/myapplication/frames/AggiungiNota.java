@@ -312,6 +312,8 @@ public class AggiungiNota extends Fragment {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_nota);
+        cal.add(Calendar.DATE, -1);
+        Log.i("date cal", cal.getTime() + "");
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
