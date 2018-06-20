@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -57,6 +60,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -78,6 +82,8 @@ public class ModificaPillola extends Fragment {
 
     int id_tipo_foto = 0;
 
+    int ripetizione = 0;
+
     //Stringa che ci da il percorso della foto scattata
     protected static String pictureFilePath;
     //Stringa che ci da il percorso della foto presa da galleria
@@ -91,6 +97,8 @@ public class ModificaPillola extends Fragment {
     private EditText scorte = null;
     private EditText rimanenze = null;
 
+    private EditText giorni_ripetizione = null;
+
     private CheckBox check_importante = null;
 
     Spinner spin1 = null;
@@ -101,6 +109,24 @@ public class ModificaPillola extends Fragment {
     private DatePickerDialog.OnDateSetListener dateend = null;
 
     private Button btn_conferma = null;
+
+    private Button b_lunedi;
+    private Button b_martedi;
+    private Button b_mercoledi;
+    private Button b_giovedi;
+    private Button b_venerdi;
+    private Button b_sabato;
+    private Button b_domenica;
+
+    ArrayList<String> days_of_week = null;
+
+    private boolean lun = false;
+    private boolean mar = false;
+    private boolean mer = false;
+    private boolean gio = false;
+    private boolean ven = false;
+    private boolean sab = false;
+    private boolean dom = false;
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
@@ -181,6 +207,8 @@ public class ModificaPillola extends Fragment {
         text_date_end = (EditText) view.findViewById(R.id.dateend);
         text_date_end.setText(modify_cura.getFine_cura());
 
+        giorni_ripetizione = (EditText) view.findViewById(R.id.giorni_ripetizione);
+
 
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose1.setText(modify_cura.getQuantità_assunzione()+"");
@@ -197,6 +225,22 @@ public class ModificaPillola extends Fragment {
 
         orario_di_assunzione1 = view.findViewById(R.id.txt_orario_dose1);
         orario_di_assunzione1.setText(modify_cura.getOrario_assunzione());
+
+        b_lunedi = (Button) view.findViewById(R.id.btn_lun);
+        b_martedi = (Button) view.findViewById(R.id.btn_mar);
+        b_mercoledi = (Button) view.findViewById(R.id.btn_mer);
+        b_giovedi = (Button) view.findViewById(R.id.btn_gio);
+        b_venerdi = (Button) view.findViewById(R.id.btn_ven);
+        b_sabato = (Button) view.findViewById(R.id.btn_sab);
+        b_domenica = (Button) view.findViewById(R.id.btn_dom);
+
+        b_lunedi.setOnClickListener(button_week_manage);
+        b_martedi.setOnClickListener(button_week_manage);
+        b_mercoledi.setOnClickListener(button_week_manage);
+        b_giovedi.setOnClickListener(button_week_manage);
+        b_venerdi.setOnClickListener(button_week_manage);
+        b_sabato.setOnClickListener(button_week_manage);
+        b_domenica.setOnClickListener(button_week_manage);
 
         if(modify_cura.getFoto() != null){
             setImage(imgpill, modify_cura.getFoto());
@@ -286,6 +330,39 @@ public class ModificaPillola extends Fragment {
             }
         });
 
+        //per prova, poi andrà settato giusto
+        ripetizione = 1;
+
+        RadioGroup rgroup = view.findViewById(R.id.radioGroup_ripetizione);
+        if (ripetizione == 1) {
+            rgroup.check(R.id.rbtn_giorno);
+        } else if (ripetizione == 2) {
+            rgroup.check(R.id.rbtn_settimana);
+            for (String s : days_of_week) {
+                switch (s) {
+                    case "MONDAY": {
+                        lun = true;
+                    }
+                    break;
+                }
+                //continuare qui
+            }
+        }
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked) {
+                    String s = checkedRadioButton.getText().toString();
+                    if (s.equals("Ogni")) {
+                        ripetizione = 1;
+                    } else if (s.equals("Giorni della settimana")) {
+                        ripetizione = 2;
+                    }
+                }
+            }
+        });
 
 
 
@@ -301,6 +378,24 @@ public class ModificaPillola extends Fragment {
                     boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
                     boolean notifica_scorte = prefs.getBoolean("imposta_notifiche_scorta_app", false);
                     String scorte_pillole = prefs.getString("pillole_scorta","");
+
+                    days_of_week = new ArrayList<String>();
+
+                    if (lun) {
+                        days_of_week.add("MONDAY");
+                    } else if (mar) {
+                        days_of_week.add("TUESDAY");
+                    } else if (mer) {
+                        days_of_week.add("WEDNESDAY");
+                    } else if (gio) {
+                        days_of_week.add("THURSDAY");
+                    } else if (ven) {
+                        days_of_week.add("FRIDAY");
+                    } else if (sab) {
+                        days_of_week.add("SATURDAY");
+                    } else if (dom) {
+                        days_of_week.add("SUNDAY");
+                    }
 
                     dao = new CureDao_DB();
                     dao.open();
@@ -767,6 +862,81 @@ public class ModificaPillola extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    private View.OnClickListener button_week_manage = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            selectDay(view);
+        }
+    };
+
+    public void selectDay(View view) {
+        switch (view.getId()) {
+            case R.id.btn_lun:
+                if (lun) {
+                    lun = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!lun) {
+                    lun = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_mar:
+                if (mar) {
+                    mar = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!mar) {
+                    mar = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_mer:
+                if (mer) {
+                    mer = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!mar) {
+                    mer = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_gio:
+                if (gio) {
+                    gio = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!gio) {
+                    gio = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_ven:
+                if (ven) {
+                    ven = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!ven) {
+                    ven = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_sab:
+                if (sab) {
+                    sab = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!sab) {
+                    sab = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+            case R.id.btn_dom:
+                if (dom) {
+                    dom = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!dom) {
+                    dom = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                break;
+        }
     }
 
 }

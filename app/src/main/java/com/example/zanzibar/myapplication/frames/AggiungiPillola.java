@@ -38,6 +38,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -88,6 +89,8 @@ public class AggiungiPillola extends Fragment {
     //intero che ci dice se la foto è presa da fotocamera o da galleria
     int id_tipo_foto = 0;
 
+    int ripetizione = 0;
+
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_pills = null;
@@ -97,6 +100,7 @@ public class AggiungiPillola extends Fragment {
     private EditText nome_cura = null;
     private EditText scorte = null;
     private EditText rimanenze = null;
+    private EditText giorni_ripetizione = null;
 
     private CheckBox check_importante = null;
 
@@ -107,7 +111,6 @@ public class AggiungiPillola extends Fragment {
 
     private Button btn_conferma = null;
 
-    private Button btn_current_day_of_week;
     private Button b_lunedi;
     private Button b_martedi;
     private Button b_mercoledi;
@@ -116,7 +119,15 @@ public class AggiungiPillola extends Fragment {
     private Button b_sabato;
     private Button b_domenica;
 
-    Integer[] id_button_views = {R.id.btn_lun, R.id.btn_mar, R.id.btn_mer, R.id.btn_gio, R.id.btn_ven, R.id.btn_sab, R.id.btn_dom};
+    ArrayList<String> days_of_week = null;
+
+    private boolean lun = false;
+    private boolean mar = false;
+    private boolean mer = false;
+    private boolean gio = false;
+    private boolean ven = false;
+    private boolean sab = false;
+    private boolean dom = false;
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
@@ -147,9 +158,6 @@ public class AggiungiPillola extends Fragment {
     int resourceId;
 
     private int importante = 0;
-
-    private RadioGroup giorni_ripetizione = null;
-    private RadioGroup giorni_selezione = null;
 
 
     public AggiungiPillola() {
@@ -207,6 +215,8 @@ public class AggiungiPillola extends Fragment {
         orario_di_assunzione2 = (EditText) view.findViewById(R.id.txt_orario_dose2);
         orario_di_assunzione3 = (EditText) view.findViewById(R.id.txt_orario_dose3);
 
+        giorni_ripetizione = (EditText) view.findViewById(R.id.giorni_ripetizione);
+
         text_dose1 = (EditText) view.findViewById(R.id.txt_dose1);
         text_dose2 = (EditText) view.findViewById(R.id.txt_dose2);
         text_dose3 = (EditText) view.findViewById(R.id.txt_dose3);
@@ -230,9 +240,6 @@ public class AggiungiPillola extends Fragment {
         b_venerdi = (Button) view.findViewById(R.id.btn_ven);
         b_sabato = (Button) view.findViewById(R.id.btn_sab);
         b_domenica = (Button) view.findViewById(R.id.btn_dom);
-
-        giorni_ripetizione = (RadioGroup) view.findViewById(R.id.rbtn_giorno);
-        giorni_selezione = (RadioGroup) view.findViewById(R.id.rbtn_settimana);
 
         b_lunedi.setOnClickListener(button_week_manage);
         b_martedi.setOnClickListener(button_week_manage);
@@ -367,6 +374,26 @@ public class AggiungiPillola extends Fragment {
             }
         });
 
+        RadioGroup rgroup = view.findViewById(R.id.radioGroup_ripetizione);
+        rgroup.check(R.id.rbtn_giorno);
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked) {
+                    String s = checkedRadioButton.getText().toString();
+                    if (s.equals("Ogni")) {
+                        ripetizione = 1;
+                        Log.i("ripetizione", ripetizione + "");
+                    } else if (s.equals("Giorni della settimana")) {
+                        ripetizione = 2;
+                        Log.i("ripetizione", ripetizione + "");
+                    }
+                }
+            }
+        });
+
 
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
@@ -413,7 +440,33 @@ public class AggiungiPillola extends Fragment {
                     //fine
                     String unita_misura_dose = null;
 
+                    days_of_week = new ArrayList<String>();
 
+                    int n_giorni_ripetizione = 0;
+
+                    if (ripetizione == 1) {
+                        n_giorni_ripetizione = Integer.parseInt(giorni_ripetizione.getText().toString());
+                        //TODO:gestire giorni di ripetizione
+                    } else if (ripetizione == 2) {
+
+                        /*
+                        if (lun) {
+                            days_of_week.add("MONDAY");
+                        } else if (mar) {
+                            days_of_week.add("TUESDAY");
+                        } else if (mer) {
+                            days_of_week.add("WEDNESDAY");
+                        } else if (gio) {
+                            days_of_week.add("THURSDAY");
+                        } else if (ven) {
+                            days_of_week.add("FRIDAY");
+                        } else if (sab) {
+                            days_of_week.add("SATURDAY");
+                        } else if (dom) {
+                            days_of_week.add("SUNDAY");
+                        }*/
+                        //TODO: gestire i giorni della settimana
+                    }
 
                     int qta_ass;
                     if(nClicks >= 1)
@@ -882,96 +935,69 @@ public class AggiungiPillola extends Fragment {
     public void selectDay(View view) {
         switch (view.getId()) {
             case R.id.btn_lun:
-                Log.i("log", "lun");
-                //setStyles(R.id.btn_lun, id_button_views, view);
-                //do something else...
+                if (lun) {
+                    lun = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!lun) {
+                    lun = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_mar:
-                //setStyles(R.id.btn_mar, id_button_views, view);
-                //do something else...
+                if (mar) {
+                    mar = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!mar) {
+                    mar = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_mer:
-                //setStyles(R.id.btn_mer, id_button_views, view);
-                //do something else...
+                if (mer) {
+                    mer = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!mar) {
+                    mer = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_gio:
-                //setStyles(R.id.btn_gio, id_button_views, view);
-                //do something else...
+                if (gio) {
+                    gio = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!gio) {
+                    gio = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_ven:
-                //setStyles(R.id.btn_ven, id_button_views, view);
-                //do something else...
+                if (ven) {
+                    ven = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!ven) {
+                    ven = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_sab:
-                //setStyles(R.id.btn_sab, id_button_views, view);
-                //do something else...
+                if (sab) {
+                    sab = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!sab) {
+                    sab = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
             case R.id.btn_dom:
-                //setStyles(R.id.btn_dom, id_button_views, view);
-                //do something else...
+                if (dom) {
+                    dom = false;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+                } else if (!dom) {
+                    dom = true;
+                    view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
                 break;
         }
     }
-
-    public void setStyles(Integer current_id, Integer[] ids, View v) {
-        for (Integer i : ids) {
-            if (i.equals(current_id)) {
-                setStyleOfDay((Button) v.findViewById(i));
-            } else {
-                setDefaultStyleDay((Button) v.findViewById(i));
-            }
-        }
-    }
-
-    public void setStyleOfDay(Button b) {
-        final int sdk = android.os.Build.VERSION.SDK_INT;
-        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            b.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
-        } else {
-            b.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
-        }
-    }
-
-    public void setDefaultStyleDay(Button b) {
-        final int sdk = android.os.Build.VERSION.SDK_INT;
-        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            b.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
-        } else {
-            b.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
-        }
-    }
-
-    /*
-    public Button getBtnDayOfWeek() {
-        Button btn_day = null;
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-
-        switch (day) {
-            case Calendar.SUNDAY:
-                btn_day = findViewById(R.id.btn_dom);
-                break;
-            case Calendar.MONDAY:
-                btn_day = findViewById(R.id.btn_lun);
-                break;
-            case Calendar.TUESDAY:
-                btn_day = findViewById(R.id.btn_mar);
-                break;
-            case Calendar.WEDNESDAY:
-                btn_day = findViewById(R.id.btn_mer);
-                break;
-            case Calendar.THURSDAY:
-                btn_day = findViewById(R.id.btn_gio);
-                break;
-            case Calendar.FRIDAY:
-                btn_day = findViewById(R.id.btn_ven);
-                break;
-            case Calendar.SATURDAY:
-                btn_day = findViewById(R.id.btn_sab);
-                break;
-        }
-        return btn_day;
-    }
-    */
 
 }

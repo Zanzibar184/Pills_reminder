@@ -170,6 +170,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:id="@+id/myview3_1"
         android:layout_width="match_parent"
@@ -493,8 +494,6 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    -->
-
 
     <RelativeLayout
         android:id="@+id/myview4"
@@ -593,7 +592,7 @@
     <RelativeLayout
         android:id="@+id/myview4_1"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/marginBottom_view"
         android:layout_marginLeft="@dimen/marginLeft_view"
@@ -621,31 +620,35 @@
             android:background="@color/colorPrimaryDark" />
 
         <RadioGroup
-            android:id="@+id/radioGroup_cat"
+            android:id="@+id/radioGroup_ripetizione"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp">
 
+            <!--
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp">
+                android:layout_marginBottom="30dp">-->
 
-                <RadioButton
-                    android:id="@+id/rbtn_giorno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/giorni_ripetizione"
-                    android:layout_alignParentStart="true"
-                    android:text="Ogni" />
+            <RadioButton
+                android:id="@+id/rbtn_giorno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/giorni_ripetizione"
+                android:layout_alignParentStart="true"
+                android:text="Ogni" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/giorni_ripetizione"
-                    android:layout_width="128dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="80dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="numero giorni"
@@ -660,13 +663,14 @@
                     android:text="giorni"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            </LinearLayout>
+            <!--
+                        </RelativeLayout>-->
+            <!--
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">-->
 
                 <RadioButton
                     android:id="@+id/rbtn_settimana"
@@ -796,7 +800,7 @@
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
-                </LinearLayout>
+                    <!--    </LinearLayout>-->
 
             </LinearLayout>
 
