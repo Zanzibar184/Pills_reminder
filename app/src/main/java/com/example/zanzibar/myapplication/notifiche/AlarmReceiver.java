@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.R;
 
 import java.util.Calendar;
@@ -30,22 +31,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    static int COUNTER = 0;
 
     public String CHANNEL_ID = "Channel_ID";
     public String contentText = "prova";
     public String contentTitle = "Hai un farmaco da prendere";
     public String contentTicker = "New Message Alert!";
+    private Cura cura;
 
     NotificationManager nm;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
-        COUNTER++;
-
-        //Log.i("counter notifica", COUNTER+"");
 
 
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -58,16 +54,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         int request_code = b.getInt("req_code");
         int numero_giorni = b.getInt("n_giorni");
         String key = b.getString("key");
-        String cura = b.getString("cura");
+        String cura_string = b.getString("cura");
+        cura = Cura.toCura(cura_string);
         contentText = content_notification;
 
         resultIntent.putExtra("prova_passaggio_parametri", "passaggio parametri alla classe ProvaNotifica");
-        resultIntent.putExtra("stringa_cura", cura);
+        resultIntent.putExtra("stringa_cura", cura_string);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,0,b);
-
-        //intent.putExtra("contatore_giorni", ++contatore_giorni);
-        //Log.i("contatore giorni", contatore_giorni+"");
 
         SharedPreferences prefs = context.getSharedPreferences("ContatoreGiorniPreferenze", MODE_PRIVATE);
         int counter = prefs.getInt(key,0);
@@ -116,18 +110,23 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.i("dati in alarmrevceir()",  "reqcode" + request_code);
 
 
-        //int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+
         Random r = new Random();
         int random_value = r.nextInt();
         while(random_value<0) {
             random_value = r.nextInt();
         }
+
+
+
         if(assumi_farmaco_notifica) {
             nm.notify(random_value, notification);
 
             boolean enable_sms = prefs_notif.getBoolean("imposta_notifiche_sms", false);
 
-            if (enable_sms) {
+            if (enable_sms && (cura.getImportante() == 1)) {
+
+
                 int minuti_smsavviso = getMinutiSMS(prefs_notif.getString("minuti_smsavviso", ""));
 
                 Random rand = new Random();
@@ -136,15 +135,16 @@ public class AlarmReceiver extends BroadcastReceiver {
                     req_value = rand.nextInt();
                 }
 
+
                 Intent intent_sms = new Intent(context, AlarmReceiverSMS.class);
-                intent_sms.putExtra("cura_string", cura);
+                intent_sms.putExtra("cura_string", cura_string);
+                intent_sms.putExtra("tempo_ritardo", prefs_notif.getString("minuti_smsavviso", ""));
 
                 PendingIntent alarmIntent;
                 alarmIntent = PendingIntent.getBroadcast(context, req_value, intent_sms, 0);
 
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(System.currentTimeMillis() + (minuti_smsavviso * 60 * 1000));
-                Log.i("minuti sms", cal.getTime() + "");
 
                 AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
@@ -165,6 +165,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     }
+
 
     public static int getMinutiSMS(String s) {
         int res = 0;

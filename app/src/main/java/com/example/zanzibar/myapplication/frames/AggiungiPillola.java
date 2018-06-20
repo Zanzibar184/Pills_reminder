@@ -709,6 +709,7 @@ public class AggiungiPillola extends Fragment {
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
         dao.open();
         Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
+        Log.i("CURA", cura_notifica.toString());
         dao.close();
 
         Random r = new Random();
