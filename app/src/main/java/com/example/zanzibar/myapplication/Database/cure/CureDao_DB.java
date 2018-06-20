@@ -11,6 +11,7 @@ import com.example.zanzibar.myapplication.Database.QueryHelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -117,10 +118,15 @@ public class CureDao_DB implements CureDAO {
     public Cura insertCura(Cura cura) {
 
         database.insert(query.TABLE_CURE,null,curaToValues(cura));
+        insertDosi(cura);
 
-        //----gestione date dosi-------//
 
-        Cura cura_get_id = findCura(cura.getNome(),cura.getInizio_cura(),cura.getFine_cura(),cura.getOrario_assunzione());
+        return cura;
+    }
+
+    private void insertDosi(Cura cura_without_id){
+
+        Cura cura_get_id = findCura(cura_without_id.getNome(),cura_without_id.getInizio_cura(),cura_without_id.getFine_cura(),cura_without_id.getOrario_assunzione());
 
         int diff_giorni = (int) printDifference(StringtoDate(cura_get_id.getInizio_cura()),StringtoDate(cura_get_id.getFine_cura()));
 
@@ -136,10 +142,48 @@ public class CureDao_DB implements CureDAO {
 
             database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura_get_id.getId(),giorno,Dosi.DA_ASSUMERE)));
         }
+    }
+    private void insertDosi(Cura cura_without_id, List<String> DaysAllowed){
 
-        //----fine gestione date dosi-------//
+        Cura cura_get_id = findCura(cura_without_id.getNome(),cura_without_id.getInizio_cura(),cura_without_id.getFine_cura(),cura_without_id.getOrario_assunzione());
 
-        return cura;
+        int diff_giorni = (int) printDifference(StringtoDate(cura_get_id.getInizio_cura()),StringtoDate(cura_get_id.getFine_cura()));
+
+        for(int i = 0; i<=diff_giorni;i++){
+
+            Date scroll_date = StringtoDate(cura_get_id.getInizio_cura());
+            Calendar c = Calendar.getInstance();
+            c.setTime(scroll_date);
+            c.add(Calendar.DATE, i);
+            scroll_date = c.getTime();
+
+            SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+            String allowed = outFormat.format(scroll_date);
+
+            String giorno = DateToString(scroll_date);
+            if( Arrays.asList(DaysAllowed).contains(allowed)) {
+                database.insert(query.TABLE_DOSI, null, dosiToValues(new Dosi(cura_get_id.getId(), giorno, Dosi.DA_ASSUMERE)));
+            }
+        }
+    }
+    private void insertDosi(Cura cura_without_id, int repetition){
+
+        Cura cura_get_id = findCura(cura_without_id.getNome(),cura_without_id.getInizio_cura(),cura_without_id.getFine_cura(),cura_without_id.getOrario_assunzione());
+
+        int diff_giorni = (int) printDifference(StringtoDate(cura_get_id.getInizio_cura()),StringtoDate(cura_get_id.getFine_cura()));
+
+        for(int i = 0; i<=diff_giorni;i = i + repetition){
+
+            Date inizio_cura = StringtoDate(cura_get_id.getInizio_cura());
+            Calendar c = Calendar.getInstance();
+            c.setTime(inizio_cura);
+            c.add(Calendar.DATE, i);
+            inizio_cura = c.getTime();
+
+            String giorno = DateToString(inizio_cura);
+
+            database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura_get_id.getId(),giorno,Dosi.DA_ASSUMERE)));
+        }
     }
 
     @Override

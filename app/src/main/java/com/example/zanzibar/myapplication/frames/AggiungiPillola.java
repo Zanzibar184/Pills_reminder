@@ -38,6 +38,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -147,6 +148,10 @@ public class AggiungiPillola extends Fragment {
 
     private int importante = 0;
 
+    private RadioGroup giorni_ripetizione = null;
+    private RadioGroup giorni_selezione = null;
+
+
     public AggiungiPillola() {
         // Required empty public constructor
     }
@@ -225,6 +230,9 @@ public class AggiungiPillola extends Fragment {
         b_venerdi = (Button) view.findViewById(R.id.btn_ven);
         b_sabato = (Button) view.findViewById(R.id.btn_sab);
         b_domenica = (Button) view.findViewById(R.id.btn_dom);
+
+        giorni_ripetizione = (RadioGroup) view.findViewById(R.id.rbtn_giorno);
+        giorni_selezione = (RadioGroup) view.findViewById(R.id.rbtn_settimana);
 
         b_lunedi.setOnClickListener(button_week_manage);
         b_martedi.setOnClickListener(button_week_manage);
@@ -404,6 +412,8 @@ public class AggiungiPillola extends Fragment {
                     }
                     //fine
                     String unita_misura_dose = null;
+
+
 
                     int qta_ass;
                     if(nClicks >= 1)
