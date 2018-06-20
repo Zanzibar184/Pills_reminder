@@ -12,6 +12,7 @@ public interface NoteDao {
     public void updateNota(Nota nota);
     public List<Nota> getAllNote();
     public List<Nota> getNoteByDate(String date);
+    public List<Nota> getNoteByRange(String date);
 }
 
 

@@ -19,10 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
@@ -49,7 +52,8 @@ public class Note extends Fragment {
     NoteDao dao;
     List<Nota> list_note;
 
-    private LinearLayout linearLayout = null;
+    private LinearLayout linearLayoutSpinner = null;
+    private LinearLayout linearLayoutNote = null;
 
     FloatingActionButton fab_note = null;
 
@@ -91,9 +95,23 @@ public class Note extends Fragment {
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, aggiungiNota).addToBackStack(null).commit();
             }
         });
-        linearLayout = (LinearLayout) view.findViewById(R.id.llayoutnote);
+        linearLayoutSpinner = (LinearLayout) view.findViewById(R.id.llnotespinner);
+        linearLayoutNote = (LinearLayout) view.findViewById(R.id.llnotes);
 
-        showNote();
+        final Spinner periodi = view.findViewById(R.id.spinnerperiodo);
+        periodi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+              public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                         long id) {
+                  showNote(parent.getItemAtPosition(pos).toString());
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0) {
+                  // TODO Auto-generated method stub
+
+              }
+          });
+
 
 
     }
@@ -104,10 +122,11 @@ public class Note extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_note));
     }
 
-    private void showNote(){
+    private void showNote(String range){
+        linearLayoutNote.removeAllViews();
         dao.open();
 
-        list_note = dao.getAllNote();
+        list_note = dao.getNoteByRange(parseRange(range));
 
         for(int i=0; i<list_note.size();i++){
             Nota tmp = list_note.get(i);
@@ -119,7 +138,7 @@ public class Note extends Fragment {
     }
 
     private void addLayoutNote(String titolo, String testo, String data, String ora, int tipo_memo, int id_memo) {
-        final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayout, false);
+        final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayoutNote, false);
 
         ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
@@ -147,7 +166,7 @@ public class Note extends Fragment {
 
 
 
-        linearLayout.addView(frame);
+        linearLayoutNote.addView(frame);
     }
 
     public void setPopupMenuImages(Context c, final View v) {
@@ -255,5 +274,29 @@ public class Note extends Fragment {
         alarmManager.cancel(pendingIntent);
     }
 
+    private String parseRange(String range){
+
+        switch(range){
+            case "Tutti": return DateAdd(3650);
+            case "Ultimo giorno": return DateAdd(0);
+            case "Ultima settimana": return DateAdd(7);
+            case "Ultimo mese": return DateAdd(30);
+            case "Ultimo anno": return DateAdd(365);
+        }
+
+
+        return "";
+    }
+
+    private String DateAdd(int add){
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        c.add(Calendar.DATE, -add);
+        String result = sdf.format(c.getTime());
+
+        return result;
+
+    }
 
 }

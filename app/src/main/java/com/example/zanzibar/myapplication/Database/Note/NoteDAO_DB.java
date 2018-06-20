@@ -139,4 +139,28 @@ public class NoteDAO_DB implements  NoteDao{
 
         return people;
     }
+    @Override
+    public List<Nota> getNoteByRange(String date) {
+        List<Nota> people = new ArrayList<Nota>();
+        Cursor cursor = database.query(
+                query.TABLE_NOTE,
+                allColumns,
+                "'"+date+ "'" + " <= DATA or (DATA = '') or (DATA = null)",
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Nota person = CursotToNota(cursor);
+            people.add(person);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return people;
+    }
 }
