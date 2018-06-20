@@ -7,28 +7,29 @@
     tools:context=".frames.Cure"
     android:id="@+id/llayoutfarmaci">
 
-    <!--Qui ho un linear layout per gestire meglio l'ordine dei vari contenuti, che appunto andranno inseriti qui-->
-
-    <!--
-    <Button
-        android:id="@+id/add_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ADD" />
-     -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/ll_cure_spinner">
 
         <Spinner
-            android:id="@+id/spinnerperiodo"
+            android:id="@+id/spinnerperiodo_cure"
             style="@android:style/Widget.Holo.Light.Spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/periodi" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_cure"
+        android:orientation="vertical">
+
 
     </LinearLayout>
 

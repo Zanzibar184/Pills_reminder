@@ -252,6 +252,32 @@ public class CureDao_DB implements CureDAO {
         return people;
 
     }
+    @Override
+    public List<Cura> getCureByRange(String date) {
+
+        List<Cura> people = new ArrayList<Cura>();
+        Cursor cursor = database.query(
+                query.TABLE_CURE,
+                allColumns,
+                "'"+date+ "'" + " <= INIZIO_CURA",
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Cura person = cursorToCura(cursor);
+            people.add(person);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return people;
+
+    }
 
     @Override
     public Cura findCura(String nome, String inizio_cura, String fine_cura, String orario) {

@@ -225,15 +225,14 @@ public class AggiungiNota extends Fragment {
                 SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
                 boolean ricevi_notifica_nota = prefs.getBoolean("imposta_notifiche_note",false);
 
-                if((!text_contenuto_nota.getText().toString().equals("")) &&(tipo_memo != 0)) {
-                        if(date_time_visible == true && (!text_time.getText().toString().equals("")) && (!text_date.getText().toString().equals(""))) {
+                if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
                             dao.open();
                             String txt_titolo = text_titolo_nota.getText().toString();
                             String txt_contenuto = text_contenuto_nota.getText().toString();
                             String txt_date = text_date.getText().toString();
                             String txt_time = text_time.getText().toString();
                             dao.insertNota(new Nota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo));
-                            if ((ricevi_notifica_nota)) {
+                            if ((ricevi_notifica_nota) && date_time_visible == true) {
                                 if ((!text_date.getText().toString().equals("") && !text_time.getText().toString().equals(""))) {
                                     setNotifyNota(txt_titolo, txt_contenuto, txt_date, txt_time, tipo_memo);
                                 }
@@ -243,9 +242,6 @@ public class AggiungiNota extends Fragment {
                             Note nota = new Note(fab_nota);
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction().replace(R.id.fragmentmanager, nota).addToBackStack(null).commit();
-                        }
-                        else
-                            colorInputUnfilled();
                 }
                 else
                     colorInputUnfilled();
