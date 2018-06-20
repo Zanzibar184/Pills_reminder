@@ -263,6 +263,7 @@
                 android:entries="@array/pill_units"
                 style="@android:style/Widget.Holo.Light.Spinner"/>
 
+
         </RelativeLayout>
     </RelativeLayout>
 
@@ -397,6 +398,14 @@
                 android:layout_marginStart="191dp"
                 android:entries="@array/pill_units" />
 
+            <ImageView
+                android:id="@+id/btn_rimuovi_dose2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/minus_red" />
+
         </RelativeLayout>
     </RelativeLayout>
 
@@ -490,6 +499,14 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="191dp"
                 android:entries="@array/pill_units" />
+
+            <ImageView
+                android:id="@+id/btn_rimuovi_dose3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/minus_red" />
 
         </RelativeLayout>
     </RelativeLayout>

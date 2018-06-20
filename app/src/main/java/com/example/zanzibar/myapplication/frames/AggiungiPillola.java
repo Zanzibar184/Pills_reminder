@@ -198,6 +198,8 @@ public class AggiungiPillola extends Fragment {
         ImageView img_date_init = (ImageView) view.findViewById(R.id.imgdateinit);
         ImageView img_date_end = (ImageView) view.findViewById(R.id.imgdateend);
         ImageView img_add_pill = (ImageView) view.findViewById(R.id.img_add_dosi);
+        ImageView img_remove_dose2 = (ImageView) view.findViewById(R.id.btn_rimuovi_dose2);
+        ImageView img_remove_dose3 = (ImageView) view.findViewById(R.id.btn_rimuovi_dose3);
         ImageView img_time_dose_1 = (ImageView) view.findViewById(R.id.img_time_1);
         ImageView img_time_dose_2 = (ImageView) view.findViewById(R.id.img_time_2);
         ImageView img_time_dose_3 = (ImageView) view.findViewById(R.id.img_time_3);
@@ -248,6 +250,26 @@ public class AggiungiPillola extends Fragment {
         b_venerdi.setOnClickListener(button_week_manage);
         b_sabato.setOnClickListener(button_week_manage);
         b_domenica.setOnClickListener(button_week_manage);
+
+        img_remove_dose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_dose2.setText("");
+                orario_di_assunzione2.setText("");
+                r2.setVisibility(View.GONE);
+                nClicks--;
+            }
+        });
+
+        img_remove_dose3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_dose3.setText("");
+                orario_di_assunzione3.setText("");
+                r3.setVisibility(View.GONE);
+                nClicks--;
+            }
+        });
 
         img_mic_pillname.setOnClickListener(new View.OnClickListener() {
             @Override
