@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -104,6 +105,17 @@ public class AggiungiPillola extends Fragment {
     private DatePickerDialog.OnDateSetListener dateend = null;
 
     private Button btn_conferma = null;
+
+    private Button btn_current_day_of_week;
+    private Button b_lunedi;
+    private Button b_martedi;
+    private Button b_mercoledi;
+    private Button b_giovedi;
+    private Button b_venerdi;
+    private Button b_sabato;
+    private Button b_domenica;
+
+    Integer[] id_button_views = {R.id.btn_lun, R.id.btn_mar, R.id.btn_mer, R.id.btn_gio, R.id.btn_ven, R.id.btn_sab, R.id.btn_dom};
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
@@ -205,6 +217,22 @@ public class AggiungiPillola extends Fragment {
         orario_di_assunzione1 = view.findViewById(R.id.txt_orario_dose1);
         orario_di_assunzione2 = view.findViewById(R.id.txt_orario_dose2);
         orario_di_assunzione3 = view.findViewById(R.id.txt_orario_dose3);
+
+        b_lunedi = (Button) view.findViewById(R.id.btn_lun);
+        b_martedi = (Button) view.findViewById(R.id.btn_mar);
+        b_mercoledi = (Button) view.findViewById(R.id.btn_mer);
+        b_giovedi = (Button) view.findViewById(R.id.btn_gio);
+        b_venerdi = (Button) view.findViewById(R.id.btn_ven);
+        b_sabato = (Button) view.findViewById(R.id.btn_sab);
+        b_domenica = (Button) view.findViewById(R.id.btn_dom);
+
+        b_lunedi.setOnClickListener(button_week_manage);
+        b_martedi.setOnClickListener(button_week_manage);
+        b_mercoledi.setOnClickListener(button_week_manage);
+        b_giovedi.setOnClickListener(button_week_manage);
+        b_venerdi.setOnClickListener(button_week_manage);
+        b_sabato.setOnClickListener(button_week_manage);
+        b_domenica.setOnClickListener(button_week_manage);
 
         img_mic_pillname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -833,5 +861,107 @@ public class AggiungiPillola extends Fragment {
 
         return elapsedDays;
     }
+
+    private View.OnClickListener button_week_manage = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            selectDay(view);
+        }
+    };
+
+    public void selectDay(View view) {
+        switch (view.getId()) {
+            case R.id.btn_lun:
+                Log.i("log", "lun");
+                //setStyles(R.id.btn_lun, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_mar:
+                //setStyles(R.id.btn_mar, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_mer:
+                //setStyles(R.id.btn_mer, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_gio:
+                //setStyles(R.id.btn_gio, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_ven:
+                //setStyles(R.id.btn_ven, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_sab:
+                //setStyles(R.id.btn_sab, id_button_views, view);
+                //do something else...
+                break;
+            case R.id.btn_dom:
+                //setStyles(R.id.btn_dom, id_button_views, view);
+                //do something else...
+                break;
+        }
+    }
+
+    public void setStyles(Integer current_id, Integer[] ids, View v) {
+        for (Integer i : ids) {
+            if (i.equals(current_id)) {
+                setStyleOfDay((Button) v.findViewById(i));
+            } else {
+                setDefaultStyleDay((Button) v.findViewById(i));
+            }
+        }
+    }
+
+    public void setStyleOfDay(Button b) {
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            b.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+        } else {
+            b.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+        }
+    }
+
+    public void setDefaultStyleDay(Button b) {
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            b.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+        } else {
+            b.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
+        }
+    }
+
+    /*
+    public Button getBtnDayOfWeek() {
+        Button btn_day = null;
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day) {
+            case Calendar.SUNDAY:
+                btn_day = findViewById(R.id.btn_dom);
+                break;
+            case Calendar.MONDAY:
+                btn_day = findViewById(R.id.btn_lun);
+                break;
+            case Calendar.TUESDAY:
+                btn_day = findViewById(R.id.btn_mar);
+                break;
+            case Calendar.WEDNESDAY:
+                btn_day = findViewById(R.id.btn_mer);
+                break;
+            case Calendar.THURSDAY:
+                btn_day = findViewById(R.id.btn_gio);
+                break;
+            case Calendar.FRIDAY:
+                btn_day = findViewById(R.id.btn_ven);
+                break;
+            case Calendar.SATURDAY:
+                btn_day = findViewById(R.id.btn_sab);
+                break;
+        }
+        return btn_day;
+    }
+    */
 
 }

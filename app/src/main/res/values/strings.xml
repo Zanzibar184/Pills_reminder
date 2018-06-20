@@ -55,6 +55,7 @@
     <string name="scorte_farmaco">Scorte</string>
     <string name="dosi_farmaco">Dosi e Orari</string>
     <string name="periodo_assunzione">Periodo di assunzione</string>
+    <string name="ripetizione_assunzione">Ripetizione</string>
     <string name="importanza_farmaco">Importanza</string>
     <string name="dosiorario_txt">Clicca qui per aggiungere ulteriori dosaggi alla tua cura (max 3)</string>
     <string name="pillola_foto_txt">Qui puoi inserire una foto per il tuo farmaco</string>
