@@ -127,32 +127,7 @@ public class Cure extends Fragment {
         Calendar rightNow = Calendar.getInstance();
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
 
-        linearLayout.post(new Runnable(){
-            public void run(){
-                int height = linearLayout.getHeight();
-
-                if((currentHour >= 6) && (currentHour <12))
-                {
-                    v.setScrollY(0);
-
-                }
-                if((currentHour >= 12) && (currentHour <18))
-                {
-                    v.setScrollY(height/4);
-                }
-                if((currentHour >= 18) && (currentHour <24))
-                {
-                    v.setScrollY(height);
-                }
-                if((currentHour >= 0) && (currentHour <6))
-                {
-                    v.setScrollY(height);
-                }
-
-
-
-            }
-        });
+        v.setScrollY(0);
 
 
 
