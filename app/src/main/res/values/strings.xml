@@ -145,6 +145,14 @@
         <item>Altro</item>
     </string-array>
 
+    <string-array name="periodi">
+        <item>Tutti</item>
+        <item>Ultimo giorno</item>
+        <item>Ultima settimana</item>
+        <item>Ultimo mese</item>
+        <item>Ultimo anno</item>
+    </string-array>
+
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
