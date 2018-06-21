@@ -576,11 +576,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/giorni_ripetizione"
                 android:layout_alignParentStart="true"
-                android:text="Ogni" />
+                android:text="Ripeti" />
 
             <LinearLayout
+                android:id="@+id/llripgiorno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewogni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="ogni"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/giorni_ripetizione"
@@ -594,7 +604,7 @@
                     android:inputType="number" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textViewgiorni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -619,7 +629,7 @@
                 android:text="Giorni della settimana" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/llayout_ripweek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
