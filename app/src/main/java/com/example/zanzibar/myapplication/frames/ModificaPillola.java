@@ -184,6 +184,9 @@ public class ModificaPillola extends Fragment {
 
         fab_pills.hide();
 
+        final LinearLayout view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
+        final LinearLayout view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
+
         RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
 
         if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
@@ -342,23 +345,26 @@ public class ModificaPillola extends Fragment {
             }
         });
 
-        //per prova, poi andrà settato giusto
-        ripetizione = 1;
 
+        /*
+        String string_ripetizione = modify_cura.getRipetizione();
+        if(string_ripetizione.length() <= 3) {
+            ripetizione = 1;
+            view_ripetizione_settimana.setVisibility(View.GONE);
+            view_ripetizione_giorni.setVisibility(View.VISIBLE);
+            giorni_ripetizione.setText(modify_cura.getRipetizione());
+        } else {
+            ripetizione = 2;
+            view_ripetizione_settimana.setVisibility(View.VISIBLE);
+            view_ripetizione_giorni.setVisibility(View.GONE);
+            days_of_week = reverseRipetizione(string_ripetizione);
+        }*/
+        
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_ripetizione);
         if (ripetizione == 1) {
             rgroup.check(R.id.rbtn_giorno);
         } else if (ripetizione == 2) {
             rgroup.check(R.id.rbtn_settimana);
-            for (String s : days_of_week) {
-                switch (s) {
-                    case "MONDAY": {
-                        lun = true;
-                    }
-                    break;
-                }
-                //continuare qui
-            }
         }
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -367,10 +373,16 @@ public class ModificaPillola extends Fragment {
                 boolean isChecked = checkedRadioButton.isChecked();
                 if (isChecked) {
                     String s = checkedRadioButton.getText().toString();
-                    if (s.equals("Ogni")) {
+                    if (s.equals("Ripeti")) {
                         ripetizione = 1;
+                        view_ripetizione_settimana.setVisibility(View.GONE);
+                        view_ripetizione_giorni.setVisibility(View.VISIBLE);
+                        Log.i("ripetizione", ripetizione + "");
                     } else if (s.equals("Giorni della settimana")) {
                         ripetizione = 2;
+                        view_ripetizione_settimana.setVisibility(View.VISIBLE);
+                        view_ripetizione_giorni.setVisibility(View.GONE);
+                        Log.i("ripetizione", ripetizione + "");
                     }
                 }
             }
