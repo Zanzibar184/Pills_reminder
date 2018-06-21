@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:ems="10"
-            android:hint="Nome..."
+            android:hint="@string/hint_nome_cura"
             android:inputType="textPersonName" />
 
         <ImageView
@@ -121,7 +121,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/textView4"
             android:layout_marginBottom="9dp"
-            android:text="Quantità corrente" />
+            android:text="@string/qta_scatola" />
 
         <TextView
             android:id="@+id/textView4"
@@ -132,7 +132,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="Quantità per scatola" />
+            android:text="@string/qta_corrente" />
 
         <EditText
             android:id="@+id/rimanenze"
@@ -189,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 1"
+            android:text="@string/dose_1"
             android:textStyle="bold" />
 
         <View
@@ -214,7 +214,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:text="Numero:" />
+                android:text="@string/num_dose" />
 
             <EditText
                 android:id="@+id/txt_dose1"
@@ -243,7 +243,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/textView6"
                 android:layout_marginTop="106dp"
-                android:text="Ora:" />
+                android:text="@string/ora_dose" />
 
             <ImageView
                 android:id="@+id/img_time_1"
@@ -325,7 +325,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 2"
+            android:text="@string/dose_2"
             android:textStyle="bold" />
 
         <View
@@ -350,7 +350,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:text="Numero:" />
+                android:text="@string/num_dose" />
 
             <EditText
                 android:id="@+id/txt_dose2"
@@ -379,7 +379,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/textView6"
                 android:layout_marginTop="106dp"
-                android:text="Ora:" />
+                android:text="@string/ora_dose" />
 
             <ImageView
                 android:id="@+id/img_time_2"
@@ -427,7 +427,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Dose 3"
+            android:text="@string/dose_3"
             android:textStyle="bold" />
 
         <View
@@ -452,7 +452,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:text="Numero:" />
+                android:text="@string/num_dose" />
 
             <EditText
                 android:id="@+id/txt_dose3"
@@ -481,7 +481,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/textView6"
                 android:layout_marginTop="106dp"
-                android:text="Ora:" />
+                android:text="@string/ora_dose" />
 
             <ImageView
                 android:id="@+id/img_time_3"
@@ -592,7 +592,7 @@
             android:layout_alignTop="@+id/imgdateinit"
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
-            android:text="Dal" />
+            android:text="@string/init_periodo_ass" />
 
         <TextView
             android:id="@+id/textView4"
@@ -602,7 +602,7 @@
             android:layout_alignBottom="@+id/dateend"
             android:layout_alignLeft="@+id/textView3"
             android:layout_alignStart="@+id/textView3"
-            android:text="Al" />
+            android:text="@string/end_periodo_ass" />
 
     </RelativeLayout>
 
@@ -642,19 +642,13 @@
             android:layout_height="match_parent"
             android:layout_marginTop="40dp">
 
-            <!--
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp">-->
-
             <RadioButton
                 android:id="@+id/rbtn_giorno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/giorni_ripetizione"
                 android:layout_alignParentStart="true"
-                android:text="Ripeti" />
+                android:text="@string/radio_ripeti" />
 
             <LinearLayout
                 android:id="@+id/llripgiorno"
@@ -666,7 +660,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="ogni"
+                    android:text="@string/radio_content_start"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
 
@@ -678,7 +672,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="numero giorni"
+                    android:hint="@string/radio_content_hint"
                     android:inputType="number" />
 
                 <TextView
@@ -687,24 +681,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/giorni_ripetizione"
-                    android:text="giorni"
+                    android:text="@string/radio_content_end"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp" />
             </LinearLayout>
-            <!--
-                        </RelativeLayout>-->
-            <!--
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">-->
+
 
                 <RadioButton
                     android:id="@+id/rbtn_settimana"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Giorni della settimana" />
+                    android:text="@string/radio_settimana" />
 
                 <LinearLayout
                     android:id="@+id/llayout_ripweek"
@@ -727,7 +715,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="LUN"
+                            android:text="@string/btn_lun"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -743,7 +731,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="MAR"
+                            android:text="@string/btn_mar"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -759,7 +747,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="MER"
+                            android:text="@string/btn_mer"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -775,7 +763,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="GIO"
+                            android:text="@string/btn_gio"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -792,7 +780,7 @@
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
                             android:onClick="selectDay"
-                            android:text="VEN"
+                            android:text="@string/btn_ven"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -808,7 +796,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="SAB"
+                            android:text="@string/btn_sab"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -824,7 +812,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/round_button"
                             android:gravity="center_vertical|center_horizontal"
-                            android:text="DOM"
+                            android:text="@string/btn_dom"
                             android:textColor="@color/colorSecondary" />
                     </FrameLayout>
 
@@ -854,7 +842,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="@string/importanza_farmaco"
+            android:text="@string/sms_testata"
             android:textStyle="bold" />
 
         <View
@@ -874,7 +862,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="10dp"
-            android:text="Cura importante (Aggiungila al servizio SMS Avviso)" />
+            android:text="@string/check_sms" />
 
     </RelativeLayout>
 
@@ -884,7 +872,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/marginLeft_view"
         android:background="@color/colorPrimary"
-        android:text="Conferma"
+        android:text="@string/btn_conferma"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 

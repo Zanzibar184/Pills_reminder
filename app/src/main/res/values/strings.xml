@@ -50,15 +50,67 @@
     <string name="titolo_smsavviso">SMS Avviso</string>
     <string name="titolo_modificapillola">Modifica Farmaco</string>
 
-    <string name="foto_pillola">Foto del farmaco</string>
-    <string name="nome_cura">Nome del farmaco</string>
-    <string name="scorte_farmaco">Scorte</string>
-    <string name="dosi_farmaco">Dosi e Orari</string>
-    <string name="periodo_assunzione">Periodo di assunzione</string>
-    <string name="ripetizione_assunzione">Ripetizione</string>
-    <string name="importanza_farmaco">Importanza</string>
+    //-------------------------------------------------------------------//
+    //-----------------   Schermata Aggiunta/Modifica Cure   ----------------------//
+
+
+    <string name="foto_pillola">Foto della Cura</string>
+
+    <string name="nome_cura">Nome della Cura</string>
+    <string name="hint_nome_cura">Nome...</string>
+
+    <string name="scorte_farmaco">Scorte di Medicinali</string>
+    <string name="qta_corrente">Quantità di una confezione nuova</string>
+    <string name="qta_scatola">Quantità rimasta</string>
+
+
+    <string name="dose_1">Dosaggio</string>
+    <string name="dose_2">Secondo Dosaggio</string>
+    <string name="dose_3">Terzo Dosaggio</string>
+    <string name="num_dose">Numero:</string>
+    <string name="ora_dose">Ora:</string>
+
+    <string-array name="pill_units">
+        <item>mg</item>
+        <item>gr</item>
+        <item>cc</item>
+        <item>ml</item>
+        <item>gocce</item>
+        <item>cucchiai</item>
+        <item>unità</item>
+    </string-array>
+
     <string name="dosiorario_txt">Clicca qui per aggiungere ulteriori dosaggi alla tua cura (max 3)</string>
-    <string name="pillola_foto_txt">Qui puoi inserire una foto per il tuo farmaco</string>
+
+    <string name="periodo_assunzione">Periodo di assunzione</string>
+    <string name="init_periodo_ass">Dal</string>
+    <string name="end_periodo_ass">Al</string>
+
+
+    <string name="ripetizione_assunzione">Intervallo di Ripetizione</string>
+    <string name="radio_ripeti">Ripeti</string>
+    <string name="radio_content_start">Ogni</string>
+    <string name="radio_content_hint">numero giorni...</string>
+    <string name="radio_content_end">giorni</string>
+
+    <string name="radio_settimana">Giorni della Settimana</string>
+    <string name="btn_lun">LUN</string>
+    <string name="btn_mar">MAR</string>
+    <string name="btn_mer">MER</string>
+    <string name="btn_gio">GIO</string>
+    <string name="btn_ven">VEN</string>
+    <string name="btn_sab">SAB</string>
+    <string name="btn_dom">DOM</string>
+
+
+    <string name="sms_testata">Servizio SMS AVVISO</string>
+    <string name="check_sms">Aggiungi al servizio SMS AVVISO</string>
+
+
+    <string name="btn_conferma">Conferma</string>
+
+
+    //-------------------------------------------------------------------//
 
     <string name="scatta_fotocamera">Scatta foto</string>
     <string name="scatta_galleria">Scegli da galleria</string>
@@ -86,15 +138,7 @@
 
     <string name="non_support_speechapi">Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale</string>
 
-    <string-array name="pill_units">
-        <item>mg</item>
-        <item>gr</item>
-        <item>cc</item>
-        <item>ml</item>
-        <item>gocce</item>
-        <item>cucchiai</item>
-        <item>unità</item>
-    </string-array>
+
 
     <string-array name="pillole_per_scorta">
         <item>2 pillole</item>

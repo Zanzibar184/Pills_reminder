@@ -417,12 +417,12 @@ public class ModificaPillola extends Fragment {
                 boolean isChecked = checkedRadioButton.isChecked();
                 if (isChecked) {
                     String s = checkedRadioButton.getText().toString();
-                    if (s.equals("Ripeti")) {
+                    if (s.equals(getString(R.string.radio_ripeti))) {
                         ripetizione = 1;
                         view_ripetizione_settimana.setVisibility(View.GONE);
                         view_ripetizione_giorni.setVisibility(View.VISIBLE);
                         //Log.i("ripetizione", ripetizione + "");
-                    } else if (s.equals("Giorni della settimana")) {
+                    } else if (s.equals(getString(R.string.radio_settimana))) {
                         ripetizione = 2;
                         view_ripetizione_settimana.setVisibility(View.VISIBLE);
                         view_ripetizione_giorni.setVisibility(View.GONE);
