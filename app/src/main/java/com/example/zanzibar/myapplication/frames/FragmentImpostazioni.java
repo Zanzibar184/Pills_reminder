@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
+import com.example.zanzibar.myapplication.WelcomeActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -213,7 +214,13 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
         pref_infoapp.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                //TODO: implementare InfoApp
+                SharedPreferences pref_intro = getContext().getSharedPreferences("snow-intro-slider", 0);
+                SharedPreferences.Editor editor_intro = pref_intro.edit();
+                editor_intro.putBoolean("imposta_info_app", true);
+                editor_intro.apply();
+                Log.i("pref in infoapp", pref_intro.getBoolean("imposta_info_app", false) + "");
+                Intent i = new Intent(getContext(), WelcomeActivity.class);
+                startActivity(i);
                 return true;
             }
         });

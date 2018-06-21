@@ -49,6 +49,8 @@ public class Session {
             editorprefsettings.putString("pillole_scorta", "5 pillole");
             editorprefsettings.apply();
         }
+        editor.putBoolean("imposta_info_app", false);
+        editor.commit();
     }
 
     public boolean isFirstTimeLaunch() {

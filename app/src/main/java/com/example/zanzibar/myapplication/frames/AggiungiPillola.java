@@ -193,6 +193,9 @@ public class AggiungiPillola extends Fragment {
 
         RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
 
+        final LinearLayout view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
+        final LinearLayout view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
+
         if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
             view_scorte.setVisibility(View.VISIBLE);
         } else {
@@ -411,6 +414,7 @@ public class AggiungiPillola extends Fragment {
 
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_ripetizione);
         rgroup.check(R.id.rbtn_giorno);
+        view_ripetizione_settimana.setVisibility(View.GONE);
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -418,11 +422,15 @@ public class AggiungiPillola extends Fragment {
                 boolean isChecked = checkedRadioButton.isChecked();
                 if (isChecked) {
                     String s = checkedRadioButton.getText().toString();
-                    if (s.equals("Ogni")) {
+                    if (s.equals("Ripeti")) {
                         ripetizione = 1;
+                        view_ripetizione_settimana.setVisibility(View.GONE);
+                        view_ripetizione_giorni.setVisibility(View.VISIBLE);
                         Log.i("ripetizione", ripetizione + "");
                     } else if (s.equals("Giorni della settimana")) {
                         ripetizione = 2;
+                        view_ripetizione_settimana.setVisibility(View.VISIBLE);
+                        view_ripetizione_giorni.setVisibility(View.GONE);
                         Log.i("ripetizione", ripetizione + "");
                     }
                 }

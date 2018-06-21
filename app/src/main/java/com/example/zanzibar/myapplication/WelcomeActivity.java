@@ -2,6 +2,7 @@ package com.example.zanzibar.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,14 +47,20 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("snow-intro-slider", 0);
+        SharedPreferences.Editor editor = pref.edit();
+        boolean intro = pref.getBoolean("imposta_info_app", false);
+
         // Checking for first time launch - before calling setContentView()
         session = new Session(this);
-        if (!session.isFirstTimeLaunch()) {
+        if (!session.isFirstTimeLaunch() && !intro) {
             launchHomeScreen();
             finish();
-        } else if (session.isFirstTimeLaunch()) {
+        } else if (session.isFirstTimeLaunch() || intro) {
 
-            session.setFirstTimeLaunch(true);
+            if (session.isFirstTimeLaunch()) {
+                session.setFirstTimeLaunch(true);
+            }
 
             // Making notification bar transparent
             if (Build.VERSION.SDK_INT >= 21) {
@@ -108,6 +115,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            editor.putBoolean("imposta_info_app", false);
         }
     }
 
