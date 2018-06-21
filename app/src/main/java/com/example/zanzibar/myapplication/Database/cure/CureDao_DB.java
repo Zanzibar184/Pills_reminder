@@ -37,6 +37,7 @@ public class CureDao_DB implements CureDAO {
                     query.COLUMN_FOTO,
                     query.COLUMN_UDM,
                     query.COLUMN_CURA_IMPORTANTE,
+                    query.COLUMN_RIPETIZIONE,
             };
     private String[] dosicolumns =
             {
@@ -74,6 +75,7 @@ public class CureDao_DB implements CureDAO {
         values.put(query.COLUMN_FOTO, cura.getFoto());
         values.put(query.COLUMN_UDM, cura.getUnità_misura());
         values.put(query.COLUMN_CURA_IMPORTANTE, cura.getImportante());
+        values.put(query.COLUMN_RIPETIZIONE, cura.getRipetizione());
         return values;
     }
     private ContentValues dosiToValues(Dosi dosi){

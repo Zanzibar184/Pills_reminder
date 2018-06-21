@@ -57,7 +57,7 @@ public class Cura {
 
     @Override
     public String toString(){
-        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + id + " " + foto + " " + unità_misura + " " + importante;
+        return nome +" "+ quantità_assunzione +" "+ scorta +" "+ rimanenze+" "+ inizio_cura +" "+ fine_cura + " " + tipo_cura + " " + orario_assunzione + " " + id + " " + foto + " " + unità_misura + " " + importante + " " + ripetizione;
     }
 
     public static Cura toCura(String string){
@@ -199,5 +199,6 @@ public class Cura {
         for(int i = 0; i < arrayString.length; i++){
             days.add(arrayString[i]);
         }
+        return days;
     }
 }

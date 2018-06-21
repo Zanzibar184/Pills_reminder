@@ -69,6 +69,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.zanzibar.myapplication.Database.cure.Cura.reverseRipetizione;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_CAPTURE;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.getDaySystem;
@@ -346,7 +347,7 @@ public class ModificaPillola extends Fragment {
         });
 
 
-        /*
+        //------------------------------------------------->>>>>>>>>>>>>>>>>>
         String string_ripetizione = modify_cura.getRipetizione();
         if(string_ripetizione.length() <= 3) {
             ripetizione = 1;
@@ -358,8 +359,36 @@ public class ModificaPillola extends Fragment {
             view_ripetizione_settimana.setVisibility(View.VISIBLE);
             view_ripetizione_giorni.setVisibility(View.GONE);
             days_of_week = reverseRipetizione(string_ripetizione);
-        }*/
-        
+
+            for(String s: days_of_week) {
+                if(s.equals(getDaySystem(0))) {
+                    b_lunedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(1))) {
+                    b_martedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(2))) {
+                    b_mercoledi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(3))) {
+                    b_giovedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(4))) {
+                    b_venerdi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(5))) {
+                    b_sabato.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+                if(s.equals(getDaySystem(6))) {
+                    b_domenica.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                }
+
+            }
+        }
+
+
+        //------------------------------------------------->>>>>>>>>>>>>>>>>>
+
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_ripetizione);
         if (ripetizione == 1) {
             rgroup.check(R.id.rbtn_giorno);
@@ -464,7 +493,9 @@ public class ModificaPillola extends Fragment {
                             modify_cura.getId(),
                             URI_foto_farmaco,
                             unità_misura,
-                            importante
+                            importante,
+                            "ciao"
+
                     );
                     dao.updateCura(cura_updated);
                     dao.reinitDose(cura_updated);
