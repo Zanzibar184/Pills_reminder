@@ -31,6 +31,7 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
     ListPreference pillole_scorta = null;
     Preference pref_feed = null;
     Preference pref_infoapp = null;
+    Preference pref_privacy = null;
 
 
 
@@ -89,6 +90,7 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
 
         pref_feed = (Preference) findPreference("pref_key_feedback");
         pref_infoapp = (Preference) findPreference("pref_key_infoapp");
+        pref_privacy = (Preference) findPreference("pref_key_infoapp");
 
         //-----------------------------
 
@@ -221,6 +223,14 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
                 Log.i("pref in infoapp", pref_intro.getBoolean("imposta_info_app", false) + "");
                 Intent i = new Intent(getContext(), WelcomeActivity.class);
                 startActivity(i);
+                return true;
+            }
+        });
+
+        pref_privacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                //TODO: mostrare il contratto per la privacy
                 return true;
             }
         });
