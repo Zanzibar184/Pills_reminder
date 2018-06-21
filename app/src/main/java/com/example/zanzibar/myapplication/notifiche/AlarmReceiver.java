@@ -52,7 +52,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         Bundle b = intent.getExtras();
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
-        int numero_giorni = b.getInt("n_giorni");
         String key = b.getString("key");
         String cura_string = b.getString("cura");
         cura = Cura.toCura(cura_string);
@@ -63,20 +62,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,0,b);
 
-        SharedPreferences prefs = context.getSharedPreferences("ContatoreGiorniPreferenze", MODE_PRIVATE);
-        int counter = prefs.getInt(key,0);
 
         SharedPreferences prefs_notif = context.getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
         boolean assumi_farmaco_notifica = prefs_notif.getBoolean("imposta_notifiche_farmaci",false);
 
-        counter = counter+1;
-
-        SharedPreferences.Editor editor = context.getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
-        editor.putInt(key, counter);
-        editor.apply();
-
-        Log.i("counter giorni", counter+"");
-        Log.i("numero giorni", numero_giorni+"");
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(NotificaAssunzione.class);
@@ -150,17 +139,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), alarmIntent);
             }
 
-        }
-
-        if(counter==numero_giorni) {
-            int alarmId = intent.getExtras().getInt("req_code");
-            PendingIntent alarmIntent;
-            alarmIntent = PendingIntent.getBroadcast(context, alarmId, new Intent(context, AlarmReceiver.class),
-                    0);
-
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-            alarmManager.cancel(alarmIntent);
-            Log.e("Alarm","Cancellata Notifica");
         }
 
 

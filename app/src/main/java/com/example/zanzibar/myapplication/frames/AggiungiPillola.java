@@ -26,6 +26,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -49,6 +50,7 @@ import android.widget.Toast;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Dosi;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
@@ -75,6 +77,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class AggiungiPillola extends Fragment {
     private CureDAO dao;
 
+    private List<Dosi> list_dose_notifica;
+
     static final int REQUEST_PICTURE_CAPTURE = 1;
     static final int REQUEST_PICTURE_GALLERY = 2;
 
@@ -89,7 +93,7 @@ public class AggiungiPillola extends Fragment {
     //intero che ci dice se la foto è presa da fotocamera o da galleria
     int id_tipo_foto = 0;
 
-    int ripetizione = 0;
+    int ripetizione = 1;
 
     private LinearLayout linearLayout = null;
 
@@ -428,7 +432,8 @@ public class AggiungiPillola extends Fragment {
 
         btn_conferma = view.findViewById(R.id.btn_conferma_inserimento);
         btn_conferma.setOnClickListener(new View.OnClickListener() {
-            @Override
+
+        @Override
         public void onClick(View view) {
 
                 SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
@@ -475,28 +480,29 @@ public class AggiungiPillola extends Fragment {
 
                     int n_giorni_ripetizione = 0;
 
-                    if (ripetizione == 1) {
+                    if (ripetizione == 1 && !giorni_ripetizione.getText().toString().equals("")) {
                         n_giorni_ripetizione = Integer.parseInt(giorni_ripetizione.getText().toString());
-                        //TODO:gestire giorni di ripetizione
                     } else if (ripetizione == 2) {
 
-                        /*
+
+
+
+
                         if (lun) {
-                            days_of_week.add("MONDAY");
-                        } else if (mar) {
-                            days_of_week.add("TUESDAY");
-                        } else if (mer) {
-                            days_of_week.add("WEDNESDAY");
-                        } else if (gio) {
-                            days_of_week.add("THURSDAY");
-                        } else if (ven) {
-                            days_of_week.add("FRIDAY");
-                        } else if (sab) {
-                            days_of_week.add("SATURDAY");
-                        } else if (dom) {
-                            days_of_week.add("SUNDAY");
-                        }*/
-                        //TODO: gestire i giorni della settimana
+                            days_of_week.add(getDaySystem(0));
+                        }if (mar) {
+                            days_of_week.add(getDaySystem(1));
+                        }if (mer) {
+                            days_of_week.add(getDaySystem(2));
+                        }if (gio) {
+                            days_of_week.add(getDaySystem(3));
+                        }if (ven) {
+                            days_of_week.add(getDaySystem(4));
+                        }if (sab) {
+                            days_of_week.add(getDaySystem(5));
+                        }if (dom) {
+                            days_of_week.add(getDaySystem(6));
+                        }
                     }
 
                     int qta_ass;
@@ -506,10 +512,16 @@ public class AggiungiPillola extends Fragment {
                         qta_ass = Integer.parseInt(text_dose1.getText().toString());
                         unita_misura_dose = spin1.getSelectedItem().toString();
                         dao.open();
-                        Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
+                        if(ripetizione == 1){
+                            Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante),n_giorni_ripetizione);
+
+                        }
+                        else if (ripetizione ==2){
+                            Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante),days_of_week);
+                        }
                         dao.close();
                         if(assumi_farmaco_notifica) {
-                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                            setNotify2(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
 
                     }
@@ -522,7 +534,7 @@ public class AggiungiPillola extends Fragment {
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
-                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                            setNotify2(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
                     }
                     if(nClicks >= 3)
@@ -534,7 +546,7 @@ public class AggiungiPillola extends Fragment {
                         Cura cura = dao.insertCura(new Cura(nome,qta_ass,scorta,qta_rimasta, inizio_cura, fine_cura,tipo_cura, orario_assunzione, URI_foto_farmaco, unita_misura_dose, importante));
                         dao.close();
                         if(assumi_farmaco_notifica) {
-                            setNotify(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
+                            setNotify2(nome, qta_ass, unita_misura_dose, orario_assunzione, inizio_cura, fine_cura);
                         }
 
                     }
@@ -824,84 +836,70 @@ public class AggiungiPillola extends Fragment {
         }
     }
 
-    private void setNotify(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
+    private void setNotify2(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
 
 
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
         dao.open();
         Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
-        Log.i("CURA", cura_notifica.toString());
+        list_dose_notifica = dao.getDosiById(cura_notifica.getId());
         dao.close();
 
-        Random r = new Random();
-        int random_value = r.nextInt();
-        while(random_value<0) {
-            random_value = r.nextInt();
+
+
+
+        for(int i = 0; i < list_dose_notifica.size(); i++){
+            Dosi tmp = list_dose_notifica.get(i);
+
+            String myDate = tmp.getGiorno() + " " + orario;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date_notifica = null;
+
+            try {
+                date_notifica = format.parse(myDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Calendar cal_notifica = Calendar.getInstance();
+            cal_notifica.setTime(date_notifica);
+
+            Random r = new Random();
+            int random_value = r.nextInt();
+            while(random_value<0) {
+                random_value = r.nextInt();
+            }
+            String key = nome + "_" + quantità + "_" + orario;
+            int req_code_int = random_value;
+
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+            editor.putInt(key, req_code_int);
+            editor.apply();
+
+            SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+            int request_code = prefs.getInt(key, 0);
+
+            Bundle c = new Bundle();
+            c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+            c.putInt("req_code", request_code);
+            c.putString("key", key);
+            c.putString("cura", cura_notifica.toString());
+            intent.putExtras(c);
+
+
+            Log.i("notifica settata per il", tmp.getGiorno());
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, cal_notifica.getTimeInMillis() , pendingIntent);
+
+
         }
-        String key = nome + "_" + quantità + "_" + orario;
-        int req_code_int = random_value;
 
-        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE + next);
-
-        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
-        editor.putInt(key, req_code_int);
-        editor.apply();
-
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
-
-        SharedPreferences.Editor editor2 = getContext().getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
-        editor2.putInt(key, 0);
-        editor2.apply();
-
-        Date date = null;
-        SimpleDateFormat formatdate = new SimpleDateFormat("H:mm");
-        Date cal1 = null;
-        SimpleDateFormat formatcal1 = new SimpleDateFormat("yyyy-MM-dd");
-        Date cal2 = null;
-        SimpleDateFormat formatcal2 = new SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar cal_app = Calendar.getInstance();
-        cal_app.setTimeInMillis(System.currentTimeMillis());
-        Date date_app = null;
-        SimpleDateFormat formatcalapp = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            date = formatdate.parse(orario);
-            cal1 = formatcal1.parse(data_inizio);
-            cal2 = formatcal2.parse(data_fine);
-            date_app = cal_app.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        Bundle c = new Bundle();
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-        c.putInt("req_code", request_code);
-        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)) + 1);
-        c.putInt("contatore_giorni", 0);
-        c.putString("key", key);
-        c.putString("cura", cura_notifica.toString());
-        intent.putExtras(c);
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int hours = cal.get(Calendar.HOUR_OF_DAY);
-        int minutes = cal.get(Calendar.MINUTE);
-        int seconds = 0;
-        cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, hours);
-        cal.set(Calendar.MINUTE, minutes);
-        cal.set(Calendar.SECOND, seconds);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60*60*24 , pendingIntent);
 
             //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
-        Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
+        //Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
 
     }
 
@@ -987,7 +985,7 @@ public class AggiungiPillola extends Fragment {
                 if (mer) {
                     mer = false;
                     view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
-                } else if (!mar) {
+                } else if (!mer) {
                     mer = true;
                     view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                 }
@@ -1031,4 +1029,30 @@ public class AggiungiPillola extends Fragment {
         }
     }
 
+     private  static Date StringtoDate(String data){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date converted = new Date();
+        try {
+            converted = dateFormat.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return  converted;
+
+    }
+
+    public static String getDaySystem(int add){
+
+        Date scroll_date = StringtoDate("1900-01-01");
+        Calendar c = Calendar.getInstance();
+        c.setTime(scroll_date);
+        c.add(Calendar.DATE, add);
+        scroll_date = c.getTime();
+
+        SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+        String day = outFormat.format(scroll_date);
+
+        return day;
+    }
 }

@@ -175,7 +175,9 @@ public class Calendario extends Fragment {
         for(int i=0; i<list_cure.size();i++){
             Cura tmp = list_cure.get(i);
             Dosi tmp_dose = findDoseFromCura(tmp);
-            addLayoutFarmaciCalendario(tmp.getNome(),tmp.getOrario_assunzione(),tmp.getQuantità_assunzione(),tmp.getUnità_misura(), tmp.getTipo_cura(), tmp_dose.getStato_cura());
+            if (tmp_dose != null) {
+                addLayoutFarmaciCalendario(tmp.getNome(), tmp.getOrario_assunzione(), tmp.getQuantità_assunzione(), tmp.getUnità_misura(), tmp.getTipo_cura(), tmp_dose.getStato_cura());
+            }
         }
 
         dao.close();

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.zanzibar.myapplication.Database.Pills_reminder;
 import com.example.zanzibar.myapplication.Database.QueryHelper;
@@ -124,6 +125,25 @@ public class CureDao_DB implements CureDAO {
         return cura;
     }
 
+    @Override
+    public Cura insertCura(Cura cura,  List<String> DaysAllowed) {
+
+        database.insert(query.TABLE_CURE,null,curaToValues(cura));
+        insertDosi(cura, DaysAllowed);
+
+
+        return cura;
+    }
+    @Override
+    public Cura insertCura(Cura cura, int repetition) {
+
+        database.insert(query.TABLE_CURE,null,curaToValues(cura));
+        insertDosi(cura, repetition);
+
+
+        return cura;
+    }
+
     private void insertDosi(Cura cura_without_id){
 
         Cura cura_get_id = findCura(cura_without_id.getNome(),cura_without_id.getInizio_cura(),cura_without_id.getFine_cura(),cura_without_id.getOrario_assunzione());
@@ -159,20 +179,26 @@ public class CureDao_DB implements CureDAO {
 
             SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
             String allowed = outFormat.format(scroll_date);
-
+            Log.i("lista", DaysAllowed + "");
+            Log.i("giorno controllato", allowed + "");
             String giorno = DateToString(scroll_date);
-            if( Arrays.asList(DaysAllowed).contains(allowed)) {
+
+            if( DaysAllowed.contains(allowed)) {
+                Log.i("giorno ", allowed);
                 database.insert(query.TABLE_DOSI, null, dosiToValues(new Dosi(cura_get_id.getId(), giorno, Dosi.DA_ASSUMERE)));
             }
         }
     }
+
+
     private void insertDosi(Cura cura_without_id, int repetition){
 
         Cura cura_get_id = findCura(cura_without_id.getNome(),cura_without_id.getInizio_cura(),cura_without_id.getFine_cura(),cura_without_id.getOrario_assunzione());
 
         int diff_giorni = (int) printDifference(StringtoDate(cura_get_id.getInizio_cura()),StringtoDate(cura_get_id.getFine_cura()));
 
-        for(int i = 0; i<=diff_giorni;i = i + repetition){
+        int i = 0;
+        while(i<=diff_giorni){
 
             Date inizio_cura = StringtoDate(cura_get_id.getInizio_cura());
             Calendar c = Calendar.getInstance();
@@ -183,6 +209,7 @@ public class CureDao_DB implements CureDAO {
             String giorno = DateToString(inizio_cura);
 
             database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura_get_id.getId(),giorno,Dosi.DA_ASSUMERE)));
+            i += repetition;
         }
     }
 
@@ -385,6 +412,32 @@ public class CureDao_DB implements CureDAO {
                 query.TABLE_DOSI,
                 dosicolumns,
                 "'"+date+ "'" + " = GIORNO",
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Dosi dose = cursorToDose(cursor);
+            list_dosi.add(dose);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return list_dosi;
+
+    }
+    @Override
+    public List<Dosi> getDosiById(int id) {
+
+        List<Dosi> list_dosi = new ArrayList<Dosi>();
+        Cursor cursor = database.query(
+                query.TABLE_DOSI,
+                dosicolumns,
+                ""+id+ "" + " = id",
                 null,
                 null,
                 null,

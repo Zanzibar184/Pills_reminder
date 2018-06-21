@@ -49,6 +49,7 @@ import android.widget.Toast;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.Database.cure.Dosi;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.R;
@@ -63,18 +64,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_CAPTURE;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
+import static com.example.zanzibar.myapplication.frames.AggiungiPillola.getDaySystem;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.getIntPillole;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.pictureFilePath;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.printDifference;
 
 public class ModificaPillola extends Fragment {
     private CureDAO dao;
+    private List<Dosi> list_dose_notifica;
 
     private LinearLayout linearLayout = null;
 
@@ -255,7 +259,7 @@ public class ModificaPillola extends Fragment {
 
         }
 
-        deleteNotification(modify_cura.getNome(), modify_cura.getQuantità_assunzione(), modify_cura.getUnità_misura(), modify_cura.getOrario_assunzione(), modify_cura.getInizio_cura(), modify_cura.getFine_cura());
+        deleteNotification(modify_cura.getNome(), modify_cura.getQuantità_assunzione(),modify_cura.getOrario_assunzione());
 
 
         img_date_init.setOnClickListener(new View.OnClickListener() {
@@ -390,19 +394,19 @@ public class ModificaPillola extends Fragment {
                     days_of_week = new ArrayList<String>();
 
                     if (lun) {
-                        days_of_week.add("MONDAY");
-                    } else if (mar) {
-                        days_of_week.add("TUESDAY");
-                    } else if (mer) {
-                        days_of_week.add("WEDNESDAY");
-                    } else if (gio) {
-                        days_of_week.add("THURSDAY");
-                    } else if (ven) {
-                        days_of_week.add("FRIDAY");
-                    } else if (sab) {
-                        days_of_week.add("SATURDAY");
-                    } else if (dom) {
-                        days_of_week.add("SUNDAY");
+                        days_of_week.add(getDaySystem(0));
+                    }if (mar) {
+                    days_of_week.add(getDaySystem(1));
+                    }if (mer) {
+                    days_of_week.add(getDaySystem(2));
+                    }if (gio) {
+                    days_of_week.add(getDaySystem(3));
+                    }if (ven) {
+                    days_of_week.add(getDaySystem(4));
+                    }if (sab) {
+                    days_of_week.add(getDaySystem(5));
+                    }if (dom) {
+                    days_of_week.add(getDaySystem(6));
                     }
 
                     dao = new CureDao_DB();
@@ -455,7 +459,7 @@ public class ModificaPillola extends Fragment {
 
 
                     if(assumi_farmaco_notifica) {
-                        setNotify(nome, qta_ass, unità_misura, orario_assunzione, inizio_cura, fine_cura);
+                        setNotify2(nome, qta_ass, unità_misura, orario_assunzione, inizio_cura, fine_cura);
                     }
 
                     int numero_pillole_rimaste = getIntPillole(scorte_pillole);
@@ -744,82 +748,70 @@ public class ModificaPillola extends Fragment {
     }
 
 
-    private void setNotify(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
+    private void setNotify2(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
+
 
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
         dao.open();
         Cura cura_notifica = dao.findCura(nome,data_inizio,data_fine,orario);
+        list_dose_notifica = dao.getDosiById(cura_notifica.getId());
         dao.close();
 
-        Random r = new Random();
-        int random_value = r.nextInt();
-        while(random_value<0) {
-            random_value = r.nextInt();
+
+
+
+        for(int i = 0; i < list_dose_notifica.size(); i++){
+            Dosi tmp = list_dose_notifica.get(i);
+
+            String myDate = tmp.getGiorno() + " " + orario;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date_notifica = null;
+
+            try {
+                date_notifica = format.parse(myDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Calendar cal_notifica = Calendar.getInstance();
+            cal_notifica.setTime(date_notifica);
+
+            Random r = new Random();
+            int random_value = r.nextInt();
+            while(random_value<0) {
+                random_value = r.nextInt();
+            }
+            String key = nome + "_" + quantità + "_" + orario;
+            int req_code_int = random_value;
+
+            SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+            editor.putInt(key, req_code_int);
+            editor.apply();
+
+            SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+            int request_code = prefs.getInt(key, 0);
+
+            Bundle c = new Bundle();
+            c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+            c.putInt("req_code", request_code);
+            c.putString("key", key);
+            c.putString("cura", cura_notifica.toString());
+            intent.putExtras(c);
+
+
+            Log.i("notifica settata per il", tmp.getGiorno());
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, cal_notifica.getTimeInMillis() , pendingIntent);
+
+
         }
-        String key = nome + "_" + quantità + "_" + orario;
-        int req_code_int = random_value;
 
-        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE + next);
-
-        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
-        editor.putInt(key, req_code_int);
-        editor.apply();
-
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
-
-        SharedPreferences.Editor editor2 = getContext().getSharedPreferences("ContatoreGiorniPreferenze",MODE_PRIVATE).edit();
-        editor2.putInt(key, 0);
-        editor2.apply();
-
-        Date date = null;
-        SimpleDateFormat formatdate = new SimpleDateFormat("H:mm");
-        Date cal1 = null;
-        SimpleDateFormat formatcal1 = new SimpleDateFormat("yyyy-MM-dd");
-        Date cal2 = null;
-        SimpleDateFormat formatcal2 = new SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar cal_app = Calendar.getInstance();
-        cal_app.setTimeInMillis(System.currentTimeMillis());
-        Date date_app = null;
-        SimpleDateFormat formatcalapp = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            date = formatdate.parse(orario);
-            cal1 = formatcal1.parse(data_inizio);
-            cal2 = formatcal2.parse(data_fine);
-            date_app = cal_app.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        Bundle c = new Bundle();
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-        c.putInt("req_code", request_code);
-        c.putInt("n_giorni", (int) ((printDifference(cal1, cal2)) - printDifference(cal1,date_app)) + 1);
-        c.putInt("contatore_giorni", 0);
-        c.putString("key", key);
-        c.putString("cura", cura_notifica.toString());
-        intent.putExtras(c);
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int hours = cal.get(Calendar.HOUR_OF_DAY);
-        int minutes = cal.get(Calendar.MINUTE);
-        int seconds = 0;
-        cal.setTimeInMillis(System.currentTimeMillis());
-        cal.set(Calendar.HOUR_OF_DAY, hours);
-        cal.set(Calendar.MINUTE, minutes);
-        cal.set(Calendar.SECOND, seconds);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 1000*60*60*24, pendingIntent);
 
         //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 
-        Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
+        //Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
 
     }
 
@@ -851,21 +843,13 @@ public class ModificaPillola extends Fragment {
 
     }
 
-    private void deleteNotification(String nome, int quantita, String unita, String orario, String data_inizio, String data_fine) {
+    private void deleteNotification(String nome, int quantita, String orario) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
         String key = nome + "_" + quantita + "_" + orario;
         SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
-
-        /*
-        Bundle c = new Bundle();
-        c.putString("titolo", "Hai un farmaco da prendere");
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unita + " di " + nome);
-        c.putInt("req_code", request_code);
-        intent.putExtras(c);
-        */
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

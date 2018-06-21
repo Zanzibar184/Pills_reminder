@@ -147,22 +147,19 @@ public class Cure extends Fragment {
 
                     Dosi tmp_dose = findDoseFromCura(tmp);
                     int ora = Integer.parseInt(tmp.getOrario_assunzione().substring(0,2));
-
-                    if((ora >= 6) && (ora <12))
-                    {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_mattina, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
-                    }
-                    if((ora >= 12) && (ora <18))
-                    {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_pomeriggio, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
-                    }
-                    if((ora >= 18) && (ora <24))
-                    {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_sera, tmp.getId(),tmp_dose.getStato_cura(), tmp.getImportante());
-                    }
-                    if((ora >= 0) && (ora <6))
-                    {
-                        addLayoutFarmaco(tmp.getNome(),tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(),layout_pills_notte, tmp.getId(),tmp_dose.getStato_cura(),tmp.getImportante());
+                    if(tmp_dose != null) {
+                        if ((ora >= 6) && (ora < 12)) {
+                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_mattina, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                        }
+                        if ((ora >= 12) && (ora < 18)) {
+                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_pomeriggio, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                        }
+                        if ((ora >= 18) && (ora < 24)) {
+                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_sera, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                        }
+                        if ((ora >= 0) && (ora < 6)) {
+                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_notte, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                        }
                     }
 
                 }

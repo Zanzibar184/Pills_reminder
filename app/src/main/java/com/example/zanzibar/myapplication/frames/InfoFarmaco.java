@@ -159,7 +159,7 @@ public class InfoFarmaco extends Fragment {
             @Override
             public void onClick(View view) {
                 dao.open();
-                deleteNotification(cura.getNome(), cura.getQuantità_assunzione(), cura.getUnità_misura(), cura.getOrario_assunzione(), cura.getInizio_cura(), cura.getFine_cura());
+                deleteNotification(cura.getNome(), cura.getQuantità_assunzione(),cura.getOrario_assunzione());
                 dao.deleteCura(cura);
                 dao.close();
 
@@ -200,21 +200,13 @@ public class InfoFarmaco extends Fragment {
         nagDialog.show();
     }
 
-    private void deleteNotification(String nome, int quantita, String unita, String orario, String data_inizio, String data_fine) {
+    private void deleteNotification(String nome, int quantita,String orario) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
         String key = nome + "_" + quantita + "_" + orario;
         SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
-
-        /*
-        Bundle c = new Bundle();
-        c.putString("titolo", "Hai un farmaco da prendere");
-        c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unita + " di " + nome);
-        c.putInt("req_code", request_code);
-        intent.putExtras(c);
-        */
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
