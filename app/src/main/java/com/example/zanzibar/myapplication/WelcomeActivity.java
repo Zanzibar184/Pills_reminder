@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,16 +41,26 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnSkip, btnNext;
     private Session session;
 
+    SharedPreferences.Editor editor_privacy = null;
+    SharedPreferences prefs_privacy = null;
+
+    SharedPreferences pref = null;
+    SharedPreferences.Editor editor = null;
+
     boolean privacyAccepted = false;
+    boolean intro = false;
     CheckBox checkPrivacy = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("snow-intro-slider", 0);
-        SharedPreferences.Editor editor = pref.edit();
-        boolean intro = pref.getBoolean("imposta_info_app", false);
+        pref = getApplicationContext().getSharedPreferences("snow-intro-slider", 0);
+        editor = pref.edit();
+        intro = pref.getBoolean("imposta_info_app", false);
+
+        editor_privacy = getApplicationContext().getSharedPreferences("Privacy", MODE_PRIVATE).edit();
+        prefs_privacy = getSharedPreferences("Privacy", MODE_PRIVATE);
 
         // Checking for first time launch - before calling setContentView()
         session = new Session(this);
@@ -73,6 +84,10 @@ public class WelcomeActivity extends AppCompatActivity {
             dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
             btnSkip = (Button) findViewById(R.id.btn_skip);
             btnNext = (Button) findViewById(R.id.btn_next);
+
+            if (session.isFirstTimeLaunch()) {
+                btnSkip.setVisibility(View.GONE);
+            }
 
 
             // layouts of all welcome sliders
@@ -117,6 +132,7 @@ public class WelcomeActivity extends AppCompatActivity {
             });
 
             editor.putBoolean("imposta_info_app", false);
+            editor.apply();
         }
     }
 
@@ -155,26 +171,54 @@ public class WelcomeActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
+            /*
+            if(position==0) {
+                RotateAnimation rotateAnimation = new RotateAnimation(0, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setInterpolator(new LinearInterpolator());
+                rotateAnimation.setDuration(10000);
+                rotateAnimation.setRepeatCount(Animation.INFINITE);
+                findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
+                Log.i("LOG", "LOGGEE");
+            }*/
+
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
-                btnNext.setText(getString(R.string.start));
                 checkPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
+                btnNext.setText(getString(R.string.start));
+                Log.i("accept", prefs_privacy.getBoolean("privacy_accepted", false) + "");
+                privacyAccepted = prefs_privacy.getBoolean("privacy_accepted", false);
+                if (privacyAccepted) {
+                    checkPrivacy.setChecked(true);
+                    btnNext.setVisibility(View.VISIBLE);
+                } else {
+                    btnNext.setVisibility(View.GONE);
+                }
+                if (intro) {
+                    checkPrivacy.setVisibility(View.GONE);
+                }
                 checkPrivacy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(checkPrivacy.isChecked()){
-                            btnNext.setClickable(true);
+                            editor_privacy.putBoolean("privacy_accepted", true);
+                            editor_privacy.apply();
+                            privacyAccepted = prefs_privacy.getBoolean("privacy_accepted", false);
+                            btnNext.setVisibility(View.VISIBLE);
                         } else {
-                            btnNext.setClickable(false);
+                            editor_privacy.putBoolean("privacy_accepted", false);
+                            editor_privacy.apply();
+                            privacyAccepted = prefs_privacy.getBoolean("privacy_accepted", false);
+                            btnNext.setVisibility(View.GONE);
                         }
                     }
                 });
-                btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left
                 btnNext.setText(getString(R.string.next));
-                btnSkip.setVisibility(View.VISIBLE);
+            }
+            if (!intro) {
+                btnSkip.setVisibility(View.GONE);
             }
         }
 
@@ -214,15 +258,24 @@ public class WelcomeActivity extends AppCompatActivity {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(layouts[position], container, false);
-            if(position==1) {
+
+            if (layouts[position] == R.layout.welcome_slide1) {
                 RotateAnimation rotateAnimation = new RotateAnimation(0, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 rotateAnimation.setInterpolator(new LinearInterpolator());
                 rotateAnimation.setDuration(10000);
                 rotateAnimation.setRepeatCount(Animation.INFINITE);
-                findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
-            } else if(position==5) {
-                checkPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
+                view.findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
+            } else if (layouts[position] == R.layout.welcome_slide2) {
+                ImageView i = (ImageView) view.findViewById(R.id.img_welcome2);
+                i.setImageResource(R.drawable.compressa);
+            } else if (layouts[position] == R.layout.welcome_slide3) {
+                ImageView i = (ImageView) view.findViewById(R.id.img_welcome3);
+                i.setImageResource(R.drawable.sciroppo);
+            } else if (layouts[position] == R.layout.welcome_slide4) {
+                ImageView i = (ImageView) view.findViewById(R.id.img_welcome4);
+                i.setImageResource(R.drawable.syringe);
             }
+
             container.addView(view);
 
             return view;

@@ -18,6 +18,9 @@ public class Session {
     SharedPreferences.Editor editorprefsettings;
     Context _context;
 
+    SharedPreferences.Editor editor_privacy = null;
+    SharedPreferences prefs_privacy = null;
+
     // shared pref mode
     int PRIVATE_MODE = 0;
 
@@ -31,6 +34,10 @@ public class Session {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         prefsettings = context.getSharedPreferences(PREF_SETTINGS_NAME, PRIVATE_MODE);
+
+        editor_privacy = context.getSharedPreferences("Privacy", MODE_PRIVATE).edit();
+        prefs_privacy = context.getSharedPreferences("Privacy", MODE_PRIVATE);
+
         editor = pref.edit();
         editorprefsettings = prefsettings.edit();
     }
@@ -47,6 +54,7 @@ public class Session {
             editorprefsettings.putBoolean("imposta_notifiche_note", true);
             editorprefsettings.putString("minuti_smsavviso", "30 minuti");
             editorprefsettings.putString("pillole_scorta", "5 pillole");
+            editor_privacy.putBoolean("privacy_accepted", false);
             editorprefsettings.apply();
         }
         editor.putBoolean("imposta_info_app", false);
