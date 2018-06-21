@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -245,6 +246,12 @@ public class AggiungiNota extends Fragment {
                 }
                 else
                     colorInputUnfilled();
+
+                View hide_keyboard = getActivity().getCurrentFocus();
+                if (hide_keyboard != null) {
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(hide_keyboard.getWindowToken(), 0);
+                }
 
             }
         });

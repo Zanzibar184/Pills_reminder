@@ -64,40 +64,12 @@ public class SmsAvviso extends Fragment {
         linearLayout = (LinearLayout) view.findViewById(R.id.llayoutsms);
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_sms, linearLayout, false);
 
-        modifySMS = (ImageView) frame.findViewById(R.id.modify_sms_text);
-        saveSMS = (ImageView) frame.findViewById(R.id.save_sms_text);
-
-        editSMS = (EditText) frame.findViewById(R.id.contenuto_SMS);
-
-        modifySMS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveSMS.setVisibility(View.VISIBLE);
-                editSMS.setFocusable(true);
-                editSMS.setFocusableInTouchMode(true);
-                editSMS.setClickable(true);
-            }
-        });
-
-        saveSMS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String testo = editSMS.getText().toString();
-                Log.i("Testo sms", testo);
-                editSMS.setFocusable(false);
-                editSMS.setFocusableInTouchMode(false);
-                editSMS.setClickable(false);
-                saveSMS.setVisibility(View.GONE);
-            }
-        });
-
         linearLayoutNumeri = (LinearLayout) frame.findViewById(R.id.layout_numeri_avvisare);
-
 
 
         for (int i = 0; i < list_contatti.size(); i++){
             Contatti tmp = list_contatti.get(i);
-            addLayoutNumeri(tmp);
+            addLayoutNumeri(tmp, list_contatti.size());
         }
 
 
@@ -110,9 +82,11 @@ public class SmsAvviso extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_smsavviso));
     }
 
-    private void addLayoutNumeri(Contatti contatti) {
+    private void addLayoutNumeri(Contatti contatti, int size_lista) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_numeri_da_avvvisare, linearLayoutNumeri, false);
         TextView info = (TextView) frame.findViewById(R.id.txt_contattoSMS);
+        if (size_lista == 0) {
+        }
         info.setText(contatti.toString());
         linearLayoutNumeri.addView(frame);
     }

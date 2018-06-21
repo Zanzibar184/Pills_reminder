@@ -12,12 +12,33 @@
     </PreferenceCategory>
     -->
 
-    <PreferenceCategory android:title="Scorte">
+    <PreferenceCategory android:title="Abilita Notifiche per">
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="notifiche_scorta_abilitate"
-            android:title="Notifiche per scorta farmaci" />
+            android:title="Scorta farmaci" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="notifiche_SMSAVVISO_abilitate"
+            android:title="SMS AVVISO" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="notifiche_assunzione_farmaci"
+            android:title="Assunzione farmaco" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="notifiche_note"
+            android:title="Note" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Scorte"
+        android:textSize="10px">
 
         <ListPreference
             android:defaultValue="1"
@@ -30,11 +51,6 @@
 
     <PreferenceCategory android:title="SMS AVVISO">
 
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="notifiche_SMSAVVISO_abilitate"
-            android:title="Notifiche per SMS AVVISO" />
-
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/minuti_per_smsavviso"
@@ -43,25 +59,6 @@
             android:title="Manda SMS dopo" />
 
     </PreferenceCategory>
-
-    <PreferenceCategory android:title="Promemoria farmaci">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="notifiche_assunzione_farmaci"
-            android:title="Notifiche assunzione farmaco" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Note">
-
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="notifiche_note"
-            android:title="Notifiche Note" />
-
-    </PreferenceCategory>
-
 
     <PreferenceCategory android:title="Supporto">
 
