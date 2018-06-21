@@ -97,6 +97,9 @@ public class AggiungiPillola extends Fragment {
 
     private LinearLayout linearLayout = null;
 
+    LinearLayout view_ripetizione_giorni = null;
+    LinearLayout view_ripetizione_settimana = null;
+
     FloatingActionButton fab_pills = null;
 
     private EditText text_date_init = null;
@@ -193,8 +196,8 @@ public class AggiungiPillola extends Fragment {
 
         RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
 
-        final LinearLayout view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
-        final LinearLayout view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
+        view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
+        view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
 
         if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
             view_scorte.setVisibility(View.VISIBLE);
@@ -450,7 +453,9 @@ public class AggiungiPillola extends Fragment {
                 String scorte_pillole = prefs.getString("pillole_scorta","");
 
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
-                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
+                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals(""))
+                        && ((!giorni_ripetizione.getText().toString().equals("") || (( lun || mar || mer || gio || ven || sab || dom)))))
+
                 {
                     dao = new CureDao_DB();
                     //dao.open();
@@ -643,6 +648,16 @@ public class AggiungiPillola extends Fragment {
             orario_di_assunzione1.setBackground(alert);
         else
             orario_di_assunzione1.setBackground(null);
+
+        if(giorni_ripetizione.getText().toString().equals(""))
+            giorni_ripetizione.setBackground(alert);
+        else
+            giorni_ripetizione.setBackground(null);
+
+        if( !lun && !mar && !mer && !gio && !ven && !sab && !dom)
+            view_ripetizione_settimana.setBackground(alert);
+        else
+            view_ripetizione_settimana.setBackground(null);
     }
 
     private void setDateInit() {

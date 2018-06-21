@@ -64,6 +64,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -84,6 +85,9 @@ public class ModificaPillola extends Fragment {
     private LinearLayout linearLayout = null;
 
     Cura modify_cura;
+
+     LinearLayout view_ripetizione_giorni = null;
+     LinearLayout view_ripetizione_settimana = null;
 
     int id_tipo_foto = 0;
 
@@ -185,8 +189,8 @@ public class ModificaPillola extends Fragment {
 
         fab_pills.hide();
 
-        final LinearLayout view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
-        final LinearLayout view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
+        view_ripetizione_giorni = (LinearLayout) view.findViewById(R.id.llripgiorno);
+        view_ripetizione_settimana = (LinearLayout) view.findViewById(R.id.llayout_ripweek);
 
         RelativeLayout view_scorte = (RelativeLayout) view.findViewById(R.id.myview2);
 
@@ -359,31 +363,41 @@ public class ModificaPillola extends Fragment {
             view_ripetizione_settimana.setVisibility(View.VISIBLE);
             view_ripetizione_giorni.setVisibility(View.GONE);
             days_of_week = reverseRipetizione(string_ripetizione);
+            Log.i("REVERSE", days_of_week + "");
 
             for(String s: days_of_week) {
                 if(s.equals(getDaySystem(0))) {
                     b_lunedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    lun = true;
                 }
                 if(s.equals(getDaySystem(1))) {
                     b_martedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    mar = true;
                 }
                 if(s.equals(getDaySystem(2))) {
                     b_mercoledi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    mer = true;
                 }
                 if(s.equals(getDaySystem(3))) {
                     b_giovedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    gio = true;
                 }
                 if(s.equals(getDaySystem(4))) {
                     b_venerdi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    ven = true;
                 }
                 if(s.equals(getDaySystem(5))) {
                     b_sabato.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    sab = true;
                 }
                 if(s.equals(getDaySystem(6))) {
                     b_domenica.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
+                    dom = true;
                 }
 
             }
+
+            Log.i("REVERSE", days_of_week + "");
         }
 
 
@@ -406,12 +420,12 @@ public class ModificaPillola extends Fragment {
                         ripetizione = 1;
                         view_ripetizione_settimana.setVisibility(View.GONE);
                         view_ripetizione_giorni.setVisibility(View.VISIBLE);
-                        Log.i("ripetizione", ripetizione + "");
+                        //Log.i("ripetizione", ripetizione + "");
                     } else if (s.equals("Giorni della settimana")) {
                         ripetizione = 2;
                         view_ripetizione_settimana.setVisibility(View.VISIBLE);
                         view_ripetizione_giorni.setVisibility(View.GONE);
-                        Log.i("ripetizione", ripetizione + "");
+                        //Log.i("ripetizione", ripetizione + "");
                     }
                 }
             }
@@ -425,30 +439,65 @@ public class ModificaPillola extends Fragment {
         public void onClick(View view) {
 
                 if((!nome_cura.getText().toString().equals("")) && (!text_dose1.getText().toString().equals("")) && (!text_date_init.getText().toString().equals(""))
-                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals("")))
+                        && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals(""))
+                        && ((!giorni_ripetizione.getText().toString().equals("") || (( lun || mar || mer || gio || ven || sab || dom)))))
                 {
                     SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
                     boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
                     boolean notifica_scorte = prefs.getBoolean("imposta_notifiche_scorta_app", false);
                     String scorte_pillole = prefs.getString("pillole_scorta","");
 
-                    days_of_week = new ArrayList<String>();
 
                     if (lun) {
                         days_of_week.add(getDaySystem(0));
-                    }if (mar) {
-                    days_of_week.add(getDaySystem(1));
-                    }if (mer) {
-                    days_of_week.add(getDaySystem(2));
-                    }if (gio) {
-                    days_of_week.add(getDaySystem(3));
-                    }if (ven) {
-                    days_of_week.add(getDaySystem(4));
-                    }if (sab) {
-                    days_of_week.add(getDaySystem(5));
-                    }if (dom) {
-                    days_of_week.add(getDaySystem(6));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(0));
                     }
+                    if (mar) {
+                        days_of_week.add(getDaySystem(1));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(1));
+                    }
+                    if (mer) {
+                        days_of_week.add(getDaySystem(2));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(2));
+                    }
+                    if (gio) {
+                        days_of_week.add(getDaySystem(3));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(3));
+                    }
+                    if (ven) {
+                        days_of_week.add(getDaySystem(4));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(4));
+                    }
+                    if (sab) {
+                        days_of_week.add(getDaySystem(5));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(5));
+                    }
+                    if (dom) {
+                        days_of_week.add(getDaySystem(6));
+                    }else{
+
+                        days_of_week.remove(getDaySystem(6));
+                    }
+
+
+                    HashSet<String> hashSet = new HashSet<String>();
+                    hashSet.addAll(days_of_week);
+                    days_of_week.clear();
+                    days_of_week.addAll(hashSet);
+
+                    Log.i("REVERSE after", days_of_week + "");
 
                     dao = new CureDao_DB();
                     dao.open();
@@ -480,6 +529,13 @@ public class ModificaPillola extends Fragment {
                     }
 
                     String unità_misura = spin1.getSelectedItem().toString();
+                    String scelta = "";
+                    if (ripetizione == 1) {
+                        scelta = giorni_ripetizione.getText().toString();
+                    } else if (ripetizione == 2) {
+                       scelta = Cura.parseRipetizione(days_of_week);
+                    }
+
 
                     Cura cura_updated = new Cura(
                             nome,
@@ -494,7 +550,7 @@ public class ModificaPillola extends Fragment {
                             URI_foto_farmaco,
                             unità_misura,
                             importante,
-                            "ciao"
+                            scelta
 
                     );
                     dao.updateCura(cura_updated);
@@ -562,6 +618,16 @@ public class ModificaPillola extends Fragment {
             orario_di_assunzione1.setBackground(alert);
         else
             orario_di_assunzione1.setBackground(null);
+
+        if(giorni_ripetizione.getText().toString().equals(""))
+            giorni_ripetizione.setBackground(alert);
+        else
+            giorni_ripetizione.setBackground(null);
+
+        if( !lun && !mar && !mer && !gio && !ven && !sab && !dom)
+            view_ripetizione_settimana.setBackground(alert);
+        else
+            view_ripetizione_settimana.setBackground(null);
     }
 
     private void setDateInit() {
@@ -753,7 +819,7 @@ public class ModificaPillola extends Fragment {
             if(imgFile.exists()){
                 //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
                 //imgpill.setImageURI(Uri.fromFile(imgFile));
-                Log.i("picturefilepath", pictureFilePath+"");
+                //Log.i("picturefilepath", pictureFilePath+"");
             }
         } else if (requestCode == REQUEST_PICTURE_GALLERY && resultCode == Activity.RESULT_OK) {
             //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
@@ -843,7 +909,7 @@ public class ModificaPillola extends Fragment {
             intent.putExtras(c);
 
 
-            Log.i("notifica settata per il", tmp.getGiorno());
+
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.set(AlarmManager.RTC_WAKEUP, cal_notifica.getTimeInMillis() , pendingIntent);
@@ -930,7 +996,7 @@ public class ModificaPillola extends Fragment {
                 if (mer) {
                     mer = false;
                     view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button));
-                } else if (!mar) {
+                } else if (!mer) {
                     mer = true;
                     view.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                 }

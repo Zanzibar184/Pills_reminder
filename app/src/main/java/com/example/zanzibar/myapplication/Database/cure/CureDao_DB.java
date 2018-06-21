@@ -182,12 +182,12 @@ public class CureDao_DB implements CureDAO {
 
             SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
             String allowed = outFormat.format(scroll_date);
-            Log.i("lista", DaysAllowed + "");
-            Log.i("giorno controllato", allowed + "");
+            //Log.i("lista", DaysAllowed + "");
+            //Log.i("giorno controllato", allowed + "");
             String giorno = DateToString(scroll_date);
 
             if( DaysAllowed.contains(allowed)) {
-                Log.i("giorno ", allowed);
+                //Log.i("giorno ", allowed);
                 database.insert(query.TABLE_DOSI, null, dosiToValues(new Dosi(cura_get_id.getId(), giorno, Dosi.DA_ASSUMERE)));
             }
         }
@@ -239,7 +239,7 @@ public class CureDao_DB implements CureDAO {
     @Override
     public void reinitDose(Cura cura) {
 
-         int id = cura.getId();
+        int id = cura.getId();
 
         database.delete(
                 query.TABLE_DOSI,
@@ -249,17 +249,46 @@ public class CureDao_DB implements CureDAO {
 
         int diff_giorni = (int) printDifference(StringtoDate(cura.getInizio_cura()),StringtoDate(cura.getFine_cura()));
 
-        for(int i = 0; i<=diff_giorni;i++){
+        int i = 0;
+        while(i<=diff_giorni){
 
-            Date inizio_cura = StringtoDate(cura.getInizio_cura());
-            Calendar c = Calendar.getInstance();
-            c.setTime(inizio_cura);
-            c.add(Calendar.DATE, i);
-            inizio_cura = c.getTime();
+            if(cura.getRipetizione().length() < 3){
+                Date inizio_cura = StringtoDate(cura.getInizio_cura());
+                Calendar c = Calendar.getInstance();
+                c.setTime(inizio_cura);
+                c.add(Calendar.DATE, i);
+                inizio_cura = c.getTime();
 
-            String giorno = DateToString(inizio_cura);
+                String giorno = DateToString(inizio_cura);
 
-            database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura.getId(),giorno,Dosi.DA_ASSUMERE)));
+                database.insert(query.TABLE_DOSI,null,dosiToValues(new Dosi(cura.getId(),giorno,Dosi.DA_ASSUMERE)));
+                i = i + Integer.parseInt(cura.getRipetizione());
+            }
+            else {
+                List<String> DaysAllowed = Cura.reverseRipetizione(cura.getRipetizione());
+
+                Date scroll_date = StringtoDate(cura.getInizio_cura());
+                Calendar c = Calendar.getInstance();
+                c.setTime(scroll_date);
+                c.add(Calendar.DATE, i);
+                scroll_date = c.getTime();
+
+                SimpleDateFormat outFormat = new SimpleDateFormat("EEEE");
+                String allowed = outFormat.format(scroll_date);
+                //Log.i("lista", DaysAllowed + "");
+                //Log.i("giorno controllato", allowed + "");
+                String giorno = DateToString(scroll_date);
+
+                if( DaysAllowed.contains(allowed)) {
+                    //Log.i("giorno ", allowed);
+                    database.insert(query.TABLE_DOSI, null, dosiToValues(new Dosi(cura.getId(), giorno, Dosi.DA_ASSUMERE)));
+                }
+
+                i++;
+            }
+
+
+
         }
 
 
