@@ -90,7 +90,7 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
 
         pref_feed = (Preference) findPreference("pref_key_feedback");
         pref_infoapp = (Preference) findPreference("pref_key_infoapp");
-        pref_privacy = (Preference) findPreference("pref_key_infoapp");
+        pref_privacy = (Preference) findPreference("pref_key_privacy");
 
         //-----------------------------
 

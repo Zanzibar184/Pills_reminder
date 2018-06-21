@@ -219,7 +219,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 rotateAnimation.setInterpolator(new LinearInterpolator());
                 rotateAnimation.setDuration(10000);
                 rotateAnimation.setRepeatCount(Animation.INFINITE);
-
                 findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
             } else if(position==5) {
                 checkPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
