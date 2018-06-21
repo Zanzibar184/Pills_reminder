@@ -2,6 +2,9 @@ package com.example.zanzibar.myapplication.Database.cure;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cura {
 
     private String nome;
@@ -16,10 +19,11 @@ public class Cura {
     private String foto;
     private String unità_misura;
     private int importante;
+    private String ripetizione;
 
 
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione,String foto,String unità_misura, int importante){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione,String foto,String unità_misura, int importante, String ripetizione){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -32,9 +36,10 @@ public class Cura {
         this.foto = foto;
         this.unità_misura = unità_misura;
         this.importante = importante;
+        this.ripetizione = ripetizione;
     }
 
-    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, int id, String foto, String unità_misura, int importante){
+    public Cura(String nome, int quantità_assunzione, int scorta, int rimanenze, String inizio_cura, String fine_cura, int tipo_cura, String orario_assunzione, int id, String foto, String unità_misura, int importante, String ripetizione){
         this.nome = nome;
         this.quantità_assunzione = quantità_assunzione;
         this.scorta = scorta;
@@ -47,6 +52,7 @@ public class Cura {
         this.foto = foto;
         this.unità_misura = unità_misura;
         this.importante = importante;
+        this.ripetizione = ripetizione;
     }
 
     @Override
@@ -68,8 +74,9 @@ public class Cura {
         String foto  = splited[9];
         String unità_misura  = splited[10];
         int importante = Integer.parseInt(splited[11]);
+        String ripetizione  = splited[12];
 
-        return new Cura(nome,quantità_assunzione,scorta,rimanenze,inizio_cura,fine_cura,tipo_cura,orario_assunzione,id,foto,unità_misura,importante);
+        return new Cura(nome,quantità_assunzione,scorta,rimanenze,inizio_cura,fine_cura,tipo_cura,orario_assunzione,id,foto,unità_misura,importante, ripetizione);
 
 
     }
@@ -169,5 +176,28 @@ public class Cura {
 
     public int getImportante() {
         return importante;
+    }
+
+    public String getRipetizione() {
+        return ripetizione;
+    }
+
+    public void setRipetizione(String ripetizione) {
+        this.ripetizione = ripetizione;
+    }
+
+    public static String parseRipetizione(ArrayList<String> base){
+        String result= "";
+        for(int i=0; i< base.size(); i++){
+            result = result + "-" + base.get(i);
+        }
+        return result;
+    }
+    public static ArrayList<String>  reverseRipetizione(String base){
+        String[] arrayString = base.split("-");
+        ArrayList<String> days = new ArrayList<>();
+        for(int i = 0; i < arrayString.length; i++){
+            days.add(arrayString[i]);
+        }
     }
 }

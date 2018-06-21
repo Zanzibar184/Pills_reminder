@@ -103,8 +103,9 @@ public class CureDao_DB implements CureDAO {
         String foto = cursor.getString(9);
         String udm = cursor.getString(10);
         int importante = cursor.getInt(11);
+        String ripetizione = cursor.getString(12);
 
-        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione, id, foto, udm, importante);
+        return  new Cura(nome, quantità_assunzione, scorta, rimanenze,inizio_cura,fine_cura, tipo_cura, orario_assunzione, id, foto, udm, importante, ripetizione);
     }
     private Dosi cursorToDose(Cursor cursor){
         int id = cursor.getInt(0);
