@@ -821,7 +821,7 @@ public class AggiungiPillola extends Fragment {
     }
 
     private File getPictureFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat(getString(R.string.notify_date_format)).format(new Date());
         String pictureFile = "PILL_" + timeStamp;
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
