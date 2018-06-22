@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Nome del contatto"
+            android:text="@string/cont_nome"
             android:textStyle="bold" />
 
         <View
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:ems="10"
-            android:hint="Nome..."
+            android:hint="@string/cont_nome_hint"
             android:inputType="textPersonName" />
 
         <ImageView
@@ -118,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Relazione (ad esempio medico, figlia, ecc...)"
+            android:text="@string/cont_relazione"
             android:textStyle="bold" />
 
         <View
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:ems="10"
-            android:hint="Relazione..."
+            android:hint="@string/cont_relazione_hint"
             android:inputType="textPersonName" />
 
         <ImageView
@@ -167,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Numero di telefono"
+            android:text="@string/cont_num"
             android:textStyle="bold" />
 
         <View
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:ems="10"
-            android:hint="Nome..."
+            android:hint="@string/cont_num_hint"
             android:inputType="number" />
 
     </RelativeLayout>
@@ -216,7 +216,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Conferma"
+        android:text="@string/cont_btn_conferma"
         android:layout_margin="@dimen/marginLeft_view"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />

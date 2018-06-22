@@ -442,55 +442,49 @@ public class ModificaPillola extends Fragment {
                     boolean notifica_scorte = prefs.getBoolean(getString(R.string.imp_not_scorta), false);
                     String scorte_pillole = prefs.getString(getString(R.string.pillole_scorta),"");
 
+                    if(ripetizione == 2) {
+                        if (lun) {
+                            days_of_week.add(DateHelper.getDaySystem(0));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(0));
+                        }
+                        if (mar) {
+                            days_of_week.add(DateHelper.getDaySystem(1));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(1));
+                        }
+                        if (mer) {
+                            days_of_week.add(DateHelper.getDaySystem(2));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(2));
+                        }
+                        if (gio) {
+                            days_of_week.add(DateHelper.getDaySystem(3));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(3));
+                        }
+                        if (ven) {
+                            days_of_week.add(DateHelper.getDaySystem(4));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(4));
+                        }
+                        if (sab) {
+                            days_of_week.add(DateHelper.getDaySystem(5));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(5));
+                        }
+                        if (dom) {
+                            days_of_week.add(DateHelper.getDaySystem(6));
+                        } else {
+                            days_of_week.remove(DateHelper.getDaySystem(6));
+                        }
 
-                    if (lun) {
-                        days_of_week.add(DateHelper.getDaySystem(0));
-                    }else{
 
-                        days_of_week.remove(DateHelper.getDaySystem(0));
+                        HashSet<String> hashSet = new HashSet<String>();
+                        hashSet.addAll(days_of_week);
+                        days_of_week.clear();
+                        days_of_week.addAll(hashSet);
                     }
-                    if (mar) {
-                        days_of_week.add(DateHelper.getDaySystem(1));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(1));
-                    }
-                    if (mer) {
-                        days_of_week.add(DateHelper.getDaySystem(2));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(2));
-                    }
-                    if (gio) {
-                        days_of_week.add(DateHelper.getDaySystem(3));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(3));
-                    }
-                    if (ven) {
-                        days_of_week.add(DateHelper.getDaySystem(4));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(4));
-                    }
-                    if (sab) {
-                        days_of_week.add(DateHelper.getDaySystem(5));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(5));
-                    }
-                    if (dom) {
-                        days_of_week.add(DateHelper.getDaySystem(6));
-                    }else{
-
-                        days_of_week.remove(DateHelper.getDaySystem(6));
-                    }
-
-
-                    HashSet<String> hashSet = new HashSet<String>();
-                    hashSet.addAll(days_of_week);
-                    days_of_week.clear();
-                    days_of_week.addAll(hashSet);
 
                     dao = new CureDao_DB();
                     dao.open();
@@ -781,7 +775,7 @@ public class ModificaPillola extends Fragment {
     }
 
     private File getPictureFile() throws IOException {
-        String timeStamp = new SimpleDateFormat(getString(R.string.notify_date_format)).format(new Date());
+        String timeStamp = new SimpleDateFormat(getString(R.string.picture_date_format)).format(new Date());
         String pictureFile = "PILL_" + timeStamp;
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(pictureFile,  ".jpg", storageDir);

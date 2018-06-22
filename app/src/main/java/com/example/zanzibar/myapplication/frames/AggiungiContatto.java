@@ -64,7 +64,7 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 
 /**
- * Created by user on 11/05/18.
+ * Schermata per l'aggiunta di un contatto al db
  */
 
 public class AggiungiContatto extends Fragment {
@@ -95,7 +95,7 @@ public class AggiungiContatto extends Fragment {
 
     private int id_tipo_foto = 0;
 
-    int sms_avviso = 0;
+    private int sms_avviso = 0;
 
 
     //Stringa che ci da il percorso della foto scattata
@@ -114,11 +114,10 @@ public class AggiungiContatto extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiungicontatto, container, false);
     }
 
-    @Override
+    @Override //inizializza le componenti della schermata
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -142,12 +141,12 @@ public class AggiungiContatto extends Fragment {
         numeroContatto = view.findViewById(R.id.numero_contatto);
         relazioneContatto = view.findViewById(R.id.relazione_contatto);
 
-
-
-
-
-
         aggiungiContatto = (Button) view.findViewById(R.id.btn_conferma_contatto);
+
+
+        //fine inizializzazione
+
+
         aggiungiContatto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,6 +246,7 @@ public class AggiungiContatto extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiungicontatto));
     }
 
+    //colora di rosso gli input importanti rimasti vuoti
     private void colorInputUnfilled(){
 
 
@@ -265,6 +265,8 @@ public class AggiungiContatto extends Fragment {
             numeroContatto.setBackground(null);
 
     }
+
+
 
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
@@ -373,12 +375,8 @@ public class AggiungiContatto extends Fragment {
         if (requestCode == REQUEST_PICTURE_CAPTURE && resultCode == Activity.RESULT_OK) {
             File imgFile = new  File(pictureFilePath);
             if(imgFile.exists()){
-                //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
-                //imgpill.setImageURI(Uri.fromFile(imgFile));
-                Log.i("picturefilepath", pictureFilePath+"");
             }
         } else if (requestCode == REQUEST_PICTURE_GALLERY && resultCode == Activity.RESULT_OK) {
-            //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
             Uri pickedImage = data.getData();
             setPillImageCapturedFromGallery(pickedImage);
 

@@ -56,25 +56,25 @@ public class ModifciaContatto extends Fragment {
 
     private LinearLayout linearLayout = null;
 
-    FloatingActionButton fab_contatto = null;
+    private FloatingActionButton fab_contatto = null;
 
     private String choose_from_camera = "Scatta foto";
     private String choose_from_gallery = "Scegli da galleria";
     private static final int IMPORT_CONTACT_NAME_NUMBER = 5000;
 
-    EditText nomeContatto = null;
-    EditText numeroContatto = null;
-    EditText relazioneContatto = null;
+    private EditText nomeContatto = null;
+    private EditText numeroContatto = null;
+    private EditText relazioneContatto = null;
 
-    Button aggiungiContatto = null;
+    private Button aggiungiContatto = null;
 
-    ImageView imgcontact;
-    ImageView img_call_camera;
+    private ImageView imgcontact;
+    private ImageView img_call_camera;
 
-    CheckBox check_import;
-    CheckBox check_SMSAVVISO;
+    private CheckBox check_import;
+    private CheckBox check_SMSAVVISO;
 
-    int id_tipo_foto = 0;
+    private int id_tipo_foto = 0;
 
     private int sms_avviso = 0;
 
@@ -84,7 +84,7 @@ public class ModifciaContatto extends Fragment {
     //Stringa che ci da il percorso della foto presa da galleria
     protected static String pictureGalleryFilePath;
 
-    Contatti contatto;
+    private Contatti contatto;
 
     public ModifciaContatto() {
         // Required empty public constructor
@@ -213,7 +213,7 @@ public class ModifciaContatto extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_modificacontatto));
     }
 
-
+    //colora di rosso gli input importanti rimasti vuoti
     private void colorInputUnfilled(){
 
 
@@ -232,6 +232,7 @@ public class ModifciaContatto extends Fragment {
             numeroContatto.setBackground(null);
 
     }
+
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);

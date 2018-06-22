@@ -50,7 +50,20 @@
     <string name="titolo_smsavviso">SMS Avviso</string>
     <string name="titolo_modificapillola">Modifica Farmaco</string>
 
-    //-------------------------------------------------------------------//
+    //-----------------   Stringhe comuni   ----------------------//
+
+    <string name="foto">Scatta foto</string>
+    <string name="galleria">Scegli da galleria</string>
+
+    <string name="non_support_speechapi">Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale</string>
+
+    <string name="date_format_base">yyyy-MM-dd</string>
+    <string name="notify_date_format">yyyy-MM-dd HH:mm</string>
+    <string name="picture_date_format">yyyyMMddHHmmss</string>
+
+    //----------------------------->>end>>--------------------------------------//
+
+
     //-----------------   Schermata Aggiunta/Modifica Cure   ----------------------//
 
         //------xml-----//
@@ -111,9 +124,6 @@
 
     //------java class-----//
 
-    <string name="foto">Scatta foto</string>
-    <string name="galleria">Scegli da galleria</string>
-
     <string name="imp_notifiche">ImpostazioniNotifiche</string>
     <string name="imp_not_farmaci">imposta_notifiche_farmaci</string>
     <string name="imp_not_scorta">imposta_notifiche_scorta_app</string>
@@ -127,8 +137,7 @@
     <string name="pill_20">20 pillole</string>
     <string name="pill_30">30 pillole</string>
 
-    <string name="date_format_base">yyyy-MM-dd</string>
-    <string name="notify_date_format">yyyy-MM-dd HH:mm</string>
+
 
     <string name="pref_name">MyNotifPref</string>
     <string name="pref_content">contenuto</string>
@@ -137,8 +146,30 @@
     <string name="pref_cura_record">cura</string>
 
 
-    //-------------------------------------------------------------------//
-    //-------------------------------------------------------------------//
+    //----------------------------->>end>>--------------------------------------//
+
+    //-----------------   Schermata Aggiunta/Modifica Contatti   ----------------------//
+    //------xml-----//
+
+    <string name="importa_contatto">Importa nome e telefono da contatto</string>
+
+    <string name="cont_nome">Nome del contatto</string>
+    <string name="cont_nome_hint">"Nome..."</string>
+
+    <string name="cont_relazione">Relazione (ad esempio medico, figlia, ecc...)</string>
+    <string name="cont_relazione_hint">Relazione...</string>
+
+    <string name="cont_num">Numero di telefono</string>
+    <string name="cont_num_hint">Numero...</string>
+
+    <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
+
+    <string name="cont_btn_conferma">CONFERMA</string>
+    //------java class-----//
+
+
+    //----------------------------->>end>>--------------------------------------//
+
 
     <string name="scatta_fotocamera">Scatta foto</string>
     <string name="scatta_galleria">Scegli da galleria</string>
@@ -155,16 +186,13 @@
     <string name="nota_appuntamento">Appuntamento</string>
     <string name="nota_promemoria">Promemoria</string>
 
-    <string name="importa_contatto">Importa nome e telefono da contatto</string>
-    <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
-
     <string name="modifica_cura">Modifica informazioni</string>
     <string name="elimina_cura">Elimina</string>
 
     <string name="info_positivo_sms">Nel caso non venga confermata l\'assunzione della cura agli orari prestabiliti, i contatti importanti verranno avvertiti via SMS</string>
     <string name="info_negativo_sms">Cura non inserita nel servizio SMS AVVISO</string>
 
-    <string name="non_support_speechapi">Ci dispiace, il tuo dispositivo non supporta il riconoscimento vocale</string>
+
 
 
 
