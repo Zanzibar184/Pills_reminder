@@ -265,15 +265,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 rotateAnimation.setDuration(10000);
                 rotateAnimation.setRepeatCount(Animation.INFINITE);
                 view.findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
-            } else if (layouts[position] == R.layout.welcome_slide2) {
-                ImageView i = (ImageView) view.findViewById(R.id.img_welcome2);
-                i.setImageResource(R.drawable.compressa);
-            } else if (layouts[position] == R.layout.welcome_slide3) {
-                ImageView i = (ImageView) view.findViewById(R.id.img_welcome3);
-                i.setImageResource(R.drawable.sciroppo);
-            } else if (layouts[position] == R.layout.welcome_slide4) {
-                ImageView i = (ImageView) view.findViewById(R.id.img_welcome4);
-                i.setImageResource(R.drawable.syringe);
             }
 
             container.addView(view);
