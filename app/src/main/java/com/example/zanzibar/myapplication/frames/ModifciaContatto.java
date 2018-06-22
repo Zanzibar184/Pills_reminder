@@ -48,7 +48,7 @@ import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
 
 /**
- * Created by user on 11/05/18.
+ * Schermata di modifica di un contatto
  */
 
 public class ModifciaContatto extends Fragment {
@@ -303,7 +303,7 @@ public class ModifciaContatto extends Fragment {
     }
 
     private File getPictureFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat(getString(R.string.picture_date_format)).format(new Date());
         String pictureFile = "PILL_" + timeStamp;
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
@@ -340,7 +340,7 @@ public class ModifciaContatto extends Fragment {
             if(imgFile.exists()){
                 //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
                 //imgpill.setImageURI(Uri.fromFile(imgFile));
-                Log.i("picturefilepath", pictureFilePath+"");
+
             }
         } else if (requestCode == REQUEST_PICTURE_GALLERY && resultCode == Activity.RESULT_OK) {
             //Qui settiamo l'immagine del farmaco in aggiungipillola, al momento commentato
