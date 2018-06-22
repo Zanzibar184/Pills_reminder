@@ -575,7 +575,7 @@ public class AggiungiPillola extends Fragment {
                     int numero_pillole_rimaste = getIntPillole(scorte_pillole);
 
                     if(qta_rimasta <= numero_pillole_rimaste && scorta!=0 && notifica_scorte) {
-                        setNotifyScorta(nome, scorta, qta_rimasta);
+                        setNotifyScorta(nome, scorta, qta_rimasta, inizio_cura, fine_cura, orario_assunzione);
                     }
 
                     //dao.close();
@@ -925,9 +925,13 @@ public class AggiungiPillola extends Fragment {
 
     }
 
-    private void setNotifyScorta(String nome, int scorta, int qta_rimasta){
+    private void setNotifyScorta(String nome, int scorta, int qta_rimasta, String data_inizio, String data_fine, String orario) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverScorte.class);
+
+        dao.open();
+        Cura cura_scorta = dao.findCura(nome, data_inizio, data_fine, orario);
+        dao.close();
 
         Random r = new Random();
         int random_value = r.nextInt();
@@ -942,6 +946,7 @@ public class AggiungiPillola extends Fragment {
         c.putString(getString(R.string.pref_content), "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);
         c.putInt(getString(R.string.pref_req_code), req_code_int);
         c.putString(getString(R.string.pref_key), key);
+        c.putString(getString(R.string.pref_cura_record), cura_scorta.toString());
 
         intent.putExtras(c);
 

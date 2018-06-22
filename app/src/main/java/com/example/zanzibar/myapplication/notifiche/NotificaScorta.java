@@ -20,6 +20,7 @@ public class NotificaScorta extends AppCompatActivity {
 
         Intent i = getIntent();
         final String contenuto = i.getStringExtra("contenuto");
+        String cura = i.getStringExtra(getString(R.string.pref_cura_record));
 
         TextView txt_titolo = (TextView) findViewById(R.id.text_title_scorte);
         txt_titolo.setText(contenuto);
