@@ -15,7 +15,7 @@
             android:id="@+id/img_welcome4"
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/pillslogo" />
+            android:src="@drawable/mappa_intro" />
 
         <TextView
             android:layout_width="wrap_content"
