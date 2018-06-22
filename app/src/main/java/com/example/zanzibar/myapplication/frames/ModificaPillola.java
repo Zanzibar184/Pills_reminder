@@ -51,13 +51,13 @@ import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.Database.cure.Dosi;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiverScorte;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -74,32 +74,33 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.Database.cure.Cura.reverseRipetizione;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_CAPTURE;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.REQUEST_PICTURE_GALLERY;
-import static com.example.zanzibar.myapplication.frames.AggiungiPillola.getDaySystem;
 import static com.example.zanzibar.myapplication.frames.AggiungiPillola.getIntPillole;
-import static com.example.zanzibar.myapplication.frames.AggiungiPillola.pictureFilePath;
-import static com.example.zanzibar.myapplication.frames.AggiungiPillola.printDifference;
 
+/*
+
+Codice per la gestione della modifica di una cura e le relative dosi(date in cui deve essere assunto)
+ */
 public class ModificaPillola extends Fragment {
     private CureDAO dao;
     private List<Dosi> list_dose_notifica;
 
     private LinearLayout linearLayout = null;
 
-    Cura modify_cura;
+    private Cura modify_cura;
 
-     LinearLayout view_ripetizione_giorni = null;
-     LinearLayout view_ripetizione_settimana = null;
+    private LinearLayout view_ripetizione_giorni = null;
+    private LinearLayout view_ripetizione_settimana = null;
 
-    int id_tipo_foto = 0;
+    private int id_tipo_foto = 0;
 
-    int ripetizione = 0;
+    private int ripetizione = 0;
 
     //Stringa che ci da il percorso della foto scattata
     protected static String pictureFilePath;
     //Stringa che ci da il percorso della foto presa da galleria
     protected static String pictureGalleryFilePath;
 
-    FloatingActionButton fab_pills = null;
+    private FloatingActionButton fab_pills = null;
 
     private EditText text_date_init = null;
     private EditText text_date_end = null;
@@ -111,7 +112,7 @@ public class ModificaPillola extends Fragment {
 
     private CheckBox check_importante = null;
 
-    Spinner spin1 = null;
+    private Spinner spin1 = null;
 
     private Calendar myCalendarinit = null;
     private Calendar myCalendarend = null;
@@ -128,7 +129,7 @@ public class ModificaPillola extends Fragment {
     private Button b_sabato;
     private Button b_domenica;
 
-    ArrayList<String> days_of_week = null;
+    private ArrayList<String> days_of_week = null;
 
     private boolean lun = false;
     private boolean mar = false;
@@ -138,22 +139,20 @@ public class ModificaPillola extends Fragment {
     private boolean sab = false;
     private boolean dom = false;
 
-    private String choose_from_camera = "Scatta foto";
-    private String choose_from_gallery = "Scegli da galleria";
 
-    RelativeLayout r1;
+    private RelativeLayout r1;
 
-    ImageView img_call_camera;
+    private ImageView img_call_camera;
 
-    ImageView imgpill;
+    private ImageView imgpill;
 
     private EditText orario_di_assunzione1 = null;
 
     private EditText text_dose1 = null;
 
-    Drawable draw;
+    private Drawable draw;
 
-    int resourceId;
+    private int resourceId;
 
     private int importante = 0;
 
@@ -172,8 +171,6 @@ public class ModificaPillola extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.sfondo_aggiungipillola, container, false);
     }
 
@@ -254,6 +251,8 @@ public class ModificaPillola extends Fragment {
         b_venerdi = (Button) view.findViewById(R.id.btn_ven);
         b_sabato = (Button) view.findViewById(R.id.btn_sab);
         b_domenica = (Button) view.findViewById(R.id.btn_dom);
+
+        //---------------fine inizializzazione---------<<<<<<<
 
         b_lunedi.setOnClickListener(button_week_manage);
         b_martedi.setOnClickListener(button_week_manage);
@@ -352,7 +351,7 @@ public class ModificaPillola extends Fragment {
         });
 
 
-        //------------------------------------------------->>>>>>>>>>>>>>>>>>
+        //----------------------gestione giorni scelti precedentemente--------------------------->>>>>>>>>>>>>>>>>>
         String string_ripetizione = modify_cura.getRipetizione();
         if(string_ripetizione.length() <= 3) {
             ripetizione = 1;
@@ -364,41 +363,38 @@ public class ModificaPillola extends Fragment {
             view_ripetizione_settimana.setVisibility(View.VISIBLE);
             view_ripetizione_giorni.setVisibility(View.GONE);
             days_of_week = reverseRipetizione(string_ripetizione);
-            Log.i("REVERSE", days_of_week + "");
 
             for(String s: days_of_week) {
-                if(s.equals(getDaySystem(0))) {
+                if(s.equals(DateHelper.getDaySystem(0))) {
                     b_lunedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     lun = true;
                 }
-                if(s.equals(getDaySystem(1))) {
+                if(s.equals(DateHelper.getDaySystem(1))) {
                     b_martedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     mar = true;
                 }
-                if(s.equals(getDaySystem(2))) {
+                if(s.equals(DateHelper.getDaySystem(2))) {
                     b_mercoledi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     mer = true;
                 }
-                if(s.equals(getDaySystem(3))) {
+                if(s.equals(DateHelper.getDaySystem(3))) {
                     b_giovedi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     gio = true;
                 }
-                if(s.equals(getDaySystem(4))) {
+                if(s.equals(DateHelper.getDaySystem(4))) {
                     b_venerdi.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     ven = true;
                 }
-                if(s.equals(getDaySystem(5))) {
+                if(s.equals(DateHelper.getDaySystem(5))) {
                     b_sabato.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     sab = true;
                 }
-                if(s.equals(getDaySystem(6))) {
+                if(s.equals(DateHelper.getDaySystem(6))) {
                     b_domenica.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.round_button_selected));
                     dom = true;
                 }
 
             }
-
-            Log.i("REVERSE", days_of_week + "");
         }
 
 
@@ -421,12 +417,10 @@ public class ModificaPillola extends Fragment {
                         ripetizione = 1;
                         view_ripetizione_settimana.setVisibility(View.GONE);
                         view_ripetizione_giorni.setVisibility(View.VISIBLE);
-                        //Log.i("ripetizione", ripetizione + "");
                     } else if (s.equals(getString(R.string.radio_settimana))) {
                         ripetizione = 2;
                         view_ripetizione_settimana.setVisibility(View.VISIBLE);
                         view_ripetizione_giorni.setVisibility(View.GONE);
-                        //Log.i("ripetizione", ripetizione + "");
                     }
                 }
             }
@@ -443,53 +437,53 @@ public class ModificaPillola extends Fragment {
                         && (!text_date_end.getText().toString().equals("")) && (!orario_di_assunzione1.getText().toString().equals(""))
                         && ((!giorni_ripetizione.getText().toString().equals("") || (( lun || mar || mer || gio || ven || sab || dom)))))
                 {
-                    SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
-                    boolean assumi_farmaco_notifica = prefs.getBoolean("imposta_notifiche_farmaci",false);
-                    boolean notifica_scorte = prefs.getBoolean("imposta_notifiche_scorta_app", false);
-                    String scorte_pillole = prefs.getString("pillole_scorta","");
+                    SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.imp_notifiche), MODE_PRIVATE);
+                    boolean assumi_farmaco_notifica = prefs.getBoolean(getString(R.string.imp_not_farmaci),false);
+                    boolean notifica_scorte = prefs.getBoolean(getString(R.string.imp_not_scorta), false);
+                    String scorte_pillole = prefs.getString(getString(R.string.pillole_scorta),"");
 
 
                     if (lun) {
-                        days_of_week.add(getDaySystem(0));
+                        days_of_week.add(DateHelper.getDaySystem(0));
                     }else{
 
-                        days_of_week.remove(getDaySystem(0));
+                        days_of_week.remove(DateHelper.getDaySystem(0));
                     }
                     if (mar) {
-                        days_of_week.add(getDaySystem(1));
+                        days_of_week.add(DateHelper.getDaySystem(1));
                     }else{
 
-                        days_of_week.remove(getDaySystem(1));
+                        days_of_week.remove(DateHelper.getDaySystem(1));
                     }
                     if (mer) {
-                        days_of_week.add(getDaySystem(2));
+                        days_of_week.add(DateHelper.getDaySystem(2));
                     }else{
 
-                        days_of_week.remove(getDaySystem(2));
+                        days_of_week.remove(DateHelper.getDaySystem(2));
                     }
                     if (gio) {
-                        days_of_week.add(getDaySystem(3));
+                        days_of_week.add(DateHelper.getDaySystem(3));
                     }else{
 
-                        days_of_week.remove(getDaySystem(3));
+                        days_of_week.remove(DateHelper.getDaySystem(3));
                     }
                     if (ven) {
-                        days_of_week.add(getDaySystem(4));
+                        days_of_week.add(DateHelper.getDaySystem(4));
                     }else{
 
-                        days_of_week.remove(getDaySystem(4));
+                        days_of_week.remove(DateHelper.getDaySystem(4));
                     }
                     if (sab) {
-                        days_of_week.add(getDaySystem(5));
+                        days_of_week.add(DateHelper.getDaySystem(5));
                     }else{
 
-                        days_of_week.remove(getDaySystem(5));
+                        days_of_week.remove(DateHelper.getDaySystem(5));
                     }
                     if (dom) {
-                        days_of_week.add(getDaySystem(6));
+                        days_of_week.add(DateHelper.getDaySystem(6));
                     }else{
 
-                        days_of_week.remove(getDaySystem(6));
+                        days_of_week.remove(DateHelper.getDaySystem(6));
                     }
 
 
@@ -497,8 +491,6 @@ public class ModificaPillola extends Fragment {
                     hashSet.addAll(days_of_week);
                     days_of_week.clear();
                     days_of_week.addAll(hashSet);
-
-                    Log.i("REVERSE after", days_of_week + "");
 
                     dao = new CureDao_DB();
                     dao.open();
@@ -666,14 +658,14 @@ public class ModificaPillola extends Fragment {
     }
 
     private void updateLabelInit() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = getString(R.string.date_format_base); //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date_init.setText(sdf.format(myCalendarinit.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabelEnd() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat =  getString(R.string.date_format_base); //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date_end.setText(sdf.format(myCalendarend.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
@@ -743,9 +735,9 @@ public class ModificaPillola extends Fragment {
 
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
-                    if(item.getTitle().equals(choose_from_camera)) {
+                    if(item.getTitle().equals(getString(R.string.foto))) {
                         sendTakePictureIntent();
-                    } else if(item.getTitle().equals(choose_from_gallery)) {
+                    } else if(item.getTitle().equals(getString(R.string.galleria))) {
                         sendTakeGalleryIntent();
                     }
                     return true;
@@ -789,7 +781,7 @@ public class ModificaPillola extends Fragment {
     }
 
     private File getPictureFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat( getString(R.string.notify_date_format).format(new Date());
         String pictureFile = "PILL_" + timeStamp;
         File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
@@ -881,7 +873,7 @@ public class ModificaPillola extends Fragment {
             Dosi tmp = list_dose_notifica.get(i);
 
             String myDate = tmp.getGiorno() + " " + orario;
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat( getString(R.string.notify_date_format));
             Date date_notifica = null;
 
             try {
@@ -901,18 +893,18 @@ public class ModificaPillola extends Fragment {
             String key = nome + "_" + quantità + "_" + orario;
             int req_code_int = random_value;
 
-            SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getContext().getSharedPreferences( getString(R.string.pref_name),MODE_PRIVATE).edit();
             editor.putInt(key, req_code_int);
             editor.apply();
 
-            SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+            SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.pref_name), MODE_PRIVATE);
             int request_code = prefs.getInt(key, 0);
 
             Bundle c = new Bundle();
-            c.putString("contenuto", "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
-            c.putInt("req_code", request_code);
-            c.putString("key", key);
-            c.putString("cura", cura_notifica.toString());
+            c.putString(getString(R.string.pref_content), "Ricordati di prendere " + quantità + " " + unità + " di " + nome);
+            c.putInt(getString(R.string.pref_req_code), request_code);
+            c.putString(getString(R.string.pref_key), key);
+            c.putString(getString(R.string.pref_cura_record), cura_notifica.toString());
             intent.putExtras(c);
 
 
@@ -923,11 +915,6 @@ public class ModificaPillola extends Fragment {
 
 
         }
-
-
-        //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
-
-        //Log.i("dati in setNotify()", "key:" + key + " reqcode "  + request_code);
 
     }
 
@@ -945,9 +932,9 @@ public class ModificaPillola extends Fragment {
         //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
         Bundle c = new Bundle();
-        c.putString("contenuto", "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);
-        c.putInt("req_code", req_code_int);
-        c.putString("key", key);
+        c.putString(getString(R.string.pref_content), "Rimangono " + qta_rimasta + " su " + scorta + " di " + nome);
+        c.putInt(getString(R.string.pref_req_code), req_code_int);
+        c.putString(getString(R.string.pref_key), key);
 
         intent.putExtras(c);
 
@@ -964,7 +951,7 @@ public class ModificaPillola extends Fragment {
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
         String key = nome + "_" + quantita + "_" + orario;
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.pref_name), MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);

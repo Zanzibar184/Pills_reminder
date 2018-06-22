@@ -53,7 +53,7 @@
     //-------------------------------------------------------------------//
     //-----------------   Schermata Aggiunta/Modifica Cure   ----------------------//
 
-
+        //------xml-----//
     <string name="foto_pillola">Foto della Cura</string>
 
     <string name="nome_cura">Nome della Cura</string>
@@ -109,7 +109,35 @@
 
     <string name="btn_conferma">Conferma</string>
 
+    //------java class-----//
 
+    <string name="foto">Scatta foto</string>
+    <string name="galleria">Scegli da galleria</string>
+
+    <string name="imp_notifiche">ImpostazioniNotifiche</string>
+    <string name="imp_not_farmaci">imposta_notifiche_farmaci</string>
+    <string name="imp_not_scorta">imposta_notifiche_scorta_app</string>
+    <string name="pillole_scorta">pillole_scorta</string>
+
+
+    <string name="pill_2">2 pillole</string>
+    <string name="pill_5">5 pillole</string>
+    <string name="pill_10">10 pillole</string>
+    <string name="pill_15">15 pillole</string>
+    <string name="pill_20">20 pillole</string>
+    <string name="pill_30">30 pillole</string>
+
+    <string name="date_format_base">yyyy-MM-dd</string>
+    <string name="notify_date_format">yyyy-MM-dd HH:mm</string>
+
+    <string name="pref_name">MyNotifPref</string>
+    <string name="pref_content">contenuto</string>
+    <string name="pref_req_code">req_code</string>
+    <string name="pref_key">key</string>
+    <string name="pref_cura_record">cura</string>
+
+
+    //-------------------------------------------------------------------//
     //-------------------------------------------------------------------//
 
     <string name="scatta_fotocamera">Scatta foto</string>

@@ -43,7 +43,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 
-//TODO: migliorare visualizzazione dati
 public class Cure extends Fragment {
 
 

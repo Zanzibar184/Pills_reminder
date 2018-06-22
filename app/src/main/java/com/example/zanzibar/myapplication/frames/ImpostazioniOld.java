@@ -25,7 +25,6 @@ import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.settings.FragmentDatiPersonali;
 
 import java.io.ByteArrayOutputStream;
-//TODO: salvare dati personali/creare db
 
 /**
  * A simple {@link Fragment} subclass.
