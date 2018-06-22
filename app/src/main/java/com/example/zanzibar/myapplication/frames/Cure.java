@@ -52,8 +52,6 @@ public class Cure extends Fragment {
     private LinearLayout layout_pills_pomeriggio = null;
     private LinearLayout layout_pills_sera = null;
     private LinearLayout layout_pills_notte = null;
-
-    final int numberOfFrames = 4;
     int currentHour;
 
     String conferma_farmaco = "Conferma assunzione farmaco";
@@ -67,9 +65,6 @@ public class Cure extends Fragment {
     private List<Cura> list_cure;
     private List<Dosi> list_dosi;
 
-    //Dati nuovi
-    ImageView ivPreview;
-    //---
 
     static ScrollView v;
 

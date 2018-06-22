@@ -76,6 +76,8 @@ public class NotificaAssunzione extends AppCompatActivity {
                     //cura_final.setRimanenze(cura_final.getRimanenze() - cura_final.getQuantità_assunzione());
                     dao.open();
                     dose.setStato_cura(Dosi.ASSUNTA);
+                    cura_final.setRimanenze(cura_final.getRimanenze() - cura_final.getQuantità_assunzione());
+                    dao.updateCura(cura_final);
                     dao.updateDose(dose);
                     dao.close();
                 } else if (v.getId()==R.id.btn_non_assunto) {

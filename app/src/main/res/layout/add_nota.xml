@@ -23,7 +23,7 @@
             android:id="@+id/title_nota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Inserisci il titolo..." />
+            android:hint="@string/nota_titolo_hint" />
 
         <View
             android:layout_width="fill_parent"
@@ -55,7 +55,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:hint="Inserisci il testo della nota..."
+                android:hint="@string/nota_testo_hint"
                 android:inputType="textMultiLine"
                 android:lines="8"
                 android:maxLines="15"
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Scegli la categoria della nota"
+            android:text="@string/nota_categoria"
             android:textStyle="bold" />
 
         <View
@@ -115,25 +115,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
-                android:text="Generale" />
+                android:text="@string/nota_radio_general" />
 
             <RadioButton
                 android:id="@+id/rbtn_sintomi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sintomi" />
+                android:text="@string/nota_radio_sintomi" />
 
             <RadioButton
                 android:id="@+id/rbtn_appuntamento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Appuntamento" />
+                android:text="@string/nota_radio_appuntamento" />
 
             <RadioButton
                 android:id="@+id/rbtn_promemoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promemoria" />
+                android:text="@string/nota_radio_promemoria" />
 
         </RadioGroup>
 
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Inserisci data e ora per questa nota" />
+            android:text="@string/nota_check_data_ora" />
 
     </RelativeLayout>
 
@@ -176,7 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:text="Imposta data e orario"/>
+            android:text="@string/nota_data_ora"/>
 
         <View
             android:layout_width="fill_parent"
@@ -203,7 +203,7 @@
                 android:layout_marginLeft="13dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginTop="45dp"
-                android:text="Giorno:" />
+                android:text="@string/nota_scelta_giorno" />
 
             <EditText
                 android:id="@+id/textdate"
@@ -227,7 +227,7 @@
                 android:layout_alignBottom="@+id/textora"
                 android:layout_alignLeft="@+id/textView6"
                 android:layout_alignStart="@+id/textView6"
-                android:text="Ora:" />
+                android:text="@string/nota_scelta_ora" />
 
             <ImageView
                 android:id="@+id/imageviewtime"
@@ -267,7 +267,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Conferma"
+        android:text="@string/nota_btn_conferma"
         android:layout_margin="@dimen/marginLeft_view"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"

@@ -165,7 +165,51 @@
     <string name="setta_contatto_SMSAVVISO">Imposta questo contatto per SMS AVVISO</string>
 
     <string name="cont_btn_conferma">CONFERMA</string>
+
+
+    //----------------------------->>end>>--------------------------------------//
+
+
+//-----------------   Schermata Aggiunta/Modifica Note   ----------------------//
+    //------xml-----//
+    <string name="nota_titolo_hint">Inserisci il titolo...</string>
+
+    <string name="nota_testo_hint">Inserisci il testo della nota...</string>
+
+    <string name="nota_categoria">Scegli la categoria della nota</string>
+    <string name="nota_radio_general">Generale</string>
+    <string name="nota_radio_sintomi">Sintomi</string>
+    <string name="nota_radio_appuntamento">Appuntamento</string>
+    <string name="nota_radio_promemoria">Promemoria</string>
+
+    <string name="nota_check_data_ora">Inserisci data e ora per questa nota</string>
+
+    <string name="nota_data_ora">Imposta data e orario</string>
+    <string name="nota_scelta_giorno">Giorno:</string>
+    <string name="nota_scelta_ora">Ora:</string>
+
+    <string name="nota_btn_conferma">Conferma</string>
+
     //------java class-----//
+
+    <string name="nota_pref_name">ImpostazioniNotifiche</string>
+    <string name="nota_pref_key">imposta_notifiche_note</string>
+    <string name="nota_pref_notify">iMyNotifPref</string>
+    <string name="nota_pref_notify2">MyNotifPref</string>
+
+    <string name="nota_bundle_titolo_cont">contenuto</string>
+    <string name="nota_bundle_req">req_code</string>
+    <string name="nota_bundle_key">key</string>
+    <string name="nota_bundle_title">titolo_nota</string>
+    <string name="nota_bundle_content">contenuto_nota</string>
+    <string name="nota_bundle_data">data_nota</string>
+    <string name="nota_bundle_ora">orario_nota</string>
+    <string name="nota_bundle_type">tipo_nota</string>
+
+    <string name="nota_generale">Generale</string>
+    <string name="nota_sintomi">Sintomi</string>
+    <string name="nota_appuntamento">Appuntamento</string>
+    <string name="nota_promemoria">Promemoria</string>
 
 
     //----------------------------->>end>>--------------------------------------//
@@ -181,10 +225,7 @@
     <string name="photo_from_camera">Scatta foto</string>
     <string name="photo_from_gallery">Scegli da galleria</string>
 
-    <string name="nota_generale">Generale</string>
-    <string name="nota_sintomi">Sintomi</string>
-    <string name="nota_appuntamento">Appuntamento</string>
-    <string name="nota_promemoria">Promemoria</string>
+
 
     <string name="modifica_cura">Modifica informazioni</string>
     <string name="elimina_cura">Elimina</string>

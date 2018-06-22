@@ -37,6 +37,7 @@ import android.widget.Toast;
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiverNote;
@@ -62,18 +63,17 @@ public class AggiungiNota extends Fragment {
     private static final int GET_SPEECH_TITOLO_NOTA = 600;
     private static final int GET_SPEECH_CONTENUTO_NOTA = 700;
 
-    NoteDao dao;
-    List<Nota> list_note;
+    private NoteDao dao;
 
     private LinearLayout linearLayout = null;
 
     private RelativeLayout rdatetimeselect = null;
 
-    CheckBox c;
+    private CheckBox c;
 
-    String dateSelected = null;
+    private String dateSelected = null;
 
-    Boolean date_time_visible = false;
+    private Boolean date_time_visible = false;
 
     private EditText text_date = null;
     private EditText text_time = null;
@@ -85,7 +85,7 @@ public class AggiungiNota extends Fragment {
 
     private String categoria_nota = null;
 
-    FloatingActionButton fab_nota = null;
+    private FloatingActionButton fab_nota = null;
 
     public AggiungiNota() {
         // Required empty public constructor
@@ -134,7 +134,7 @@ public class AggiungiNota extends Fragment {
 
         RadioGroup rgroup = view.findViewById(R.id.radioGroup_cat);
         rgroup.check(R.id.rbtn_generale);
-        categoria_nota = "Generale";
+        categoria_nota = getString(R.string.nota_radio_general);
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -144,7 +144,6 @@ public class AggiungiNota extends Fragment {
                 {
                     String s = checkedRadioButton.getText().toString();
                     categoria_nota = s;
-                    Log.i("Checked:", categoria_nota + " " + CheckId(categoria_nota));
                 }
             }
         });
@@ -223,8 +222,8 @@ public class AggiungiNota extends Fragment {
             public void onClick(View v) {
                 int tipo_memo = CheckId(categoria_nota);
 
-                SharedPreferences prefs = getContext().getSharedPreferences("ImpostazioniNotifiche", MODE_PRIVATE);
-                boolean ricevi_notifica_nota = prefs.getBoolean("imposta_notifiche_note",false);
+                SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.nota_pref_name), MODE_PRIVATE);
+                boolean ricevi_notifica_nota = prefs.getBoolean(getString(R.string.nota_pref_key),false);
 
                 if((!text_contenuto_nota.getText().toString().equals("")) && (tipo_memo != 0)) {
                             dao.open();
@@ -275,44 +274,27 @@ public class AggiungiNota extends Fragment {
         }
         String key = titolo + "_" + date + "_" + time + "_" + tipo;
         int req_code_int = random_value;
-        //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
         String myStrDate = date + " " + time;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date_nota = null;
+        Date date_nota = DateHelper.StringtoDate(myStrDate, getString(R.string.notify_date_format));
 
-        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(getString(R.string.nota_pref_notify),MODE_PRIVATE).edit();
         editor.putInt(key, req_code_int);
         editor.apply();
 
-        /*
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
-        */
-
-        try {
-            date_nota = format.parse(myStrDate);
-            System.out.println(date_nota);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
 
         Bundle c = new Bundle();
-        c.putString("contenuto", titolo);
-        c.putInt("req_code", req_code_int);
-        c.putString("key", key);
-        c.putString("titolo_nota", titolo);
-        c.putString("contenuto_nota", contenuto);
-        c.putString("data_nota", date);
-        c.putString("orario_nota", time);
-        c.putInt("tipo_nota", tipo);
+        c.putString(getString(R.string.nota_bundle_titolo_cont), titolo);
+        c.putInt(getString(R.string.nota_bundle_req), req_code_int);
+        c.putString(getString(R.string.nota_bundle_key), key);
+        c.putString(getString(R.string.nota_bundle_title), titolo);
+        c.putString(getString(R.string.nota_bundle_content), contenuto);
+        c.putString(getString(R.string.nota_bundle_data), date);
+        c.putString(getString(R.string.nota_bundle_ora), time);
+        c.putInt(getString(R.string.nota_bundle_type), tipo);
 
-        /*
-        Log.i("contenut aggiunginota", titolo);
-        Log.i("reqcode in aggiunginota", req_code_int+"");
-        Log.i("key in aggiunginota", key);
-        */
+
 
         intent.putExtras(c);
 
@@ -320,7 +302,6 @@ public class AggiungiNota extends Fragment {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_nota);
         cal.add(Calendar.DATE, -1);
-        Log.i("date cal", cal.getTime() + "");
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
@@ -367,7 +348,7 @@ public class AggiungiNota extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = getString(R.string.date_format_base); //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date.setText(sdf.format(myCalendardate.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
@@ -409,7 +390,6 @@ public class AggiungiNota extends Fragment {
                 }
             }
         }, hour, minute, true);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
     }
 

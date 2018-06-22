@@ -33,6 +33,7 @@ import android.widget.TimePicker;
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiverNote;
@@ -53,18 +54,17 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ModificaNota extends Fragment {
 
-    NoteDao dao;
-    List<Nota> list_note;
+    private NoteDao dao;
 
     private LinearLayout linearLayout = null;
 
     private RelativeLayout rdatetimeselect = null;
 
-    CheckBox c;
+    private CheckBox c;
 
-    String dateSelected = null;
+    private String dateSelected = null;
 
-    Boolean date_time_visible = false;
+    private Boolean date_time_visible = false;
 
     private EditText text_date = null;
     private EditText text_time = null;
@@ -76,7 +76,7 @@ public class ModificaNota extends Fragment {
 
     private String categoria_nota = null;
 
-    FloatingActionButton fab_nota = null;
+    private FloatingActionButton fab_nota = null;
 
     private Nota nota;
 
@@ -266,36 +266,24 @@ public class ModificaNota extends Fragment {
         //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
         String myStrDate = date + " " + time;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date_nota = null;
 
-        SharedPreferences.Editor editor = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE).edit();
+        Date date_nota = null;
+        date_nota = DateHelper.StringtoDate(myStrDate,getString(R.string.notify_date_format));
+
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(getString(R.string.nota_pref_notify2),MODE_PRIVATE).edit();
         editor.putInt(key, req_code_int);
         editor.apply();
 
-        /*
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
-        int request_code = prefs.getInt(key, 0);
-        */
-
-        try {
-            date_nota = format.parse(myStrDate);
-            System.out.println(date_nota);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
 
         Bundle c = new Bundle();
-        c.putString("contenuto", titolo);
-        c.putInt("req_code", req_code_int);
-        c.putString("key", key);
-        c.putString("titolo_nota", titolo);
-        c.putString("contenuto_nota", contenuto);
-        c.putString("data_nota", date);
-        c.putString("orario_nota", time);
-        c.putInt("tipo_nota", tipo);
-
+        c.putString(getString(R.string.nota_bundle_titolo_cont), titolo);
+        c.putInt(getString(R.string.nota_bundle_req), req_code_int);
+        c.putString(getString(R.string.nota_bundle_key), key);
+        c.putString(getString(R.string.nota_bundle_title), titolo);
+        c.putString(getString(R.string.nota_bundle_content), contenuto);
+        c.putString(getString(R.string.nota_bundle_data), date);
+        c.putString(getString(R.string.nota_bundle_ora), time);
+        c.putInt(getString(R.string.nota_bundle_type), tipo);
         /*
         Log.i("contenut aggiunginota", titolo);
         Log.i("reqcode in aggiunginota", req_code_int+"");
@@ -308,7 +296,6 @@ public class ModificaNota extends Fragment {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date_nota);
         cal.add(Calendar.DATE, -1);
-        Log.i("date cal", cal.getTime() + "");
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req_code_int, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
@@ -322,12 +309,9 @@ public class ModificaNota extends Fragment {
         String key = titolo + "_" + data + "_" + ora + "_" + tipo;
         //int req_code_int = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
 
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref",MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.nota_pref_notify2),MODE_PRIVATE);
         int req = prefs.getInt(key, 0);
 
-        Log.i("contenut aggiunginota", titolo);
-        Log.i("reqcode in aggiunginota", req+"");
-        Log.i("key in aggiunginota", key);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), req, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
@@ -374,7 +358,7 @@ public class ModificaNota extends Fragment {
     }
 
     private void updateLabelDate() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        String myFormat = getString(R.string.date_format_base); //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ITALIAN);
         text_date.setText(sdf.format(myCalendardate.getTime()));
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
@@ -416,7 +400,6 @@ public class ModificaNota extends Fragment {
                 }
             }
         }, hour, minute, true);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
     }
 
