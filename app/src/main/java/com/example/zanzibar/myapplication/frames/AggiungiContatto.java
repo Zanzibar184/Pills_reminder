@@ -74,8 +74,6 @@ public class AggiungiContatto extends Fragment {
 
     private FloatingActionButton fab_contatto = null;
 
-    private String choose_from_camera = "Scatta foto";
-    private String choose_from_gallery = "Scegli da galleria";
     private static final int IMPORT_CONTACT_NAME_NUMBER = 5000;
 
     private static final int GET_SPEECH_CONTACT_NAME = 100;
@@ -294,9 +292,9 @@ public class AggiungiContatto extends Fragment {
 
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
-                    if(item.getTitle().equals(choose_from_camera)) {
+                    if(item.getTitle().equals(getString(R.string.foto))) {
                         sendTakePictureIntent();
-                    } else if(item.getTitle().equals(choose_from_gallery)) {
+                    } else if(item.getTitle().equals(getString(R.string.galleria))) {
                         sendTakeGalleryIntent();
                     }
                     return true;
