@@ -247,20 +247,37 @@ public class Cure extends Fragment {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
 
-                    //aggiorno lo stato del record
+
+                    if(dose.getStato_cura().equals(Dosi.NON_ASSUNTA)){
+                        updated_cura.setRimanenze(updated_cura.getRimanenze() - updated_cura.getQuantità_assunzione());
+                    }
+
+                    if(dose.getStato_cura().equals(Dosi.DA_ASSUMERE)){
+                        updated_cura.setRimanenze(updated_cura.getRimanenze() - updated_cura.getQuantità_assunzione());
+                    }
+
+
                     dose.setStato_cura(Dosi.ASSUNTA);
-                    Log.i("dose:", dose.toString());
                     dao.updateDose(dose);
 
                 } else if (item.getTitle().equals(non_conferma_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
 
+                    if(dose.getStato_cura().equals(Dosi.ASSUNTA)){
+                        updated_cura.setRimanenze(updated_cura.getRimanenze() + updated_cura.getQuantità_assunzione());
+                    }
+
                     dose.setStato_cura(Dosi.NON_ASSUNTA);
                     dao.updateDose(dose);
                 } else if (item.getTitle().equals(ripristina_stato_farmaco)) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.GONE);
+
+                    if(dose.getStato_cura().equals(Dosi.ASSUNTA)){
+                        updated_cura.setRimanenze(updated_cura.getRimanenze() + updated_cura.getQuantità_assunzione());
+                    }
+
 
                     dose.setStato_cura(Dosi.DA_ASSUMERE);
                     dao.updateDose(dose);
@@ -269,6 +286,13 @@ public class Cure extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
                 }
+
+                if(updated_cura.getRimanenze() < 0)
+                    updated_cura.setRimanenze(0);
+
+                dao.updateCura(updated_cura);
+
+                Log.i("CURA", updated_cura.getRimanenze() +"");
 
                 dao.close();
                 return true;
