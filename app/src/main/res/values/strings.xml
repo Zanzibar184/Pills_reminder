@@ -73,7 +73,7 @@
     <string name="hint_nome_cura">Nome...</string>
 
     <string name="scorte_farmaco">Scorte di Medicinali</string>
-    <string name="qta_corrente">Quantità di una confezione nuova</string>
+    <string name="qta_corrente">Quantità nella confezione</string>
     <string name="qta_scatola">Quantità rimasta</string>
 
 
