@@ -48,9 +48,11 @@ public class AlarmReceiverScorte extends BroadcastReceiver {
         String content_notification = b.getString("contenuto");
         int request_code = b.getInt("req_code");
         String key = b.getString("key");
+        String cura_string = b.getString(context.getString(R.string.pref_cura_record), "");
         contentText = content_notification;
 
         resultIntent.putExtra("contenuto", content_notification);
+        resultIntent.putExtra(context.getString(R.string.pref_cura_record), cura_string);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context,request_code,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT,b);
 
