@@ -30,11 +30,6 @@ public class SmsAvviso extends Fragment {
     private LinearLayout linearLayout = null;
     private LinearLayout linearLayoutNumeri = null;
 
-    ImageView modifySMS = null;
-    ImageView saveSMS = null;
-
-    EditText editSMS = null;
-
     ContattiDAO dao;
     List<Contatti> list_contatti;
 

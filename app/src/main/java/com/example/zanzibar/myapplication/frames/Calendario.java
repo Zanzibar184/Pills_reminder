@@ -1,6 +1,5 @@
 package com.example.zanzibar.myapplication.frames;
 
-//TODO: aggiungere colori per richiamare la nota nel suo giorno
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

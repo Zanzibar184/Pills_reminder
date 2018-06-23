@@ -21,7 +21,7 @@ import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 
 /**
- * Created by user on 11/05/18.
+ * Schermata di scelta del tipo di cura da assumere
  */
 
 public class ScegliPillola extends Fragment {
@@ -29,7 +29,6 @@ public class ScegliPillola extends Fragment {
     private LinearLayout linearLayout = null;
 
     FloatingActionButton fab_sceglipillola = null;
-    Button bu;
 
     ImageView pill_image;
     ImageView arrow_left_image;
