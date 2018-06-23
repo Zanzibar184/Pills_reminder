@@ -39,7 +39,6 @@ import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 /*
 Schermata con tutti i dettagli di una cura
@@ -107,8 +106,8 @@ public class InfoFarmaco extends Fragment {
         ((TextView) frame.findViewById(R.id.nome_farmaco_info)).setText(cura.getNome());
         ((TextView) frame.findViewById(R.id.txt_dose)).setText(getString(R.string.info_assunzione) + cura.getQuantità_assunzione() + " " + cura.getUnità_misura() + " alle " + cura.getOrario_assunzione());
 
-        Date inizio = StringToDate(cura.getInizio_cura());
-        Date fine = StringToDate(cura.getFine_cura());
+        Date inizio = DateHelper.StringtoDate(cura.getInizio_cura());
+        Date fine = DateHelper.StringtoDate(cura.getFine_cura());
         ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText(getString(R.string.info_start) + DateHelper.DateToString(inizio,getString(R.string.user_date_format)));
         ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText(getString(R.string.info_end) + DateHelper.DateToString(fine,getString(R.string.user_date_format)));
 

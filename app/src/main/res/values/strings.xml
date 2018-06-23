@@ -252,7 +252,18 @@
     //----------------------------->>end>>--------------------------------------//
 
 
-    //-----------------   Stringhe comuni   ----------------------//
+    //-----------------   Miei Farmaci   ----------------------//
+    //----------java class-----------//
+
+    <string name="modifica_cura">Modifica informazioni</string>
+    <string name="elimina_cura">Elimina</string>
+    <string name="cura_terminata">Cura Terminata</string>
+    <string name="cura_in_corso">Cura In Corso</string>
+    <string name="cura_da_cominciare">Cura Non Ancora Cominciata</string>
+
+    <string name="cura_dal">Dal: </string>
+    <string name="cura_al">Fino al: </string>
+
     //----------------------------->>end>>--------------------------------------//
 
 
@@ -265,8 +276,6 @@
 
 
 
-    <string name="modifica_cura">Modifica informazioni</string>
-    <string name="elimina_cura">Elimina</string>
 
 
 

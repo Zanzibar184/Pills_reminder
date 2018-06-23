@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
@@ -137,20 +138,19 @@ public class MieiFarmaci extends Fragment {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_mieifarmaci));
     }
-
+    //aggiunge le cure prese dal db alla schermata
     public void addFarmaci(String nome, int qta_rimasta, int qta_totale, String start_cura, String end_cura, int tipo_cura, int id) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout_cure, false);
 
-        Date inizio = StringToDate(start_cura);
-        Date fine = StringToDate(end_cura);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date inizio = DateHelper.StringtoDate(start_cura);
+        Date fine = DateHelper.StringtoDate(end_cura);
 
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
-        ((TextView) frame.findViewById(R.id.txt_start_cura)).setText("Dal: " + dateFormat.format(inizio) );
-        ((TextView) frame.findViewById(R.id.txt_end_cura)).setText("Fino al: " + dateFormat.format(fine));
+        ((TextView) frame.findViewById(R.id.txt_start_cura)).setText(getString(R.string.cura_dal) + DateHelper.DateToString(inizio,getString(R.string.user_date_format)) );
+        ((TextView) frame.findViewById(R.id.txt_end_cura)).setText(getString(R.string.cura_al) + DateHelper.DateToString(fine,getString(R.string.user_date_format)));
 
 
-        ((TextView) frame.findViewById(R.id.txt_terminata)).setText("Cura " + compareStringDate(inizio,fine));
+        ((TextView) frame.findViewById(R.id.txt_terminata)).setText(compareStringDate(inizio,fine));
 
 
         ((TextView) frame.findViewById(R.id.txt_id_hidden)).setText(id + "");
@@ -165,31 +165,12 @@ public class MieiFarmaci extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
 
-                //per inserire il menu di visualizzazione delle opzioni per il farmaco
-                //setPopupMenuImages(getContext(), frame);
             }
         });
 
         linearLayout_cure.addView(frame);
     }
 
-    public static Date StringToDate(String s) {
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-
-        try {
-
-            date = formatter.parse(s);
-            Log.i("data: ",formatter.format(date));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return date;
-
-    }
 
 
     private Cura getCurabyId(int id){
@@ -208,11 +189,11 @@ public class MieiFarmaci extends Fragment {
     private String compareStringDate( Date inizio, Date fine) {
 
         if (System.currentTimeMillis() > fine.getTime())
-            return "terminata";
+            return getString(R.string.cura_terminata);
         else if ((fine.getTime() > System.currentTimeMillis() && (inizio.getTime() < System.currentTimeMillis())))
-            return "in corso";
+            return getString(R.string.cura_in_corso);
         else if (inizio.getTime() > System.currentTimeMillis())
-            return "non ancora cominciata";
+            return getString(R.string.cura_da_cominciare);
 
         return "";
 

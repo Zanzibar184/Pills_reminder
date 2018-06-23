@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.zanzibar.myapplication.Database.Note.Nota;
 import com.example.zanzibar.myapplication.Database.Note.NoteDAO_DB;
 import com.example.zanzibar.myapplication.Database.Note.NoteDao;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
@@ -44,7 +45,6 @@ import java.util.List;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
 
 public class Note extends Fragment {
@@ -142,9 +142,8 @@ public class Note extends Fragment {
         ((TextView) frame.findViewById(R.id.txt_note_title)).setText(titolo);
         ((TextView) frame.findViewById(R.id.txt_contenuto)).setText(testo);
 
-        Date data_format = StringToDate(data);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        ((TextView) frame.findViewById(R.id.data_nota)).setText(dateFormat.format(data_format));
+        Date data_format = DateHelper.StringtoDate(data);
+        ((TextView) frame.findViewById(R.id.data_nota)).setText(DateHelper.DateToString(data_format, getString(R.string.user_date_format)));
 
         ((TextView) frame.findViewById(R.id.ora)).setText(ora);
         ((TextView) frame.findViewById(R.id.id_nota_hidden)).setText(id_memo + "");
