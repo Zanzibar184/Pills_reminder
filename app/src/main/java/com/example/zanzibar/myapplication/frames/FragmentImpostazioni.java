@@ -10,6 +10,7 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Log;
 
 import com.example.zanzibar.myapplication.MainActivity;
+import com.example.zanzibar.myapplication.PrivacyActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.WelcomeActivity;
 
@@ -231,6 +232,8 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 //TODO: mostrare il contratto per la privacy
+                Intent intent_privacy = new Intent(getContext(), PrivacyActivity.class);
+                startActivity(intent_privacy);
                 return true;
             }
         });
