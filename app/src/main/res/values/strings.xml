@@ -330,26 +330,24 @@ aggiornamenti saranno vincolanti non appena pubblicati sull\'Applicazione. L‘U
 leggere l\'Informativa Privacy ad ogni accesso all\'Applicazione.
 Nel caso di mancata accettazione delle modifiche apportate alla presente Informativa Privacy, l\'Utente è
 tenuto a cessare l\’utilizzo di questa Applicazione e può richiedere al Titolare del Trattamento di rimuovere i
-propri Dati Personali.
-1. Dati Personali raccolti dall\'Applicazione
+propri Dati Personali. \n <br />
+        1. Dati Personali raccolti dall\'Applicazione \n <br />
 
-Il Titolare raccoglie le seguenti tipologie di Dati Personali:
+Il Titolare raccoglie le seguenti tipologie di Dati Personali: \n <br />
 
-A. Contenuti e informazioni forniti volontariamente dall\'Utente
+A. Contenuti e informazioni forniti volontariamente dall\'Utente \n <br />
 
 I Dati di contatto, credenziali, contenuti: per esempio dati anagrafici, indirizzo di posta
 elettronica o postale e altri dati di contatto, password e informazioni di sicurezza utilizzati per
 l\'autenticazione e l‘accesso all\'account, interessi e preferenze personali e altri contenuti personali,
-etc.
+etc.\n <br />
 
 Dati sensibili: Dati Personali che rivelino l\'origine razziale o etnica, le opinioni politiche, le
 convinzioni religiose o filosofiche, o l‘appartenenza sindacale, nonché dati genetici, dati biometrici
 intesi a identificare in modo univoco una persona fisica, Dati relativi alla salute o alla vita sessuale o
-all\'orientamento sessuale della persona.
+all\'orientamento sessuale della persona. \n <br />
 
-Il mancato conferimento da parte dell’Utente di alcuni Dati potrebbe impedire a questa Applicazione di
-
-erogare i propri servizi.
+Il mancato conferimento da parte dell’Utente di alcuni Dati potrebbe impedire a questa Applicazione di erogare i propri servizi. <br />
 
 L\'Utente si assume la responsabilità dei Dati Personali di terzi pubblicati o condivisi mediante questa
 
@@ -359,9 +357,9 @@ responsabilità verso terzi.
 
 Se l\'elaborazione dei Dati Personali si basa sul consenso dell’Utente, lo stesso può revocarlo in qualsiasi
 
-momento.
+momento. \n <br />
 
-8. Dati e contenuti acquisiti automaticamente durante l\'utilizzo dell\'Applicazione
+8. Dati e contenuti acquisiti automaticamente durante l\'utilizzo dell\'Applicazione \n <br />
 
 I Dati tecnici: i sistemi informatici e le procedure software preposte al funzionamento di questa
 Applicazione possono acquisire, nel corso del loro normale esercizio, alcuni Dati Personali la cui
@@ -371,13 +369,13 @@ stessa natura, potrebbero, attraverso elaborazioni ed associazioni con Dati dete
 permettere di identificare gli utenti. In questa categoria rientrano gli indirizzi IP, o i nomi di dominio
 utilizzati dagli Utenti che si connettono all\'Applicazione, gli indirizzi in notazione URI (Uniform
 Resource Identifier) delle risorse richieste, l\'orario della richiesta, il metodo utilizzato nel sottoporre
-la richiesta al server, la dimensione del file ottenuto, etc.
+la richiesta al server, la dimensione del file ottenuto, etc. \n <div />
 
 I Dati di geolocalizzazione: L\'Applicazione può raccogliere Dati sulla posizione, che possono essere
 precisi o imprecisi. I Dati precisi sulla posizione possono essere Dati GNSS (Global Navigation
 Satellite System, ad esempio quelli GPS), oltre ai Dati che identificano il ripetitore più vicino, gli
 hotspot Wi-Fi e bluetooth, comunicati quando si abilitano i prodotti o le funzionalità basati sulla
-posizione.</string>
+        posizione. <div /> </string>
 
 </resources>
 
