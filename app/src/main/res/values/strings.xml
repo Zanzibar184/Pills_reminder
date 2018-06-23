@@ -66,6 +66,7 @@
     <string name="date_format_base">yyyy-MM-dd</string>
     <string name="notify_date_format">yyyy-MM-dd HH:mm</string>
     <string name="picture_date_format">yyyyMMddHHmmss</string>
+    <string name="user_date_format">dd-MM-yyyy</string>
 
     //----------------------------->>end>>--------------------------------------//
 
@@ -237,6 +238,20 @@
     //----------------------------->>end>>--------------------------------------//
 
 
+    //-----------------   Info farmaco   ----------------------//
+
+    //----------java class-----------//
+    <string name="confezione">Confezione da: </string>
+    <string name="info_qta">Quantità rimasta: </string>
+    <string name="info_assunzione">Quantità di assunzione: </string>
+    <string name="info_start">Cominciata il: </string>
+    <string name="info_end">Termina il: </string>
+    <string name="info_positivo_sms">Nel caso non venga confermata l\'assunzione della cura agli orari prestabiliti, i contatti importanti verranno avvertiti via SMS</string>
+    <string name="info_negativo_sms">Cura non inserita nel servizio SMS AVVISO</string>
+
+    //----------------------------->>end>>--------------------------------------//
+
+
     //-----------------   Stringhe comuni   ----------------------//
     //----------------------------->>end>>--------------------------------------//
 
@@ -253,8 +268,6 @@
     <string name="modifica_cura">Modifica informazioni</string>
     <string name="elimina_cura">Elimina</string>
 
-    <string name="info_positivo_sms">Nel caso non venga confermata l\'assunzione della cura agli orari prestabiliti, i contatti importanti verranno avvertiti via SMS</string>
-    <string name="info_negativo_sms">Cura non inserita nel servizio SMS AVVISO</string>
 
 
 
