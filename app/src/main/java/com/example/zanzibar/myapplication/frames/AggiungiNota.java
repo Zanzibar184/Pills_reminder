@@ -263,6 +263,7 @@ public class AggiungiNota extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_aggiunginota));
     }
 
+    //gestisco e avvio le notifiche per le note
     private void setNotifyNota(String titolo, String contenuto, String date, String time, int tipo){
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverNote.class);
@@ -283,7 +284,6 @@ public class AggiungiNota extends Fragment {
         editor.apply();
 
 
-
         Bundle c = new Bundle();
         c.putString(getString(R.string.nota_bundle_titolo_cont), titolo);
         c.putInt(getString(R.string.nota_bundle_req), req_code_int);
@@ -293,7 +293,6 @@ public class AggiungiNota extends Fragment {
         c.putString(getString(R.string.nota_bundle_data), date);
         c.putString(getString(R.string.nota_bundle_ora), time);
         c.putInt(getString(R.string.nota_bundle_type), tipo);
-
 
 
         intent.putExtras(c);
@@ -308,6 +307,7 @@ public class AggiungiNota extends Fragment {
 
     }
 
+    //colora di rosso gli input importanti rimasti vuoti
     private void colorInputUnfilled(){
 
 
@@ -333,6 +333,7 @@ public class AggiungiNota extends Fragment {
 
     }
 
+    //imposta la data per la nota
     private void setDateNote() {
         myCalendardate = Calendar.getInstance();
         datenote = new DatePickerDialog.OnDateSetListener() {
@@ -354,6 +355,7 @@ public class AggiungiNota extends Fragment {
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
     }
 
+    //setta la visibilità del layout che chiede l'inserimento della data e dell'ora a seconda se il checkbox è selezionato o meno
     private void setDateAndTimeVisibility() {
         if(date_time_visible==true) {
             rdatetimeselect.setVisibility(View.GONE);
@@ -364,6 +366,7 @@ public class AggiungiNota extends Fragment {
         }
     }
 
+    //avvia il timepicker per prendere l'ora a cui settare la nota
     private void setTimePickerNota() {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
@@ -416,6 +419,7 @@ public class AggiungiNota extends Fragment {
         }
     }
 
+    //gestisco i risultati dei vari intent per l'input vocale
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == GET_SPEECH_TITOLO_NOTA && resultCode == Activity.RESULT_OK) {

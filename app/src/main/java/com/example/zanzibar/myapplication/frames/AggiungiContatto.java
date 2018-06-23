@@ -265,7 +265,7 @@ public class AggiungiContatto extends Fragment {
     }
 
 
-
+    //setto come immagine quella che ho preso dalla galleria
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
@@ -284,6 +284,7 @@ public class AggiungiContatto extends Fragment {
         cursor.close();
     }
 
+    //listener per scegliere di scattare una foto del contatto con la fotocamera o prenderla da galleria
     private View.OnClickListener popupPhotoListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -305,6 +306,7 @@ public class AggiungiContatto extends Fragment {
         }
     };
 
+    //metodo che fa partire un intent per avviare la fotocamera per scattare una foto del contatto
     private void sendTakePictureIntent() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra( MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
@@ -331,12 +333,14 @@ public class AggiungiContatto extends Fragment {
         }
     }
 
+    //metodo che fa partire un intent per avviare la galleria per scegliere un'immagine del contatto
     private void sendTakeGalleryIntent() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhoto, REQUEST_PICTURE_GALLERY);
     }
 
+    //creo il path per l'immagine scattata dalla fotocamera
     private File getPictureFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String pictureFile = "PILL_" + timeStamp;
@@ -346,6 +350,7 @@ public class AggiungiContatto extends Fragment {
         return image;
     }
 
+    //quando clicco sulla foto, la mostro a schermo intero (con possibilità di fare zoom)
     private void showFotoFarmaco(String file, ImageView ivPreview) {
         final Dialog nagDialog = new Dialog(getContext(),android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -368,6 +373,7 @@ public class AggiungiContatto extends Fragment {
         nagDialog.show();
     }
 
+    //gestisco i risultati dei vari intent, a seconda che siano relativi alla fotocamera, alla galleria o all'input vocale
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_PICTURE_CAPTURE && resultCode == Activity.RESULT_OK) {
@@ -400,6 +406,7 @@ public class AggiungiContatto extends Fragment {
         }
     }
 
+    //imposto l'immagine scelta
     private void setImage(final ImageView img, final String path){
 
         File imgFile = new  File(path);
@@ -421,6 +428,7 @@ public class AggiungiContatto extends Fragment {
 
     }
 
+    //scelgo un contatto da rubrica e mi faccio importare il relativo nome e numero di telefono
     public void getNameNumberFromContact(Context c, Uri contactData) {
         Cursor cursor = c.getContentResolver().query(contactData, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -433,6 +441,7 @@ public class AggiungiContatto extends Fragment {
         }
     }
 
+    //avvio l'input vocale
     public void getSpeechInput(int req_code){
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);

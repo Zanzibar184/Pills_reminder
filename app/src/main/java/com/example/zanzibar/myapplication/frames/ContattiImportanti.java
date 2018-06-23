@@ -111,6 +111,7 @@ public class ContattiImportanti extends Fragment {
 
     }
 
+    //gestisce il layout per visualizzare i contatti inseriti
     private void addLayoutContatti(String nome, final String numero, String ruolo, String foto) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_contatti, linearLayout, false);
 
@@ -133,7 +134,6 @@ public class ContattiImportanti extends Fragment {
         }
 
 
-
         ImageView img_dial = (ImageView) frame.findViewById(R.id.imagePhoneDial);
         img_dial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +154,7 @@ public class ContattiImportanti extends Fragment {
         linearLayout.addView(frame);
     }
 
+    //gestisce il popupMenu per modificare o eliminare un contatto
     public void setPopupMenuImages(Context c, final View v) {
         Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
         PopupMenu popup = new PopupMenu(wrapper,v);
@@ -168,15 +169,9 @@ public class ContattiImportanti extends Fragment {
                 if (item.getTitle().equals(MieiFarmaci.MODIFICA)) {
 
 
-
-
-
-
-
                     ModifciaContatto modifciaContatto = new ModifciaContatto(fab_contatti, modify);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modifciaContatto).addToBackStack(null).commit();
-
 
 
                 } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {

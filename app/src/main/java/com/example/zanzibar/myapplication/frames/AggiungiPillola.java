@@ -619,6 +619,7 @@ public class AggiungiPillola extends Fragment {
         return res;
     }
 
+    //colora di rosso gli input importanti rimasti vuoti
     private void colorInputUnfilled(){
 
 
@@ -704,6 +705,7 @@ public class AggiungiPillola extends Fragment {
         //text_date_end.setText(sdf.format(myCalendar.getTime()));
     }
 
+    //setto come immagine quella che ho preso dalla galleria
     private void setPillImageCapturedFromGallery(Uri pickedImage) {
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
@@ -722,6 +724,7 @@ public class AggiungiPillola extends Fragment {
         cursor.close();
     }
 
+    //gestisco la visualizzazione dei layout delle varie dosi a seconda di quante volte l'utente clicca sul bottone di aggiunta
     private void setVisibilityDosi() {
         nClicks++;
         if(nClicks==1){
@@ -736,6 +739,7 @@ public class AggiungiPillola extends Fragment {
             nClicks = 3;
     }
 
+    //avvia il timepicker per ottenere l'orario a cui settare l'assunzione dei farmaci
     private void setTimePickerDosi(EditText editText) {
         final EditText e = editText;
         Calendar mcurrentTime = Calendar.getInstance();
@@ -767,6 +771,7 @@ public class AggiungiPillola extends Fragment {
         mTimePicker.show();
     }
 
+    //listener per scegliere di scattare una foto del farmaco con la fotocamera o prenderla da galleria
     private View.OnClickListener popupPhotoListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -788,6 +793,7 @@ public class AggiungiPillola extends Fragment {
         }
     };
 
+    //metodo che fa partire un intent per avviare la fotocamera per scattare una foto del farmaco
     private void sendTakePictureIntent() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra( MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
@@ -814,12 +820,14 @@ public class AggiungiPillola extends Fragment {
         }
     }
 
+    //metodo che fa partire un intent per avviare la galleria per scegliere un'immagine del farmaco
     private void sendTakeGalleryIntent() {
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhoto, REQUEST_PICTURE_GALLERY);
     }
 
+    //creo il path per l'immagine scattata dalla fotocamera
     private File getPictureFile() throws IOException {
         String timeStamp = new SimpleDateFormat(getString(R.string.picture_date_format)).format(new Date());
         String pictureFile = "PILL_" + timeStamp;
@@ -829,6 +837,7 @@ public class AggiungiPillola extends Fragment {
         return image;
     }
 
+    //gestisco i risultati dei vari intent, a seconda che siano relativi alla fotocamera, alla galleria o all'input vocale
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_PICTURE_CAPTURE && resultCode == Activity.RESULT_OK) {
@@ -925,6 +934,7 @@ public class AggiungiPillola extends Fragment {
 
     }
 
+    //gestisco e avvio le notifiche per i farmaci
     private void setNotifyScorta(String nome, int scorta, int qta_rimasta, String data_inizio, String data_fine, String orario) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverScorte.class);
@@ -958,6 +968,7 @@ public class AggiungiPillola extends Fragment {
 
     }
 
+    //restituisce il numero di giorni che stanno in un intervallo di date
     public static long printDifference(Date startDate, Date endDate){
 
         long different = endDate.getTime() - startDate.getTime();
@@ -981,6 +992,7 @@ public class AggiungiPillola extends Fragment {
         return elapsedDays;
     }
 
+    //listener che gestisce i giorni della settimana che sono stati scelti impostando la cura
     private View.OnClickListener button_week_manage = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -988,6 +1000,7 @@ public class AggiungiPillola extends Fragment {
         }
     };
 
+    //cambia il colore e lo stato dei bottoni che si occupano dei giorni della settimana quando si clicca su di essi
     public void selectDay(View view) {
         switch (view.getId()) {
             case R.id.btn_lun:

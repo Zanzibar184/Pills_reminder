@@ -187,7 +187,7 @@ public class Calendario extends Fragment {
 
     }
 
-
+    //gestisce il layout per la visualizzazione delle note nel calendario
     private void addLayoutNoteCalendario(String titolo, String testo, String ora, int tipo_memo) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_nota_calendario, layout3, false);
 
@@ -199,6 +199,7 @@ public class Calendario extends Fragment {
         layout3.addView(frame);
     }
 
+    //gestisce il layout per la visualizzazione dei farmaci nel calendario
     private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura, String stato_cura) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
@@ -215,12 +216,12 @@ public class Calendario extends Fragment {
         layout3.addView(frame);
     }
 
+    //calcola la dimensione della finestra in cui si visualizzano i farmaci e le note di quel particolare gionro
     private void calcolaDimensioniFinestra() {
 
         //Mi faccio restituire l'altezza della ActionBar
         TypedValue tv = new TypedValue();
-        if (getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
-        {
+        if (getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
         }
 

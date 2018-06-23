@@ -82,6 +82,7 @@ public class SmsAvviso extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_smsavviso));
     }
 
+    //metodo che visualizza i contatti aggiunti come SMS avviso
     private void addLayoutNumeri(Contatti contatti, int size_lista) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.add_numeri_da_avvvisare, linearLayoutNumeri, false);
         TextView info = (TextView) frame.findViewById(R.id.txt_contattoSMS);

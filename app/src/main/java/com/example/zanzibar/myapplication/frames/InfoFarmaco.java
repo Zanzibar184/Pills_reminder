@@ -178,6 +178,7 @@ public class InfoFarmaco extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_infofarmaco));
     }
 
+    //mostra la foto di quel particolare farmaco che è stata salvata (con zoom)
     private void showFotoFarmaco(String file, ImageView ivPreview) {
         final Dialog nagDialog = new Dialog(getContext(),android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         nagDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -200,7 +201,8 @@ public class InfoFarmaco extends Fragment {
         nagDialog.show();
     }
 
-    private void deleteNotification(String nome, int quantita,String orario) {
+    //se viene richiesta la cancellazione del farmaco allora cancella anche la notifica relativa
+    private void deleteNotification(String nome, int quantita, String orario) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 

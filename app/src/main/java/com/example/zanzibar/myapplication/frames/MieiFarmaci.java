@@ -138,6 +138,7 @@ public class MieiFarmaci extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_mieifarmaci));
     }
 
+    //aggiunge il layout per visualizzare i farmaci salvati
     public void addFarmaci(String nome, int qta_rimasta, int qta_totale, String start_cura, String end_cura, int tipo_cura, int id) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci, linearLayout_cure, false);
 

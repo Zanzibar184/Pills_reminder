@@ -136,6 +136,7 @@ public class Note extends Fragment {
 
     }
 
+    //aggiunge il layout per visualizzare le note inserite
     private void addLayoutNote(String titolo, String testo, String data, String ora, int tipo_memo, int id_memo) {
         final View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_note, linearLayoutNote, false);
 
@@ -151,8 +152,7 @@ public class Note extends Fragment {
         ((TextView) frame.findViewById(R.id.categoria_nota)).setText(CheckType(tipo_memo));
 
 
-        if ((data.equals("")) && (ora.equals("")))
-        {
+        if ((data.equals("")) && (ora.equals(""))) {
             ((RelativeLayout)frame.findViewById(R.id.layout_data_ora_nota)).setVisibility(View.GONE);
         }
 
@@ -164,10 +164,10 @@ public class Note extends Fragment {
         });
 
 
-
         linearLayoutNote.addView(frame);
     }
 
+    //gestisce il menu per la modiica o l'eliminazione delle note precedentemente inserite
     public void setPopupMenuImages(Context c, final View v) {
         Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
         PopupMenu popup = new PopupMenu(wrapper,v);
@@ -184,7 +184,6 @@ public class Note extends Fragment {
                     ModificaNota modificaNota = new ModificaNota(fab_note,modify);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, modificaNota).addToBackStack(null).commit();
-
 
 
                 } else if (item.getTitle().equals(MieiFarmaci.ELIMINA)) {
@@ -255,6 +254,7 @@ public class Note extends Fragment {
         return nota;
     }
 
+    //se viene richiesta la cancellazione della nota allora cancella anche la notifica relativa
     private void deleteNotification(String titolo, String data, String ora, int tipo) {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext(), AlarmReceiverNote.class);

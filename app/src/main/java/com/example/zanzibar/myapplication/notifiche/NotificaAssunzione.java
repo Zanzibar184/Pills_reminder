@@ -107,7 +107,7 @@ public class NotificaAssunzione extends AppCompatActivity {
 
     }
 
-
+    //se è stato selezionato rimanda, viene settata una notifica per ricordare l'assunzione 2 minuti dopo
     private void setNotify(String nome, int quantità, String unità, String orario, String data_inizio, String data_fine) {
 
         AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -182,7 +182,7 @@ public class NotificaAssunzione extends AppCompatActivity {
         */
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() + 1000*60, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis() + 1000 * 60 * 2, pendingIntent);
 
         //alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
 

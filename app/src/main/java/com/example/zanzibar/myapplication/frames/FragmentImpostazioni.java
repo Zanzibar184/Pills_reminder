@@ -231,7 +231,6 @@ public class FragmentImpostazioni extends PreferenceFragmentCompat implements Sh
         pref_privacy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                //TODO: mostrare il contratto per la privacy
                 Intent intent_privacy = new Intent(getContext(), PrivacyActivity.class);
                 startActivity(intent_privacy);
                 return true;

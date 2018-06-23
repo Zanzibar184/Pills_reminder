@@ -127,6 +127,7 @@ public class Cure extends Fragment {
 
     }
 
+    //gestisce la visualizzazione dei layout della mattina, pomeriggio, sera e notte
     public void addLayoutCure() {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_cure, linearLayout, false);
         layout_pills_mattina = (LinearLayout) frame.findViewById(R.id.layout_mattina);
@@ -135,81 +136,77 @@ public class Cure extends Fragment {
         layout_pills_notte = (LinearLayout) frame.findViewById(R.id.layout_notte);
 
 
-                for(int i=0;i<list_cure.size(); i++)
-                {
-                    Cura tmp = list_cure.get(i);
+        for(int i=0; i<list_cure.size(); i++) {
+            Cura tmp = list_cure.get(i);
 
-                    Dosi tmp_dose = findDoseFromCura(tmp);
-                    int ora = Integer.parseInt(tmp.getOrario_assunzione().substring(0,2));
-                    if(tmp_dose != null) {
-                        if ((ora >= 6) && (ora < 12)) {
-                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_mattina, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
-                        }
-                        if ((ora >= 12) && (ora < 18)) {
-                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_pomeriggio, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
-                        }
-                        if ((ora >= 18) && (ora < 24)) {
-                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_sera, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
-                        }
-                        if ((ora >= 0) && (ora < 6)) {
-                            addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_notte, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
-                        }
-                    }
-
+            Dosi tmp_dose = findDoseFromCura(tmp);
+            int ora = Integer.parseInt(tmp.getOrario_assunzione().substring(0,2));
+            if(tmp_dose != null) {
+                if ((ora >= 6) && (ora < 12)) {
+                    addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_mattina, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
                 }
+                if ((ora >= 12) && (ora < 18)) {
+                    addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_pomeriggio, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                }
+                if ((ora >= 18) && (ora < 24)) {
+                    addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_sera, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                }
+                if ((ora >= 0) && (ora < 6)) {
+                    addLayoutFarmaco(tmp.getNome(), tmp.getQuantità_assunzione(), tmp.getTipo_cura(), tmp.getOrario_assunzione(), layout_pills_notte, tmp.getId(), tmp_dose.getStato_cura(), tmp.getImportante());
+                }
+            }
 
+        }
 
 
         linearLayout.addView(frame);
     }
 
-    public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura, int importante) {
+    //gestisce il layout per la visualizzazione del farmaco che si trova dentro uno dei quattro riquadri per la mattina.pomeriggio,sera e notte
+    public void addLayoutFarmaco (String nome, int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura, int importante) {
 
-            View frame = null;
+        View frame = null;
 
-            if (importante == 1)
-                frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola_importante, layout, false);
-            else
-                frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
+        if (importante == 1)
+            frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola_importante, layout, false);
+        else
+            frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_pillola, layout, false);
 
-            final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
-            final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
-            final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
-            final TextView txt_nome = (TextView) frame.findViewById(R.id.txt_nome_pillola);
-            final TextView txt_orario_assunzione = (TextView) frame.findViewById(R.id.txt_ora);
-            final TextView txt_qta_ass = (TextView) frame.findViewById(R.id.txt_numero_dosi);
-            final TextView cura_id = (TextView) frame.findViewById(R.id.cura_id);
-
-
-            //Qui va il codice per le altre TextView e altro da gestire
+        final ImageView img_farmaco = (ImageView) frame.findViewById(R.id.img_farmaco);
+        final ImageView img_greenV = (ImageView) frame.findViewById(R.id.img_greenV);
+        final ImageView img_redX = (ImageView) frame.findViewById(R.id.img_redX);
+        final TextView txt_nome = (TextView) frame.findViewById(R.id.txt_nome_pillola);
+        final TextView txt_orario_assunzione = (TextView) frame.findViewById(R.id.txt_ora);
+        final TextView txt_qta_ass = (TextView) frame.findViewById(R.id.txt_numero_dosi);
+        final TextView cura_id = (TextView) frame.findViewById(R.id.cura_id);
 
 
-                Drawable drawable_farmaco = getResources().getDrawable(getDrawIcons(tipo_cura));
-                img_farmaco.setImageDrawable(drawable_farmaco);
-                txt_nome.setText(nome);
-                txt_orario_assunzione.setText(orario_assunzione);
-                txt_qta_ass.setText("x" + qta_ass);
-                cura_id.setText(Integer.toString(id));
+        //Qui va il codice per le altre TextView e altro da gestire
 
-                if (stato_cura.equals(Dosi.NON_ASSUNTA))
-                {
-                    img_redX.setVisibility(View.VISIBLE);
-                }
-                else if (stato_cura.equals(Dosi.ASSUNTA))
-                {
-                    img_greenV.setVisibility(View.VISIBLE);
-                }
+
+        Drawable drawable_farmaco = getResources().getDrawable(getDrawIcons(tipo_cura));
+        img_farmaco.setImageDrawable(drawable_farmaco);
+        txt_nome.setText(nome);
+        txt_orario_assunzione.setText(orario_assunzione);
+        txt_qta_ass.setText("x" + qta_ass);
+        cura_id.setText(Integer.toString(id));
+
+        if (stato_cura.equals(Dosi.NON_ASSUNTA)) {
+            img_redX.setVisibility(View.VISIBLE);
+        } else if (stato_cura.equals(Dosi.ASSUNTA)) {
+            img_greenV.setVisibility(View.VISIBLE);
+        }
 
 
         final View finalFrame = frame;
         frame.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    img_farmaco.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.img_click));
-                    v.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.frame_click));
-                    setPopupMenuImages(getContext(), finalFrame, img_greenV, img_redX);
-                }
-            });
+            @Override
+            public void onClick(View v) {
+                img_farmaco.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.img_click));
+                v.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.frame_click));
+                setPopupMenuImages(getContext(), finalFrame, img_greenV, img_redX);
+            }
+        });
         //Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.prova_frame_anim);
         //frame.startAnimation(hyperspaceJumpAnimation);
 
@@ -218,6 +215,7 @@ public class Cure extends Fragment {
     }
 
 
+    //gestisce il popupMenu per la conferma o meno dell'assunzione di un farmaco e la possibilità di vedere le informazioni relative
     public void setPopupMenuImages(Context c, final View v, final ImageView imgok, final ImageView imgno) {
         Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
         PopupMenu popup = new PopupMenu(wrapper,v);
@@ -310,6 +308,7 @@ public class Cure extends Fragment {
     }
 
 
+    //a seconda dell'id che viene passato, setta l'immagine della tipologia di cura corrispondente
     public static int getDrawIcons(int id){
         switch(id){
             case 1: return R.drawable.pill_colored;
