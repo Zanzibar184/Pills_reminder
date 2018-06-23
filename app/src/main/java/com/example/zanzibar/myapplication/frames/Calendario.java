@@ -1,6 +1,5 @@
 package com.example.zanzibar.myapplication.frames;
 
-//TODO: aggiungere colori per richiamare la nota nel suo giorno
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +24,7 @@ import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.Database.cure.Dosi;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
@@ -39,11 +39,11 @@ import java.util.Locale;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Il calendario permette di rivedere tutte le cure/note giorno per giorno
  */
 public class Calendario extends Fragment {
 
-    FloatingActionButton fab_cal = null;
+    private FloatingActionButton fab_cal = null;
 
     private LinearLayout layout3= null;
 
@@ -83,7 +83,6 @@ public class Calendario extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         Cure.v.setScrollY(0);
         Cure.v.setScrollX(0);
         fab_cal.show();
@@ -101,7 +100,7 @@ public class Calendario extends Fragment {
             }
         });
 
-        LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.layout1);
+        //LinearLayout layout1 = (LinearLayout) view.findViewById(R.id.layout1);
 
         //Initialize CustomCalendarView from layout
         final CustomCalendarView calendarView = (CustomCalendarView) view.findViewById(R.id.calendario);
@@ -119,15 +118,12 @@ public class Calendario extends Fragment {
         calendarView.setCalendarListener(new CalendarListener() {
             @Override
             public void onDateSelected(final Date date) {
-                final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                dateSelected = df.format(date);
+                dateSelected = DateHelper.DateToString(date, getString(R.string.date_format_base));
                 refreshData(dateSelected);
             }
 
             @Override
             public void onMonthChanged(Date date) {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                //Toast.makeText(getContext(), df.format(date), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -203,7 +199,7 @@ public class Calendario extends Fragment {
     private void addLayoutFarmaciCalendario(String nome, String orario, int qta_ass, String udm, int tipo_cura, String stato_cura) {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_farmaci_calendario, layout3, false);
         ((TextView) frame.findViewById(R.id.txt_titolo_farmaco)).setText(nome);
-        ((TextView) frame.findViewById(R.id.txt_dose)).setText("Assumere "+qta_ass+" "+udm);
+        ((TextView) frame.findViewById(R.id.txt_dose)).setText(getString(R.string.cal_cura_assunzione)+qta_ass+" "+udm);
         ((TextView) frame.findViewById(R.id.txt_ora_dose)).setText(orario);
         setImage(tipo_cura, ((ImageView) frame.findViewById(R.id.img_pillola_nota)));
         ImageView check_assunzione = (ImageView) frame.findViewById(R.id.img_check_assunzione);

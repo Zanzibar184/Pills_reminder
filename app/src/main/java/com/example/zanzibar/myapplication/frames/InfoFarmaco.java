@@ -28,6 +28,7 @@ import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
 import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.R;
 import com.example.zanzibar.myapplication.notifiche.AlarmReceiver;
@@ -38,20 +39,23 @@ import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
+/*
+Schermata con tutti i dettagli di una cura
+
+ */
 public class InfoFarmaco extends Fragment {
 
     private Cura cura;
     private CureDAO dao;
     private LinearLayout linearLayout = null;
 
-    FloatingActionButton fab_info = null;
+    private FloatingActionButton fab_info = null;
 
-    Button modifica = null;
-    Button elimina = null;
+    private Button modifica = null;
+    private Button elimina = null;
 
-    ImageView image;
+    private ImageView image;
 
     public InfoFarmaco() {
         // Required empty public constructor
@@ -93,20 +97,19 @@ public class InfoFarmaco extends Fragment {
 
         if (resourceId == 1 || resourceId == 7 || resourceId == 8 || resourceId == 9) {
             view_scorte.setVisibility(View.VISIBLE);
-            ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText("Confezione da: " + cura.getScorta() + " " + cura.getUnità_misura());
-            ((TextView) frame.findViewById(R.id.txt_pillole_rimanenti)).setText("Quantità rimasta: " + cura.getRimanenze() + " " + cura.getUnità_misura());
+            ((TextView) frame.findViewById(R.id.txt_pillole_scatola)).setText(getString(R.string.confezione) + cura.getScorta() + " " + cura.getUnità_misura());
+            ((TextView) frame.findViewById(R.id.txt_pillole_rimanenti)).setText(getString(R.string.info_qta) + cura.getRimanenze() + " " + cura.getUnità_misura());
         } else {
             view_scorte.setVisibility(View.GONE);
         }
 
         ((TextView) frame.findViewById(R.id.nome_farmaco_info)).setText(cura.getNome());
-        ((TextView) frame.findViewById(R.id.txt_dose)).setText("Quantità di assunzione: " + cura.getQuantità_assunzione() + " " + cura.getUnità_misura() + " alle " + cura.getOrario_assunzione());
+        ((TextView) frame.findViewById(R.id.txt_dose)).setText(getString(R.string.info_assunzione) + cura.getQuantità_assunzione() + " " + cura.getUnità_misura() + " alle " + cura.getOrario_assunzione());
 
-        Date inizio = StringToDate(cura.getInizio_cura());
-        Date fine = StringToDate(cura.getFine_cura());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText("Cominciata il: " +dateFormat.format(inizio));
-        ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText("Termina il: " + dateFormat.format(fine));
+        Date inizio = DateHelper.StringtoDate(cura.getInizio_cura());
+        Date fine = DateHelper.StringtoDate(cura.getFine_cura());
+        ((TextView) frame.findViewById(R.id.txt_inizio_cura)).setText(getString(R.string.info_start) + DateHelper.DateToString(inizio,getString(R.string.user_date_format)));
+        ((TextView) frame.findViewById(R.id.txt_termine_cura)).setText(getString(R.string.info_end) + DateHelper.DateToString(fine,getString(R.string.user_date_format)));
 
         if(cura.getImportante() == 1){
             ((TextView) frame.findViewById(R.id.txt_sms)).setText(R.string.info_positivo_sms);
@@ -207,7 +210,7 @@ public class InfoFarmaco extends Fragment {
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
         String key = nome + "_" + quantita + "_" + orario;
-        SharedPreferences prefs = getContext().getSharedPreferences("MyNotifPref", MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences(getString(R.string.pref_name), MODE_PRIVATE);
         int request_code = prefs.getInt(key, 0);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), request_code, intent, PendingIntent.FLAG_UPDATE_CURRENT);

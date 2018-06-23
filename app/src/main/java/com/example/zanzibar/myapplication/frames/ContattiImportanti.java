@@ -35,7 +35,7 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Schermata per la visualizzazione dei contatti salvati
  */
 
 public class ContattiImportanti extends Fragment {

@@ -34,9 +34,6 @@ public class ImpostazioniOld extends Fragment {
     private LinearLayout linearLayout = null;
 
     ImageView img_profile = null;
-
-    private String choose_from_camera = "Scatta foto";
-    private String choose_from_gallery = "Scegli da galleria";
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1888;
     private static final int CAPTURE_IMAGE_FROM_GALLERY_ACTIVITY_REQUEST_CODE = 2888;
 

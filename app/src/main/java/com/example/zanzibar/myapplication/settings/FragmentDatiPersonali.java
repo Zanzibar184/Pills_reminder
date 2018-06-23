@@ -54,7 +54,7 @@ public class FragmentDatiPersonali extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("Dati Personali");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.titolo_dati_personali));
     }
 
 }
