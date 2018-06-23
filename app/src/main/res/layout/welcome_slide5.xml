@@ -20,8 +20,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txt_titolo_consenso_informativa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="20dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
@@ -30,11 +32,31 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/slide_desc" />
 
+        <ScrollView
+            android:id="@+id/scroll_informativa"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/informativa_privacy" />
+
+        </ScrollView>
+
         <CheckBox
             android:id="@+id/checkPrivacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="10dp"
             android:text="Ho letto e accetto il contratto sulla privacy" />
 
     </LinearLayout>

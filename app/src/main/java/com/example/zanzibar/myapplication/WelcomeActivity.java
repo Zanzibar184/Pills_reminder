@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
@@ -265,6 +266,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 rotateAnimation.setDuration(10000);
                 rotateAnimation.setRepeatCount(Animation.INFINITE);
                 view.findViewById(R.id.img_welcome1).startAnimation(rotateAnimation);
+            }
+
+            if (layouts[position] == R.layout.welcome_slide5) {
+                if (intro) {
+                    ScrollView scroll_informativa_privacy = (ScrollView) view.findViewById(R.id.scroll_informativa);
+                    scroll_informativa_privacy.setVisibility(View.GONE);
+                    TextView txt_titolo_consenso = (TextView) view.findViewById(R.id.txt_titolo_consenso_informativa);
+                    txt_titolo_consenso.setText(getString(R.string.txt_consenso_ok));
+                }
             }
 
             container.addView(view);
