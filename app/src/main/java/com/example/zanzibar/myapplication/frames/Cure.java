@@ -28,6 +28,7 @@ import com.example.zanzibar.myapplication.Database.cure.Cura;
 import com.example.zanzibar.myapplication.Database.cure.CureDAO;
 import com.example.zanzibar.myapplication.Database.cure.CureDao_DB;
 import com.example.zanzibar.myapplication.Database.cure.Dosi;
+import com.example.zanzibar.myapplication.DateHelper;
 import com.example.zanzibar.myapplication.MainActivity;
 import com.example.zanzibar.myapplication.MyBounceInterpolator;
 import com.example.zanzibar.myapplication.R;
@@ -40,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Schermata principale, mostra le cure da assumere nella giornata in corso, suddivise per fascia di orario
  */
 
 public class Cure extends Fragment {
@@ -52,15 +53,11 @@ public class Cure extends Fragment {
     private LinearLayout layout_pills_pomeriggio = null;
     private LinearLayout layout_pills_sera = null;
     private LinearLayout layout_pills_notte = null;
-    int currentHour;
+    private int currentHour;
 
-    String conferma_farmaco = "Conferma assunzione farmaco";
-    String non_conferma_farmaco = "Farmaco non assunto";
-    String ripristina_stato_farmaco = "Annulla";
     String informazioni_farmaco = "Info farmaco";
-    String foto_farmaco = "Foto farmaco";
 
-    FloatingActionButton fab_cure = null;
+    private FloatingActionButton fab_cure = null;
     private CureDAO dao;
     private List<Cura> list_cure;
     private List<Dosi> list_dosi;
@@ -83,9 +80,8 @@ public class Cure extends Fragment {
         //context.startActivity(intent_sms);
         dao = new CureDao_DB();
         dao.open();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        list_cure = dao.getCureByDate(formatter.format(new Date()));
-        list_dosi = dao.getDosiByDate(formatter.format(new Date()));
+        list_cure = dao.getCureByDate(DateHelper.DateToString(new Date()));
+        list_dosi = dao.getDosiByDate(DateHelper.DateToString(new Date()));
         dao.close();
 
         v = container.findViewById(R.id.fragmentmanager);
@@ -96,8 +92,6 @@ public class Cure extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        //-----------IMPORTANTISSIMOOOOOOO!!!!!
         fab_cure.show();
         //-----------
         fab_cure.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +120,7 @@ public class Cure extends Fragment {
 
 
     }
-
+    //aggiunge le cure di oggi prese dal db, seperandole per fascia oraria
     public void addLayoutCure() {
         View frame = LayoutInflater.from(getActivity()).inflate(R.layout.frame_cure, linearLayout, false);
         layout_pills_mattina = (LinearLayout) frame.findViewById(R.id.layout_mattina);
@@ -162,7 +156,7 @@ public class Cure extends Fragment {
 
         linearLayout.addView(frame);
     }
-
+    //aggiunge un singolo "tassello", cioè una singola cura
     public void addLayoutFarmaco (String nome,int qta_ass, int tipo_cura, String orario_assunzione, LinearLayout layout, int id, String stato_cura, int importante) {
 
             View frame = null;
@@ -217,7 +211,7 @@ public class Cure extends Fragment {
 
     }
 
-
+    //aggiunge il menu popup al riquadro di una cura
     public void setPopupMenuImages(Context c, final View v, final ImageView imgok, final ImageView imgno) {
         Context wrapper = new ContextThemeWrapper(getContext(), R.style.MenuPillsStyle);
         PopupMenu popup = new PopupMenu(wrapper,v);
@@ -243,7 +237,7 @@ public class Cure extends Fragment {
 
                 Cura updated_cura = getCurabyId(Integer.parseInt(id.getText().toString()));
                 Dosi dose = findDoseFromCura(updated_cura);
-                if (item.getTitle().equals(conferma_farmaco)) {
+                if (item.getTitle().equals(getString(R.string.conferma_farmaco))) {
                     imgok.setVisibility(View.VISIBLE);
                     imgno.setVisibility(View.GONE);
 
@@ -260,7 +254,7 @@ public class Cure extends Fragment {
                     dose.setStato_cura(Dosi.ASSUNTA);
                     dao.updateDose(dose);
 
-                } else if (item.getTitle().equals(non_conferma_farmaco)) {
+                } else if (item.getTitle().equals(getString(R.string.nonconferma_farmaco))) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.VISIBLE);
 
@@ -270,7 +264,7 @@ public class Cure extends Fragment {
 
                     dose.setStato_cura(Dosi.NON_ASSUNTA);
                     dao.updateDose(dose);
-                } else if (item.getTitle().equals(ripristina_stato_farmaco)) {
+                } else if (item.getTitle().equals(getString(R.string.posticipa_farmaco))) {
                     imgok.setVisibility(View.GONE);
                     imgno.setVisibility(View.GONE);
 
@@ -281,7 +275,7 @@ public class Cure extends Fragment {
 
                     dose.setStato_cura(Dosi.DA_ASSUMERE);
                     dao.updateDose(dose);
-                } else if (item.getTitle().equals(informazioni_farmaco)) {
+                } else if (item.getTitle().equals(getString(R.string.info_farmaco))) {
                     InfoFarmaco infoFarmaco = new InfoFarmaco(fab_cure,updated_cura);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentmanager, infoFarmaco).addToBackStack(null).commit();
@@ -291,8 +285,6 @@ public class Cure extends Fragment {
                     updated_cura.setRimanenze(0);
 
                 dao.updateCura(updated_cura);
-
-                Log.i("CURA", updated_cura.getRimanenze() +"");
 
                 dao.close();
                 return true;

@@ -24,6 +24,8 @@
     <string name="notte">Notte</string>
     <string name="conferma_assunzione">Confermare l\'assunzione del farmaco?</string>
 
+    //-----------------   Schermata Aggiungipillola nomi cure   ----------------------//
+
     <string name="pillola">Pillola</string>
     <string name="compressa">Compressa</string>
     <string name="f_generico">Farmaco Generico</string>
@@ -33,6 +35,9 @@
     <string name="supposta">Supposta</string>
     <string name="pomata">Pomata</string>
     <string name="spray">Spray</string>
+    //----------------------------->>end>>--------------------------------------//
+
+    //-----------------   Titoli schermate   ----------------------//
 
     <string name="titolo_sceglipillola">Scegli il tipo di farmaco</string>
     <string name="titolo_aggiungicontatto">Aggiungi contatto</string>
@@ -49,6 +54,7 @@
     <string name="titolo_note">Note</string>
     <string name="titolo_smsavviso">SMS Avviso</string>
     <string name="titolo_modificapillola">Modifica Farmaco</string>
+    //----------------------------->>end>>--------------------------------------//
 
     //-----------------   Stringhe comuni   ----------------------//
 
@@ -215,13 +221,30 @@
     //----------------------------->>end>>--------------------------------------//
 
 
-    <string name="scatta_fotocamera">Scatta foto</string>
-    <string name="scatta_galleria">Scegli da galleria</string>
+    //-----------------   Calendario   ----------------------//
+    //---------java class-----------//
+    <string name="cal_cura_assunzione">Assumere </string>
+
+    //----------------------------->>end>>--------------------------------------//
+
+
+    //-----------------   Schermata Cure ----------------------//
     <string name="conferma_farmaco">Conferma assunzione farmaco</string>
     <string name="nonconferma_farmaco">Farmaco non assunto</string>
     <string name="posticipa_farmaco">Annulla</string>
     <string name="info_farmaco">Info farmaco</string>
     <string name="foto_farmaco">Foto farmaco</string>
+    //----------------------------->>end>>--------------------------------------//
+
+
+    //-----------------   Stringhe comuni   ----------------------//
+    //----------------------------->>end>>--------------------------------------//
+
+
+
+    <string name="scatta_fotocamera">Scatta foto</string>
+    <string name="scatta_galleria">Scegli da galleria</string>
+
     <string name="photo_from_camera">Scatta foto</string>
     <string name="photo_from_gallery">Scegli da galleria</string>
 

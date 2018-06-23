@@ -33,6 +33,16 @@ public class DateHelper {
         return converted;
 
     }
+    public static String DateToString(Date data, String format) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(data);
+
+    }
+    public static String DateToString(Date data) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(data);
+
+    }
 
     public static String getDaySystem(int add) {
 

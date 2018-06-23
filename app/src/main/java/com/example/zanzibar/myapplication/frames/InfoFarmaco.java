@@ -40,18 +40,22 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.zanzibar.myapplication.frames.MieiFarmaci.StringToDate;
 
+/*
+Schermata con tutti i dettagli di una cura
+
+ */
 public class InfoFarmaco extends Fragment {
 
     private Cura cura;
     private CureDAO dao;
     private LinearLayout linearLayout = null;
 
-    FloatingActionButton fab_info = null;
+    private FloatingActionButton fab_info = null;
 
-    Button modifica = null;
-    Button elimina = null;
+    private Button modifica = null;
+    private Button elimina = null;
 
-    ImageView image;
+    private ImageView image;
 
     public InfoFarmaco() {
         // Required empty public constructor
